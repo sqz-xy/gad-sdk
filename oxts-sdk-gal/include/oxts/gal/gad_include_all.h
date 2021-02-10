@@ -21,7 +21,7 @@
 
 #include "gad_defines.h"
 #include "gad_struct.h"
-#include "decode_genaid.h"
+#include "gad_decode.h"
 #include "gad_encode.h"
 
 #endif

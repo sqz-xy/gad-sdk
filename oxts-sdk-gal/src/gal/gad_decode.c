@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "oxts/gal/decode_genaid.h"
+#include "oxts/gal/gad_decode.h"
 
 // #include "errors.h"
 // #include "BasicCasts.h"

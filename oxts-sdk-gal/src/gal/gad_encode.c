@@ -26,9 +26,9 @@
 // #include "errors.h"
 // #include "BasicCasts.h"
 
-#include "oxts/gad_encode.h"
-#include "oxts/gad_defines.h"
-#include "oxts/gad_struct.h"
+#include "oxts/gal/gad_encode.h"
+#include "oxts/gal/gad_defines.h"
+#include "oxts/gal/gad_struct.h"
 
 #if OXTS_EXE_PP
 #include "FileUtils.h"

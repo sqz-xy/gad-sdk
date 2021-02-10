@@ -19,13 +19,15 @@ The fastest way to get started with the SDK is to install the pre-built binaries
 Users can also build the SDK from source, using the following instructions:
 
 1. Clone the repository onto the PC.
-2. cd gad-sdk/build 
+2. cd oxts-sdk/build 
 3. cmake ..
 4. make
 
+Building the SDK will install it (TBC)...
+
 ## Examples
 
-The SDK contains a number of examples to demonstrate Generic Aiding and NCom decoding in action. 
+The SDK contains a number of examples to demonstrate Generic Aiding and NCom decoding in action. These are contained in the /examples directory.
 
 
 ...

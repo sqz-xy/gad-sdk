@@ -11,6 +11,9 @@ set(OXTS_SDK_GAD_HEADERS
     ./include/oxts/gal/gad_struct.h
     )
 
+set(OXTS_SDK_LIB_HEADERS
+    ./include/oxts/lib/BasicTypes.h)
+
 set(OXTS_SDK_GAD_SOURCES
     #./src/gal/decode_genaid.c
     #./src/gal/gad_encode.c
@@ -22,6 +25,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_library(${PROJECT_NAME} 
             ${OXTS_SDK_GAD_HEADERS}
+            ${OXTS_SDK_LIB_HEADERS}
             ${OXTS_SDK_GAD_SOURCES}
             )
 

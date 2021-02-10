@@ -25,8 +25,8 @@
 #include <stdlib.h>
 
 //#include "errors.h"
-//#include "gad_defines.h"
-//#include "BasicTypes.h"
+#include "oxts/gal/gad_defines.h"
+#include "oxts/lib/BasicTypes.h"
 
 typedef uint8_t   GEN_BOOL;
 

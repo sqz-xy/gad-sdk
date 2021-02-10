@@ -73,7 +73,7 @@ int initialise_genaid(void** gad)
       memset(*gad, 0, sizeof(GEN_AIDING_DATA));
    else if ((*gad = calloc(1, sizeof(GEN_AIDING_DATA))) == NULL)    // calloc() is used to initialise all the memory to NULL
    {
-      oxts_error(1, "Unable to allocate generic aiding data");
+      //oxts_error(1, "Unable to allocate generic aiding data");
       return 1;
    }
 

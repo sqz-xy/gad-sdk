@@ -19,11 +19,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "oxts/gal/gad_decode.h"
+#include "oxts/gal-c/gad_decode.h"
 
-// #include "errors.h"
-// #include "BasicCasts.h"
-// #include "EnumHardware.h"
+#include "oxts/common/errors.h"
+#include "oxts/common/BasicCasts.h"
 
 
 #ifdef OXTS_DEBUG

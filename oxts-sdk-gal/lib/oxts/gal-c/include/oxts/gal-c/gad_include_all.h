@@ -19,9 +19,9 @@
 #ifndef GAD_INCLUDE_ALL
 #define GAD_INCLUDE_ALL
 
-#include "gad_defines.h"
-#include "gad_struct.h"
-#include "gad_decode.h"
-#include "gad_encode.h"
+#include "oxts/gal-c/gad_defines.h"
+#include "oxts/gal-c/gad_struct.h"
+#include "oxts/gal-c/gad_decode.h"
+#include "oxts/gal-c/gad_encode.h"
 
 #endif

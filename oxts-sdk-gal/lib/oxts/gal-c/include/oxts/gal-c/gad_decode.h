@@ -20,8 +20,8 @@
 #ifndef GNS__DECODE_GENAID_H
 #define GNS__DECODE_GENAID_H
 
-#include "gad_defines.h"
-#include "gad_struct.h"
+#include "oxts/gal-c/gad_defines.h"
+#include "oxts/gal-c/gad_struct.h"
 
 
 #ifdef __cplusplus

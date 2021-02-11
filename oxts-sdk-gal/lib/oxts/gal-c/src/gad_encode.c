@@ -23,12 +23,12 @@
 #include <math.h>
 #include <stdlib.h>
 
-// #include "errors.h"
-// #include "BasicCasts.h"
+#include "oxts/common/errors.h"
+#include "oxts/common/BasicCasts.h"
 
-#include "oxts/gal/gad_encode.h"
-#include "oxts/gal/gad_defines.h"
-#include "oxts/gal/gad_struct.h"
+#include "oxts/gal-c/gad_encode.h"
+#include "oxts/gal-c/gad_defines.h"
+#include "oxts/gal-c/gad_struct.h"
 
 #if OXTS_EXE_PP
 #include "FileUtils.h"
@@ -190,7 +190,7 @@ extern "C"
          i = -1;
 
       if (!i && data->acq_valid)
-         i = (fprintf(file_ptr, "%lu,", data->acq) < 0);
+         i = (fprintf(file_ptr, "%u,", data->acq) < 0);
       else if (!i && !data->acq_valid)
          i = (fprintf(file_ptr, ",") < 0) ? -1 : 0;
 
@@ -422,7 +422,7 @@ extern "C"
       if (buffer_size > expected_data_size - 1) { return 0; }
       else
       {
-         printf("Not enough space in the buffer to hold all data, packet is at least: %d bytes longer than the allocated buffer space \n",
+         printf("Not enough space in the buffer to hold all data, packet is at least: %ld bytes longer than the allocated buffer space \n",
             expected_data_size - buffer_size);
 
          return -1;

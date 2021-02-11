@@ -19,8 +19,8 @@
 //!  
 //============================================================================================================
 
-#include "gad_defines.h"
-#include "gad_struct.h"
+#include "oxts/gal-c/gad_defines.h"
+#include "oxts/gal-c/gad_struct.h"
 
 #ifdef __cplusplus
 extern "C"

@@ -43,3 +43,40 @@ void Gen3d::SetVarSingle(double v0)
   this->v_type = GEN_VAR_TYPE::GEN_VAR_SINGLE;
   this->v[0] = v0;
 }
+
+
+
+void GadPosition::SetWgs84Pos(double lat, double lon, double alt)
+{
+  this->SetDataMode(0);
+  this->SetDataValType(POS_SYS_TYPE::POS_SYS_WGS84);
+  this->SetDataVal(lat,lon,alt);
+}
+
+void GadPosition::SetWgs84PosVar(double varLat, double varLon, double varAlt)
+{
+  this->SetDataVarDiag(varLat,varLon,varAlt);
+}
+
+void GadPosition::SetAidingFixedLeverArm(double x, double y, double z)
+{
+  this->SetLocMode(LOC_SYS::LOC_FIXED);
+  this->SetLocVal(x,y,z);
+}
+
+void GadPosition::SetAidingOptimisingLeverArm(double x, double y, double z)
+{
+  this->SetLocMode(LOC_SYS::LOC_KF);
+  this->SetLocVal(x,y,z);
+
+}
+
+void GadPosition::SetAidingConfigLeverArm()
+{
+  this->SetLocMode(LOC_SYS::LOC_CONFIG);
+}
+
+void GadPosition::SetAidingLeverArmVar(double x, double y, double z)
+{
+  this->SetDataVarDiag(x,y,z);
+}

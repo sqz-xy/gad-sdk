@@ -162,6 +162,8 @@ class GadPosition : public Gad
    * @param lat Latitude of the position estimate (deg).
    * @param lon Longitude of the position estimate (deg).
    * @param alt Altitude of the position estimate (deg).
+   * 
+   * @todo Verify WGS84 coordinate frame
    */
   void SetWgs84Pos(double lat, double lon, double alt);
   /**

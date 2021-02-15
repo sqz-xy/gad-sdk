@@ -1,7 +1,13 @@
 #ifndef GAD_H
 #define GAD_H
 
-#include "oxts/gal-c/gad_struct.h"
+extern "C"
+{
+  #include "oxts/gal-c/gad_struct.h"
+}
+
+typedef GEN_BOOL GenBool;
+
 
 /**
  * Cpp wrapper class for C struct GEN_3D.
@@ -18,9 +24,9 @@ public:
   /*! Copy constructor */
   Gen3d(const GEN_3D& g);
 
-  /*! Implicit conversion from Gad to GEN_AIDING_DATA* */
+  /*! Implicit conversion from Gen3d to GEN_3D* */
   operator ::GEN_3D*(){ return this; }
-  /*! Implicit const conversion from Gad to GEN_AIDING_DATA* */
+  /*! Implicit const conversion from Gen3d to GEN_3D* */
   operator const ::GEN_3D*() const { return this; }
 
   /*! Copy assignment operator GEN_AIDING_DATA -> Gad */
@@ -42,13 +48,51 @@ public:
 /**
  * Cpp wrapper class for C struct GEN_AIDING_DATA
  * 
- * Contains Generic Aiding data. The class also acts as a creator for Gen3d 
- * concrete implentations.
  */
-class Gad : private GEN_AIDING_DATA
+class Gad 
 {
 private:
+  /** 
+   * Type of Aiding (position, velocity, ...). For enumerated values see 
+   * GEN_TYPE. 
+   */
+  int8_t        type;                // GEN_TYPE - type of data 
 
+  /** 
+   * Aiding stream ID to identify the source device. 
+   * Values 128-254. Each stream should have a unique ID. 
+   */
+  uint8_t       stream_id;
+
+  /** Sub-struct VALUE. Contains navigation aiding data. */
+  Gen3d*        val;                 // Navigation data
+  GenBool       val_valid;
+
+  /** Sub-struct TIME. Contains the time the data was recorded. */
+  Gen3d*        time;                
+  GenBool       time_valid;
+
+  /** 
+   * Sub-struct LOCATION. Contains lever arm (or alignment) data between the 
+   * IMU and aiding source.
+   */
+  Gen3d*        loc;                 // Location/Position of Generic Aiding Device (lever arm)
+  GenBool       loc_valid;
+
+  // Sub-struct RESERVED
+  Gen3d*        res1;
+  GenBool       res1_valid;          
+
+  // Sub-struct RESERVED
+  Gen3d*        res2;
+  GenBool       res2_valid;          
+
+  /** 
+   * Acquisition Time Stamp. The INS will fill in this timestamp upon its 
+   * arrival to the INS. Leave blank.
+   */ 
+  uint32_t      acq;                 // Timestamp from INS. Leave empty.
+  GenBool       acq_valid;
 public:
   /*! Default Constructor */
   Gad();
@@ -59,23 +103,19 @@ public:
   Gad(const GEN_AIDING_DATA& g);
 
   /*! Implicit conversion from Gad to GEN_AIDING_DATA* */
-  operator ::GEN_AIDING_DATA*(){ return this; }
+  // operator ::GEN_AIDING_DATA*(){ return this; }
   /*! Implicit const conversion from Gad to GEN_AIDING_DATA* */
-  operator const ::GEN_AIDING_DATA*() const { return this; }
+  // operator const ::GEN_AIDING_DATA*() const { return this; }
 
   // Copy assignment operator GEN_AIDING_DATA -> Gad */
   Gad& operator=(const GEN_AIDING_DATA& g);
   // Copy assignment operator Gad -> Gad */
   Gad& operator=(const Gad& g);
 
-  // Implement C functions on struct as member functions (reset, delete, etc.)
-  // ... 
-
-
   // General Accessors
   // streamId
-  void SetStreamId(int id) { this->stream_id = id; }
-  int  GetStreamId() { return this->stream_id; }
+  void SetStreamId(int id);
+  int  GetStreamId();
   // type 
   void SetDataType(int type); 
   int  GetDataType(); 
@@ -110,10 +150,6 @@ public:
   // Void
   void   SetTimeVoid();
 
-  // Loc accessors
-  void SetFixedLoc(double x, double y, double z);
-  void SetOptimisingLoc(double x, double y, double z);
-  void SetLocVar(double x, double y, double z);
 };
 
 /**
@@ -144,7 +180,7 @@ class GadPosition : public Gad
    * @param y Offset from INS to aiding source in the y axis of the IMU frame (m).
    * @param z Offset from INS to aiding source in the z axis of the IMU frame (m).
    */
-  void SetAidingFixedLeverArm(double x, double y, double z);
+  void SetAidingLeverArmFixed(double x, double y, double z);
   /**
    * Set lever arm from the INS to the aiding source. This lever arm will be
    * optimised by the Kalman Filter during navigation.
@@ -153,16 +189,16 @@ class GadPosition : public Gad
    * @param y Offset from INS to aiding source in the y axis of the IMU frame.
    * @param z Offset from INS to aiding source in the z axis of the IMU frame.
    */
-  void SetAidingOptimisingLeverArm(double x, double y, double z);
+  void SetAidingLeverArmOptimising(double x, double y, double z);
   /** 
    * Indicate that lever arm will be configured in the configuration file on 
    * the INS.
    * @todo Remove and set this mode to be default 
    */
-  void SetAidingConfigLeverArm();
+  void SetAidingLeverArmConfig();
   /**
-   * Set lever arm from the INS to the aiding source. This lever arm will be
-   * optimised by the Kalman Filter during navigation.
+   * Set the variance (accuracy) of the lever arm measurements from the INS to 
+   * the aiding source. 
    * 
    * @param x Variance on the lever arm from INS to aiding source in the x axis of the IMU frame.
    * @param y Variance on the lever arm from INS to aiding source in the y axis of the IMU frame.
@@ -181,8 +217,8 @@ class GadVelocity : public Gad
   void SetVelNeuVar(double varN, double varE, double varU);
   
   // loc 
-  void SetAidingFixedLeverArm(double x, double y, double z);
-  void SetAidingOptimisingLeverArm(double x, double y, double z);
+  void SetAidingLeverArmFixed(double x, double y, double z);
+  void SetAidingLeverArmOptimising(double x, double y, double z);
   void SetAidingLeverArmVar(double x, double y, double z);
 };
 
@@ -197,8 +233,8 @@ class GadSpeed : public Gad
   void SetWheelspeedVar(double count);
 
   // loc 
-  void SetAidingFixedLeverArm(double x, double y, double z);
-  void SetAidingOptimisingLeverArm(double x, double y, double z);
+  void SetAidingLeverArmFixed(double x, double y, double z);
+  void SetAidingLeverArmOptimising(double x, double y, double z);
   void SetAidingLeverArmVar(double x, double y, double z);
 };
 
@@ -212,9 +248,9 @@ class GadAttitude : public Gad
   void SetAttVar(double varH, double varP, double varR);
 
   // loc 
-  void SetAidingFixedOffset(double x, double y, double z);
-  void SetAidingOptimisingOffset(double x, double y, double z);
-  void SetAidingOffsetVar(double x, double y, double z);
+  void SetAidingAlignmentFixed(double x, double y, double z);
+  void SetAidingAlignmentOptimising(double x, double y, double z);
+  void SetAidingAlignmentVar(double x, double y, double z);
 };
 
 

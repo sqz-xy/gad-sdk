@@ -4,7 +4,7 @@ project(oxts-sdk-gad VERSION 0.1.0)
 set(DESCRIPTION "Generic Aiding library for the OxTS SDK in C++.")
 
 set(OXTS_SDK_GAD_CPP_HEADERS
-    ./include/oxts/gal-cpp/gad.h
+    ./include/oxts/gal-cpp/gad.hpp
     )
 
 

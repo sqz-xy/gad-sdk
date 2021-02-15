@@ -184,10 +184,74 @@ void GadPosition::SetAidingLeverArmVar(double x, double y, double z)
 
 //==============================================================================
 // GadVelocity
+// val
+void GadVelocity::SetVelNeu(double vN, double vE, double vU)
+{
+  this->SetDataMode(0);
+  this->SetDataValType(VEL_SYS_TYPE::VEL_SYS_NEU);
+  this->SetDataVal(vN,vE,vU);
+}
 
+void GadVelocity::SetVelNeuVar(double varN, double varE, double varU)
+{
+  this->SetDataVarDiag(varN,varE,varU);
+}
+
+// loc 
+void GadVelocity::SetAidingLeverArmFixed(double x, double y, double z)
+{
+  this->SetLocMode(LOC_SYS::LOC_FIXED);
+  this->SetLocVal(x,y,z);
+}
+void GadVelocity::SetAidingLeverArmOptimising(double x, double y, double z)
+{
+  this->SetLocMode(LOC_SYS::LOC_KF);
+  this->SetLocVal(x,y,z);
+}
+void GadVelocity::SetAidingLeverArmVar(double x, double y, double z)
+{
+  this->SetDataVarDiag(x,y,z);
+}
 //==============================================================================
 // GadSpeed
 
+// val
+void GadSpeed::SetSpeedFw(double sF)
+{
+  this->SetDataMode(0);
+  this->SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_FW_VEL);
+  this->SetDataVal(sF,0.0,0.0); /** @todo Implement with time interval */
+}
+void GadSpeed::SetSpeedFwVar(double varS)
+{
+  this->SetDataVarSingle(varS);
+}
+void GadSpeed::SetWheelspeedCount(double count, double period)
+{
+  this->SetDataMode(0);
+  this->SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_FW_VEL);
+  this->SetDataVal(count,period,0.0); /** @todo Implement with time interval */
+}
+void GadSpeed::SetWheelspeedVar(double varC)
+{
+  this->SetDataVarSingle(varC);
+}
+
+
+// loc 
+void GadSpeed::SetAidingLeverArmFixed(double x, double y, double z)
+{
+  this->SetLocMode(LOC_SYS::LOC_FIXED);
+  this->SetLocVal(x,y,z);
+}
+void GadSpeed::SetAidingLeverArmOptimising(double x, double y, double z)
+{
+  this->SetLocMode(LOC_SYS::LOC_KF);
+  this->SetLocVal(x,y,z);
+}
+void GadSpeed::SetAidingLeverArmVar(double x, double y, double z)
+{
+  this->SetDataVarDiag(x,y,z);
 
 //==============================================================================
 // GadAttitude

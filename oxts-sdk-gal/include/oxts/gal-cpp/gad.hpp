@@ -212,8 +212,19 @@ class GadPosition : public Gad
  */
 class GadVelocity : public Gad
 {
-  // val
+  /**
+   * Set the aiding velocity estimate in the local NEU coordinate frame.
+   * @param vN Velocity estimate in the North direction (m/s).
+   * @param vE Velocity estimate in the East direction (m/s).
+   * @param vU Velocity estimate in the Up direction (m/s).
+   */
   void SetVelNeu(double vN, double vE, double vU);
+  /**
+   * Set the aiding velocity variance estimate in the local NEU coordinate frame.
+   * @param varN Velocity variance estimate in the North direction (m/s).
+   * @param varE Velocity variance estimate in the East direction (m/s).
+   * @param varU Velocity variance estimate in the Up direction (m/s).
+   */
   void SetVelNeuVar(double varN, double varE, double varU);
   
   // loc 
@@ -228,9 +239,10 @@ class GadVelocity : public Gad
 class GadSpeed : public Gad
 {
   // val
-  void SetSpeedFw(double sF);
-  void SetSpeedFwVar(double vS);
-  void SetWheelspeedVar(double count);
+  void SetSpeedFw(double speed);
+  void SetSpeedFwVar(double varS);
+  void SetWheelspeedCount(double count);
+  void SetWheelspeedVar(double varC);
 
   // loc 
   void SetAidingLeverArmFixed(double x, double y, double z);

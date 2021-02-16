@@ -157,6 +157,9 @@ public:
  */
 class GadPosition : public Gad
 {
+private:
+
+public:
   /**
    * Set the aiding position in the WGS84 coordinate frame.
    * @param lat Latitude of the position estimate (deg).
@@ -214,6 +217,9 @@ class GadPosition : public Gad
  */
 class GadVelocity : public Gad
 {
+private:
+
+public:
   /**
    * Set the aiding velocity estimate in the local NEU coordinate frame.
    * @param vN Velocity estimate in the North direction (m/s).
@@ -229,9 +235,38 @@ class GadVelocity : public Gad
    */
   void SetVelNeuVar(double varN, double varE, double varU);
   
-  // loc 
+  /**
+   * Set lever arm from the INS to the aiding source. This lever arm will not be
+   * optimised by the Kalman Filter.
+   * 
+   * @param x Offset from INS to aiding source in the x axis of the IMU frame (m).
+   * @param y Offset from INS to aiding source in the y axis of the IMU frame (m).
+   * @param z Offset from INS to aiding source in the z axis of the IMU frame (m).
+   */
   void SetAidingLeverArmFixed(double x, double y, double z);
+  /**
+   * Set lever arm from the INS to the aiding source. This lever arm will be
+   * optimised by the Kalman Filter during navigation.
+   * 
+   * @param x Offset from INS to aiding source in the x axis of the IMU frame.
+   * @param y Offset from INS to aiding source in the y axis of the IMU frame.
+   * @param z Offset from INS to aiding source in the z axis of the IMU frame.
+   */
   void SetAidingLeverArmOptimising(double x, double y, double z);
+  /** 
+   * Indicate that lever arm will be configured in the configuration file on 
+   * the INS.
+   * @todo Remove and set this mode to be default 
+   */
+  void SetAidingLeverArmConfig();
+  /**
+   * Set the variance (accuracy) of the lever arm measurements from the INS to 
+   * the aiding source. 
+   * 
+   * @param x Variance on the lever arm from INS to aiding source in the x axis of the IMU frame.
+   * @param y Variance on the lever arm from INS to aiding source in the y axis of the IMU frame.
+   * @param z Variance on the lever arm from INS to aiding source in the z axis of the IMU frame.
+   */ 
   void SetAidingLeverArmVar(double x, double y, double z);
 };
 
@@ -240,15 +275,71 @@ class GadVelocity : public Gad
  */
 class GadSpeed : public Gad
 {
-  // val
+private:
+
+public:
+  /**
+   * Set the forward speed aiding estimate. 
+   * 
+   * @param speed Forward speed estimate in the vehicle frame (m/s).
+   */
   void SetSpeedFw(double speed);
+  /**
+   * Set estimated variance on the forward speed aiding measurement. 
+   * 
+   * @param varS Forward speed estimate in the vehicle frame (units).
+   */
   void SetSpeedFwVar(double varS);
-  void SetWheelspeedCount(double count);
+  /**
+   * Set the pulse count measurement from a wheelspeed encoder. 
+   * 
+   * @param count Number of pulses recorded during the period.
+   * @param period The period over which the current pulse count was recorded.
+   * 
+   * @todo Clarify where the timestamp should correspond to in the period: 
+   * start, middle, end.
+   */
+  void SetWheelspeedCount(double count, double period);
+  /**
+   * Set the estimated variance on the wheelspeed pulse count. 
+   * 
+   * @param varC Estimated variance (pulses).
+   * @todo Clarify units
+   */
   void SetWheelspeedVar(double varC);
 
-  // loc 
+  /**
+   * Set lever arm from the INS to the aiding source. This lever arm will not be
+   * optimised by the Kalman Filter.
+   * 
+   * @param x Offset from INS to aiding source in the x axis of the IMU frame (m).
+   * @param y Offset from INS to aiding source in the y axis of the IMU frame (m).
+   * @param z Offset from INS to aiding source in the z axis of the IMU frame (m).
+   */
   void SetAidingLeverArmFixed(double x, double y, double z);
+  /**
+   * Set lever arm from the INS to the aiding source. This lever arm will be
+   * optimised by the Kalman Filter during navigation.
+   * 
+   * @param x Offset from INS to aiding source in the x axis of the IMU frame.
+   * @param y Offset from INS to aiding source in the y axis of the IMU frame.
+   * @param z Offset from INS to aiding source in the z axis of the IMU frame.
+   */
   void SetAidingLeverArmOptimising(double x, double y, double z);
+  /** 
+   * Indicate that lever arm will be configured in the configuration file on 
+   * the INS.
+   * @todo Remove and set this mode to be default 
+   */
+  void SetAidingLeverArmConfig();
+  /**
+   * Set the variance (accuracy) of the lever arm measurements from the INS to 
+   * the aiding source. 
+   * 
+   * @param x Variance on the lever arm from INS to aiding source in the x axis of the IMU frame.
+   * @param y Variance on the lever arm from INS to aiding source in the y axis of the IMU frame.
+   * @param z Variance on the lever arm from INS to aiding source in the z axis of the IMU frame.
+   */ 
   void SetAidingLeverArmVar(double x, double y, double z);
 };
 
@@ -257,6 +348,9 @@ class GadSpeed : public Gad
  */
 class GadAttitude : public Gad
 {
+private:
+
+public:
   // val
   void SetAtt(double heading, double pitch, double roll);
   void SetAttVar(double varH, double varP, double varR);

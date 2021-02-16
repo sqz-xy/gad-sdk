@@ -80,45 +80,45 @@ void Gad::SetDataVarSingle(double v0)
 // time
 
 // GPS
-void   SetGpsTime(double week, double secondsFromSunday)
+void   Gad::SetGpsTime(double week, double secondsFromSunday)
 {
   this->time->SetMode(0);
   this->time->SetValType(TIME_SYS::TIME_GPS);
   this->time->SetVal(week,secondsFromSunday, 0);
 }
-int    GetGpsWeek()
+int    Gad::GetGpsWeek()
 {
-
+  return 0;
 }
-double GetGpsSecondsFromSunday()
+double Gad::GetGpsSecondsFromSunday()
 {
-
+  return 0.0;
 }
 // PPS
-void   SetTimePpsRelative(double ns)
+void   Gad::SetTimePpsRelative(double ns)
 {
   this->time->SetMode(0);
   this->time->SetValType(TIME_SYS::TIME_PPS_RELATIVE);
   this->time->SetVal(0.0, 0.0, ns);
 }
-double GetTimePpsRelative()
+double Gad::GetTimePpsRelative()
 {
-
+  return 0.0;
 }
 // Latency
-void   SetTimeLatency(double ns)
+void   Gad::SetTimeLatency(double ns)
 {
   this->time->SetMode(0);
   this->time->SetValType(TIME_SYS::TIME_EST_LATENCY);
   this->time->SetVal(0.0, ns, 0.0);
 
 }
-double GetTimeLatency()
+double Gad::GetTimeLatency()
 {
-
+  return 0.0;
 }
 // Void
-void   SetTimeVoid()
+void   Gad::SetTimeVoid()
 {
   this->time->SetMode(0);
   this->time->SetValType(TIME_SYS::TIME_VOID);
@@ -252,6 +252,6 @@ void GadSpeed::SetAidingLeverArmOptimising(double x, double y, double z)
 void GadSpeed::SetAidingLeverArmVar(double x, double y, double z)
 {
   this->SetDataVarDiag(x,y,z);
-
+}
 //==============================================================================
 // GadAttitude

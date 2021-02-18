@@ -1,2 +1,6 @@
+_builds/
 build/
+_install/
 install/
+
+#.vscode/

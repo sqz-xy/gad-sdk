@@ -1,37 +1,41 @@
 cmake_minimum_required(VERSION 3.1)
 
-project(oxts-sdk-core VERSION 0.1.0)
-set(DESCRIPTION "OxTS core library for common C/C++ functionality.")
+project(oxts-sdk-gal-c VERSION 0.1.0)
+set(DESCRIPTION "OxTS library for base Generic Aiding API in C.")
 
-set(OXTS_CORE_HEADERS
-    ./include/oxts/core/BasicCasts.h
-    ./include/oxts/core/BasicTypes.h
-    ./include/oxts/core/ccomtx.h
-    ./include/oxts/core/errors.h
-    ./include/oxts/core/Lib_Compiler.h
-    ./include/oxts/core/Lib_Detect.h
-    ./include/oxts/core/version.h
+# find_package(oxts-sdk-core REQUIRED)
+find_package(oxts-sdk-core CONFIG REQUIRED)
+if(NOT oxts-sdk-core_FOUND)
+    message("Core not found")
+else()
+    message("Package found")
+endif()
+
+set(OXTS_SDK_GAL_C_HEADERS
+    ./include/oxts/gal-c/gad_decode.h
+    ./include/oxts/gal-c/gad_defines.h
+    ./include/oxts/gal-c/gad_encode.h
+    ./include/oxts/gal-c/gad_include_all.h
+    ./include/oxts/gal-c/gad_struct.h
     )
 
-set(OXTS_CORE_SOURCES
-    ./src/BasicCasts.c
-    ./src/ccomtx.cpp
-    ./src/errors.c
-    ./src/Lib_Compiler.c
+set(OXTS_SDK_GAL_C_SOURCES
+    ./src/gad_decode.c
+    ./src/gad_encode.c
+    ./src/gad_struct.c
     )
-
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-set(OXTS_SDK_CORE_NAME "oxts-sdk-core")
+set(OXTS_SDK_GAL_C_NAME "oxts-sdk-gal-c")
+set(CMAKE_INSTALL_RPATH "\$ORIGIN/../${CMAKE_INSTALL_LIBDIR}")
 
-####
-# Create targets
-add_library(${OXTS_SDK_CORE_NAME} STATIC
-    ${OXTS_CORE_HEADERS}
-    ${OXTS_CORE_SOURCES}
-    )
+add_library(${OXTS_SDK_GAL_C_NAME}  STATIC
+            ${OXTS_SDK_GAL_C_HEADERS}
+            ${OXTS_SDK_GAL_C_SOURCES}
+            )
 
+target_link_libraries(${OXTS_SDK_GAL_C_NAME} PUBLIC oxts-sdk-core)
 
 ####
 # Properties of targets
@@ -41,7 +45,7 @@ add_library(${OXTS_SDK_CORE_NAME} STATIC
 #   * Debug: -DFOO_BAR_DEBUG=1
 #   * Release: -DFOO_BAR_DEBUG=0
 #   * other: -DFOO_BAR_DEBUG=0
-target_compile_definitions(${OXTS_SDK_CORE_NAME} PUBLIC "OXTS_SDK_CORE_DEBUG=$<CONFIG:Debug>")
+target_compile_definitions(${OXTS_SDK_GAL_C_NAME} PUBLIC "OXTS_SDK_GAL_C_DEBUG=$<CONFIG:Debug>")
 
 # Generate:
 #   * ${CMAKE_CURRENT_BINARY_DIR}/generated_headers/foo/BAR_EXPORT.h with BAR_EXPORT
@@ -49,11 +53,11 @@ target_compile_definitions(${OXTS_SDK_CORE_NAME} PUBLIC "OXTS_SDK_CORE_DEBUG=$<C
 # * We need prefix 'foo' to fit OSX/iOS frameworks layout
 # * File name match name of the macro
 set(generated_headers "${CMAKE_CURRENT_BINARY_DIR}/generated_headers")
-set(oxts_core_export "${generated_headers}/oxts/core/OXTS_CORE_EXPORT.h")
+set(oxts_gal_c_export "${generated_headers}/oxts/gal-c/OXTS_GAL_C_EXPORT.h")
 
 # https://cmake.org/cmake/help/v3.9/module/GenerateExportHeader.html
 include(GenerateExportHeader)
-generate_export_header(${OXTS_SDK_CORE_NAME} EXPORT_FILE_NAME ${oxts_core_export})
+generate_export_header(${OXTS_SDK_GAL_C_NAME} EXPORT_FILE_NAME ${oxts_gal_c_export})
 
 # Global includes. Used by all targets
 # Note:
@@ -90,7 +94,7 @@ set(generated_dir "${CMAKE_CURRENT_BINARY_DIR}/generated")
 set(version_config "${generated_dir}/${PROJECT_NAME}-config-version.cmake")
 set(project_config "${generated_dir}/${PROJECT_NAME}-config.cmake")
 set(TARGETS_EXPORT_NAME "${PROJECT_NAME}-targets")
-# set(namespace "${PROJECT_NAME}::")
+set(namespace "${PROJECT_NAME}::")
 
 # Include module with fuction 'write_basic_package_version_file'
 include(CMakePackageConfigHelpers)
@@ -118,7 +122,7 @@ configure_package_config_file(
 #   * header location after install: <prefix>/include/foo/Bar.hpp
 #   * headers can be included by C++ code `#include <foo/Bar.hpp>`
 install(
-    TARGETS ${OXTS_SDK_CORE_NAME}
+    TARGETS ${OXTS_SDK_GAL_C_NAME}
     EXPORT "${TARGETS_EXPORT_NAME}"
     LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
     ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
@@ -130,7 +134,7 @@ install(
 #   * Source/foo/Bar.hpp -> <prefix>/include/foo/Bar.hpp
 #   * Source/foo/Baz.hpp -> <prefix>/include/foo/Baz.hpp
 install(
-    DIRECTORY "include/oxts/core"
+    DIRECTORY "include/oxts/gal-c"
     DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/oxts"
     FILES_MATCHING PATTERN "*.h"
 )
@@ -139,8 +143,8 @@ install(
 #   * ${CMAKE_CURRENT_BINARY_DIR}/.../BAR_EXPORT.h -> <prefix>/include/foo/BAR_EXPORT.h
 #   * ${CMAKE_CURRENT_BINARY_DIR}/.../BAZ_EXPORT.h -> <prefix>/include/foo/BAZ_EXPORT.h
 install(
-    FILES "${oxts_core_export}"
-    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/oxts/core"
+    FILES "${oxts_gal_c_export}"
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/oxts/gal-c"
 )
 
 # Config
@@ -163,5 +167,3 @@ install(
 # which could be used to search CMAKE modules by "include()" or "find_package()", but the default value is empty.
 # Add cmake dir to search list
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
-
-# }

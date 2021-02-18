@@ -1,35 +1,41 @@
 cmake_minimum_required(VERSION 3.1)
 
-project(oxts-sdk-gal-c VERSION 0.1.0)
-set(DESCRIPTION "OxTS library for base Generic Aiding API in C.")
 
-find_package(oxts-sdk-core CONFIG REQUIRED)
+# define library version 
+set(OXTS_SDK_GAL_VERSION_MAJOR 0 CACHE STRING "major version" FORCE)
+set(OXTS_SDK_GAL_VERSION_MINOR 1 CACHE STRING "minor version" FORCE)
+set(OXTS_SDK_GAL_VERSION_PATCH 0 CACHE STRING "patch version" FORCE)
+set(OXTS_SDK_GAL_VERSION 
+${OXTS_SDK_GAL_VERSION_MAJOR}.${OXTS_SDK_GAL_VERSION_MINOR}.${OXTS_SDK_GAL_VERSION_PATCH} 
+CACHE STRING "version" FORCE
+)
 
-set(OXTS_SDK_GAL_C_HEADERS
-    ./include/oxts/gal-c/gad_decode.h
-    ./include/oxts/gal-c/gad_defines.h
-    ./include/oxts/gal-c/gad_encode.h
-    ./include/oxts/gal-c/gad_include_all.h
-    ./include/oxts/gal-c/gad_struct.h
+project(oxts-sdk-gal-cpp VERSION ${OXTS_SDK_GAL_VERSION})
+set(DESCRIPTION "Generic Aiding library for the OxTS SDK in C++.")
+
+find_package(oxts-sdk-gal-c CONFIG REQUIRED)
+
+set(OXTS_SDK_GAD_CPP_HEADERS
+    ./include/oxts/gal-cpp/gad.hpp
     )
 
-set(OXTS_SDK_GAL_C_SOURCES
-    ./src/gad_decode.c
-    ./src/gad_encode.c
-    ./src/gad_struct.c
+set(OXTS_SDK_GAD_CPP_SOURCES
+    ./src/gal-cpp/gad.cpp
     )
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-set(OXTS_SDK_GAL_C_NAME "oxts-sdk-gal-c")
+set(OXTS_SDK_GAL_CPP_NAME "oxts-sdk-gal-cpp")
 # set(CMAKE_INSTALL_RPATH "\$ORIGIN/../${CMAKE_INSTALL_LIBDIR}")
 
-add_library(${OXTS_SDK_GAL_C_NAME}  STATIC
-            ${OXTS_SDK_GAL_C_HEADERS}
-            ${OXTS_SDK_GAL_C_SOURCES}
+
+add_library(${OXTS_SDK_GAL_CPP_NAME} STATIC
+            ${OXTS_SDK_GAD_CPP_HEADERS}
+            ${OXTS_SDK_GAD_CPP_SOURCES}
             )
 
-target_link_libraries(${OXTS_SDK_GAL_C_NAME} PUBLIC oxts-sdk-core)
+target_link_libraries(${OXTS_SDK_GAL_CPP_NAME} PUBLIC oxts-sdk-gal-c)
+
 
 ####
 # Properties of targets
@@ -39,7 +45,7 @@ target_link_libraries(${OXTS_SDK_GAL_C_NAME} PUBLIC oxts-sdk-core)
 #   * Debug: -DFOO_BAR_DEBUG=1
 #   * Release: -DFOO_BAR_DEBUG=0
 #   * other: -DFOO_BAR_DEBUG=0
-target_compile_definitions(${OXTS_SDK_GAL_C_NAME} PUBLIC "OXTS_SDK_GAL_C_DEBUG=$<CONFIG:Debug>")
+target_compile_definitions(${OXTS_SDK_GAL_CPP_NAME} PUBLIC "OXTS_SDK_GAL_CPP_DEBUG=$<CONFIG:Debug>")
 
 # Generate:
 #   * ${CMAKE_CURRENT_BINARY_DIR}/generated_headers/foo/BAR_EXPORT.h with BAR_EXPORT
@@ -47,11 +53,11 @@ target_compile_definitions(${OXTS_SDK_GAL_C_NAME} PUBLIC "OXTS_SDK_GAL_C_DEBUG=$
 # * We need prefix 'foo' to fit OSX/iOS frameworks layout
 # * File name match name of the macro
 set(generated_headers "${CMAKE_CURRENT_BINARY_DIR}/generated_headers")
-set(oxts_gal_c_export "${generated_headers}/oxts/gal-c/OXTS_GAL_C_EXPORT.h")
+set(oxts_gal_cpp_export "${generated_headers}/oxts/gal-cpp/OXTS_GAL_CPP_EXPORT.h")
 
 # https://cmake.org/cmake/help/v3.9/module/GenerateExportHeader.html
 include(GenerateExportHeader)
-generate_export_header(${OXTS_SDK_GAL_C_NAME} EXPORT_FILE_NAME ${oxts_gal_c_export})
+generate_export_header(${OXTS_SDK_GAL_CPP_NAME} EXPORT_FILE_NAME ${oxts_gal_cpp_export})
 
 # Global includes. Used by all targets
 # Note:
@@ -116,7 +122,7 @@ configure_package_config_file(
 #   * header location after install: <prefix>/include/foo/Bar.hpp
 #   * headers can be included by C++ code `#include <foo/Bar.hpp>`
 install(
-    TARGETS ${OXTS_SDK_GAL_C_NAME}
+    TARGETS ${OXTS_SDK_GAL_CPP_NAME}
     EXPORT "${TARGETS_EXPORT_NAME}"
     LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
     ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
@@ -128,17 +134,17 @@ install(
 #   * Source/foo/Bar.hpp -> <prefix>/include/foo/Bar.hpp
 #   * Source/foo/Baz.hpp -> <prefix>/include/foo/Baz.hpp
 install(
-    DIRECTORY "include/oxts/gal-c"
+    DIRECTORY "include/oxts/gal-cpp"
     DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/oxts"
-    FILES_MATCHING PATTERN "*.h"
+    FILES_MATCHING PATTERN "*.hpp"
 )
 
 # Export headers:
 #   * ${CMAKE_CURRENT_BINARY_DIR}/.../BAR_EXPORT.h -> <prefix>/include/foo/BAR_EXPORT.h
 #   * ${CMAKE_CURRENT_BINARY_DIR}/.../BAZ_EXPORT.h -> <prefix>/include/foo/BAZ_EXPORT.h
 install(
-    FILES "${oxts_gal_c_export}"
-    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/oxts/gal-c"
+    FILES "${oxts_gal_cpp_export}"
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/oxts/gal-cpp"
 )
 
 # Config

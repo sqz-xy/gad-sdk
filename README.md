@@ -12,22 +12,41 @@ CMake is required to build the code and examples from source. (Pre-built binarie
 
 ## Getting Started
 
-The fastest way to get started with the SDK is to install the pre-built binaries from... (TBC)
+The fastest way to get started with the SDK is to install the pre-built binaries from... (TBC). Will require some form of deployment.
 
 ## Building from source
 
 Users can also build the SDK from source, using the following instructions:
 
 1. Clone the repository onto the PC.
-2. cd oxts-sdk/build 
-3. cmake ..
-4. make
+2. Navigate to the root directory of the repository
+3. (Optional) Edit the CMakeLists.txt file in the root of the repository to 
+   configure options, such as enabling building of examples.
+4. Execute the commands:
 
-Building the SDK will install it (TBC)...
+```
+mkdir _build && cd _build 
+cmake ..
+cmake --build . --target install
+```
+
+This will build the SDK and install it to your machine. Once this is complete, 
+other CMake projects on the machine can link to the libraries using... (not 
+functional yet. Can only be included in example projects within the repo.)
 
 ## Examples
 
-The SDK contains a number of examples to demonstrate Generic Aiding and NCom decoding in action. These are contained in the /examples directory.
+The SDK contains a number of examples to demonstrate Generic Aiding and NCom 
+decoding in action. These are contained in the /examples directory. To build 
+the examples, ensure that the option OXTS_SDK_BUILD_EXAMPLES is enabled in the
+CMakeLists.txt file at the root of the repository.
 
+### GAL
 
-...
+#### Static Aiding
+
+This is one of the simplest Generic Aiding examples, ideal for getting to grips 
+with the interface without leaving your desk.
+
+Static position and attitude measurements are created alongside zero velocity 
+updates, all of which are sent to the INS.

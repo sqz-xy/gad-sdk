@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.1)
+
+# C++ Standard version. Minimum supported is C++11.
+set(CMAKE_CXX_STANDARD 11)
+
+project(oxts-sdk-examples-gal VERSION 0.1.0)
+
+# Example 1 - Static Aiding
+set(OXTS_SDK_EXAMPLES_GAL_STATIC static-aiding-example)
+
+add_executable(${OXTS_SDK_EXAMPLES_GAL_STATIC} ./static-aiding.cpp)
+
+# find_package(oxts-sdk-core REQUIRED)
+# find_package(oxts-sdk-gal-c REQUIRED)
+find_package(oxts-sdk-gal-cpp REQUIRED)
+
+target_link_libraries(${OXTS_SDK_EXAMPLES_GAL_STATIC} 
+    PUBLIC 
+        # oxts-sdk-core
+        # oxts-sdk-gal-c
+        oxts-sdk-gal-cpp
+        )

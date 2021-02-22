@@ -2,23 +2,38 @@ cmake_minimum_required(VERSION 3.1)
 
 project(oxts-sdk VERSION 0.1.0)
 
-# C++ Standard version. Minimum supported is C++11.
+# Add preprocessor definitions for the SDK version and platform name
+add_definitions(-DOXTS_SDK_VERSION_STRING=\"${oxts-sdk_VERSION}\")
+add_definitions(-DOXTS_SDK_VERSION_MAJOR=${oxts-sdk_VERSION_MAJOR})
+add_definitions(-DOXTS_SDK_VERSION_MINOR=${oxts-sdk_VERSION_MINOR})
+add_definitions(-DOXTS_SDK_VERSION_PATCH=${oxts-sdk_VERSION_PATCH})
+
+# Building and installation options
+option(OXTS_SDK_BUILD_DOCS "Build SDK documentation" OFF)
+option(OXTS_SDK_BUILD_EXAMPLES "Enable examples targets" ON) # NOT YET IMPLEMENTED
+
+# C++ Standard version
 set(CMAKE_CXX_STANDARD 11)
 
-option(OXTS_SDK_BUILD_DOCS "Build SDK documentation" OFF)
-option(OXTS_SDK_BUILD_EXAMPLES "Enable examples targets" OFF) # NOT YET IMPLEMENTED
+# Add cmake dir to search list
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
-# Add modules
-add_subdirectory(oxts-sdk-core)
-add_subdirectory(oxts-sdk-gal-c) 
-add_subdirectory(oxts-sdk-gal-cpp) 
-#add_subdirectory(oxts-sdk-ncomdecoder)
+# Save root sdk folder path
+get_filename_component(OXTS_SDK_ROOT "${CMAKE_CURRENT_SOURCE_DIR}" ABSOLUTE)
 
-if (OXTS_SDK_BUILD_EXAMPLES)
-    add_subdirectory(examples)
-endif()
+# Include common scripts
+include(sdk-management)
+
+# Add the sdks
+add_sdks()
+
+
 
 if (OXTS_SDK_BUILD_DOCS)
     add_subdirectory(docs)
+endif()
+
+if (OXTS_SDK_BUILD_EXAMPLES)
+    add_subdirectory(examples)
 endif()
 

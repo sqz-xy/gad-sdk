@@ -10,7 +10,7 @@ add_definitions(-DOXTS_SDK_VERSION_PATCH=${oxts-sdk_VERSION_PATCH})
 
 # Building and installation options
 option(OXTS_SDK_BUILD_DOCS "Build SDK documentation" OFF)
-option(OXTS_SDK_BUILD_EXAMPLES "Enable examples targets" ON) # NOT YET IMPLEMENTED
+option(OXTS_SDK_BUILD_EXAMPLES "Enable examples targets" ON) 
 
 # C++ Standard version
 set(CMAKE_CXX_STANDARD 11)

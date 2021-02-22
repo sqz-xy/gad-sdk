@@ -48,6 +48,20 @@ void Gen3d::SetVarSingle(double v0)
 //==============================================================================
 // Gad superclass
 
+// Default constructor
+Gad::Gad()
+{
+  SetStreamId(129);
+  SetDataType(GEN_TYPE::GEN_VOID);
+  /*! @todo Add initialisation of Gen3d members */
+  // SetAcqTimestamp(0.0);
+}
+
+Gad::~Gad()
+{
+  /** @todo Implement destructor */
+}
+
 // streamId
 void Gad::SetStreamId(int id) { this->stream_id = id; }
 int  Gad::GetStreamId() { return this->stream_id; }
@@ -86,7 +100,7 @@ void   Gad::SetGpsTime(double week, double secondsFromSunday)
   this->time->SetValType(TIME_SYS::TIME_GPS);
   this->time->SetVal(week,secondsFromSunday, 0);
 }
-int    Gad::GetGpsWeek()
+double Gad::GetGpsWeek()
 {
   return 0;
 }
@@ -111,7 +125,6 @@ void   Gad::SetTimeLatency(double ns)
   this->time->SetMode(0);
   this->time->SetValType(TIME_SYS::TIME_EST_LATENCY);
   this->time->SetVal(0.0, ns, 0.0);
-
 }
 double Gad::GetTimeLatency()
 {

@@ -92,6 +92,7 @@ macro(export_config)
         DESTINATION
         ${ConfigPackageLocation}
         COMPONENT
-        Devel)
+        Devel
+    )
 
 endmacro()

@@ -15,11 +15,11 @@ set(DESCRIPTION "Generic Aiding library for the OxTS SDK in C++.")
 
 find_package(oxts-sdk-gal-c CONFIG REQUIRED)
 
-set(OXTS_GAD_CPP_HEADERS
+set(OXTS_GAL_CPP_HEADERS
     ./include/oxts/gal-cpp/gad.hpp
 )
 
-set(OXTS_GAD_CPP_SOURCES
+set(OXTS_GAL_CPP_SOURCES
     ./src/gal-cpp/gad.cpp
 )
 
@@ -30,8 +30,8 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
 ####
 # Create targets
 add_library(${PROJECT_NAME} #STATIC
-    ${OXTS_GAD_CPP_HEADERS}
-    ${OXTS_GAD_CPP_SOURCES}
+    ${OXTS_GAL_CPP_HEADERS}
+    ${OXTS_GAL_CPP_SOURCES}
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
@@ -48,10 +48,11 @@ target_link_libraries(${PROJECT_NAME}
 )
 
 target_compile_definitions(${PROJECT_NAME}
-    PRIVATE GAL_CPP_LIBRARY)
+    PRIVATE GAL_CPP_LIBRARY
+)
 
-install (FILES ${OXTS_SDK_GAL_CPP_HEADERS} DESTINATION ${INCLUDE_DIRECTORY}/oxts/gal-cpp)
-
+install (FILES ${OXTS_GAL_CPP_HEADERS} DESTINATION ${INCLUDE_DIRECTORY}/oxts/gal-cpp)
+message(STATUS "install prefix: ${CMAKE_INSTALL_PREFIX}")
 export_config()
 
 # TODO: Add testing

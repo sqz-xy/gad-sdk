@@ -45,7 +45,7 @@ target_link_libraries(${PROJECT_NAME}
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE GAL_C_LIBRARY)
 
-install (FILES ${OXTS_SDK_GAL_C_HEADERS} DESTINATION ${INCLUDE_DIRECTORY}/oxts/gal-c)
+install (FILES ${OXTS_GAL_C_HEADERS} DESTINATION ${INCLUDE_DIRECTORY}/oxts/gal-c)
 
 export_config()
 

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 
-project(oxts-sdk VERSION 0.1.0)
+project(oxts-sdk)
 
 # Add preprocessor definitions for the SDK version and platform name
 add_definitions(-DOXTS_SDK_VERSION_STRING=\"${oxts-sdk_VERSION}\")
@@ -21,14 +21,14 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 # Save root sdk folder path
 get_filename_component(OXTS_SDK_ROOT "${CMAKE_CURRENT_SOURCE_DIR}" ABSOLUTE)
 
-# Include common scripts
+# Include useful functions from /cmake. Manages dependencies between packages
+# within the SDK.
 include(sdk-management)
 
 # Add the sdks
 add_sdks()
 
-
-
+# Optional extras
 if (OXTS_SDK_BUILD_DOCS)
     add_subdirectory(docs)
 endif()

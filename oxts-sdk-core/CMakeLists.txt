@@ -36,19 +36,18 @@ add_library(${PROJECT_NAME} #STATIC
     ${OXTS_CORE_SOURCES}
 )
 
-target_include_directories(${PROJECT_NAME} PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
-
-    $<INSTALL_INTERFACE:include>
+target_include_directories(${PROJECT_NAME} 
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
+        $<INSTALL_INTERFACE:include>
 )
 
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE CORE_LIBRARY)
 
-install (FILES ${OXTS_SDK_CORE_HEADERS} DESTINATION ${INCLUDE_DIRECTORY}/oxts/core)
-
+install (FILES ${OXTS_CORE_HEADERS} DESTINATION ${INCLUDE_DIRECTORY}/oxts/core)
 export_config()
 
 # TODO: Add testing

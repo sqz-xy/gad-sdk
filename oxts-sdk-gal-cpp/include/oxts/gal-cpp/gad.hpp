@@ -1,6 +1,6 @@
 #ifndef GAD_H
 #define GAD_H
-
+/*! \file gad.hpp */
 extern "C"
 {
   #include "oxts/gal-c/gad_struct.h"
@@ -18,7 +18,13 @@ class Gen3d : private GEN_3D
 {
 public:
   /*! Default Constructor */
-  Gen3d();
+  Gen3d()
+  {
+    SetMode(0);
+    SetValType(0);
+    SetVal(0.0,0.0,0.0);
+    SetVarUpperDiag(0.0,0.0,0.0,0.0,0.0,0.0);
+  }
   /*! Destructor */
   ~Gen3d();
   /*! Copy constructor */
@@ -36,9 +42,16 @@ public:
 
 
   // Accessor functions 
+  /*! Set the aiding mode. Typically set to 0.*/
   void SetMode(int mode);
+  int  GetMode();
+  /** Set the value type. Index source depends on use of the struct. Sources
+   *  include ::POS_SYS_TYPE, ::VEL_SYS_TYPE, ::SPEED_SYS_TYPE, ::LOC_SYS.
+   */
   void SetValType(int x_type);
+  int  GetValType();
   void SetVal(double x0, double x1,double x2);
+
   void SetVarUpperDiag(double v0, double v1, double v2, double v3, double v4, double v5);
   void SetVarDiag(double v0, double v1,double v2);
   void SetVarSingle(double v0);
@@ -93,6 +106,7 @@ private:
    */ 
   uint32_t      acq;                 // Timestamp from INS. Leave empty.
   GenBool       acq_valid;
+
 public:
   /*! Default Constructor */
   Gad();
@@ -139,7 +153,7 @@ public:
   // Time accessors
   // GPS
   void   SetGpsTime(double week, double secondsFromSunday);
-  int    GetGpsWeek();
+  double    GetGpsWeek();
   double GetGpsSecondsFromSunday();
   // PPS
   void   SetTimePpsRelative(double ns);
@@ -149,6 +163,12 @@ public:
   double GetTimeLatency();
   // Void
   void   SetTimeVoid();
+  
+  // Acquisiton time accessors.
+  /*! Set the acquisition time of the data. Not to be used outside of the INS.*/
+  void SetAcqTimestamp();
+  /*! Get the acquisition time of the data. Not expected to be set outside of the INS.*/
+  int  GetAcqTimestamp();
 
 };
 
@@ -160,6 +180,10 @@ class GadPosition : public Gad
 private:
 
 public:
+  /**
+   * Default Constructor
+   */
+  GadPosition();
   /**
    * Set the aiding position in the WGS84 coordinate frame.
    * @param lat Latitude of the position estimate (deg).

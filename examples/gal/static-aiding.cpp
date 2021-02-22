@@ -15,7 +15,8 @@ int main(int argc, char * argv[])
 
   GenBool b = true;
   // // Construct the position aiding class.
-  //GadPosition gp = GadPosition();
+  Gad gp = Gad();
+  // GadPosition gp = GadPosition();
   // // Set the aiding position
   // gp.SetWgs84Pos(0.0,0.0,0.0); 
   // // Set the estimated variance on this position

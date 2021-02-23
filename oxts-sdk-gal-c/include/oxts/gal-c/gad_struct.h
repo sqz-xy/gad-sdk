@@ -118,6 +118,14 @@ typedef enum
    SPEED_SYS_VOID,
    SPEED_SYS_FW_VEL,        // speed at sensor fixed wrt IMU, speed angle wrt IMU given
 } SPEED_SYS_TYPE;
+//============================================================================================================
+//! \brief Attitude types 
+
+typedef enum
+{
+   ATT_SYS_VOID,
+   ATT_SYS_HPR,            // Attitude measurement given as Heading, Pitch, Roll in the vehicle frame
+} ATT_SYS_TYPE;
 
 //============================================================================================================
 //! \brief Location types. (lever arm)

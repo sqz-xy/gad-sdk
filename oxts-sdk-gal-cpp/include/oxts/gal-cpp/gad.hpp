@@ -7,7 +7,7 @@ extern "C"
   #include "oxts/gal-c/gad_struct.h"
 }
 
-typedef GEN_BOOL GenBool;
+typedef GEN_BOOL GenFlag;
 
 /**
  * Cpp wrapper class for C struct GEN_3D.
@@ -35,10 +35,10 @@ public:
   /*! Implicit const conversion from Gen3d to GEN_3D* */
   operator const ::GEN_3D*() const { return this; }
 
-  /*! Copy assignment operator GEN_AIDING_DATA -> Gad */
+  /*! Copy assignment operator Gen3d -> GEN_3D */
   Gen3d& operator=(const GEN_3D);
-  /*! Copy assignment operator Gad -> Gad */
-  Gen3d& operator=(const Gen3d& g);
+  /*! Copy assignment operator Gen3d -> Gen3d */
+  //Gen3d& operator=(const Gen3d& g);
 
 
   // Accessor functions 
@@ -89,49 +89,54 @@ private:
 
   /** Sub-struct VALUE. Contains navigation aiding data. */
   Gen3d*        val;                 // Navigation data
-  GenBool       val_valid;
+  GenFlag       val_valid;
 
   /** Sub-struct TIME. Contains the time the data was recorded. */
   Gen3d*        time;                
-  GenBool       time_valid;
+  GenFlag       time_valid;
 
   /** 
    * Sub-struct LOCATION. Contains lever arm (or alignment) data between the 
    * IMU and aiding source.
    */
   Gen3d*        loc;                 // Location/Position of Generic Aiding Device (lever arm)
-  GenBool       loc_valid;
+  GenFlag       loc_valid;
 
   // Sub-struct RESERVED
   Gen3d*        res1;
-  GenBool       res1_valid;          
+  GenFlag       res1_valid;          
 
   // Sub-struct RESERVED
   Gen3d*        res2;
-  GenBool       res2_valid;          
+  GenFlag       res2_valid;          
 
   /** 
    * Acquisition Time Stamp. The INS will fill in this timestamp upon its 
    * arrival to the INS. Leave blank.
    */ 
   uint32_t      acq;                 // Timestamp from INS. Leave empty.
-  GenBool       acq_valid;
+  GenFlag       acq_valid;
 
 public:
   /*! Default Constructor */
   Gad();
+  /*! Constructor */
+  Gad(uint8_t stream_id, int8_t aiding_type);
   /*! Destructor */
   ~Gad();
 
   /*! Copy constructor */
   Gad(const GEN_AIDING_DATA& g);
+  Gad(const Gad& g);
 
   /*! Implicit conversion from Gad to GEN_AIDING_DATA* */
   // operator ::GEN_AIDING_DATA*(){ return this; }
   /*! Implicit const conversion from Gad to GEN_AIDING_DATA* */
   // operator const ::GEN_AIDING_DATA*() const { return this; }
 
-  // Copy assignment operator GEN_AIDING_DATA -> Gad */
+  /** Copy assignment operator GEN_AIDING_DATA -> Gad 
+   *  @todo Implement the copy assignment operator GEN_AIDING_DATA -> Gad
+  */
   Gad& operator=(const GEN_AIDING_DATA& g);
   // Copy assignment operator Gad -> Gad */
   Gad& operator=(const Gad& g);
@@ -144,6 +149,7 @@ public:
   void SetDataType(int type); 
   int  GetDataType(); 
   // val
+  void SetValValid(GenFlag validity);
   void SetDataMode(int mode);
   void SetDataValType(int x_type);
   void SetDataVal(double x0, double x1,double x2);
@@ -153,6 +159,7 @@ public:
   // time
 
   // loc  
+  void SetLocValid(GenFlag validity);
   void SetLocMode(int mode);
   void SetLocValType(int x_type);
   void SetLocVal(double x0, double x1,double x2);
@@ -161,9 +168,10 @@ public:
   void SetLocVarSingle(double v0);
 
   // Time accessors
+  void SetTimeValid(GenFlag validity);
   // GPS
   void   SetGpsTime(double week, double secondsFromSunday);
-  double    GetGpsWeek();
+  double GetGpsWeek();
   double GetGpsSecondsFromSunday();
   // PPS
   void   SetTimePpsRelative(double ns);
@@ -191,9 +199,11 @@ private:
 
 public:
   /**
-   * Default Constructor
+   * Constructor
+   * 
+   * @param stream_id Stream ID for the position aiding. Must be unique 128-254.
    */
-  GadPosition();
+  GadPosition(uint8_t stream_id);
   /**
    * Set the aiding position in the WGS84 coordinate frame.
    * @param lat Latitude of the position estimate (deg).
@@ -254,6 +264,7 @@ class GadVelocity : public Gad
 private:
 
 public:
+  GadVelocity(uint8_t stream_id);
   /**
    * Set the aiding velocity estimate in the local NEU coordinate frame.
    * @param vN Velocity estimate in the North direction (m/s).
@@ -312,6 +323,8 @@ class GadSpeed : public Gad
 private:
 
 public:
+  GadSpeed(uint8_t stream_id);
+
   /**
    * Set the forward speed aiding estimate. 
    * 

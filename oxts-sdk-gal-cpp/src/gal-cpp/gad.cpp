@@ -3,24 +3,22 @@
 //==============================================================================
 // Gen3d
 
-void Gen3d::SetMode(int mode)
-{
-  this->mode = mode;
-}
+void   Gen3d::SetMode(int mode){ this->mode = mode; }
+void   Gen3d::SetValType(int x_type){ this->x_type = x_type; }
+void   Gen3d::SetValX(double x){this->x[0] = x;}
+double Gen3d::GetValX(){return this->x[0];}
+void   Gen3d::SetValY(double y){this->x[1] = y;}
+double Gen3d::GetValY(){return this->x[1];}
+void   Gen3d::SetValZ(double z){this->x[2] = z;}
+double Gen3d::GetValZ(){return this->x[2];}
 
-void Gen3d::SetValType(int x_type)
+void   Gen3d::SetVal(double x, double y,double z)
 {
-  this->x_type = x_type;
+  SetValX(x);
+  SetValY(y);
+  SetValZ(z);
 }
-
-void Gen3d::SetVal(double x0, double x1,double x2)
-{
-  this->x[0] = x0;
-  this->x[1] = x1;
-  this->x[2] = x2;
-}
-
-void Gen3d::SetVarUpperDiag(double v0, double v1, double v2, double v3, double v4, double v5)
+void   Gen3d::SetVarUpperDiag(double v0, double v1, double v2, double v3, double v4, double v5)
 {
   this->v_type = GEN_VAR_TYPE::GEN_VAR_HMAT;
   this->v[0] = v0;
@@ -51,15 +49,23 @@ void Gen3d::SetVarSingle(double v0)
 // Default constructor
 Gad::Gad()
 {
-  SetStreamId(129);
+  SetStreamId(128);
   SetDataType(GEN_TYPE::GEN_VOID);
-  /*! @todo Add initialisation of Gen3d members */
+  val  = new Gen3d();
+  time = new Gen3d();
+  loc  = new Gen3d();
+  res1 = new Gen3d();
+  res2 = new Gen3d();
   // SetAcqTimestamp(0.0);
 }
 
 Gad::~Gad()
 {
-  /** @todo Implement destructor */
+  delete(val);
+  delete(time);
+  delete(loc);
+  delete(res2);
+  delete(res1);
 }
 
 // streamId
@@ -102,11 +108,11 @@ void   Gad::SetGpsTime(double week, double secondsFromSunday)
 }
 double Gad::GetGpsWeek()
 {
-  return 0;
+  return this->time->GetValX();
 }
 double Gad::GetGpsSecondsFromSunday()
 {
-  return 0.0;
+  return this->time->GetValY();
 }
 // PPS
 void   Gad::SetTimePpsRelative(double ns)
@@ -117,7 +123,7 @@ void   Gad::SetTimePpsRelative(double ns)
 }
 double Gad::GetTimePpsRelative()
 {
-  return 0.0;
+  return this->time->GetValY();
 }
 // Latency
 void   Gad::SetTimeLatency(double ns)
@@ -128,7 +134,7 @@ void   Gad::SetTimeLatency(double ns)
 }
 double Gad::GetTimeLatency()
 {
-  return 0.0;
+  return this->time->GetValY();
 }
 // Void
 void   Gad::SetTimeVoid()

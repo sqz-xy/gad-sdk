@@ -1,13 +1,13 @@
 #ifndef GAD_H
 #define GAD_H
 /*! \file gad.hpp */
+
 extern "C"
 {
   #include "oxts/gal-c/gad_struct.h"
 }
 
 typedef GEN_BOOL GenBool;
-
 
 /**
  * Cpp wrapper class for C struct GEN_3D.
@@ -26,7 +26,7 @@ public:
     SetVarUpperDiag(0.0,0.0,0.0,0.0,0.0,0.0);
   }
   /*! Destructor */
-  ~Gen3d();
+  ~Gen3d(){ }
   /*! Copy constructor */
   Gen3d(const GEN_3D& g);
 
@@ -42,15 +42,25 @@ public:
 
 
   // Accessor functions 
-  /*! Set the aiding mode. Typically set to 0.*/
+  /*! Set the struct mode. Typically set to 0.*/
   void SetMode(int mode);
+  /*! Set the struct mode.*/
   int  GetMode();
   /** Set the value type. Index source depends on use of the struct. Sources
    *  include ::POS_SYS_TYPE, ::VEL_SYS_TYPE, ::SPEED_SYS_TYPE, ::LOC_SYS.
    */
   void SetValType(int x_type);
+  /*! Get the value type. See ::GetMode() for indexes */
   int  GetValType();
-  void SetVal(double x0, double x1,double x2);
+
+  void   SetValX(double x);
+  double GetValX();
+  void   SetValY(double y);
+  double GetValY();
+  void   SetValZ(double z);
+  double GetValZ();
+  /*! Set the value array. Used to store the aiding data.*/
+  void   SetVal(double x, double y,double z);
 
   void SetVarUpperDiag(double v0, double v1, double v2, double v3, double v4, double v5);
   void SetVarDiag(double v0, double v1,double v2);

@@ -8,14 +8,16 @@ find_package(oxts-sdk-core REQUIRED)
 set(OXTS_GAL_C_HEADERS
     ./include/oxts/gal-c/gad_decode.h
     ./include/oxts/gal-c/gad_defines.h
-    ./include/oxts/gal-c/gad_encode.h
+    ./include/oxts/gal-c/gad_encode_bin.h
+    ./include/oxts/gal-c/gad_encode_csv.h
     ./include/oxts/gal-c/gad_include_all.h
     ./include/oxts/gal-c/gad_struct.h
     )
 
 set(OXTS_GAL_C_SOURCES
     ./src/gad_decode.c
-    ./src/gad_encode.c
+    ./src/gad_encode_bin.c
+    ./src/gad_encode_csv.c
     ./src/gad_struct.c
     )
 

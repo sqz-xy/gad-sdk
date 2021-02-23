@@ -307,3 +307,33 @@ void GadSpeed::SetAidingLeverArmVar(double x, double y, double z)
 }
 //==============================================================================
 // GadAttitude
+GadAttitude::GadAttitude(uint8_t stream_id) : Gad(stream_id, GEN_TYPE::GEN_ATT){}
+
+// val
+void GadAttitude::SetAtt(double heading, double pitch, double roll)
+{
+  this->SetDataMode(0);
+  this->SetDataValType(ATT_SYS_TYPE::ATT_SYS_HPR);
+  this->SetDataVal(heading,pitch,roll); 
+}
+void GadAttitude::SetAttVar(double varH, double varP, double varR)
+{
+  this->SetDataVarDiag(varH,varP,varR);
+}
+
+// loc 
+void GadAttitude::SetAidingAlignmentFixed(double x, double y, double z)
+{
+  this->SetLocMode(LOC_SYS::LOC_FIXED);
+  this->SetLocVal(x,y,z);
+}
+void GadAttitude::SetAidingAlignmentOptimising(double x, double y, double z)
+{
+  this->SetLocMode(LOC_SYS::LOC_KF);
+  this->SetLocVal(x,y,z);
+}
+void GadAttitude::SetAidingAlignmentVar(double x, double y, double z)
+{
+  this->SetDataVarDiag(x,y,z);
+}
+

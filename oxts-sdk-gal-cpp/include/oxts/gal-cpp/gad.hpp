@@ -116,6 +116,26 @@ private:
    */ 
   uint32_t      acq;                 // Timestamp from INS. Leave empty.
   GenFlag       acq_valid;
+protected:
+  // type 
+  void SetDataType(int type); 
+  int  GetDataType(); 
+  // val
+  void SetValValid(GenFlag validity);
+  void SetDataMode(int mode);
+  void SetDataValType(int x_type);
+  void SetDataVal(double x0, double x1,double x2);
+  void SetDataVarUpperDiag(double v0, double v1, double v2, double v3, double v4, double v5);
+  void SetDataVarDiag(double v0, double v1,double v2);
+  void SetDataVarSingle(double v0);
+  // loc  
+  void SetLocValid(GenFlag validity);
+  void SetLocMode(int mode);
+  void SetLocValType(int x_type);
+  void SetLocVal(double x0, double x1,double x2);
+  void SetLocVarUpperDiag(double v0, double v1, double v2, double v3, double v4, double v5);
+  void SetLocVarDiag(double v0, double v1,double v2);
+  void SetLocVarSingle(double v0);
 
 public:
   /*! Default Constructor */
@@ -124,8 +144,7 @@ public:
   Gad(uint8_t stream_id, int8_t aiding_type);
   /*! Destructor */
   ~Gad();
-
-  /*! Copy constructor */
+  /*! Copy constructor to allow direct copy to C struct. */
   Gad(const GEN_AIDING_DATA& g);
   Gad(const Gad& g);
 
@@ -145,27 +164,6 @@ public:
   // streamId
   void SetStreamId(int id);
   int  GetStreamId();
-  // type 
-  void SetDataType(int type); 
-  int  GetDataType(); 
-  // val
-  void SetValValid(GenFlag validity);
-  void SetDataMode(int mode);
-  void SetDataValType(int x_type);
-  void SetDataVal(double x0, double x1,double x2);
-  void SetDataVarUpperDiag(double v0, double v1, double v2, double v3, double v4, double v5);
-  void SetDataVarDiag(double v0, double v1,double v2);
-  void SetDataVarSingle(double v0);
-  // time
-
-  // loc  
-  void SetLocValid(GenFlag validity);
-  void SetLocMode(int mode);
-  void SetLocValType(int x_type);
-  void SetLocVal(double x0, double x1,double x2);
-  void SetLocVarUpperDiag(double v0, double v1, double v2, double v3, double v4, double v5);
-  void SetLocVarDiag(double v0, double v1,double v2);
-  void SetLocVarSingle(double v0);
 
   // Time accessors
   void SetTimeValid(GenFlag validity);
@@ -201,7 +199,7 @@ public:
   /**
    * Constructor
    * 
-   * @param stream_id Stream ID for the position aiding. Must be unique 128-254.
+   * @param stream_id Stream ID for the position aiding source. Must be unique 128-254.
    */
   GadPosition(uint8_t stream_id);
   /**
@@ -264,6 +262,11 @@ class GadVelocity : public Gad
 private:
 
 public:
+  /**
+   * Constructor
+   * 
+   * @param stream_id Stream ID for the velocity aiding source. Must be unique 128-254.
+   */
   GadVelocity(uint8_t stream_id);
   /**
    * Set the aiding velocity estimate in the local NEU coordinate frame.
@@ -279,7 +282,6 @@ public:
    * @param varU Velocity variance estimate in the Up direction (m/s).
    */
   void SetVelNeuVar(double varN, double varE, double varU);
-  
   /**
    * Set lever arm from the INS to the aiding source. This lever arm will not be
    * optimised by the Kalman Filter.
@@ -395,16 +397,54 @@ public:
  */
 class GadAttitude : public Gad
 {
-private:
-
 public:
+  /** Constructor. 
+   *  @param stream_id Stream ID for the attitude aiding source. Must be unique 128-254.
+  */
+  GadAttitude(uint8_t stream_id);
   // val
+  /**
+   * Set the aiding attitude measurement relative to the NED coordinate frame.
+   * @param heading 
+   * @param pitch   
+   * @param roll    
+   * 
+   * @todo Confirm whether the roll estimate is used from the update.
+   */
   void SetAtt(double heading, double pitch, double roll);
+  /**
+   * Set the estimated variance on the aiding attitude measurement.
+   * @param varH Variance estimate on the heading angle
+   * @param varP Variance estimate on the pitch angle
+   * @param varR Variance estimate on the roll angle
+   * @todo Confirm units.
+   */
   void SetAttVar(double varH, double varP, double varR);
 
   // loc 
+  /**
+   * Set the angles which specify the rotation required to align the IMU and 
+   * aiding sensor frames. This alignment will not be optimised by the INS.
+   * @param x
+   * @param y
+   * @param z
+   */
   void SetAidingAlignmentFixed(double x, double y, double z);
+  /**
+   * Set the angles which specify the rotation required to align the IMU and 
+   * aiding sensor frames. This alignment will be optimised by the INS.
+   * @param x
+   * @param y
+   * @param z
+   */
   void SetAidingAlignmentOptimising(double x, double y, double z);
+  /**
+   * Set the estimated variance (error) on the alignment angles between the IMU 
+   * and aiding sensor frames.
+   * @param x
+   * @param y
+   * @param z
+   */
   void SetAidingAlignmentVar(double x, double y, double z);
 };
 

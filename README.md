@@ -31,8 +31,23 @@ cmake --build . --target install
 ```
 
 This will build the SDK and install it to your machine. Once this is complete, 
-other CMake projects on the machine can link to the libraries using... (not 
-functional yet. Can only be included in example projects within the repo.)
+other CMake projects on the machine can link to the libraries using:
+
+```
+find_package(oxts-sdk-core REQUIRED)
+find_package(oxts-sdk-gal-c REQUIRED)
+find_package(oxts-sdk-gal-cpp REQUIRED)
+
+target_link_libraries(${PROJECT_NAME} 
+    PUBLIC
+        oxts-sdk-core
+        oxts-sdk-gal-c
+        oxts-sdk-gal-cpp
+)
+```
+in their CMakeLists.txt (though most users will only require oxts-sdk-gal-cpp). 
+Header files can then be included in code files using `#include 
+"oxts/<oxts-sdk-module>/<filename>.hpp".
 
 ## Examples
 

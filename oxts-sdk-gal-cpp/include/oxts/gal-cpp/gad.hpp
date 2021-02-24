@@ -80,36 +80,29 @@ private:
    * GEN_TYPE. 
    */
   int8_t        type;                // GEN_TYPE - type of data 
-
   /** 
    * Aiding stream ID to identify the source device. 
    * Values 128-254. Each stream should have a unique ID. 
    */
   uint8_t       stream_id;
-
   /** Sub-struct VALUE. Contains navigation aiding data. */
   Gen3d*        val;                 // Navigation data
   GenFlag       val_valid;
-
   /** Sub-struct TIME. Contains the time the data was recorded. */
   Gen3d*        time;                
   GenFlag       time_valid;
-
   /** 
    * Sub-struct LOCATION. Contains lever arm (or alignment) data between the 
    * IMU and aiding source.
    */
   Gen3d*        loc;                 // Location/Position of Generic Aiding Device (lever arm)
   GenFlag       loc_valid;
-
   // Sub-struct RESERVED
   Gen3d*        res1;
   GenFlag       res1_valid;          
-
   // Sub-struct RESERVED
   Gen3d*        res2;
   GenFlag       res2_valid;          
-
   /** 
    * Acquisition Time Stamp. The INS will fill in this timestamp upon its 
    * arrival to the INS. Leave blank.
@@ -149,9 +142,9 @@ public:
   Gad(const Gad& g);
 
   /*! Implicit conversion from Gad to GEN_AIDING_DATA* */
-  // operator ::GEN_AIDING_DATA*(){ return this; }
+  //operator ::GEN_AIDING_DATA*(){ return this; }
   /*! Implicit const conversion from Gad to GEN_AIDING_DATA* */
-  // operator const ::GEN_AIDING_DATA*() const { return this; }
+  //operator const ::GEN_AIDING_DATA*() const { return this; }
 
   /** Copy assignment operator GEN_AIDING_DATA -> Gad 
    *  @todo Implement the copy assignment operator GEN_AIDING_DATA -> Gad

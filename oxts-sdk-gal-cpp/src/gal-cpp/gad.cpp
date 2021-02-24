@@ -3,6 +3,22 @@
 //==============================================================================
 // Gen3d
 
+Gen3d::Gen3d(const GEN_3D& g)
+{
+  mode = g.mode;
+  x_type = g.x_type;
+  x[0] = g.x[0];
+  x[1] = g.x[1];
+  x[2] = g.x[2];
+  v_type = g.v_type;
+  v[0] = g.v[0];
+  v[1] = g.v[1];
+  v[2] = g.v[2];
+  v[3] = g.v[3];
+  v[4] = g.v[4];
+  v[5] = g.v[5];
+}
+
 
 void   Gen3d::SetMode(int mode){ this->mode = mode; }
 void   Gen3d::SetValType(int x_type){ this->x_type = x_type; }

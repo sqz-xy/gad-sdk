@@ -36,7 +36,7 @@ public:
   operator const ::GEN_3D*() const { return this; }
 
   /*! Copy assignment operator Gen3d -> GEN_3D */
-  Gen3d& operator=(const GEN_3D);
+  // Gen3d& operator=(const GEN_3D);
   /*! Copy assignment operator Gen3d -> Gen3d */
   //Gen3d& operator=(const Gen3d& g);
 
@@ -86,22 +86,22 @@ private:
    */
   uint8_t       stream_id;
   /** Sub-struct VALUE. Contains navigation aiding data. */
-  Gen3d*        val;                 // Navigation data
+  Gen3d         val;                 // Navigation data
   GenFlag       val_valid;
   /** Sub-struct TIME. Contains the time the data was recorded. */
-  Gen3d*        time;                
+  Gen3d         time;                
   GenFlag       time_valid;
   /** 
    * Sub-struct LOCATION. Contains lever arm (or alignment) data between the 
    * IMU and aiding source.
    */
-  Gen3d*        loc;                 // Location/Position of Generic Aiding Device (lever arm)
+  Gen3d         loc;                 // Location/Position of Generic Aiding Device (lever arm)
   GenFlag       loc_valid;
   // Sub-struct RESERVED
-  Gen3d*        res1;
+  Gen3d         res1;
   GenFlag       res1_valid;          
   // Sub-struct RESERVED
-  Gen3d*        res2;
+  Gen3d         res2;
   GenFlag       res2_valid;          
   /** 
    * Acquisition Time Stamp. The INS will fill in this timestamp upon its 
@@ -146,6 +146,7 @@ public:
   /*! Implicit const conversion from Gad to GEN_AIDING_DATA* */
   //operator const ::GEN_AIDING_DATA*() const { return this; }
 
+  GEN_AIDING_DATA  getCStruct();
   /** Copy assignment operator GEN_AIDING_DATA -> Gad 
    *  @todo Implement the copy assignment operator GEN_AIDING_DATA -> Gad
   */
@@ -167,10 +168,20 @@ public:
   // PPS
   void   SetTimePpsRelative(double ns);
   double GetTimePpsRelative();
-  // Latency
+  /**
+   * Set the timestamp type for this data to Latency. The latency is an estimate
+   * of the time taken for the packet to travel from the aiding source to the 
+   * INS. Upon arrival the INS will timestamp the data, adjusting for the 
+   * latency.
+   * @param ns Latency estimate in (nanoseconds).
+   */
   void   SetTimeLatency(double ns);
+  /** Get latency estimate.   */
   double GetTimeLatency();
-  // Void
+  /**
+   * Set the timestamp type for this data to void. Data with a void timestamp
+   * will be timestamped by the INS upon receipt.
+   */
   void   SetTimeVoid();
   
   // Acquisiton time accessors.
@@ -398,9 +409,9 @@ public:
   // val
   /**
    * Set the aiding attitude measurement relative to the NED coordinate frame.
-   * @param heading 
-   * @param pitch   
-   * @param roll    
+   * @param heading (deg)
+   * @param pitch   (deg)
+   * @param roll    (deg)
    * 
    * @todo Confirm whether the roll estimate is used from the update.
    */

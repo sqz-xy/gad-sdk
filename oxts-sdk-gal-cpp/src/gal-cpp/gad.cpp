@@ -68,11 +68,6 @@ Gad::Gad()
 {
   SetStreamId(128);
   SetDataType(GEN_TYPE::GEN_VOID);
-  val  = new Gen3d();
-  time = new Gen3d();
-  loc  = new Gen3d();
-  res1 = new Gen3d();
-  res2 = new Gen3d();
   // SetAcqTimestamp(0.0);
 }
 // Constructor
@@ -80,46 +75,69 @@ Gad::Gad(uint8_t stream_id, int8_t aiding_type)
 {
   SetStreamId(stream_id);
   SetDataType(aiding_type);
-  val  = new Gen3d();
-  time = new Gen3d();
-  loc  = new Gen3d();
-  res1 = new Gen3d();
-  res2 = new Gen3d();
   // SetAcqTimestamp(0.0);
 }
 
-Gad::~Gad()
-{
-  delete(val);
-  delete(time);
-  delete(loc);
-  delete(res2);
-  delete(res1);
-}
+Gad::~Gad(){}
 
 Gad::Gad(const Gad& g)
 {
-  this->val  = new Gen3d();
-  this->time = new Gen3d();
-  this->loc  = new Gen3d();
-  this->res1 = new Gen3d();
-  this->res2 = new Gen3d();
-
   this->SetDataType(g.type);
   this->SetStreamId(g.stream_id);
-  *this->val       = *g.val;
+  this->val        = g.val;
   this->val_valid  = g.val_valid;
-  *this->time      = *g.time;
+  this->time       = g.time;
   this->time_valid = g.time_valid;
-  *this->loc       = *g.loc;
+  this->loc        = g.loc;
   this->loc_valid  = g.loc_valid;
-  *this->res1      = *g.res1;
+  this->res1       = g.res1;
   this->res1_valid = g.res1_valid;
-  *this->res2      = *g.res2;
+  this->res2       = g.res2;
   this->res2_valid = g.res2_valid;
   this->acq        = g.acq;
   this->acq_valid  = g.acq_valid;
 }
+
+Gad& Gad::operator=(const GEN_AIDING_DATA& g)
+{
+  this->SetDataType(g.type);
+  this->SetStreamId(g.stream_id);
+  this->val        = g.val;
+  this->val_valid  = g.val_valid;
+  this->time       = g.time;
+  this->time_valid = g.time_valid;
+  this->loc        = g.loc;
+  this->loc_valid  = g.loc_valid;
+  this->res1       = g.res1;
+  this->res1_valid = g.res1_valid;
+  this->res2       = g.res2;
+  this->res2_valid = g.res2_valid;
+  this->acq        = g.acq;
+  this->acq_valid  = g.acq_valid;
+  return *this;
+}
+
+GEN_AIDING_DATA Gad::getCStruct()
+{
+  GEN_AIDING_DATA g;
+  g.type       = GetDataType();
+  g.stream_id  = GetStreamId();
+  g.val      = *(this->val);
+  g.val_valid  = val_valid;
+  g.time     = *(this->time);
+  g.time_valid = time_valid;
+  g.loc      = *(this->loc);
+  g.loc_valid  = loc_valid;
+  g.res1     = *(this->res1);
+  g.res1_valid = res1_valid;
+  g.res2     = *(this->res2);
+  g.res2_valid = res2_valid;
+  g.acq        = acq;
+  g.acq_valid  = acq_valid;
+
+  return g;
+}
+
 
 // streamId
 void Gad::SetStreamId(int id) { this->stream_id = id; }
@@ -130,26 +148,26 @@ int  Gad::GetDataType(){ return this->type; }
 // val
 void Gad::SetValValid(GenFlag validity){this->val_valid = validity;}
 
-void Gad::SetDataMode(int mode){ this->val->SetMode(mode); }
-void Gad::SetDataValType(int x_type) { this->val->SetValType(x_type); }
+void Gad::SetDataMode(int mode){ this->val.SetMode(mode); }
+void Gad::SetDataValType(int x_type) { this->val.SetValType(x_type); }
 void Gad::SetDataVal(double x0, double x1,double x2)
 {
-  this->val->SetVal(x0,x1,x2);
+  this->val.SetVal(x0,x1,x2);
 }
 
 void Gad::SetDataVarUpperDiag(double v0, double v1, double v2, double v3, double v4, double v5)
 {
-  this->val->SetVarUpperDiag(v0,v1,v2,v3,v4,v5);
+  this->val.SetVarUpperDiag(v0,v1,v2,v3,v4,v5);
 }
 
 void Gad::SetDataVarDiag(double v0, double v1,double v2)
 {
-  this->val->SetVarDiag(v0,v1,v2);
+  this->val.SetVarDiag(v0,v1,v2);
 }
 
 void Gad::SetDataVarSingle(double v0)
 {
-  this->val->SetVarSingle(v0);
+  this->val.SetVarSingle(v0);
 }
 
 // time
@@ -158,55 +176,55 @@ void Gad::SetTimeValid(GenFlag validity){this->time_valid = validity;}
 // GPS
 void   Gad::SetGpsTime(double week, double secondsFromSunday)
 {
-  this->time->SetMode(0);
-  this->time->SetValType(TIME_SYS::TIME_GPS);
-  this->time->SetVal(week,secondsFromSunday, 0);
+  this->time.SetMode(0);
+  this->time.SetValType(TIME_SYS::TIME_GPS);
+  this->time.SetVal(week,secondsFromSunday, 0);
 }
-double Gad::GetGpsWeek(){ return this->time->GetValX(); }
-double Gad::GetGpsSecondsFromSunday(){ return this->time->GetValY(); }
+double Gad::GetGpsWeek(){ return this->time.GetValX(); }
+double Gad::GetGpsSecondsFromSunday(){ return this->time.GetValY(); }
 // PPS
 void   Gad::SetTimePpsRelative(double ns)
 {
-  this->time->SetMode(0);
-  this->time->SetValType(TIME_SYS::TIME_PPS_RELATIVE);
-  this->time->SetVal(0.0, 0.0, ns);
+  this->time.SetMode(0);
+  this->time.SetValType(TIME_SYS::TIME_PPS_RELATIVE);
+  this->time.SetVal(0.0, 0.0, ns);
 }
-double Gad::GetTimePpsRelative(){ return this->time->GetValY(); }
+double Gad::GetTimePpsRelative(){ return this->time.GetValY(); }
 // Latency
 void   Gad::SetTimeLatency(double ns)
 {
-  this->time->SetMode(0);
-  this->time->SetValType(TIME_SYS::TIME_EST_LATENCY);
-  this->time->SetVal(0.0, ns, 0.0);
+  this->time.SetMode(0);
+  this->time.SetValType(TIME_SYS::TIME_EST_LATENCY);
+  this->time.SetVal(0.0, ns, 0.0);
 }
-double Gad::GetTimeLatency(){ return this->time->GetValY(); }
+double Gad::GetTimeLatency(){ return this->time.GetValY(); }
 // Void
 void   Gad::SetTimeVoid()
 {
-  this->time->SetMode(0);
-  this->time->SetValType(TIME_SYS::TIME_VOID);
+  this->time.SetMode(0);
+  this->time.SetValType(TIME_SYS::TIME_VOID);
 }
 
 // loc  
 void Gad::SetLocValid(GenFlag validity){this->loc_valid = validity;}
 
-void Gad::SetLocMode(int mode) { this->loc->SetMode(mode); }
-void Gad::SetLocValType(int x_type) { this->loc->SetValType(x_type);}
+void Gad::SetLocMode(int mode) { this->loc.SetMode(mode); }
+void Gad::SetLocValType(int x_type) { this->loc.SetValType(x_type);}
 void Gad::SetLocVal(double x0, double x1,double x2)
 {
-  this->loc->SetVal(x0,x1,x2);
+  this->loc.SetVal(x0,x1,x2);
 }
 void Gad::SetLocVarUpperDiag(double v0, double v1, double v2, double v3, double v4, double v5)
 {
-  this->loc->SetVarUpperDiag(v0,v1,v2,v3,v4,v5);
+  this->loc.SetVarUpperDiag(v0,v1,v2,v3,v4,v5);
 }
 void Gad::SetLocVarDiag(double v0, double v1,double v2)
 {
-  this->loc->SetVarDiag(v0,v1,v2);
+  this->loc.SetVarDiag(v0,v1,v2);
 }
 void Gad::SetLocVarSingle(double v0)
 {
-  this->loc->SetVarSingle(v0);
+  this->loc.SetVarSingle(v0);
 }
 
 //==============================================================================

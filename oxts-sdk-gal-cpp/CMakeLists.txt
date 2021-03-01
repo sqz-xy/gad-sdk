@@ -18,6 +18,7 @@ find_package(oxts-sdk-gal-c CONFIG REQUIRED)
 set(OXTS_GAL_CPP_HEADERS
     ./include/oxts/gal-cpp/gad.hpp
     ./include/oxts/gal-cpp/gad_encoder.hpp
+    ./include/oxts/gal-cpp/gad_output.hpp
 )
 
 set(OXTS_GAL_CPP_SOURCES

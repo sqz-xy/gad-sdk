@@ -7,6 +7,8 @@
 #include "oxts/gal-c/gad_encode_bin.h"
 #include "oxts/gal-cpp/gad.hpp"
 
+#define CCOM_PKT_GEN_AIDING  (0x0b01)
+
 /**
  * Interface class to bring together GAD encoding to binary (for UDP output) and
  * string (for csv output).
@@ -15,14 +17,13 @@ class GadEncoder
 {
 private:
 
-
 public:
   /** Constructor */
-  GadEncoder(); 
+  // GadEncoder(); 
   /** Virtual Destructor. */
   virtual ~GadEncoder() {}
   /** Encode data in the Gad class to either binary or csv string */
-  virtual int EncodePacket(Gad g) = 0;
+  virtual void EncodePacket(Gad& g) = 0;
 };
 
 
@@ -30,47 +31,66 @@ public:
 /**
  * Wrapper for C Generic Aiding binary encoding functionality.
  */
-class GadEncoderBin : GadEncoder
+class GadEncoderBin : public GadEncoder 
 {
 private:
 
-  int EncodeGen3d(Gen3d& g)
+  inline int EncodeGen3d(Gen3d& g)
   {
-    return encode_gen_3d(*g, *this->data, &this->buffer_offset, this->buffer_size);
+    return encode_gen_3d(*g, this->buffer, &this->buffer_offset, this->buffer_size);
   }
 
-  int EncodeGen3dVar(Gen3d& g)
+  inline int EncodeGen3dVar(Gen3d& g)
   {
-    return encode_gen_3d_var(*g, *this->data, &this->buffer_offset, this->buffer_size);
+    return encode_gen_3d_var(*g, this->buffer, &this->buffer_offset, this->buffer_size);
   }
 
-  int BufferOverrunCheck(size_t expected_data_size)
+  inline int BufferOverrunCheck(size_t expected_data_size)
   {
     return buffer_overrun_chk(this->buffer_size, expected_data_size);
   }
 
-public:
-
-  int EncodeGad(Gad g )
+  inline int EncodeGadBin(Gad& g )
   {
-    //return encode_gen_aid(GEN_AIDING_DATA* gad, unsigned char* buffer, size_t buffer_size, size_t* packet_size);
+    // Copy Gad -> GEN_AIDING_DATA
+    GEN_AIDING_DATA genaid = g.getCStruct();
+    return encode_gen_aid(&genaid, this->buffer, this->buffer_size,&current_packet_size);
   }
 
-  virtual int EncodePacket()
+public:
+
+  GadEncoderBin()
+  {
+    buffer_offset = 0;
+    current_packet_size = 0;
+  }
+
+  inline void EncodePacket(Gad& g) override
   {
     // Encode Gad
-
+    EncodeGadBin(g);
     // Encode CCom
-
-    return 0;
+    memset(&ccom_gad, 0, sizeof(CCOM_MSG));
+    ccom_gad.type = (CCOM_PKT_GEN_AIDING);
+    BuildCComPkt(&ccom_gad, buffer, current_packet_size);
   }
 
   static const std::size_t buffer_size = 1024;
-  unsigned char * data[buffer_size];
-  std::size_t buffer_offset = 0;
+  unsigned char buffer[buffer_size];
+  std::size_t buffer_offset;
+  std::size_t current_packet_size;
+  CCOM_MSG ccom_gad;
 };
 
+/**
+ * Wrapper for C Generic Aiding csv encoding functionality.
+ * 
+ * @todo Implement this csv encoding wrapper.
+ */
+class GadEncoderCsv : public GadEncoder
+{
 
+};
 
 
 

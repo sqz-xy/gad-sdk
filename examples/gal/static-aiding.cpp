@@ -5,13 +5,12 @@
 #include "oxts/gal-cpp/gad_encoder.hpp"
 #include "oxts/gal-cpp/gad_output.hpp"
 
-
+#include "udp_server_client.h"
 
 int main(int argc, char * argv[])
 {
 
   int sendPackets = 1000; // Total number of packets to send
-  std::string ip = "192.168.25.44"; // IP address to send the data to
 
   //============================================================================
   // Construct the position aiding class with stream ID 128.
@@ -59,7 +58,15 @@ int main(int argc, char * argv[])
   // Initialise the output class
   GadOutput go = GadOutput();
   // Set encoding strategy
-  go.encoder_.reset(new GadEncoderBin());
+  go.SetEncoderToBin();
+
+
+  /** UDP Client to receive data from the device */
+  networking_udp::server udpServer;
+  std::string unitIp = "192.168.25.10";
+  udpServer.set_remote_endpoint(unitIp, 40785);
+
+  
 
 
   //============================================================================
@@ -68,6 +75,7 @@ int main(int argc, char * argv[])
     // Encode packet
     go.encoder_->EncodePacket(ga);
     // Send packet
+    udpServer.send(go.encoder_->GetPacket(), go.encoder_->GetPacketSize()); 
 
   }
 

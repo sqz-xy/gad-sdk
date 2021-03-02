@@ -18,12 +18,14 @@ class GadEncoder
 private:
 
 public:
-  /** Constructor */
-  // GadEncoder(); 
   /** Virtual Destructor. */
   virtual ~GadEncoder() {}
   /** Encode data in the Gad class to either binary or csv string */
   virtual void EncodePacket(Gad& g) = 0;
+
+  virtual unsigned char * GetPacket() = 0;
+
+  virtual std::size_t GetPacketSize() = 0;
 };
 
 
@@ -75,6 +77,16 @@ public:
     BuildCComPkt(&ccom_gad, buffer, current_packet_size);
   }
 
+  inline virtual unsigned char * GetPacket() override
+  {
+    return this->buffer;
+  }
+
+  virtual std::size_t GetPacketSize() override
+  {
+    return current_packet_size;
+  }
+
   static const std::size_t buffer_size = 1024;
   unsigned char buffer[buffer_size];
   std::size_t buffer_offset;
@@ -89,7 +101,8 @@ public:
  */
 class GadEncoderCsv : public GadEncoder
 {
-
+  /** Constructor */
+  GadEncoderCsv(){}
 };
 
 

@@ -14,15 +14,17 @@ private:
 public:
   GadOutput(GadEncoder *encoder_strategy = nullptr) : encoder_(encoder_strategy){ }
 
-  /** Generic Aiding encoder. Can be to binary or csv */
-  std::shared_ptr<GadEncoder> encoder_;
-
   /** Destructor */
   ~GadOutput(){ }
 
-  // Ability to change encoder functionality is provided by .reset() from smart
-  // pointer class. 
 
+  /** Generic Aiding encoder. Can be to binary or csv */
+  std::shared_ptr<GadEncoder> encoder_;
+  /** Set the output encoder to binary. */
+  void SetEncoderToBin() { this->encoder_.reset(new GadEncoderBin()); }
+  // void SetEncoderToCsv() {this->encoder_.reset(new GadEncoderCsv());}
+
+  /** Sending */
 };
 
 

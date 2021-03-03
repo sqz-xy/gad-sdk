@@ -2,12 +2,17 @@
 #define GAD_ENCODE_HPP
 
 #include <cstddef>
+#include <iostream>
 
 #include "oxts/core/ccomtx.h"
 #include "oxts/gal-c/gad_encode_bin.h"
 #include "oxts/gal-cpp/gad.hpp"
 
 #define CCOM_PKT_GEN_AIDING  (0x0b01)
+
+namespace OxTS
+{
+
 
 /**
  * Interface class to bring together GAD encoding to binary (for UDP output) and
@@ -56,15 +61,15 @@ private:
   {
     // Copy Gad -> GEN_AIDING_DATA
     GEN_AIDING_DATA genaid = g.getCStruct();
-    return encode_gen_aid(&genaid, this->buffer, this->buffer_size,&current_packet_size);
+    return encode_gen_aid(&genaid, this->buffer, this->buffer_size,&this->gad_size);
   }
 
 public:
 
   GadEncoderBin()
   {
-    buffer_offset = 0;
-    current_packet_size = 0;
+    this->buffer_offset = 0;
+    this->gad_size = 0;
   }
 
   inline void EncodePacket(Gad& g) override
@@ -72,25 +77,25 @@ public:
     // Encode Gad
     EncodeGadBin(g);
     // Encode CCom
-    memset(&ccom_gad, 0, sizeof(CCOM_MSG));
-    ccom_gad.type = (CCOM_PKT_GEN_AIDING);
-    BuildCComPkt(&ccom_gad, buffer, current_packet_size);
+    memset(&this->ccom_gad, 0, sizeof(CCOM_MSG));
+    this->ccom_gad.type = (CCOM_PKT_GEN_AIDING);
+    BuildCComPkt(&this->ccom_gad, this->buffer, this->gad_size);
   }
 
   inline virtual unsigned char * GetPacket() override
   {
-    return this->buffer;
+    return this->ccom_gad.msg;
   }
 
-  virtual std::size_t GetPacketSize() override
+  inline virtual std::size_t GetPacketSize() override
   {
-    return current_packet_size;
+    return this->ccom_gad.msg_len;
   }
 
   static const std::size_t buffer_size = 1024;
   unsigned char buffer[buffer_size];
   std::size_t buffer_offset;
-  std::size_t current_packet_size;
+  std::size_t gad_size;
   CCOM_MSG ccom_gad;
 };
 
@@ -105,6 +110,7 @@ class GadEncoderCsv : public GadEncoder
   GadEncoderCsv(){}
 };
 
+}
 
 
 

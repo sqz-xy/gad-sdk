@@ -1,5 +1,6 @@
 #include "oxts/gal-cpp/gad.hpp"
 
+using namespace OxTS;
 //==============================================================================
 // Gen3d
 
@@ -73,8 +74,8 @@ Gad::Gad()
 // Constructor
 Gad::Gad(uint8_t stream_id, int8_t aiding_type)
 {
-  SetStreamId(stream_id);
-  SetDataType(aiding_type);
+  this->SetStreamId(stream_id);
+  this->SetDataType(aiding_type);
   // SetAcqTimestamp(0.0);
 }
 
@@ -123,17 +124,17 @@ GEN_AIDING_DATA Gad::getCStruct()
   g.type       = GetDataType();
   g.stream_id  = GetStreamId();
   g.val      = *(this->val);
-  g.val_valid  = val_valid;
+  g.val_valid  = this->val_valid;
   g.time     = *(this->time);
-  g.time_valid = time_valid;
+  g.time_valid = this->time_valid;
   g.loc      = *(this->loc);
-  g.loc_valid  = loc_valid;
+  g.loc_valid  = this->loc_valid;
   g.res1     = *(this->res1);
-  g.res1_valid = res1_valid;
+  g.res1_valid = this->res1_valid;
   g.res2     = *(this->res2);
-  g.res2_valid = res2_valid;
-  g.acq        = acq;
-  g.acq_valid  = acq_valid;
+  g.res2_valid = this->res2_valid;
+  g.acq        = this->acq;
+  g.acq_valid  = this->acq_valid;
 
   return g;
 }
@@ -143,15 +144,17 @@ GEN_AIDING_DATA Gad::getCStruct()
 void Gad::SetStreamId(int id) { this->stream_id = id; }
 int  Gad::GetStreamId() { return this->stream_id; }
 // type 
-void Gad::SetDataType(int type){ this->type; } 
+void Gad::SetDataType(int type){ this->type = type; } 
 int  Gad::GetDataType(){ return this->type; } 
 // val
-void Gad::SetValValid(GenFlag validity){this->val_valid = validity;}
+void Gad::SetValInvalid(){this->val_valid = 0;}
+void Gad::SetValValid(){this->val_valid = 1;}
 
 void Gad::SetDataMode(int mode){ this->val.SetMode(mode); }
 void Gad::SetDataValType(int x_type) { this->val.SetValType(x_type); }
 void Gad::SetDataVal(double x0, double x1,double x2)
 {
+  this->SetValValid();
   this->val.SetVal(x0,x1,x2);
 }
 
@@ -171,11 +174,13 @@ void Gad::SetDataVarSingle(double v0)
 }
 
 // time
-void Gad::SetTimeValid(GenFlag validity){this->time_valid = validity;}
+void Gad::SetTimeInvalid(){this->time_valid = 0;}
+void Gad::SetTimeValid()  {this->time_valid = 1;}
 
 // GPS
 void   Gad::SetGpsTime(double week, double secondsFromSunday)
 {
+  this->SetTimeValid();
   this->time.SetMode(0);
   this->time.SetValType(TIME_SYS::TIME_GPS);
   this->time.SetVal(week,secondsFromSunday, 0);
@@ -185,6 +190,8 @@ double Gad::GetGpsSecondsFromSunday(){ return this->time.GetValY(); }
 // PPS
 void   Gad::SetTimePpsRelative(double ns)
 {
+  this->SetTimeValid();
+
   this->time.SetMode(0);
   this->time.SetValType(TIME_SYS::TIME_PPS_RELATIVE);
   this->time.SetVal(0.0, 0.0, ns);
@@ -193,6 +200,7 @@ double Gad::GetTimePpsRelative(){ return this->time.GetValY(); }
 // Latency
 void   Gad::SetTimeLatency(double ns)
 {
+  this->SetTimeValid();
   this->time.SetMode(0);
   this->time.SetValType(TIME_SYS::TIME_EST_LATENCY);
   this->time.SetVal(0.0, ns, 0.0);
@@ -201,17 +209,20 @@ double Gad::GetTimeLatency(){ return this->time.GetValY(); }
 // Void
 void   Gad::SetTimeVoid()
 {
+  this->SetTimeValid();
   this->time.SetMode(0);
   this->time.SetValType(TIME_SYS::TIME_VOID);
 }
 
 // loc  
-void Gad::SetLocValid(GenFlag validity){this->loc_valid = validity;}
+void Gad::SetLocInvalid(){this->loc_valid = 0;}
+void Gad::SetLocValid(){this->loc_valid = 1;}
 
 void Gad::SetLocMode(int mode) { this->loc.SetMode(mode); }
 void Gad::SetLocValType(int x_type) { this->loc.SetValType(x_type);}
 void Gad::SetLocVal(double x0, double x1,double x2)
 {
+  this->SetLocValid();
   this->loc.SetVal(x0,x1,x2);
 }
 void Gad::SetLocVarUpperDiag(double v0, double v1, double v2, double v3, double v4, double v5)

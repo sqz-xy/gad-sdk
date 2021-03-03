@@ -5,6 +5,8 @@
 
 #include "oxts/gal-cpp/gad_encoder.hpp"
 
+namespace OxTS
+{
 
 class GadOutput
 {
@@ -27,5 +29,6 @@ public:
   /** Sending */
 };
 
+}
 
 #endif // GAD_OUTPUT_HPP

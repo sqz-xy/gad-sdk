@@ -1,11 +1,15 @@
-#ifndef GAD_H
-#define GAD_H
+#ifndef GAD_HPP
+#define GAD_HPP
 /*! \file gad.hpp */
 
 extern "C"
 {
   #include "oxts/gal-c/gad_struct.h"
 }
+
+namespace OxTS
+{
+  
 
 typedef GEN_BOOL GenFlag;
 
@@ -114,7 +118,8 @@ protected:
   void SetDataType(int type); 
   int  GetDataType(); 
   // val
-  void SetValValid(GenFlag validity);
+  void SetValValid();
+  void SetValInvalid();
   void SetDataMode(int mode);
   void SetDataValType(int x_type);
   void SetDataVal(double x0, double x1,double x2);
@@ -122,7 +127,8 @@ protected:
   void SetDataVarDiag(double v0, double v1,double v2);
   void SetDataVarSingle(double v0);
   // loc  
-  void SetLocValid(GenFlag validity);
+  void SetLocValid();
+  void SetLocInvalid();
   void SetLocMode(int mode);
   void SetLocValType(int x_type);
   void SetLocVal(double x0, double x1,double x2);
@@ -160,7 +166,8 @@ public:
   int  GetStreamId();
 
   // Time accessors
-  void SetTimeValid(GenFlag validity);
+  void SetTimeInvalid();
+  void SetTimeValid();
   // GPS
   void   SetGpsTime(double week, double secondsFromSunday);
   double GetGpsWeek();
@@ -452,7 +459,8 @@ public:
   void SetAidingAlignmentVar(double x, double y, double z);
 };
 
+}
 
 
 
-#endif // GAD_H
+#endif // GAD_HPP

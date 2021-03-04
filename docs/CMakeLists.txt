@@ -21,7 +21,10 @@ set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
 configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
 
 set(COMPONENT_DIRS
-    ${CMAKE_CURRENT_SOURCE_DIR}/../oxts-sdk-gal/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/../oxts-sdk-core/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/../oxts-sdk-gal-c/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/../oxts-sdk-gal-cpp/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/../oxts-sdk-udp/include
     #oxts-sdk-ncomdecoder/include (TBA)
     ${CMAKE_CURRENT_SOURCE_DIR}/../examples
     )

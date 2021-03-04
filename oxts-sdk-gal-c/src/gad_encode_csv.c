@@ -14,6 +14,7 @@
 extern "C"
 {
 #endif
+const int MAX_BUFF = 1024;
 
    //============================================================================================================
    int print_gen_3d_header(FILE* file_ptr)
@@ -75,15 +76,14 @@ extern "C"
 
       return i;
    }
-
    //============================================================================================================
    //! \brief writes the contents of the GEN_3D to csv
 
-   int write_gen_3d(FILE* file_ptr, GEN_3D* gen_3d_data)
+   int encode_gen_3d_to_csv(unsigned char * out_string, GEN_3D* gen_3d_data)
    {
       int i = 0;
 
-      if (fprintf(file_ptr, "%d,%d,%.12f,%.12f,%.12f,%d,%.12f,%.12f,%.12f,%.12f,%.12f,%.12f,",
+      if (sprintf(out_string, "%d,%d,%.12f,%.12f,%.12f,%d,%.12f,%.12f,%.12f,%.12f,%.12f,%.12f,",
          gen_3d_data->mode,
          gen_3d_data->x_type,
          gen_3d_data->x[0], gen_3d_data->x[1], gen_3d_data->x[2],
@@ -94,6 +94,17 @@ extern "C"
          i = -1;
       }
       return i;
+   }
+
+
+   int write_gen_3d(FILE* file_ptr, GEN_3D* gen_3d_data)
+   {
+      int i = 0;
+      unsigned char out_string[MAX_BUFF];
+      encode_gen_3d_to_csv(out_string,gen_3d_data);
+      fputs(out_string,file_ptr);
+
+      return 0;
    }
 
 

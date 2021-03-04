@@ -19,7 +19,7 @@ extern "C"
 int init_gad_output_file(FILE* file_ptr);
 
 
-int encode_gen_3d_to_csv(unsigned char * out_string, GEN_3D* gen_3d_data);
+int encode_gen_3d_to_csv(unsigned char * out_string, int * offset, GEN_3D* gen_3d_data);
 
 /*
     writes the generic aiding data in data to file at file_ptr

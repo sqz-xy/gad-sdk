@@ -79,16 +79,16 @@ const int MAX_BUFF = 1024;
    //============================================================================================================
    //! \brief writes the contents of the GEN_3D to csv
 
-   int encode_gen_3d_to_csv(unsigned char * out_string, GEN_3D* gen_3d_data)
+   int encode_gen_3d_to_csv(unsigned char * out_string, int * offset, GEN_3D* g)
    {
       int i = 0;
 
-      if (sprintf(out_string, "%d,%d,%.12f,%.12f,%.12f,%d,%.12f,%.12f,%.12f,%.12f,%.12f,%.12f,",
-         gen_3d_data->mode,
-         gen_3d_data->x_type,
-         gen_3d_data->x[0], gen_3d_data->x[1], gen_3d_data->x[2],
-         gen_3d_data->v_type,
-         gen_3d_data->v[0], gen_3d_data->v[1], gen_3d_data->v[2], gen_3d_data->v[3], gen_3d_data->v[4], gen_3d_data->v[5])
+      if ((offset += sprintf(out_string + *offset, "%d,%d,%.12f,%.12f,%.12f,%d,%.12f,%.12f,%.12f,%.12f,%.12f,%.12f,",
+         g->mode,
+         g->x_type,
+         g->x[0], g->x[1], g->x[2],
+         g->v_type,
+         g->v[0], g->v[1], g->v[2], g->v[3], g->v[4], g->v[5]))
          < 0)
       {
          i = -1;
@@ -101,7 +101,9 @@ const int MAX_BUFF = 1024;
    {
       int i = 0;
       unsigned char out_string[MAX_BUFF];
-      encode_gen_3d_to_csv(out_string,gen_3d_data);
+      int offset = 0;
+      int * offset_ptr = &offset;
+      encode_gen_3d_to_csv(out_string,offset_ptr,gen_3d_data);
       fputs(out_string,file_ptr);
 
       return 0;

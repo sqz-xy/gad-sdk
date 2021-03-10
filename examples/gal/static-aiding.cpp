@@ -108,7 +108,6 @@ int main(int argc, char * argv[])
     // udpServer.send(gec.GetPacket(), gec.GetPacketSize());
     // udpServer.send(gh.encoder_->GetPacket(), gh.encoder_->GetPacketSize());
 
-
     gof.OutputPacket(gh.encoder_->GetPacket());
 
     // gh.encoder_->EncodePacket(gv);
@@ -122,7 +121,6 @@ int main(int argc, char * argv[])
 
     OxTS::Sleep(100);
   }
-  // fclose(file_ptr);
 
   return 0;
 }

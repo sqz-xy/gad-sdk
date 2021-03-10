@@ -22,7 +22,7 @@ include_directories(${Boost_INCLUDE_DIR})
 target_link_libraries(${OXTS_SDK_EXAMPLES_GAL_STATIC} 
     PUBLIC 
         # oxts-sdk-core
-        # oxts-sdk-gal-c
+        oxts-sdk-gal-c
         oxts-sdk-gal-cpp
         ${Boost_LIBRARIES}
 )

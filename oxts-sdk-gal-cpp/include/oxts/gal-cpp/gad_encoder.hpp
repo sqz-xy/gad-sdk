@@ -3,9 +3,11 @@
 
 #include <cstddef>
 #include <iostream>
+#include <stdlib.h>
 
 #include "oxts/core/ccomtx.h"
 #include "oxts/gal-c/gad_encode_bin.h"
+#include "oxts/gal-c/gad_encode_csv.h"
 #include "oxts/gal-cpp/gad.hpp"
 
 #define CCOM_PKT_GEN_AIDING  (0x0b01)
@@ -31,6 +33,11 @@ public:
   virtual unsigned char * GetPacket() = 0;
 
   virtual std::size_t GetPacketSize() = 0;
+
+  static const std::size_t buffer_size = 1024;
+  unsigned char buffer[buffer_size];
+  std::size_t buffer_offset;
+  std::size_t gad_size;
 };
 
 
@@ -92,12 +99,10 @@ public:
     return this->ccom_gad.msg_len;
   }
 
-  static const std::size_t buffer_size = 1024;
-  unsigned char buffer[buffer_size];
-  std::size_t buffer_offset;
-  std::size_t gad_size;
+
   CCOM_MSG ccom_gad;
 };
+const int MAX_BUFF = 1024;  
 
 /**
  * Wrapper for C Generic Aiding csv encoding functionality.
@@ -106,8 +111,46 @@ public:
  */
 class GadEncoderCsv : public GadEncoder
 {
+
+private:
+  inline void EncodeGadCsv(Gad& g)
+  {
+    GEN_AIDING_DATA genaid = g.getCStruct();
+    encode_gad_to_csv(this->out_string,offset_ptr, &genaid);
+  }
+
+public:
+
   /** Constructor */
-  GadEncoderCsv(){}
+  GadEncoderCsv()
+  {
+    offset = 0;
+    this->offset_ptr = &offset;
+    this->buffer_offset = 0;
+    this->gad_size = 0;
+    this->out_string = (char *)malloc(MAX_BUFF);
+  }
+
+  inline void EncodePacket(Gad& g) override
+  {
+    memset(this->buffer, 0, MAX_BUFF);    // Clear buffer
+    this->offset = 0;                     // Set offset to 0
+    EncodeGadCsv(g);                      // Encode Gad
+  }
+
+  inline virtual unsigned char * GetPacket() override
+  {
+    return reinterpret_cast<unsigned char *>(this->out_string);
+  }
+
+  inline virtual std::size_t GetPacketSize() override
+  {
+    return this->offset;
+  }
+
+  char * out_string;
+  int offset;
+  int * offset_ptr;
 };
 
 }

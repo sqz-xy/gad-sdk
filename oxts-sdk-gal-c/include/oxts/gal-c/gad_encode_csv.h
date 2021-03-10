@@ -20,12 +20,12 @@ int init_gad_output_file(FILE* file_ptr);
  * @param offset Current offset into output buffer
  * @param gen_3d_data Data to be written to the output string.
  */
-int encode_gen_3d_to_csv(char * out_string, int * offset, GEN_3D* gen_3d_data);
+int encode_gen_3d_to_csv(char * out_string, int * offset_ptr, GEN_3D* gen_3d_data);
 /** Encode data from GEN_AIDING_DATA to csv format for writing to file. 
  * @param out_string Char array to be populated with GEN_AIDING_DATA.
  * @param data GEN_AIDING_DATA to be written to the output string.
 */
-int encode_gad_to_csv(char * out_string, GEN_AIDING_DATA* data);
+int encode_gad_to_csv(char * out_string, int * offset_ptr, GEN_AIDING_DATA* data);
 
 /** Writes the generic aiding data in data to file at file_ptr
  * @param file_ptr Pointer to the file to write data to. 

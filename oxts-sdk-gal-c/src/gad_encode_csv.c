@@ -114,7 +114,7 @@ const int MAX_BUFF = 1024;
    /*
 
    */
-   int encode_gad_to_csv(char * out_string, GEN_AIDING_DATA* data)
+   int encode_gad_to_csv(char * out_string, int * offset_ptr, GEN_AIDING_DATA* data)
    {
 #ifdef EXTRA_CHECKS
       if (out_string == NULL)
@@ -131,80 +131,72 @@ const int MAX_BUFF = 1024;
 
       int i = 0; // 0 means no errors encountered
 
-      int offset = 0;
-      int * offset_ptr = &offset;
-
-
-      // fprintf() returns a negative number if it fails, no guarantee if it fails
-      // the negative number is -1 so set i = -1 manually
-
       if (i);
       // write ver
-      else if ((offset +=sprintf(out_string + offset, "%d,", 0)) < 0)
+      else if ((*offset_ptr +=sprintf(out_string + *offset_ptr, "%d,", 0)) < 0)
          i = -1;
       // write type
-      else if ((offset +=sprintf(out_string + offset, "%d,", data->type)) < 0)
+      else if ((*offset_ptr +=sprintf(out_string + *offset_ptr, "%d,", data->type)) < 0)
          i = -1;
-
       // write stream ID
-      if ((offset +=sprintf(out_string + offset, "%d,", data->stream_id)) < 0)
+      if ((*offset_ptr +=sprintf(out_string + *offset_ptr, "%d,", data->stream_id)) < 0)
          i = -1;
 
       // write val
-      if ((offset +=sprintf(out_string + offset, "%d,", data->val_valid)) < 0)
+      if ((*offset_ptr +=sprintf(out_string + *offset_ptr, "%d,", data->val_valid)) < 0)
          i = -1;
 
       if (!i && data->val_valid)
          i = encode_gen_3d_to_csv(out_string,offset_ptr, &data->val);
       else if (!i && !data->val_valid)
-         (i = (offset +=sprintf(out_string + offset, ",,,,,,,,,,,,")) < 0) ? -1 : 0;
+         (i = (*offset_ptr +=sprintf(out_string + *offset_ptr, ",,,,,,,,,,,,")) < 0) ? -1 : 0;
 
       // write time
-      if ((offset +=sprintf(out_string + offset, "%d,", data->time_valid)) < 0)
+      if ((*offset_ptr +=sprintf(out_string + *offset_ptr, "%d,", data->time_valid)) < 0)
          i = -1;
 
       if (!i)// && data->time_valid)
          i = encode_gen_3d_to_csv(out_string,offset_ptr, &data->time);
       else if (!i && !data->time_valid)
-         (i = (offset +=sprintf(out_string + offset, ",,,,,,,,,,,,")) < 0) ? -1 : 0;
+         (i = (*offset_ptr +=sprintf(out_string + *offset_ptr, ",,,,,,,,,,,,")) < 0) ? -1 : 0;
 
       // write acq_time
-      if ((offset +=sprintf(out_string + offset, "%d,", data->acq_valid)) < 0)
+      if ((*offset_ptr +=sprintf(out_string + *offset_ptr, "%d,", data->acq_valid)) < 0)
          i = -1;
 
       if (!i && data->acq_valid)
-         (i = (offset +=sprintf(out_string + offset, "%u,", data->acq)) < 0);
+         (i = (*offset_ptr +=sprintf(out_string + *offset_ptr, "%u,", data->acq)) < 0);
       else if (!i && !data->acq_valid)
-         (i = (offset +=sprintf(out_string + offset, ",")) < 0) ? -1 : 0;
+         (i = (*offset_ptr +=sprintf(out_string + *offset_ptr, ",")) < 0) ? -1 : 0;
 
       // write loc
-      if ((offset +=sprintf(out_string + offset, "%d,", data->loc_valid)) < 0)
+      if ((*offset_ptr +=sprintf(out_string + *offset_ptr, "%d,", data->loc_valid)) < 0)
          i = -1;
 
       if (!i && data->loc_valid)
          i = encode_gen_3d_to_csv(out_string,offset_ptr, &data->loc);
       else if (!i && !data->loc_valid)
-         (i = (offset +=sprintf(out_string + offset, ",,,,,,,,,,,,")) < 0) ? -1 : 0;
+         (i = (*offset_ptr +=sprintf(out_string + *offset_ptr, ",,,,,,,,,,,,")) < 0) ? -1 : 0;
 
       // write res1
-      if ((offset +=sprintf(out_string + offset, "%d,", data->res1_valid)) < 0)
+      if ((*offset_ptr +=sprintf(out_string + *offset_ptr, "%d,", data->res1_valid)) < 0)
          i = -1;
 
       if (!i && data->res1_valid)
          i = encode_gen_3d_to_csv(out_string,offset_ptr, &data->res1);
       else if (!i && !data->res1_valid)
-         (i = (offset +=sprintf(out_string + offset, ",,,,,,,,,,,,")) < 0) ? -1 : 0;
+         (i = (*offset_ptr +=sprintf(out_string + *offset_ptr, ",,,,,,,,,,,,")) < 0) ? -1 : 0;
 
       // write res2
-      if ((offset +=sprintf(out_string + offset, "%d,", data->res2_valid)) < 0)
+      if ((*offset_ptr +=sprintf(out_string + *offset_ptr, "%d,", data->res2_valid)) < 0)
          i = -1;
 
       if (!i && data->res2_valid)
          i = encode_gen_3d_to_csv(out_string,offset_ptr, &data->res2);
       else if (!i && !data->res2_valid)
-         (i = (offset +=sprintf(out_string + offset, ",,,,,,,,,,,,")) < 0) ? -1 : 0;
+         (i = (*offset_ptr +=sprintf(out_string + *offset_ptr, ",,,,,,,,,,,,")) < 0) ? -1 : 0;
 
-      offset +=sprintf(out_string + offset, "\n");
+      *offset_ptr +=sprintf(out_string + *offset_ptr, "\n");
    }
 
 
@@ -223,13 +215,14 @@ const int MAX_BUFF = 1024;
       }
 #endif
 
-      int i = 0; // 0 means no errors encountered
+      int i = 0;
       unsigned char out_string[MAX_BUFF];
+      int offset = 0;
+      int * offset_ptr = &offset;
 
-      if (i = encode_gad_to_csv(out_string, data));
-      else if ((i = fputs(out_string, file_ptr)) < 0);
-      else if (i = fflush(file_ptr));
-
+      if (i = encode_gad_to_csv(out_string,offset_ptr, data));
+      fputs(out_string, file_ptr);
+      fflush(file_ptr);
       return i;
    }
 

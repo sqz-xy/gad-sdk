@@ -83,30 +83,29 @@ private:
    * Type of Aiding (position, velocity, ...). For enumerated values see 
    * GEN_TYPE. 
    */
-  int8_t        type;                // GEN_TYPE - type of data 
+  int8_t        type;
   /** 
    * Aiding stream ID to identify the source device. 
    * Values 128-254. Each stream should have a unique ID. 
    */
   uint8_t       stream_id;
   /** Sub-struct VALUE. Contains navigation aiding data. */
-  Gen3d         val;                 // Navigation data
+  Gen3d         val;
   GenFlag       val_valid;
   /** Sub-struct TIME. Contains the time the data was recorded. */
-  Gen3d         time;                
+  Gen3d         time;
   GenFlag       time_valid;
-  /** 
-   * Sub-struct LOCATION. Contains lever arm (or alignment) data between the 
+  /** Sub-struct LOCATION. Contains lever arm (or alignment) data between the 
    * IMU and aiding source.
    */
-  Gen3d         loc;                 // Location/Position of Generic Aiding Device (lever arm)
+  Gen3d         loc;
   GenFlag       loc_valid;
   // Sub-struct RESERVED
   Gen3d         res1;
-  GenFlag       res1_valid;          
+  GenFlag       res1_valid;
   // Sub-struct RESERVED
   Gen3d         res2;
-  GenFlag       res2_valid;          
+  GenFlag       res2_valid;
   /** 
    * Acquisition Time Stamp. The INS will fill in this timestamp upon its 
    * arrival to the INS. Leave blank.
@@ -191,11 +190,18 @@ public:
    */
   void   SetTimeVoid();
   
+  void SetRes1Invalid();
+  void SetRes1Valid();
+  void SetRes2Invalid();
+  void SetRes2Valid();
+
   // Acquisiton time accessors.
+  void SetAcqInvalid();
+  void SetAcqValid();
   /*! Set the acquisition time of the data. Not to be used outside of the INS.*/
-  void SetAcqTimestamp();
+  void SetAcqTimestamp(uint32_t acq_time);
   /*! Get the acquisition time of the data. Not expected to be set outside of the INS.*/
-  int  GetAcqTimestamp();
+  uint32_t  GetAcqTimestamp();
 
 };
 

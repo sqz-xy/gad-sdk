@@ -67,16 +67,26 @@ void Gen3d::SetVarSingle(double v0)
 // Default Constructor
 Gad::Gad()
 {
-  SetStreamId(128);
-  SetDataType(GEN_TYPE::GEN_VOID);
-  // SetAcqTimestamp(0.0);
+  this->SetStreamId(128);
+  this->SetDataType(GEN_TYPE::GEN_VOID);
+  this->SetValInvalid();
+  this->SetTimeInvalid();
+  this->SetLocInvalid();
+  this->SetRes1Invalid();
+  this->SetRes2Invalid();
 }
 // Constructor
 Gad::Gad(uint8_t stream_id, int8_t aiding_type)
 {
   this->SetStreamId(stream_id);
   this->SetDataType(aiding_type);
-  // SetAcqTimestamp(0.0);
+  this->SetValInvalid();
+  this->SetTimeInvalid();
+  this->SetLocInvalid();
+  this->SetRes1Invalid();
+  this->SetRes2Invalid();
+  this->SetAcqInvalid();
+  this->SetAcqTimestamp(0.0);
 }
 
 Gad::~Gad(){}
@@ -236,6 +246,24 @@ void Gad::SetLocVarDiag(double v0, double v1,double v2)
 void Gad::SetLocVarSingle(double v0)
 {
   this->loc.SetVarSingle(v0);
+}
+
+void Gad::SetRes1Invalid(){ this->res1_valid = 0; }
+void Gad::SetRes1Valid()  { this->res1_valid = 1; }
+void Gad::SetRes2Invalid(){ this->res2_valid = 0; }
+void Gad::SetRes2Valid()  { this->res2_valid = 1; }
+void Gad::SetAcqInvalid() { this->acq_valid = 0;  }
+void Gad::SetAcqValid()   { this->acq_valid = 1;  }
+
+void Gad::SetAcqTimestamp(uint32_t acq_time)
+{
+  this->acq = acq_time;
+  this->acq_valid = 1;
+
+}
+uint32_t  Gad::GetAcqTimestamp()
+{
+  return this->acq;
 }
 
 //==============================================================================

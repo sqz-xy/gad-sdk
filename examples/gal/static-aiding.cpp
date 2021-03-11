@@ -34,6 +34,7 @@ int main(int argc, char * argv[])
   int sendPackets = 30; // Total number of packets to send
   std::string unitIp = "192.168.25.22"; // Unit to send GAD to
   std::string source_id = "out.gad";    // File to send GAD to
+  int output_type = OUTPUT_TYPE::UDP;   // Set output to UDP or CSV
 
   //============================================================================
   // Construct the position aiding class with stream ID 129.
@@ -78,13 +79,21 @@ int main(int argc, char * argv[])
   //============================================================================
   // Initialise the handler
   OxTS::GadHandler gh = OxTS::GadHandler();
-  // Set encoding strategy
-  gh.SetEncoderToBin();
-  // gh.SetEncoderToCsv();
 
-  // Set output strategy
-  // gh.SetOutputModeToFile(source_id);
-  gh.SetOutputModeToUdp(unitIp);
+  switch (output_type)
+  {
+    case OUTPUT_TYPE::UDP : 
+      gh.SetEncoderToBin();
+      gh.SetOutputModeToUdp(unitIp);
+      break;
+    case OUTPUT_TYPE::CSV :
+      gh.SetEncoderToCsv();
+      gh.SetOutputModeToFile(source_id);
+      break;
+    default :
+      std::cout << "Output type not known." << std::endl;
+      break;
+  }
 
   //============================================================================
   for (int i = 0; i < sendPackets; ++i)

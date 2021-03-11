@@ -80,6 +80,8 @@ int main(int argc, char * argv[])
   // Initialise the handler
   OxTS::GadHandler gh = OxTS::GadHandler();
 
+  // This switch case sets up the GadHandler to either output binary to UDP or 
+  // CSV to file.
   switch (output_type)
   {
     case OUTPUT_TYPE::UDP : 
@@ -98,9 +100,6 @@ int main(int argc, char * argv[])
   //============================================================================
   for (int i = 0; i < sendPackets; ++i)
   {
-    // Set position (dummy example)
-    gp.SetWgs84Pos(i,0,0);
-
     gh.SendPacket(gp);
     gh.SendPacket(gv);
     gh.SendPacket(ga);

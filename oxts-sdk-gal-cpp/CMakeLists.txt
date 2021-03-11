@@ -22,9 +22,9 @@ set(OXTS_GAL_CPP_HEADERS
     ./include/oxts/gal-cpp/gad_encoders/gad_encoder.hpp
     ./include/oxts/gal-cpp/gad_encoders/gad_encoder_bin.hpp
     ./include/oxts/gal-cpp/gad_encoders/gad_encoder_csv.hpp
-    ./include/oxts/gal-cpp/gad_output.hpp
-    ./include/oxts/gal-cpp/gad_output_file.hpp
-    ./include/oxts/gal-cpp/gad_output_udp.hpp
+    ./include/oxts/gal-cpp/gad_output/gad_output.hpp
+    ./include/oxts/gal-cpp/gad_output/gad_output_file.hpp
+    ./include/oxts/gal-cpp/gad_output/gad_output_udp.hpp
     ./include/oxts/gal-cpp/gad_handler.hpp
     ./include/oxts/gal-cpp/udp_server_client.h
 )

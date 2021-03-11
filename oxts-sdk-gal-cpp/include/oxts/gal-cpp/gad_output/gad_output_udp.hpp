@@ -2,7 +2,7 @@
 #define GAD_OUTPUT_UDP_HPP
 /** @file gad_output_udp.hpp */
 
-#include "oxts/gal-cpp/gad_output.hpp"
+#include "oxts/gal-cpp/gad_output/gad_output.hpp"
 #include "oxts/gal-cpp/udp_server_client.h"
 
 namespace OxTS

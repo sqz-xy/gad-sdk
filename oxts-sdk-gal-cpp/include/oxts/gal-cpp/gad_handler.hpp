@@ -1,6 +1,6 @@
 #ifndef GAD_HANDLER_HPP
 #define GAD_HANDLER_HPP
-
+/** @file gad_handler.hpp */
 #include <memory>
 
 #include "oxts/gal-cpp/gad_encoder.hpp"
@@ -10,6 +10,9 @@
 namespace OxTS
 {
 
+/** Class to handle encoding and sending Generic Aiding packets. This can be to 
+ *  an INS in real time via UDP or to a .gad csv file.
+ */
 class GadHandler
 {
 private:
@@ -24,14 +27,15 @@ public:
   void SetEncoderToBin() { this->encoder_.reset(new GadEncoderBin()); }
   /** Set the output encoder to csv. */
   void SetEncoderToCsv() { this->encoder_.reset(new GadEncoderCsv()); }
-  /** Generic Aiding output. Can be to file or UDP */
+  /** Set Generic Aiding output to file */
   void SetOutputModeToFile(std::string file_path) { this->output_.reset(new GadOutputFile(file_path));}
+  /** Set Generic Aiding output to UDP */
   void SetOutputModeToUdp(std::string ip)  { this->output_.reset(new GadOutputUdp(ip)); }
 
   /** Send packet */
   void SendPacket(Gad g);
 };
 
-}
+} // OxTS
 
 #endif // GAD_HANDLER_HPP

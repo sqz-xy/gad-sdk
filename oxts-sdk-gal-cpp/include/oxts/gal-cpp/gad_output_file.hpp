@@ -1,5 +1,6 @@
 #ifndef GAD_OUTPUT_FILE_HPP
 #define GAD_OUTPUT_FILE_HPP
+/** @file gad_output_file.hpp */
 
 #include "oxts/gal-cpp/gad_output.hpp"
 

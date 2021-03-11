@@ -1,5 +1,6 @@
 #ifndef GAD_OUTPUT_UDP_HPP
 #define GAD_OUTPUT_UDP_HPP
+/** @file gad_output_udp.hpp */
 
 #include "oxts/gal-cpp/gad_output.hpp"
 #include "oxts/gal-cpp/udp_server_client.h"
@@ -33,7 +34,7 @@ public:
   short unitGaPort = 50485;
 };
 
-}
+} // OxTS
 
 
 #endif // GAD_OUTPUT_UDP_HPP

@@ -11,7 +11,10 @@ namespace OxTS
 class GadOutputUdp : public GadOutput
 {
 private:
-
+  /** Server to receive the GAD. */
+  std::shared_ptr<networking_udp::server> udpServer_;
+  /** Port on the INS to recieve GAD. */
+  short unitGaPort = 50485;
 public:
   /** Constructor */
   GadOutputUdp(std::string ip)
@@ -27,11 +30,6 @@ public:
   {
     udpServer_->send(packet, packet_size);
   }
-
-  /** Server to receive the GAD. */
-  std::shared_ptr<networking_udp::server> udpServer_;
-  /** Port on the INS to recieve GAD. */
-  short unitGaPort = 50485;
 };
 
 } // OxTS

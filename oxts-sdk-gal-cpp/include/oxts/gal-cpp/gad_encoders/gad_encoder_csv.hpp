@@ -8,7 +8,6 @@
 namespace OxTS
 {
 
-
 const int MAX_BUFF = 1024;  
 
 /**
@@ -26,6 +25,9 @@ private:
     encode_gad_to_csv(this->out_string,offset_ptr, &genaid);
   }
 
+  char * out_string;
+  int offset;
+  int * offset_ptr;
 public:
 
   /** Constructor */
@@ -47,20 +49,21 @@ public:
     this->offset = 0;                     // Set offset to 0
     EncodeGadCsv(g);                      // Encode Gad
   }
-
+  /** Retrieve the encoded packet 
+   * @return Char array containing the packet encoded in csv form.
+  */
   inline virtual unsigned char * GetPacket() override
   {
     return reinterpret_cast<unsigned char *>(this->out_string);
   }
-
+  /** 
+   * @return The encoded packet size (bytes)
+  */
   inline virtual std::size_t GetPacketSize() override
   {
     return this->offset;
   }
 
-  char * out_string;
-  int offset;
-  int * offset_ptr;
 };
 
 }

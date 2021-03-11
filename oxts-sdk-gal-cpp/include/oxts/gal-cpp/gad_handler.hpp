@@ -4,6 +4,8 @@
 #include <memory>
 
 #include "oxts/gal-cpp/gad_encoder.hpp"
+#include "oxts/gal-cpp/gad_encoder_bin.hpp"
+#include "oxts/gal-cpp/gad_encoder_csv.hpp"
 #include "oxts/gal-cpp/gad_output_udp.hpp"
 #include "oxts/gal-cpp/gad_output_file.hpp"
 

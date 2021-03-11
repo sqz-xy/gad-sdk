@@ -24,15 +24,19 @@ void Sleep(int sleepMs)
     Sleep(sleepMs);    // Sleep takes sleep time in ms.
 #endif
 }
-}
+} // OxTS
 
+enum OUTPUT_TYPE
+{
+  UDP = 0,
+  CSV = 1
+};
 
 int main(int argc, char * argv[])
 {
-
   int sendPackets = 30; // Total number of packets to send
   std::string unitIp = "192.168.25.22"; // Unit to send GAD to
-  std::string source_id = "out.gad";
+  std::string source_id = "out.gad";    // File to send GAD to
 
   //============================================================================
   // Construct the position aiding class with stream ID 129.
@@ -75,12 +79,12 @@ int main(int argc, char * argv[])
   // Set the variance on the alignment to 5.0 deg in HPR.
   ga.SetAidingAlignmentVar(5.0,5.0,5.0);
   //============================================================================
-
   // Initialise the handler
   OxTS::GadHandler gh = OxTS::GadHandler();
   // Set encoding strategy
   gh.SetEncoderToBin();
   // gh.SetEncoderToCsv();
+
   // Set output strategy
   // gh.SetOutputModeToFile(source_id);
   gh.SetOutputModeToUdp(unitIp);

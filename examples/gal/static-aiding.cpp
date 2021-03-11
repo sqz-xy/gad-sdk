@@ -1,15 +1,11 @@
 #include <iostream>
 #include <string>
 
-#include "oxts/gal-c/gad_encode_csv.h"
-
 #include "oxts/gal-cpp/gad.hpp"
 #include "oxts/gal-cpp/gad_encoder.hpp"
 #include "oxts/gal-cpp/gad_handler.hpp"
 #include "oxts/gal-cpp/gad_output_file.hpp"
 #include "oxts/gal-cpp/gad_output_udp.hpp"
-
-#include "udp_server_client.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -31,12 +27,12 @@ void Sleep(int sleepMs)
 }
 
 
-
 int main(int argc, char * argv[])
 {
 
   int sendPackets = 30; // Total number of packets to send
   std::string unitIp = "192.168.25.22"; // Unit to send GAD to
+  std::string source_id = "out.gad";
 
   //============================================================================
   // Construct the position aiding class with stream ID 129.
@@ -79,21 +75,20 @@ int main(int argc, char * argv[])
   // Set the variance on the alignment to 5.0 deg in HPR.
   ga.SetAidingAlignmentVar(5.0,5.0,5.0);
   //============================================================================
-  std::string source_id = "out";
 
-  // Initialise the output class
+  // Initialise the handler
   OxTS::GadHandler gh = OxTS::GadHandler();
   // Set encoding strategy
   gh.SetEncoderToBin();
   // gh.SetEncoderToCsv();
   // Set output strategy
-  // gh.SetOutputModeToFile((source_id + ".gad").c_str());
+  // gh.SetOutputModeToFile(source_id);
   gh.SetOutputModeToUdp(unitIp);
 
   //============================================================================
   for (int i = 0; i < sendPackets; ++i)
   {
-    // Encode packet
+    // Set position (dummy example)
     gp.SetWgs84Pos(i,0,0);
 
     gh.SendPacket(gp);

@@ -14,20 +14,26 @@ project(oxts-sdk-gal-cpp VERSION ${OXTS_SDK_GAL_VERSION})
 set(DESCRIPTION "Generic Aiding library for the OxTS SDK in C++.")
 
 find_package(oxts-sdk-gal-c CONFIG REQUIRED)
+find_package(Boost REQUIRED system thread regex)
+
 
 set(OXTS_GAL_CPP_HEADERS
     ./include/oxts/gal-cpp/gad.hpp
     ./include/oxts/gal-cpp/gad_encoder.hpp
+    ./include/oxts/gal-cpp/gad_output.hpp
+    ./include/oxts/gal-cpp/gad_output_file.hpp
+    ./include/oxts/gal-cpp/gad_output_udp.hpp
     ./include/oxts/gal-cpp/gad_handler.hpp
+    ./include/oxts/gal-cpp/udp_server_client.h
 )
-
+    
 set(OXTS_GAL_CPP_SOURCES
     ./src/gal-cpp/gad.cpp
 )
 
-
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
+include_directories(${Boost_INCLUDE_DIR})
 
 ####
 # Create targets
@@ -47,6 +53,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
         oxts-sdk-gal-c
+        ${Boost_LIBRARIES}
+
 )
 
 target_compile_definitions(${PROJECT_NAME}

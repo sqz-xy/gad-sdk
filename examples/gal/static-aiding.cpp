@@ -6,6 +6,8 @@
 #include "oxts/gal-cpp/gad.hpp"
 #include "oxts/gal-cpp/gad_encoder.hpp"
 #include "oxts/gal-cpp/gad_handler.hpp"
+#include "oxts/gal-cpp/gad_output_file.hpp"
+#include "oxts/gal-cpp/gad_output_udp.hpp"
 
 #include "udp_server_client.h"
 
@@ -78,6 +80,7 @@ int main(int argc, char * argv[])
   // Set the variance on the alignment to 5.0 deg in HPR.
   ga.SetAidingAlignmentVar(5.0,5.0,5.0);
   //============================================================================
+  std::string source_id = "out";
 
   // Initialise the output class
   OxTS::GadHandler gh = OxTS::GadHandler();
@@ -85,18 +88,21 @@ int main(int argc, char * argv[])
   // gh.SetEncoderToBin();
   gh.SetEncoderToCsv();
   // Set output strategy
+  gh.SetOutputModeToFile((source_id + ".gad").c_str());
+  // gh.SetOutputModeToUdp(unitIp);
+
 
   /** UDP Client to receive data from the device */
-  networking_udp::server udpServer;
-  short unitGaPort = 50485;
-  udpServer.set_remote_endpoint(unitIp, unitGaPort);
+  // networking_udp::server udpServer;
+  // short unitGaPort = 50485;
+  // udpServer.set_remote_endpoint(unitIp, unitGaPort);
 
 
   //============================================================================
   // CSV
-  std::string source_id = "out";
-  OxTS::GadEncoderCsv gec = OxTS::GadEncoderCsv(); 
-  OxTS::GadOutputFile gof = OxTS::GadOutputFile((source_id + ".gad").c_str()); 
+  // OxTS::GadEncoderCsv gec = OxTS::GadEncoderCsv(); 
+  // OxTS::GadOutputFile gof = OxTS::GadOutputFile((source_id + ".gad").c_str()); 
+  // OxTS::GadOutputUdp  gou = OxTS::GadOutputUdp(unitIp); 
 
   //============================================================================
   for (int i = 0; i < sendPackets; ++i)
@@ -108,13 +114,12 @@ int main(int argc, char * argv[])
     // udpServer.send(gec.GetPacket(), gec.GetPacketSize());
     // udpServer.send(gh.encoder_->GetPacket(), gh.encoder_->GetPacketSize());
 
-    gof.OutputPacket(gh.encoder_->GetPacket());
+    // gof.OutputPacket(gh.encoder_->GetPacket(), gh.encoder_->GetPacketSize());
+    gh.output_->OutputPacket(gh.encoder_->GetPacket(), gh.encoder_->GetPacketSize());
 
     // gh.encoder_->EncodePacket(gv);
-    // udpServer.send(gh.encoder_->GetPacket(), gh.encoder_->GetPacketSize());
 
     // gh.encoder_->EncodePacket(ga);
-    // udpServer.send(gh.encoder_->GetPacket(), gh.encoder_->GetPacketSize());
 
     if(i % 10 == 0)
       std::cout << i << " packets sent" << std::endl;

@@ -2,7 +2,7 @@
 #define GAD_ENCODER_BIN_HPP
 /** @file gad_encoder_bin.hpp */
 
-#include "oxts/gal-cpp/gad_encoder.hpp"
+#include "oxts/gal-cpp/gad_encoders/gad_encoder.hpp"
 
 namespace OxTS
 {

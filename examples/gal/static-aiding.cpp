@@ -2,10 +2,7 @@
 #include <string>
 
 #include "oxts/gal-cpp/gad.hpp"
-#include "oxts/gal-cpp/gad_encoder.hpp"
 #include "oxts/gal-cpp/gad_handler.hpp"
-#include "oxts/gal-cpp/gad_output_file.hpp"
-#include "oxts/gal-cpp/gad_output_udp.hpp"
 
 #ifdef _WIN32
 #include <windows.h>

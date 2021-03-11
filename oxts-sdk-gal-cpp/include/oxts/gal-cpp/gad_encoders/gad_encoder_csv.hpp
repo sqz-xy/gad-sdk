@@ -2,7 +2,7 @@
 #define GAD_ENCODER_CSV_HPP
 /** @file gad_encoder_csv.hpp */
 
-#include "oxts/gal-cpp/gad_encoder.hpp"
+#include "oxts/gal-cpp/gad_encoders/gad_encoder.hpp"
 
 
 namespace OxTS

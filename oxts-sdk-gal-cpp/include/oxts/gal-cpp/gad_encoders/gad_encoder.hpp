@@ -15,7 +15,6 @@
 namespace OxTS
 {
 
-
 /**
  * Interface class to bring together GAD encoding to binary (for UDP output) and
  * string (for csv output).

@@ -12,17 +12,10 @@ set(OXTS_SDK_EXAMPLES_GAL_STATIC static-aiding-example)
 
 add_executable(${OXTS_SDK_EXAMPLES_GAL_STATIC} ./static-aiding.cpp)
 
-# find_package(oxts-sdk-core REQUIRED)
-# find_package(oxts-sdk-gal-c REQUIRED)
 find_package(oxts-sdk-gal-cpp REQUIRED)
-find_package(Boost REQUIRED system thread regex)
 
-include_directories(${Boost_INCLUDE_DIR})
 
 target_link_libraries(${OXTS_SDK_EXAMPLES_GAL_STATIC} 
     PUBLIC 
-        # oxts-sdk-core
-        oxts-sdk-gal-c
         oxts-sdk-gal-cpp
-        ${Boost_LIBRARIES}
 )

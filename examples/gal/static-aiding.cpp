@@ -59,7 +59,6 @@ int main(int argc, char * argv[])
   // Set the estimated variance on this velocity
   gv.SetVelNeuVar(0.1,0.1,0.1);
   // Set the time mode to Void, since we are not timestamping the aiding data.
-  // With no timestamp, the INS will timestamp the data upon arrival.
   gv.SetTimeVoid();
   // Set the lever arm between the aiding source and the IMU, in the IMU frame.
   // In this example, the velocity is coming from the same source as the
@@ -85,41 +84,21 @@ int main(int argc, char * argv[])
   // Initialise the output class
   OxTS::GadHandler gh = OxTS::GadHandler();
   // Set encoding strategy
-  // gh.SetEncoderToBin();
-  gh.SetEncoderToCsv();
+  gh.SetEncoderToBin();
+  // gh.SetEncoderToCsv();
   // Set output strategy
-  gh.SetOutputModeToFile((source_id + ".gad").c_str());
-  // gh.SetOutputModeToUdp(unitIp);
-
-
-  /** UDP Client to receive data from the device */
-  // networking_udp::server udpServer;
-  // short unitGaPort = 50485;
-  // udpServer.set_remote_endpoint(unitIp, unitGaPort);
-
-
-  //============================================================================
-  // CSV
-  // OxTS::GadEncoderCsv gec = OxTS::GadEncoderCsv(); 
-  // OxTS::GadOutputFile gof = OxTS::GadOutputFile((source_id + ".gad").c_str()); 
-  // OxTS::GadOutputUdp  gou = OxTS::GadOutputUdp(unitIp); 
+  // gh.SetOutputModeToFile((source_id + ".gad").c_str());
+  gh.SetOutputModeToUdp(unitIp);
 
   //============================================================================
   for (int i = 0; i < sendPackets; ++i)
   {
     // Encode packet
     gp.SetWgs84Pos(i,0,0);
-    gh.encoder_->EncodePacket(gp);
-    // Send packet
-    // udpServer.send(gec.GetPacket(), gec.GetPacketSize());
-    // udpServer.send(gh.encoder_->GetPacket(), gh.encoder_->GetPacketSize());
 
-    // gof.OutputPacket(gh.encoder_->GetPacket(), gh.encoder_->GetPacketSize());
-    gh.output_->OutputPacket(gh.encoder_->GetPacket(), gh.encoder_->GetPacketSize());
-
-    // gh.encoder_->EncodePacket(gv);
-
-    // gh.encoder_->EncodePacket(ga);
+    gh.SendPacket(gp);
+    gh.SendPacket(gv);
+    gh.SendPacket(ga);
 
     if(i % 10 == 0)
       std::cout << i << " packets sent" << std::endl;

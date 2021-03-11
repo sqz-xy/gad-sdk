@@ -26,9 +26,10 @@ set(OXTS_GAL_CPP_HEADERS
     ./include/oxts/gal-cpp/gad_handler.hpp
     ./include/oxts/gal-cpp/udp_server_client.h
 )
-    
+
 set(OXTS_GAL_CPP_SOURCES
     ./src/gal-cpp/gad.cpp
+    ./src/gal-cpp/gad_handler.cpp
 )
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)

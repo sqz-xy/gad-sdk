@@ -24,6 +24,7 @@ private:
 public:
   /**  Constructor */
   GadHandler(GadEncoder *encoder_strategy = nullptr) : encoder_(encoder_strategy){ }
+  
   /** Set the output encoder to binary. */
   void SetEncoderToBin() { this->encoder_.reset(new GadEncoderBin()); }
   /** Set the output encoder to csv. */

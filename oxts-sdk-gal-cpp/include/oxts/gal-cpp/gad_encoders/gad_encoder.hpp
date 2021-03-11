@@ -15,13 +15,19 @@
 namespace OxTS
 {
 
+const int MAX_BUFF = 1024;  
+
 /**
  * Interface class to bring together GAD encoding to binary (for UDP output) and
  * string (for csv output).
  */
 class GadEncoder
 {
-private:
+protected:
+  static const std::size_t buffer_size = MAX_BUFF;
+  unsigned char buffer[buffer_size];
+  std::size_t buffer_offset;
+  std::size_t gad_size;
 
 public:
   /** Virtual Destructor. */
@@ -37,10 +43,6 @@ public:
    */
   virtual std::size_t GetPacketSize() = 0;
 
-  static const std::size_t buffer_size = 1024;
-  unsigned char buffer[buffer_size];
-  std::size_t buffer_offset;
-  std::size_t gad_size;
 };
 
 }

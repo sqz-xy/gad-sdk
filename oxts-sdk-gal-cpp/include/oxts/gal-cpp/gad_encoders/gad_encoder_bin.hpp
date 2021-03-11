@@ -14,22 +14,22 @@ class GadEncoderBin : public GadEncoder
 {
 private:
 
-  inline int EncodeGen3d(Gen3d& g)
+  int EncodeGen3d(Gen3d& g)
   {
     return encode_gen_3d(*g, this->buffer, &this->buffer_offset, this->buffer_size);
   }
 
-  inline int EncodeGen3dVar(Gen3d& g)
+  int EncodeGen3dVar(Gen3d& g)
   {
     return encode_gen_3d_var(*g, this->buffer, &this->buffer_offset, this->buffer_size);
   }
 
-  inline int BufferOverrunCheck(size_t expected_data_size)
+  int BufferOverrunCheck(size_t expected_data_size)
   {
     return buffer_overrun_chk(this->buffer_size, expected_data_size);
   }
 
-  inline int EncodeGadBin(Gad& g )
+  int EncodeGadBin(Gad& g )
   {
     // Copy Gad -> GEN_AIDING_DATA
     GEN_AIDING_DATA genaid = g.getCStruct();
@@ -44,7 +44,7 @@ public:
     this->gad_size = 0;
   }
 
-  inline void EncodePacket(Gad& g) override
+  void EncodePacket(Gad& g) override
   {
     // Encode Gad
     EncodeGadBin(g);
@@ -54,12 +54,12 @@ public:
     BuildCComPkt(&this->ccom_gad, this->buffer, this->gad_size);
   }
 
-  inline virtual unsigned char * GetPacket() override
+  virtual unsigned char * GetPacket() override
   {
     return this->ccom_gad.msg;
   }
 
-  inline virtual std::size_t GetPacketSize() override
+  virtual std::size_t GetPacketSize() override
   {
     return this->ccom_gad.msg_len;
   }

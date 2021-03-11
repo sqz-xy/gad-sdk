@@ -8,8 +8,6 @@
 namespace OxTS
 {
 
-const int MAX_BUFF = 1024;  
-
 /**
  * Wrapper for C Generic Aiding csv encoding functionality.
  * 
@@ -43,7 +41,7 @@ public:
   /** Encode the generic aiding packet to csv format.
    * @param g Reference to the Gad data to be encoded.
    */
-  inline void EncodePacket(Gad& g) override
+  void EncodePacket(Gad& g) override
   {
     memset(this->buffer, 0, MAX_BUFF);    // Clear buffer
     this->offset = 0;                     // Set offset to 0
@@ -52,14 +50,14 @@ public:
   /** Retrieve the encoded packet 
    * @return Char array containing the packet encoded in csv form.
   */
-  inline virtual unsigned char * GetPacket() override
+  virtual unsigned char * GetPacket() override
   {
     return reinterpret_cast<unsigned char *>(this->out_string);
   }
   /** 
    * @return The encoded packet size (bytes)
   */
-  inline virtual std::size_t GetPacketSize() override
+  virtual std::size_t GetPacketSize() override
   {
     return this->offset;
   }

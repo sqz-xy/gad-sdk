@@ -24,11 +24,11 @@ private:
 public:
   /**  Constructor */
   GadHandler(GadEncoder *encoder_strategy = nullptr) : encoder_(encoder_strategy){ }
-  /** Generic Aiding encoder. Can be to binary or csv */
   /** Set the output encoder to binary. */
   void SetEncoderToBin() { this->encoder_.reset(new GadEncoderBin()); }
   /** Set the output encoder to csv. */
   void SetEncoderToCsv() { this->encoder_.reset(new GadEncoderCsv()); }
+
   /** Set Generic Aiding output to file */
   void SetOutputModeToFile(std::string file_path) { this->output_.reset(new GadOutputFile(file_path));}
   /** Set Generic Aiding output to UDP */

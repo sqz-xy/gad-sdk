@@ -4,15 +4,14 @@ This project contains the OxTS GAD SDK, written in C++. This SDK is designed to 
 
 ## Requirements
 
-The NCom decoding portion of this SDK can be used with any OxTS INS. Generic Aiding can only be used with a unit for which the appropriate Generic Aiding Feature Codes are enabled. RD files can be processed with Feature Codes they did not have at the time of recording, using NAVsolve. For internal users, blended can be run using the blended bypass code generator. 
-
-The connection to the unit is expected to be UDP via ethernet.
-
-CMake is required to build the code and examples from source. (Pre-built binaries TBC)
+- CMake 3.1
+- Boost 1.71 (requirement can be disabled, though this will remove UDP functionality)
+- Generic Aiding Feature Codes.
+- Ethernet connection to an OxTS INS, for real-time aiding.
 
 ## Getting Started
 
-The fastest way to get started with the SDK is to install the pre-built binaries from... (TBC). Will require some form of deployment.
+Install the pre-built binaries from... (TBC). Will require some form of deployment.
 
 ## Building from source
 
@@ -21,7 +20,7 @@ Users can also build the SDK from source, using the following instructions:
 1. Clone the repository onto the PC.
 2. Navigate to the root directory of the repository
 3. (Optional) Edit the CMakeLists.txt file in the root of the repository to 
-   configure options, such as enabling building of examples.
+   configure options, such as enabling building of examples and documentation.
 4. Execute the commands:
 
 ```
@@ -34,29 +33,37 @@ This will build the SDK and install it to your machine. Once this is complete,
 other CMake projects on the machine can link to the libraries using:
 
 ```
-find_package(oxts-sdk-core REQUIRED)
-find_package(oxts-sdk-gal-c REQUIRED)
+
 find_package(oxts-sdk-gal-cpp REQUIRED)
 
 target_link_libraries(${PROJECT_NAME} 
     PUBLIC
-        oxts-sdk-core
-        oxts-sdk-gal-c
         oxts-sdk-gal-cpp
 )
 ```
-in their CMakeLists.txt (though most users will only require oxts-sdk-gal-cpp). 
+in their CMakeLists.txt. 
 Header files can then be included in code files using `#include 
 "oxts/<oxts-sdk-module>/<filename>.hpp".
 
+### Build options
+
+The CMakeLists.txt file in the root of the repository contains some options for building the SDK.
+
+| Option | Description | Default |
+|-------------|---------------|----|
+|OXTS_SDK_BUILD_DOCS|Build SDK documentation.| OFF |
+|OXTS_SDK_BUILD_EXAMPLES|Enable examples targets.| ON |
+|OXTS_SDK_DISABLE_BOOST|Use Boost library when building. Note that not using boost will limit UDP functionality, which will need to be replaced by the user in order to send GAD to an INS.| OFF |
+
 ## Examples
 
-The SDK contains a number of examples to demonstrate Generic Aiding and NCom 
+The SDK contains a some examples to demonstrate Generic Aiding and NCom 
 decoding in action. These are contained in the /examples directory. To build 
 the examples, ensure that the option OXTS_SDK_BUILD_EXAMPLES is enabled in the
 CMakeLists.txt file at the root of the repository.
 
 ### GAL
+
 
 #### Static Aiding
 
@@ -65,3 +72,11 @@ with the interface without leaving your desk.
 
 Static position and attitude measurements are created alongside zero velocity 
 updates, all of which are sent to the INS.
+
+#### Static Aiding (No Boost)
+
+A stripped out version of the above example for users who cannot use the Boost 
+library. Since UDP socket functionality in this SDK relies on Boost, users will
+need to add code to send encoded Generic Aiding packets to an INS using their
+chosen library.
+

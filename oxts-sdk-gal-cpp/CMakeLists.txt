@@ -14,8 +14,16 @@ project(oxts-sdk-gal-cpp VERSION ${OXTS_SDK_GAL_VERSION})
 set(DESCRIPTION "Generic Aiding library for the OxTS SDK in C++.")
 
 find_package(oxts-sdk-gal-c CONFIG REQUIRED)
-find_package(Boost REQUIRED system thread regex)
-
+# If Boost isn't disabled, find it. If it can't be found, disable it.
+if(NOT OXTS_SDK_DISABLE_BOOST)
+    find_package(Boost COMPONENTS system thread regex)
+    if(NOT Boost_FOUND)
+        message(STATUS "Boost Library not found. Defaulting to build without Boost. UDP Socket functionality will not be built.")
+        set(OXTS_SDK_DISABLE_BOOST ON)
+    endif()
+else()
+    message(STATUS "Boost disabled.")
+endif()
 
 set(OXTS_GAL_CPP_HEADERS
     ./include/oxts/gal-cpp/gad.hpp
@@ -36,7 +44,11 @@ set(OXTS_GAL_CPP_SOURCES
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
-include_directories(${Boost_INCLUDE_DIR})
+if(OXTS_SDK_DISABLE_BOOST)
+    include_directories(${Boost_INCLUDE_DIR})
+endif()
+
+configure_file(./include/oxts/gal-cpp/config.h.in ./include/oxts/gal-cpp/config.h @ONLY)
 
 ####
 # Create targets
@@ -52,13 +64,18 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     $<INSTALL_INTERFACE:include>
     PRIVATE ${oxts-sdk-gal-c_INCLUDE_DIRS}
 )
-
-target_link_libraries(${PROJECT_NAME}
-    PUBLIC
-        oxts-sdk-gal-c
-        ${Boost_LIBRARIES}
-
-)
+if(OXTS_SDK_DISABLE_BOOST)
+    target_link_libraries(${PROJECT_NAME}
+        PUBLIC
+            oxts-sdk-gal-c
+    )
+else()
+    target_link_libraries(${PROJECT_NAME}
+        PUBLIC
+            oxts-sdk-gal-c
+            ${Boost_LIBRARIES}
+    )
+endif()
 
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE GAL_CPP_LIBRARY

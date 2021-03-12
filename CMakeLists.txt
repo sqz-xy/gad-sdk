@@ -11,7 +11,7 @@ add_definitions(-DOXTS_SDK_VERSION_PATCH=${oxts-sdk_VERSION_PATCH})
 # Building and installation options
 option(OXTS_SDK_BUILD_DOCS "Build SDK documentation." OFF)
 option(OXTS_SDK_BUILD_EXAMPLES "Enable examples targets." ON) 
-option(OXTS_SDK_DISABLE_BOOST "Use Boost library when building. Note that not using boost will limit UDP functionality, which will need to be replaced by the user in order to send GAD to an INS." ON) 
+option(OXTS_SDK_DISABLE_BOOST "Use Boost library when building. Note that not using boost will limit UDP functionality, which will need to be replaced by the user in order to send GAD to an INS." OFF) 
 
 # C++ Standard version
 set(CMAKE_CXX_STANDARD 11)

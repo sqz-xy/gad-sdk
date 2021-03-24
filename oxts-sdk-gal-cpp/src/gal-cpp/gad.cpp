@@ -317,16 +317,40 @@ void GadPosition::SetAidingLeverArmVar(double x, double y, double z)
 GadVelocity::GadVelocity(uint8_t stream_id) : Gad(stream_id, GEN_TYPE::GEN_VEL){}
 
 // val
-void GadVelocity::SetVelNeu(double vN, double vE, double vU)
+void GadVelocity::SetVelNeu(double v_n, double v_e, double v_u)
 {
   this->SetDataMode(0);
   this->SetDataValType(VEL_SYS_TYPE::VEL_SYS_NEU);
-  this->SetDataVal(vN,vE,vU);
+  this->SetDataVal(v_n,v_e,v_u);
 }
 
-void GadVelocity::SetVelNeuVar(double varN, double varE, double varU)
+void GadVelocity::SetVelOdom(double v_x, double v_y, double v_z)
 {
-  this->SetDataVarDiag(varN,varE,varU);
+  this->SetDataMode(0);
+  this->SetDataValType(VEL_SYS_TYPE::VEL_SYS_ODO);
+  this->SetDataVal(v_x,v_y,v_z);
+}
+
+void GadVelocity::SetVelLocal(double v_x, double v_y, double v_z)
+{
+  this->SetDataMode(0);
+  this->SetDataValType(VEL_SYS_TYPE::VEL_SYS_LOCAL);
+  this->SetDataVal(v_x,v_y,v_z);
+}
+
+void GadVelocity::SetVelNeuVar(double v_n, double v_e, double v_u)
+{
+  this->SetDataVarDiag(v_n,v_e,v_u);
+}
+
+void GadVelocity::SetVelOdomVar(double v_x, double v_y, double v_z)
+{
+  this->SetDataVarDiag(v_x,v_y,v_z);
+}
+
+void GadVelocity::SetVelLocalVar(double v_x, double v_y, double v_z)
+{
+  this->SetDataVarDiag(v_x,v_y,v_z);
 }
 
 // loc 

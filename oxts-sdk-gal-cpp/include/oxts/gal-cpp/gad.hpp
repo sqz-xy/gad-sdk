@@ -296,18 +296,46 @@ public:
   GadVelocity(uint8_t stream_id);
   /**
    * Set the aiding velocity estimate in the local NEU coordinate frame.
-   * @param vN Velocity estimate in the North direction (m/s).
-   * @param vE Velocity estimate in the East direction (m/s).
-   * @param vU Velocity estimate in the Up direction (m/s).
+   * @param v_n Velocity estimate in the North direction (m/s).
+   * @param v_e Velocity estimate in the East direction (m/s).
+   * @param v_u Velocity estimate in the Up direction (m/s).
    */
-  void SetVelNeu(double vN, double vE, double vU);
+  void SetVelNeu(double v_n, double v_e, double v_u);
+  /**
+   * Set the aiding velocity estimate in the odometry frame.
+   * @param v_x Velocity estimate in the x direction (m/s).
+   * @param v_y Velocity estimate in the y direction (m/s).
+   * @param v_z Velocity estimate in the z direction (m/s).
+   */
+  void SetVelOdom(double v_x, double v_y, double v_z);
+  /**
+   * Set the aiding velocity estimate in the user-defined local coordinate frame.
+   * @param v_x Velocity estimate in the x direction (m/s).
+   * @param v_y Velocity estimate in the y direction (m/s).
+   * @param v_z Velocity estimate in the z direction (m/s).
+   */
+  void SetVelLocal(double v_x, double v_y, double v_z);
   /**
    * Set the aiding velocity variance estimate in the local NEU coordinate frame.
-   * @param varN Velocity variance estimate in the North direction (m/s).
-   * @param varE Velocity variance estimate in the East direction (m/s).
-   * @param varU Velocity variance estimate in the Up direction (m/s).
+   * @param v_n Velocity variance estimate in the North direction (m/s)^2.
+   * @param v_e Velocity variance estimate in the East direction (m/s)^2.
+   * @param v_u Velocity variance estimate in the Up direction (m/s)^2.
    */
-  void SetVelNeuVar(double varN, double varE, double varU);
+  void SetVelNeuVar(double v_n, double v_e, double v_u);
+  /**
+   * Set the aiding velocity variance estimate in the local NEU coordinate frame.
+   * @param v_x Velocity variance estimate in the x direction (m/s)^2.
+   * @param v_y Velocity variance estimate in the y direction (m/s)^2.
+   * @param v_z Velocity variance estimate in the z direction (m/s)^2.
+   */
+  void SetVelOdomVar(double v_x, double v_y, double v_z);
+  /**
+   * Set the aiding velocity variance estimate in the local NEU coordinate frame.
+   * @param v_x Velocity variance estimate in the x direction (m/s)^2.
+   * @param v_y Velocity variance estimate in the y direction (m/s)^2.
+   * @param v_z Velocity variance estimate in the z direction (m/s)^2.
+   */
+  void SetVelLocalVar(double v_x, double v_y, double v_z);
   /**
    * Set lever arm from the INS to the aiding source. This lever arm will not be
    * optimised by the Kalman Filter.

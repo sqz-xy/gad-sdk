@@ -278,9 +278,16 @@ void GadPosition::SetWgs84Pos(double lat, double lon, double alt)
   this->SetDataVal(lat,lon,alt);
 }
 
-void GadPosition::SetWgs84PosVar(double varLat, double varLon, double varAlt)
+void GadPosition::SetLocalPos(double x, double y, double z)
 {
-  this->SetDataVarDiag(varLat,varLon,varAlt);
+  this->SetDataMode(0);
+  this->SetDataValType(POS_SYS_TYPE::POS_SYS_LOCAL);
+  this->SetDataVal(x,y,z);
+}
+
+void GadPosition::SetPosVar(double var_x, double var_y, double var_z)
+{
+  this->SetDataVarDiag(var_x,var_y,var_z);
 }
 
 void GadPosition::SetAidingLeverArmFixed(double x, double y, double z)

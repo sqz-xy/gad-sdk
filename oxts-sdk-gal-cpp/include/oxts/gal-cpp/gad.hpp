@@ -229,12 +229,21 @@ public:
    */
   void SetWgs84Pos(double lat, double lon, double alt);
   /**
-   * Set the variance aiding position in the WGS84 coordinate frame.
-   * @param varLat Variance of the Latitude position estimate (units).
-   * @param varLon Variance of the Longitude position estimate (units).
-   * @param varAlt Variance of the Altitude position estimate (units).
+   * Set the aiding position in the WGS84 coordinate frame.
+   * @param x Position in the x axis of the local frame (m).
+   * @param y Position in the y axis of the local frame (m).
+   * @param z Position in the z axis of the local frame (m).
+   * 
+   * @todo Verify WGS84 coordinate frame
    */
-  void SetWgs84PosVar(double varLat, double varLon, double varAlt); // Check these args
+  void SetLocalPos(double x, double y, double z);
+  /**
+   * Set the variance aiding position in the coordinate frame.
+   * @param var_x Variance of the position estimate (m^2).
+   * @param var_y Variance of the position estimate (m^2).
+   * @param var_z Variance of the position estimate (m^2).
+   */
+  void SetPosVar(double var_x, double var_y, double var_z); // Check these args
 
   /**
    * Set lever arm from the INS to the aiding source. This lever arm will not be

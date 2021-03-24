@@ -96,8 +96,9 @@ typedef enum
 
 typedef enum
 {
-   POS_SYS_VOID,         /** Position coord system. */
-   POS_SYS_WGS84,        /** Position, WGS84 - lat/lon/depth. */
+   POS_SYS_VOID,         
+   POS_SYS_WGS84,        /** WGS84 - lat/lon/depth */
+   POS_SYS_LOCAL,        /** User defined right-handed local coordinate system - x/y/z */
 } POS_SYS_TYPE;
 
 
@@ -107,7 +108,9 @@ typedef enum
 typedef enum
 {
    VEL_SYS_VOID,
-   VEL_SYS_NEU             /** North East Upwards. */
+   VEL_SYS_NEU,             /** North East Upwards */
+   VEL_SYS_ODO,             /** Aiding source frame - x/y/z */
+   VEL_SYS_LOCAL            /** User defined right-handed local coordinate system - x/y/z */
 } VEL_SYS_TYPE;
 
 //==============================================================================

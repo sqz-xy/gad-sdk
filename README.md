@@ -9,6 +9,13 @@ This project contains the OxTS GAD SDK, written in C++. This SDK is designed to 
 - Generic Aiding Feature Codes.
 - Ethernet connection to an OxTS INS, for real-time aiding.
 
+### Installing requirements on Linux
+
+```
+sudo apt-get install cmake
+sudo apt-get install libboost-all-dev
+```
+
 ## Getting Started
 
 Install the pre-built binaries from... (TBC). Will require some form of deployment.

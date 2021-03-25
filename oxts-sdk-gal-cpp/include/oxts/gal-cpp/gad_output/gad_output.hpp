@@ -1,11 +1,18 @@
 #ifndef GAD_OUTPUT_HPP
 #define GAD_OUTPUT_HPP
 
+
+/**
+ * Virtual interface class for different methods of outputting GAD.
+ */
 class GadOutput
 {
 private:
 
 public:
+  /**
+   * Output a GAD packet
+   */
   void virtual OutputPacket(unsigned char * packet, int packet_size) = 0;
 };
 

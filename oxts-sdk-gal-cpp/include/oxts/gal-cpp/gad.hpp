@@ -74,7 +74,6 @@ public:
 
 /**
  * Cpp wrapper class for C struct GEN_AIDING_DATA
- * 
  */
 class Gad 
 {
@@ -160,18 +159,30 @@ public:
   Gad& operator=(const Gad& g);
 
   // General Accessors
-  // streamId
+  /** Set Stream ID for this GAD packet */
   void SetStreamId(int id);
+  /** Get Stream ID for this GAD packet */
   int  GetStreamId();
 
   // Time accessors
+  /** Set Time Valid flag to false */
   void SetTimeInvalid();
+  /** Set Time Valid flag to true */
   void SetTimeValid();
-  // GPS
+  /** Set timestamp for this data 
+   * @param week GPS Week 
+   * @param secondsFromSunday Seconds from Midnight Sunday (s)
+   */
   void   SetGpsTime(double week, double secondsFromSunday);
+  /** Get the GPS Week value. Note that this function assumes that 
+   *  the time has been set in this format, there is no check. */
   double GetGpsWeek();
+  /** Get the Seconds from Sunday value. Note that this function assumes that 
+   *  the time has been set in this format, there is no check. */
   double GetGpsSecondsFromSunday();
-  // PPS
+  /** Set a PPS relative timestamp
+   * @param ns Time since PPS timestamp (nanoseconds)
+   */
   void   SetTimePpsRelative(double ns);
   double GetTimePpsRelative();
   /**
@@ -410,7 +421,6 @@ public:
    * @todo Clarify units
    */
   void SetWheelspeedVar(double varC);
-
   /**
    * Set lever arm from the INS to the aiding source. This lever arm will not be
    * optimised by the Kalman Filter.
@@ -468,10 +478,9 @@ public:
   void SetAtt(double heading, double pitch, double roll);
   /**
    * Set the estimated variance on the aiding attitude measurement.
-   * @param varH Variance estimate on the heading angle
-   * @param varP Variance estimate on the pitch angle
-   * @param varR Variance estimate on the roll angle
-   * @todo Confirm units.
+   * @param varH Variance estimate on the heading angle (deg)^2
+   * @param varP Variance estimate on the pitch angle (deg)^2
+   * @param varR Variance estimate on the roll angle (deg)^2
    */
   void SetAttVar(double varH, double varP, double varR);
 

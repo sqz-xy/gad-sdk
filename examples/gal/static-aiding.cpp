@@ -31,10 +31,10 @@ enum OUTPUT_TYPE
 
 int main(int argc, char * argv[])
 {
-  int sendPackets = 30; // Total number of packets to send
-  std::string unitIp = "192.168.25.22"; // Unit to send GAD to
-  std::string source_id = "out.gad";    // File to send GAD to
-  int output_type = OUTPUT_TYPE::UDP;   // Set output to UDP or CSV
+  int sendPackets       = 30; // Total number of packets to send
+  std::string unit_ip   = "192.168.25.22"; // Unit to send GAD to
+  std::string file_out = "out.gad";    // File to send GAD to
+  int output_type       = OUTPUT_TYPE::UDP;   // Set output to UDP or CSV
 
   //============================================================================
   // Construct the position aiding class with stream ID 129.
@@ -47,7 +47,7 @@ int main(int argc, char * argv[])
   // With no timestamp, the INS will timestamp the data upon arrival.
   gp.SetTimeVoid();
   // Set the lever arm between the aiding source and the IMU, in the IMU frame.
-  gp.SetAidingLeverArmFixed(0.0,0.0,0.1);
+  gp.SetAidingLeverArmFixed(0.5,0.5,1.0);
   gp.SetAidingLeverArmVar(0.1,0.1,0.1);
   //============================================================================
   // Construct the velocity aiding class with stream ID 130.
@@ -73,7 +73,7 @@ int main(int argc, char * argv[])
   // Set the time mode to Void
   ga.SetTimeVoid();
   // Set the aiding source -> IMU frame alignment with the frames aligned.
-  ga.SetAidingAlignmentOptimising(0.0,0.0,0.0);
+  ga.SetAidingAlignmentOptimising();
   // Set the variance on the alignment to 5.0 deg in HPR.
   ga.SetAidingAlignmentVar(5.0,5.0,5.0);
   //============================================================================
@@ -86,11 +86,11 @@ int main(int argc, char * argv[])
   {
     case OUTPUT_TYPE::UDP : 
       gh.SetEncoderToBin();
-      gh.SetOutputModeToUdp(unitIp);
+      gh.SetOutputModeToUdp(unit_ip);
       break;
     case OUTPUT_TYPE::CSV :
       gh.SetEncoderToCsv();
-      gh.SetOutputModeToFile(source_id);
+      gh.SetOutputModeToFile(file_out);
       break;
     default :
       std::cout << "Output type not known." << std::endl;

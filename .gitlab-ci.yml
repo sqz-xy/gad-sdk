@@ -31,6 +31,6 @@ pages:
   - sphinx-build -b html . public
   artifacts:
     paths:
-    - docs_doxygen/public
+    - docs_sphinx/public
   only:
   - master

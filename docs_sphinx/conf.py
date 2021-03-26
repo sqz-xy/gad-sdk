@@ -21,7 +21,7 @@ subprocess.call('doxygen Doxyfile.in', shell=True)
 
 # -- Project information -----------------------------------------------------
 
-project = 'OxtS C++ Generic Aiding SDK'
+project = 'OxTS C++ Generic Aiding SDK'
 copyright = '2021, OxTS'
 author = 'smccarthy'
 

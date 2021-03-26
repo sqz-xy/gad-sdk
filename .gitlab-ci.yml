@@ -29,8 +29,11 @@ pages:
   - pip3 install sphinx-sitemap
   - cd docs_sphinx
   - sphinx-build -b html . public
+  - cd ..
+  - mkdir public
+  - mv docs_sphinx/public/* public
   artifacts:
     paths:
-    - docs_sphinx/public
+    - public
   only:
   - master

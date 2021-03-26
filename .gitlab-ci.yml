@@ -1,23 +1,25 @@
-image: ubuntu-focal
+image: python:3.7-alpine
+
+before_script:
+- apk update
+- apk add doxygen
+## Uncomment the following line if you use graphviz dot graphs
+#- apk add ttf-freefont graphviz
 
 test:
   stage: test
   script:
-  - apt install python3-pip doxygen -y
   - pip install -U sphinx
-  - cd docs_sphinx
   - sphinx-build -b html . public
-  only:
-  - branches
-  except:
-  - master
+#  only:
+#  - branches
+#  except:
+#  - master
 
 pages:
-  stage: build
+  stage: deploy
   script:
-  - apt install python3-pip doxygen -y
   - pip install -U sphinx
-  - cd docs_sphinx
   - sphinx-build -b html . public
   artifacts:
     paths:

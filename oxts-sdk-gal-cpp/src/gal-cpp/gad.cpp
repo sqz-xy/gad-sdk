@@ -188,12 +188,12 @@ void Gad::SetTimeInvalid(){this->time_valid = 0;}
 void Gad::SetTimeValid()  {this->time_valid = 1;}
 
 // GPS
-void   Gad::SetGpsTime(double week, double secondsFromSunday)
+void   Gad::SetGpsTime(double week, double seconds_from_sunday)
 {
   this->SetTimeValid();
   this->time.SetMode(0);
   this->time.SetValType(TIME_SYS::TIME_GPS);
-  this->time.SetVal(week,secondsFromSunday, 0);
+  this->time.SetVal(week,seconds_from_sunday, 0);
 }
 double Gad::GetGpsWeek(){ return this->time.GetValX(); }
 double Gad::GetGpsSecondsFromSunday(){ return this->time.GetValY(); }
@@ -373,15 +373,15 @@ void GadVelocity::SetAidingLeverArmVar(double x, double y, double z)
 GadSpeed::GadSpeed(uint8_t stream_id) : Gad(stream_id, GEN_TYPE::GEN_SPEED){}
 
 // val
-void GadSpeed::SetSpeedFw(double sF)
+void GadSpeed::SetSpeedFw(double s_f)
 {
   this->SetDataMode(0);
   this->SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_FW_VEL);
-  this->SetDataVal(sF,0.0,0.0); /** @todo Implement with time interval */
+  this->SetDataVal(s_f,0.0,0.0); /** @todo Implement with time interval */
 }
-void GadSpeed::SetSpeedFwVar(double varS)
+void GadSpeed::SetSpeedFwVar(double v_s)
 {
-  this->SetDataVarSingle(varS);
+  this->SetDataVarSingle(v_s);
 }
 void GadSpeed::SetWheelspeedCount(double count, double period)
 {
@@ -389,9 +389,9 @@ void GadSpeed::SetWheelspeedCount(double count, double period)
   this->SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_FW_VEL);
   this->SetDataVal(count,period,0.0); /** @todo Implement with time interval */
 }
-void GadSpeed::SetWheelspeedVar(double varC)
+void GadSpeed::SetWheelspeedVar(double v_c)
 {
-  this->SetDataVarSingle(varC);
+  this->SetDataVarSingle(v_c);
 }
 
 // loc 
@@ -420,9 +420,9 @@ void GadAttitude::SetAtt(double heading, double pitch, double roll)
   this->SetDataValType(ATT_SYS_TYPE::ATT_SYS_HPR);
   this->SetDataVal(heading,pitch,roll); 
 }
-void GadAttitude::SetAttVar(double varH, double varP, double varR)
+void GadAttitude::SetAttVar(double v_h, double v_p, double v_r)
 {
-  this->SetDataVarDiag(varH,varP,varR);
+  this->SetDataVarDiag(v_h,v_p,v_r);
 }
 
 // loc 

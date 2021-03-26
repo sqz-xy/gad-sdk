@@ -171,9 +171,9 @@ public:
   void SetTimeValid();
   /** Set timestamp for this data 
    * @param week GPS Week 
-   * @param secondsFromSunday Seconds from Midnight Sunday (s)
+   * @param seconds_from_sunday Seconds from Midnight Sunday (s)
    */
-  void   SetGpsTime(double week, double secondsFromSunday);
+  void   SetGpsTime(double week, double seconds_from_sunday);
   /** Get the GPS Week value. Note that this function assumes that 
    *  the time has been set in this format, there is no check. */
   double GetGpsWeek();
@@ -399,9 +399,9 @@ public:
   /**
    * Set estimated variance on the forward speed aiding measurement. 
    * 
-   * @param varS Forward speed estimate in the vehicle frame (units).
+   * @param v_s Forward speed estimate in the vehicle frame (units).
    */
-  void SetSpeedFwVar(double varS);
+  void SetSpeedFwVar(double v_s);
   /**
    * Set the pulse count measurement from a wheelspeed encoder. 
    * 
@@ -415,10 +415,10 @@ public:
   /**
    * Set the estimated variance on the wheelspeed pulse count. 
    * 
-   * @param varC Estimated variance (pulses).
+   * @param v_c Estimated variance (pulses).
    * @todo Clarify units
    */
-  void SetWheelspeedVar(double varC);
+  void SetWheelspeedVar(double v_c);
   /**
    * Set lever arm from the INS to the aiding source. This lever arm will not be
    * optimised by the Kalman Filter.
@@ -474,11 +474,11 @@ public:
   void SetAtt(double heading, double pitch, double roll);
   /**
    * Set the estimated variance on the aiding attitude measurement.
-   * @param varH Variance estimate on the heading angle (deg)^2
-   * @param varP Variance estimate on the pitch angle (deg)^2
-   * @param varR Variance estimate on the roll angle (deg)^2
+   * @param v_h Variance estimate on the heading angle (deg)^2
+   * @param v_p Variance estimate on the pitch angle (deg)^2
+   * @param v_r Variance estimate on the roll angle (deg)^2
    */
-  void SetAttVar(double varH, double varP, double varR);
+  void SetAttVar(double v_h, double v_p, double v_r);
   /**
    * Set the angles which specify the rotation required to align the IMU and 
    * aiding sensor frames. This alignment will not be optimised by the INS.

@@ -30,12 +30,19 @@ public:
   /** Set the output encoder to csv. */
   void SetEncoderToCsv() { this->encoder_.reset(new GadEncoderCsv()); }
 
-  /** Set Generic Aiding output to file */
+  /** Set Generic Aiding output to file 
+   *  @param file_path Absolute path to the file to output the data to. Will be 
+   *  created if it does not already exist.
+  */
   void SetOutputModeToFile(std::string file_path) { this->output_.reset(new GadOutputFile(file_path));}
-  /** Set Generic Aiding output to UDP */
+  /** Set Generic Aiding output to UDP.
+   *  @param ip The IPv4 address of the OxTS INS to send the data to.
+   */
   void SetOutputModeToUdp(std::string ip)  { this->output_.reset(new GadOutputUdp(ip)); }
 
-  /** Send packet */
+  /** Send packet via pre-configured output method.
+   *  @param g Generic Aiding data to be encoded and sent 
+  */
   void SendPacket(Gad g);
 };
 

@@ -20,17 +20,17 @@ test:
 #  except:
 #  - master
 
-# pages:
-#   stage: deploy
-#   script:
-#   - pip install -U sphinx
-#   - pip3 install sphinx-rtd-theme
-#   - pip3 install breathe
-#   - pip3 install sphinx-sitemap
-#   - cd docs_sphinx
-#   - make html
-#   artifacts:
-#     paths:
-#     - public
-#   only:
-#   - master
+pages:
+  stage: deploy
+  script:
+  - pip install -U sphinx
+  - pip3 install sphinx-rtd-theme
+  - pip3 install breathe
+  - pip3 install sphinx-sitemap
+  - cd docs_sphinx
+  - sphinx-build -b html . public
+  artifacts:
+    paths:
+    - public
+  only:
+  - master

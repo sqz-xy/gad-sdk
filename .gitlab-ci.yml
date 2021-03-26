@@ -14,7 +14,7 @@ test:
   - pip3 install breathe
   - pip3 install sphinx-sitemap
   - cd docs_sphinx
-  - make html
+  - sphinx-build -b html . public
 #  only:
 #  - branches
 #  except:

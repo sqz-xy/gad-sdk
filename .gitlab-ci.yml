@@ -21,7 +21,7 @@ pages:
   script:
   - pip install -U sphinx
   - cd docs_sphinx
-  - sphinx-build -b html . public
+  - make html
   artifacts:
     paths:
     - public

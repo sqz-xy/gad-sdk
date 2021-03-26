@@ -24,4 +24,8 @@ Table of Contents
 
    self
    gal-cpp/index
+   longform/generic-aiding-position-updates.rst
+   longform/generic-aiding-velocity-updates.rst
+   longform/defining-a-local-reference-frame.rst
+   longform/example-static-aiding.rst
 

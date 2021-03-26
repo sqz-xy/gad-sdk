@@ -13,9 +13,9 @@ private:
 
 public:
   /** Constructor */
-  GadOutputFile(std::string file_path) : source_id(file_path)
+  GadOutputFile(std::string file_path) : file_out(file_path)
   {
-    this->file_ptr  = fopen(source_id.c_str(), "w+");
+    this->file_ptr  = fopen(file_out.c_str(), "w+");
   }
   /** Destructor */
   ~GadOutputFile()
@@ -30,7 +30,7 @@ public:
     fflush(file_ptr);
   }
 
-  std::string source_id; /** Path to file (include .gad extension) */
+  std::string file_out; /** Path to file (include .gad extension) */
   FILE * file_ptr;       /** Pointer to file handler object */
 };
 

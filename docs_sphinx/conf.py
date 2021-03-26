@@ -89,7 +89,7 @@ html_static_path = ['_static']
 # -- Breathe configuration -------------------------------------------------
 
 breathe_projects = {
-	"OxTS C++ Generic Aiding SDK": "_build/xml/"
+	"OxTS C++ Generic Aiding SDK": "public/xml/"
 }
 breathe_default_project = "OxTS C++ Generic Aiding SDK"
 breathe_default_members = ('members', 'undoc-members')

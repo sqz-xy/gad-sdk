@@ -359,10 +359,10 @@ void GadVelocity::SetAidingLeverArmFixed(double x, double y, double z)
   this->SetLocMode(LOC_SYS::LOC_FIXED);
   this->SetLocVal(x,y,z);
 }
-void GadVelocity::SetAidingLeverArmOptimising(double x, double y, double z)
+void GadVelocity::SetAidingLeverArmOptimising()
 {
   this->SetLocMode(LOC_SYS::LOC_KF);
-  this->SetLocVal(x,y,z);
+  this->SetLocVal(0.0,0.0,0.0);
 }
 void GadVelocity::SetAidingLeverArmVar(double x, double y, double z)
 {
@@ -400,10 +400,10 @@ void GadSpeed::SetAidingLeverArmFixed(double x, double y, double z)
   this->SetLocMode(LOC_SYS::LOC_FIXED);
   this->SetLocVal(x,y,z);
 }
-void GadSpeed::SetAidingLeverArmOptimising(double x, double y, double z)
+void GadSpeed::SetAidingLeverArmOptimising()
 {
   this->SetLocMode(LOC_SYS::LOC_KF);
-  this->SetLocVal(x,y,z);
+  this->SetLocVal(0.0,0.0,0.0);
 }
 void GadSpeed::SetAidingLeverArmVar(double x, double y, double z)
 {
@@ -431,10 +431,10 @@ void GadAttitude::SetAidingAlignmentFixed(double x, double y, double z)
   this->SetLocMode(LOC_SYS::LOC_FIXED);
   this->SetLocVal(x,y,z);
 }
-void GadAttitude::SetAidingAlignmentOptimising(double x, double y, double z)
+void GadAttitude::SetAidingAlignmentOptimising()
 {
   this->SetLocMode(LOC_SYS::LOC_KF);
-  this->SetLocVal(x,y,z);
+  this->SetLocVal(0.0,0.0,0.0);
 }
 void GadAttitude::SetAidingAlignmentVar(double x, double y, double z)
 {

@@ -357,14 +357,12 @@ public:
    */
   void SetAidingLeverArmFixed(double x, double y, double z);
   /**
-   * Set lever arm from the INS to the aiding source. This lever arm will be
-   * optimised by the Kalman Filter during navigation.
-   * 
-   * @param x Offset from INS to aiding source in the x axis of the IMU frame.
-   * @param y Offset from INS to aiding source in the y axis of the IMU frame.
-   * @param z Offset from INS to aiding source in the z axis of the IMU frame.
+   * Set lever arm from the INS to the aiding source to be taken from the .gap
+   * file. This lever arm will be optimised by the Kalman Filter during 
+   * navigation. Note that if using this, the GNSS antenna lever arm must be set
+   * in mobile.cfg.
    */
-  void SetAidingLeverArmOptimising(double x, double y, double z);
+  void SetAidingLeverArmOptimising();
   /** 
    * Indicate that lever arm will be configured in the configuration file on 
    * the INS.
@@ -431,14 +429,12 @@ public:
    */
   void SetAidingLeverArmFixed(double x, double y, double z);
   /**
-   * Set lever arm from the INS to the aiding source. This lever arm will be
-   * optimised by the Kalman Filter during navigation.
-   * 
-   * @param x Offset from INS to aiding source in the x axis of the IMU frame.
-   * @param y Offset from INS to aiding source in the y axis of the IMU frame.
-   * @param z Offset from INS to aiding source in the z axis of the IMU frame.
+   * Set lever arm from the INS to the aiding source to be taken from the .gap
+   * file. This lever arm will be optimised by the Kalman Filter during 
+   * navigation. Note that if using this, the GNSS antenna lever arm must be set
+   * in mobile.cfg.
    */
-  void SetAidingLeverArmOptimising(double x, double y, double z);
+  void SetAidingLeverArmOptimising();
   /** 
    * Indicate that lever arm will be configured in the configuration file on 
    * the INS.
@@ -483,8 +479,6 @@ public:
    * @param varR Variance estimate on the roll angle (deg)^2
    */
   void SetAttVar(double varH, double varP, double varR);
-
-  // loc 
   /**
    * Set the angles which specify the rotation required to align the IMU and 
    * aiding sensor frames. This alignment will not be optimised by the INS.
@@ -494,13 +488,10 @@ public:
    */
   void SetAidingAlignmentFixed(double x, double y, double z);
   /**
-   * Set the angles which specify the rotation required to align the IMU and 
-   * aiding sensor frames. This alignment will be optimised by the INS.
-   * @param x
-   * @param y
-   * @param z
+   * Set alignment to be optimised by the INS. The alignment values will be read
+   * from the mobile.att file, so are not set here.
    */
-  void SetAidingAlignmentOptimising(double x, double y, double z);
+  void SetAidingAlignmentOptimising();
   /**
    * Set the estimated variance (error) on the alignment angles between the IMU 
    * and aiding sensor frames.

@@ -21,9 +21,9 @@ subprocess.call('doxygen Doxyfile.in', shell=True)
 
 # -- Project information -----------------------------------------------------
 
-project = 'C++ Sphinx Doxygen Breathe'
-copyright = '2020, me'
-author = 'me'
+project = 'OxtS C++ Generic Aiding SDK'
+copyright = '2021, OxTS'
+author = 'smccarthy'
 
 
 # -- General configuration ---------------------------------------------------

@@ -1,6 +1,6 @@
 #ifndef GAD_HPP
 #define GAD_HPP
-/*! \file gad.hpp */
+/*! @file gad.hpp */
 
 extern "C"
 {

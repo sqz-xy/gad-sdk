@@ -3,7 +3,7 @@ image: python:3.7-alpine
 test:
   stage: test
   script:
-  - apt-get install doxygen
+  - apt install python3-pip doxygen -y
   - pip install -U sphinx
   - cd docs_sphinx
   - sphinx-build -b html . public
@@ -13,9 +13,9 @@ test:
   - master
 
 pages:
-  stage: test
+  stage: build
   script:
-  - apt-get install doxygen
+  - apt install python3-pip doxygen -y
   - pip install -U sphinx
   - cd docs_sphinx
   - sphinx-build -b html . public

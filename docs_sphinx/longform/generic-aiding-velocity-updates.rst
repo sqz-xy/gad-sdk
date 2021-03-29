@@ -1,9 +1,9 @@
+.. _gadvelocitypage:
+
 Velocity
 ********
 
 The GA interface allows users to send a number of measurement updates to an OxTS INS from external devices/ sensors, including velocity estimates. Velocity can currently be accepted in a few different coordinate frames.
-
-[toc]
 
 Aiding Frames
 =============
@@ -15,7 +15,7 @@ North, East, Up frame
 
 The NEU frame is the simplest way to provide velocity aiding to the INS, since it requires no other configuration. Note that this is a left-handed coordinate system.
 
- Velocity measurements in this frame are expected in $m/s$. 
+ Velocity measurements in this frame are expected in :math:`m/s`. 
 
 User-defined Local frame 
 ------------------------

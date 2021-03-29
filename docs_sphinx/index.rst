@@ -24,7 +24,8 @@ Table of Contents
    :maxdepth: 2
    :caption: Introduction to Generic Aiding
 
-   longform/intro.rst
+   longform/intro
+   longform/estimating-errors
 
 
 .. toctree::

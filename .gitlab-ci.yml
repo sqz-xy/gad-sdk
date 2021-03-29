@@ -15,10 +15,10 @@ test:
   - pip3 install sphinx-sitemap
   - cd docs_sphinx
   - sphinx-build -b html . public
-#  only:
-#  - branches
-#  except:
-#  - master
+  only:
+  - branches
+  except:
+  - master
 
 pages:
   stage: deploy

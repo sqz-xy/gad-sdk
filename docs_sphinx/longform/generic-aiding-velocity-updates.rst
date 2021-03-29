@@ -1,5 +1,5 @@
-Generic Aiding Velocity
-#######################
+Velocity
+********
 
 The GA interface allows users to send a number of measurement updates to an OxTS INS from external devices/ sensors, including velocity estimates. Velocity can currently be accepted in a few different coordinate frames.
 
@@ -22,44 +22,47 @@ User-defined Local frame
 
 Velocity aiding supports a user-defined local frame. More information on how to define the frame itself can be found on the relevant page.
 
-Velocity measurements in this frame are expected in $m/s$. 
+Velocity measurements in this frame are expected in :math:`m/s` . 
 
 Odometry frame (beta)
 ---------------------
 
 For this aiding frame, data is expected in the frame of an odometry sensor fixed to the vehicle. In order to use this frame, the transformation between the sensor and the INS must be specified in the INS configuration. This can be done with advanced commands in NAVconfig or in the mobile.cfg file directly on the unit.
 
-> -vo_angles[yaw]\_[pitch]\_[roll]
->
-> -vo_point[x]\_[y]\_[z]
+.. code-block::
 
-The `-vo_angle` option sets the orientation of the sensor frame with respect to the IMU frame.  The angles are defined intrinsically, following the Tait-Bryan Z<sub>1</sub>Y<sub>2</sub> X<sub>3</sub> convention.
+   -vo_angles[yaw]_[pitch]_[roll]
+   -vo_point[x]_[y]_[z]
 
-The `-vo_point` option specifies the lever arm :math: `(x,y,z)`. This defines the translation from the IMU to the aiding sensor, in the IMU frame. 
+The `-vo_angle` option sets the orientation of the sensor frame with respect to the IMU frame.  The angles are defined intrinsically, following the Tait-Bryan :math:`Z_1 Y_2 X_3` convention.
+
+The `-vo_point` option specifies the lever arm :math:`(x,y,z)`. This defines the translation from the IMU to the aiding sensor, in the IMU frame. 
 
 Example
-=======
+^^^^^^^
 
 Defining the lever arm in the IMU frame is relatively intuitive, but finding the angles of rotation can be less so for those who have not done it before. Hence, we provide an example.
 
 Say we are using a LiDAR as our odometry source, and we want to define the YPR angles.
 
-<img src=".\assets\velocity-odom-frame-rotation-georef.gif" width="300px"/>
+.. image:: assets/velocity-odom-frame-rotation-georef.gif
 
 We can do this by most intuitively by starting with the LiDAR frame and rotating it until it aligns with the IMU frame. This is shown in the diagram below:
 
-![velocity-odom-frame-rotation](.\assets\velocity-odom-frame-rotation.gif)
+.. image:: assets/velocity-odom-frame-rotation.gif
 
 Once we have these, the configuration option can be added:
 
-> -vo_angles-90.0_180.0_0.0
+.. code-block::
+
+   -vo_angles-90.0_180.0_0.0
 
 Covariance matrix
 =================
 
 All aiding provided to the INS must come with a covariance matrix. This is necessary to give the Kalman Filter some indication of confidence in the data being provided, which it can then use to inform its decision to use / reject the data.
 
-For velocity aiding, the values in covariance matrices are currently expected with units $(m/s)^2$. For example, a covariance matrix where motion in all axes is found to be (or assumed to be) independent might look like this:
+For velocity aiding, the values in covariance matrices are currently expected with units :math:`(m/s)^2`. For example, a covariance matrix where motion in all axes is found to be (or assumed to be) independent might look like this:
 
 .. math::
 
@@ -79,4 +82,4 @@ This matrix shows that
 Lever Arm
 =========
 
-Velocity measurements must be provided with a lever arm :math: `(x,y,z)` which defines the translation from the IMU to the aiding sensor, in the IMU frame. The exception to this rule is measurements in the odometry frame.  
+Velocity measurements must be provided with a lever arm :math:`(x,y,z)` which defines the translation from the IMU to the aiding sensor, in the IMU frame. The exception to this rule is measurements in the odometry frame.  

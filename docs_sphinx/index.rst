@@ -18,14 +18,42 @@ Indices and tables
 * :ref:`search`
 
 Table of Contents
-^^^^^^^^^^^^^^^^^
+=================
+
 .. toctree::
    :maxdepth: 2
+   :caption: Introduction to Generic Aiding
 
-   self
+   longform/intro.rst
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Aiding types
+
+   longform/generic-aiding-position-updates
+   longform/generic-aiding-velocity-updates
+   longform/generic-aiding-attitude-updates
+   longform/generic-aiding-speed-updates
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Examples
+
+   longform/example-static-aiding
+
+
+.. toctree:: 
+   :maxdepth: 2
+   :caption: Additional Material
+
+   longform/defining-a-local-reference-frame
+   longform/gad-files
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: API
+
    gal-cpp/index
-   longform/generic-aiding-position-updates.rst
-   longform/generic-aiding-velocity-updates.rst
-   longform/defining-a-local-reference-frame.rst
-   longform/example-static-aiding.rst
-

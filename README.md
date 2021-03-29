@@ -42,7 +42,6 @@ This will build the SDK and install it to your machine. Once this is complete,
 other CMake projects on the machine can link to the libraries using:
 
 ```
-
 find_package(oxts-sdk-gal-cpp REQUIRED)
 
 target_link_libraries(${PROJECT_NAME} 
@@ -63,6 +62,23 @@ The CMakeLists.txt file in the root of the repository contains some options for 
 |OXTS_SDK_BUILD_DOCS|Build SDK documentation.| OFF |
 |OXTS_SDK_BUILD_EXAMPLES|Enable examples targets.| ON |
 |OXTS_SDK_DISABLE_BOOST|Use Boost library when building. Note that not using boost will limit UDP functionality, which will need to be replaced by the user in order to send GAD to an INS.| OFF |
+
+### Building the docs
+
+The documentation for this project is generated using a few tools: Doxygen, Breathe, and Sphinx. 
+
+1. Install requirements (python 3.7 also required):
+```
+  pip install -U sphinx
+  pip3 install sphinx-rtd-theme
+  pip3 install sphinx-sitemap
+  pip3 install breathe
+
+```
+2. Navigate to the `docs_sphinx` directory and run the command:
+```
+  sphinx-build -b html . public
+```
 
 ## Examples
 

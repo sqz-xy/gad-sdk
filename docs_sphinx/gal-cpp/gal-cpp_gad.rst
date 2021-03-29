@@ -1,12 +1,40 @@
-.. _gal-cpp_gad:
+Data
+****
 
 Gad
 ===
-.. doxygenfile:: oxts/gal-cpp/gad.hpp
+.. doxygenclass:: OxTS::Gad
    :project: OxTS C++ Generic Aiding SDK
+   :members:
 
 
-#GadHandler
-#==========
-#.. doxygenfile:: oxts/gal-cpp/gad_handler.hpp 
-#   :project: OxTS C++ Generic Aiding SDK
+GadPosition
+===========
+.. doxygenclass:: OxTS::GadPosition
+   :project: OxTS C++ Generic Aiding SDK
+   :members:
+
+GadVelocity
+===========
+.. doxygenclass:: OxTS::GadVelocity
+   :project: OxTS C++ Generic Aiding SDK
+   :members:
+
+GadAttitude
+===========
+.. doxygenclass:: OxTS::GadAttitude
+   :project: OxTS C++ Generic Aiding SDK
+   :members:
+
+GadSpeed
+========
+.. doxygenclass:: OxTS::GadSpeed
+   :project: OxTS C++ Generic Aiding SDK
+   :members:
+
+
+GadHandler
+**********
+.. doxygenclass:: OxTS::GadHandler
+   :project: OxTS C++ Generic Aiding SDK
+   :members:

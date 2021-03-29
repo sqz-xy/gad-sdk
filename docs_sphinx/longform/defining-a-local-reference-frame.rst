@@ -15,7 +15,7 @@ This local frame is defined by two components:
 
 - **Translation**: (Lat, Long, Alt) in the WGS84 global frame. This sets the origin of the local coordinate frame in the global frame.
 
-- **Rotation**: (Yaw, Pitch, Roll) angles relative to the North, East, Down local coordinate frame. These angles follow the Tait-Bryan Z<sub>1</sub>Y<sub>2</sub> X<sub>3</sub> convention with angles defined extrinsically. For more information see [here][1]. The rotation matrix is constructed from these values using the following formula:
+- **Rotation**: (Yaw, Pitch, Roll) angles relative to the North, East, Down local coordinate frame. These angles follow the Tait-Bryan :math:`Z_1 Y_2 X_3` convention with angles defined extrinsically. For more information see [here][1]. The rotation matrix is constructed from these values using the following formula:
 
 .. math::
 
@@ -29,11 +29,13 @@ This local frame is defined by two components:
 
 To make use of the local frame, the user must define the local coordinate frame in the configuration of the INS. Doing so requires the advanced commands:
 
-> -gad\_lrf[lrf_id]\_[lat]\_[lon]\_[alt]\_[yaw]\_[pitch]\_[roll]
->
-> -gad\_lrf\_id[stream_id]\_[lrf_id]
+.. code-block::
 
-Angles are expected in degrees. The lrf\_id is a unique identifier for each local reference frame. Up to 32 reference frames can be defined in this way. Once the local refence frame has been defined, it must be associated to the stream ID of the relevant aiding so that the INS knows which local reference frame to use for a particular aiding source.
+   -gad_lrf[lrf_id]_[lat]_[lon]_[alt]_[yaw]_[pitch]_[roll]
+   -gad_lrf_id[stream_id]_[lrf_id]
+
+
+Angles are expected in degrees. The `lrf_id` is a unique identifier for each local reference frame. Up to 32 reference frames can be defined in this way. Once the local refence frame has been defined, it must be associated to the stream ID of the relevant aiding so that the INS knows which local reference frame to use for a particular aiding source.
 
 Note that this aiding type only supports right-handed coordinate systems.
 
@@ -42,18 +44,22 @@ Example
 
 As an example, we define the rotation between the East, North, Up (ENU) local reference frame and North, East, Down (NED). We start with the NED frame and rotate around the Z axis, then Y, then X to align it to ENU. This will provide the correct angles for Yaw, Pitch, and Roll respectively.
 
-![Local reference rotation example](.\assets\Local reference rotation example.gif)
+.. image:: assets/local-reference-rotation-example.gif
 
-From the above diagram, we can see that the required rotations are -90&deg; around the z axis, followed by 180&deg; around the y axis. No rotation is required around the x axis. The advanced command is then:
+From the above diagram, we can see that the required rotations are :math:`-90^{\circ}` around the z axis, followed by 180&deg; around the y axis. No rotation is required around the x axis. The advanced command is then:
 
-> -gad\_lrf[lrf_id]\_[lat]\_[lon]\_[alt]\_-90.0\_180.0\_0.0
+.. code-block::
+
+   -gad_lrf[lrf_id]_[lat]_[lon]_[alt]_-90.0_180.0_0.0
 
 The Latitude, Longitude, and Altitude are independent of the orientation of the local reference frame. They will need to be determined based on the location of the origin of the local frame on the Earth.
 
-A simple way to verify whether the rotation has been defined correctly is to create the rotation matrix from the YPR angles using ($\ref{TaitBryanMatrix}$) and apply it to a dummy point $p_{user}$ in the user-defined local frame.
-$$
-Rp_{user} = p_{ned}
-$$
+A simple way to verify whether the rotation has been defined correctly is to create the rotation matrix from the YPR angles using ($\ref{TaitBryanMatrix}$) and apply it to a dummy point :math:`p_{user}` in the user-defined local frame.
+
+.. math::
+
+   Rp_{user} = p_{ned}
+
 
 For most rotations, it is clear whether this point is in the correct place in the NED frame.
 

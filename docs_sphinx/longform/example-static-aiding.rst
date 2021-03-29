@@ -1,4 +1,4 @@
-Example - Static Aiding
+Static Aiding
 #######################
 
 The simplest example of Generic Aiding comes in the form of static aiding. The full source code for this example can be found in `/examples/gal/static-aiding.cpp`.
@@ -10,7 +10,6 @@ Recommended prior reading:
 - Building the SDK (README.md)
 - Intro to Generic Aiding (TBC)
 
-[toc]
 
 Requirements
 ============

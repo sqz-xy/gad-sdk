@@ -1,0 +1,4 @@
+﻿Option,X,Description
+-gad_csv_output_X,off,.gad file output off
+,immediate,.gad file output on. Output data before the timestamp has been resolved to full GPS time. Can be useful for debugging.
+,resolved,.gad file output on. Output data once it has been resolved to full GPS time.

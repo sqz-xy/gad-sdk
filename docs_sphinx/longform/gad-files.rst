@@ -39,6 +39,14 @@ To use a .gad file, place it in the same directory as the RD file being
 processed. Then run either blended.exe or NAVsolve on the RD file and the .gad 
 file will be automatically picked up. 
 
+Points to note:
+- Up to 4 .gad files can be provided in this way.
+- The timestamps in the .gad file must be full GPS timestamps. Otherwise there 
+is no way to know the correct time to use the data.
+- Rows in the CSV correspond to individual data packets. Columns correspond to 
+different fields within a packet.
+
+
 .. _generatinggadfiles:
 
 Generating .gad files

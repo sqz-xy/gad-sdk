@@ -1,21 +1,30 @@
+.. _definingalocalreferenceframe:
+
 User-defined Local Frame (beta)
 ###############################
 
-Generic Aiding functionality allows users to define a local coordinate system for some measurement types. Currently supported types are:
+Generic Aiding functionality allows users to define a local coordinate system 
+for some measurement types. Currently supported types are:
 
 - Position
 - Velocity
 
-More detail on how to use the local frame with each update type can be found in the relevant document for the individual update type. 
+More detail on how to use the local frame with each update type can be found in 
+the relevant document for the individual update type. 
 
 Define the frame
 ================
 
 This local frame is defined by two components:
 
-- **Translation**: (Lat, Long, Alt) in the WGS84 global frame. This sets the origin of the local coordinate frame in the global frame.
+- **Translation**: (Lat, Long, Alt) in the WGS84 global frame. This sets the 
+- origin of the local coordinate frame in the global frame.
 
-- **Rotation**: (Yaw, Pitch, Roll) angles relative to the North, East, Down local coordinate frame. These angles follow the Tait-Bryan :math:`Z_1 Y_2 X_3` convention with angles defined extrinsically. For more information see [here][1]. The rotation matrix is constructed from these values using the following formula:
+- **Rotation**: (Yaw, Pitch, Roll) angles relative to the North, East, Down 
+  local coordinate frame. These angles follow the Tait-Bryan 
+  :math:`Z_1 Y_2 X_3` convention with angles defined extrinsically. For more 
+  information see [here][1]. The rotation matrix is constructed from these 
+  values using the following formula:
 
 .. math::
 
@@ -27,7 +36,8 @@ This local frame is defined by two components:
    \end{bmatrix}
    \label{TaitBryanMatrix}
 
-To make use of the local frame, the user must define the local coordinate frame in the configuration of the INS. Doing so requires the advanced commands:
+To make use of the local frame, the user must define the local coordinate frame 
+in the configuration of the INS. Doing so requires the advanced commands:
 
 .. code-block::
 
@@ -35,26 +45,39 @@ To make use of the local frame, the user must define the local coordinate frame 
    -gad_lrf_id[stream_id]_[lrf_id]
 
 
-Angles are expected in degrees. The `lrf_id` is a unique identifier for each local reference frame. Up to 32 reference frames can be defined in this way. Once the local refence frame has been defined, it must be associated to the stream ID of the relevant aiding so that the INS knows which local reference frame to use for a particular aiding source.
+Angles are expected in degrees. The `lrf_id` is a unique identifier for each 
+local reference frame. Up to 32 reference frames can be defined in this way. 
+Once the local refence frame has been defined, it must be associated to the 
+stream ID of the relevant aiding so that the INS knows which local reference 
+frame to use for a particular aiding source.
 
 Note that this aiding type only supports right-handed coordinate systems.
 
 Example
 =======
 
-As an example, we define the rotation between the East, North, Up (ENU) local reference frame and North, East, Down (NED). We start with the NED frame and rotate around the Z axis, then Y, then X to align it to ENU. This will provide the correct angles for Yaw, Pitch, and Roll respectively.
+As an example, we define the rotation between the East, North, Up (ENU) local 
+reference frame and North, East, Down (NED). We start with the NED frame and 
+rotate around the Z axis, then Y, then X to align it to ENU. This will provide 
+the correct angles for Yaw, Pitch, and Roll respectively.
 
 .. image:: assets/local-reference-rotation-example.gif
 
-From the above diagram, we can see that the required rotations are :math:`-90^{\circ}` around the z axis, followed by 180&deg; around the y axis. No rotation is required around the x axis. The advanced command is then:
+From the above diagram, we can see that the required rotations are 
+:math:`-90^{\circ}` around the z axis, followed by 180&deg; around the y axis. 
+No rotation is required around the x axis. The advanced command is then:
 
 .. code-block::
 
    -gad_lrf[lrf_id]_[lat]_[lon]_[alt]_-90.0_180.0_0.0
 
-The Latitude, Longitude, and Altitude are independent of the orientation of the local reference frame. They will need to be determined based on the location of the origin of the local frame on the Earth.
+The Latitude, Longitude, and Altitude are independent of the orientation of the 
+local reference frame. They will need to be determined based on the location of 
+the origin of the local frame on the Earth.
 
-A simple way to verify whether the rotation has been defined correctly is to create the rotation matrix from the YPR angles using ($\ref{TaitBryanMatrix}$) and apply it to a dummy point :math:`p_{user}` in the user-defined local frame.
+A simple way to verify whether the rotation has been defined correctly is to 
+create the rotation matrix from the YPR angles using ($\ref{TaitBryanMatrix}$) 
+and apply it to a dummy point :math:`p_{user}` in the user-defined local frame.
 
 .. math::
 

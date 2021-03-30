@@ -51,6 +51,8 @@ Table of Contents
 
    longform/defining-a-local-reference-frame
    longform/gad-files
+   longform/reassigning-traditional-source
+   longform/all-options
 
 
 .. toctree::

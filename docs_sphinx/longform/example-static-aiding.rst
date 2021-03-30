@@ -1,7 +1,7 @@
 .. _staticaidingexample:
 
 Static Aiding
-#######################
+#############
 
 The simplest example of Generic Aiding comes in the form of static aiding. The full source code for this example can be found in `/examples/gal/static-aiding.cpp`.
 
@@ -10,7 +10,7 @@ In this example, position, velocity, and attitude data is sent to an OxTS INS in
 Recommended prior reading:
 
 - Building the SDK (README.md)
-- Intro to Generic Aiding (TBC)
+- :ref:`introduction`
 
 
 Requirements
@@ -107,7 +107,7 @@ These variables determine some of the setup of the example, including the number
    gp.SetAidingLeverArmVar(0.1,0.1,0.1);
 
 
-This portion of code sets up the static Generic Aiding Position data. Each Generic Aiding type has its own `Gad_____` class which inherits from the `Gad` superclass. These subclasses are designed to simplify the process of setting data for users when working with the different data types. 
+This portion of code sets up the static Generic Aiding Position data. Each Generic Aiding type has its own `Gad<type>` class which inherits from the `Gad` superclass. These subclasses are designed to simplify the process of setting data for users when working with the different data types. 
 
 When initialising an instance of any `Gad` class, it is necessary to assign it a unique stream ID. These can take values in the range 128-254, and each one must be unique. 
 

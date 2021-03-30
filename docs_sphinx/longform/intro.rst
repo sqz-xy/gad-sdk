@@ -91,4 +91,9 @@ Indoor / GNSS denied
 * The phrasing of this will need some discussion because of UWB
 
 
+Next steps
+==========
+
+- :ref:`genericaidingrequirements`
+
 

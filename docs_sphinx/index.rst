@@ -25,6 +25,7 @@ Table of Contents
    :caption: Introduction to Generic Aiding
 
    longform/intro
+   longform/generic-aiding-requirements
    longform/estimating-errors
 
 

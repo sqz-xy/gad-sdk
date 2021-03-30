@@ -3,9 +3,12 @@
 Static Aiding
 #############
 
-The simplest example of Generic Aiding comes in the form of static aiding. The full source code for this example can be found in `/examples/gal/static-aiding.cpp`.
+The simplest example of Generic Aiding comes in the form of static aiding. The 
+full source code for this example can be found in 
+`/examples/gal/static-aiding.cpp`.
 
-In this example, position, velocity, and attitude data is sent to an OxTS INS in real time. 
+In this example, position, velocity, and attitude data is sent to an OxTS INS 
+in real time. 
 
 Recommended prior reading:
 
@@ -16,10 +19,13 @@ Recommended prior reading:
 Requirements
 ============
 
-- An OxTS INS with the relevant Generic Aiding Feature Codes enabled. If you are not sure whether you have the right Feature Codes or are unfamiliar with them, contact support@oxts.com.
+- An OxTS INS with the relevant Generic Aiding Feature Codes enabled. If you 
+  are not sure whether you have the right Feature Codes or are unfamiliar with 
+  them, contact support@oxts.com.
 - A PC, connected to the INS via ethernet.
+- The GAD SDK has been built on this machine / pre-built binaries have been 
+  downloaded (not currently available).
 
-- The GAD SDK has been built on this machine / pre-built binaries have been downloaded (not currently available).
 
 Method
 ======
@@ -29,8 +35,10 @@ How to run the executable.
 Linux 
 -----
 
-1. Navigate to the relevant directory in the build folder: `cd <build_dir>/examples/gal`.
-2. Run the executable: `./static-aiding-example`. This will begin sending Generic Aiding packets  
+1. Navigate to the relevant directory in the build folder: 
+   `cd <build_dir>/examples/gal`.
+2. Run the executable: `./static-aiding-example`. This will begin sending 
+   Generic Aiding packets.
 
 Windows
 -------
@@ -48,7 +56,10 @@ Here we run through the source code, explaining the purpose of each of the lines
    #include "oxts/gal-cpp/gad_handler.hpp"
 
 
-These are the two includes required for most users of Generic Aiding. `gad.hpp` contains the `Gad` class used to form the basis of all Generic Aiding Data. `gad_handler.hpp` contains the `GadHandler` class, which provides functionality to encode and send the data packets.
+These are the two includes required for most users of Generic Aiding. `gad.hpp` 
+contains the `Gad` class used to form the basis of all Generic Aiding Data. 
+`gad_handler.hpp` contains the `GadHandler` class, which provides functionality 
+to encode and send the data packets.
 
 .. code-block:: c++
 
@@ -72,7 +83,9 @@ These are the two includes required for most users of Generic Aiding. `gad.hpp` 
    } // OxTS
 
 
-This code is not exclusive to Generic Aiding. It is a basic implementation of a cross-platform sleep function, which will make the system wait a set period of time before continuing execution.
+This code is not exclusive to Generic Aiding. It is a basic implementation of a 
+cross-platform sleep function, which will make the system wait a set period of 
+time before continuing execution.
 
 .. code-block:: c++
 
@@ -83,7 +96,8 @@ This code is not exclusive to Generic Aiding. It is a basic implementation of a 
    };
 
 
-Extremely simple enum, to allow switching between CSV (file) and UDP (via ethernet) output in this example.
+Extremely simple enum, to allow switching between CSV (file) and UDP (via 
+ethernet) output in this example.
 
 Now we enter the `main()` function:
 
@@ -95,7 +109,10 @@ Now we enter the `main()` function:
    int output_type = OUTPUT_TYPE::UDP;
 
 
-These variables determine some of the setup of the example, including the number of packets to send, the IP address to send the packets to, the output file, and whether to output to CSV or UDP. Naturally, only one of the IP address and output file are actually used on a given run.  
+These variables determine some of the setup of the example, including the 
+number of packets to send, the IP address to send the packets to, the output 
+file, and whether to output to CSV or UDP. Naturally, only one of the IP 
+address and output file are actually used on a given run.  
 
 .. code-block:: c++
 
@@ -107,15 +124,31 @@ These variables determine some of the setup of the example, including the number
    gp.SetAidingLeverArmVar(0.1,0.1,0.1);
 
 
-This portion of code sets up the static Generic Aiding Position data. Each Generic Aiding type has its own `Gad<type>` class which inherits from the `Gad` superclass. These subclasses are designed to simplify the process of setting data for users when working with the different data types. 
+This portion of code sets up the static Generic Aiding Position data. Each 
+Generic Aiding type has its own `Gad<type>` class which inherits from the `Gad` 
+superclass. These subclasses are designed to simplify the process of setting 
+data for users when working with the different data types. 
 
-When initialising an instance of any `Gad` class, it is necessary to assign it a unique stream ID. These can take values in the range 128-254, and each one must be unique. 
+When initialising an instance of any `Gad` class, it is necessary to assign it 
+a unique stream ID. These can take values in the range 128-254, and each one 
+must be unique. 
 
-This particular position data is set in the WGS84 coordinate frame, using Latitude, Longitude, Altitude. The default values here correspond to the OxTS offices - users will need to change this to match their location. The covariance values are then set for this data. More information on setting covariance values for different data sources can be found ~~here~~ (link to come). 
+This particular position data is set in the WGS84 coordinate frame, using 
+Latitude, Longitude, Altitude. The default values here correspond to the OxTS 
+offices - users will need to change this to match their location. The 
+covariance values are then set for this data. More information on how 
+covariances should be estimated can be found in :ref:`estimatingerrors` . 
 
-The Generic Aiding interface allows a few ways to timestamp data being sent to an INS. In this example, we choose to send no timestamp, or "Void". This indicates to the INS that the data should be timestamped by the system upon receipt. 
+The Generic Aiding interface allows a few ways to timestamp data being sent to 
+an INS. In this example, we choose to send no timestamp, or "Void". This 
+indicates to the INS that the data should be timestamped by the system upon 
+receipt. 
 
-Finally, the lever arm and the variance on these values are set. The lever arm is the linear offset from the INS to the aiding device, in the IMU frame. The variance indicates how accurately these values are known. By setting the lever arm to "Fixed", it is indicated to the INS that this lever arm is not to be optimised. This is the most common setup.
+Finally, the lever arm and the variance on these values are set. The lever arm 
+is the linear offset from the INS to the aiding device, in the IMU frame. The 
+variance indicates how accurately these values are known. By setting the lever 
+arm to "Fixed", it is indicated to the INS that this lever arm is not to be 
+optimised. This is the most common setup.
 
 .. code-block:: c++
 
@@ -127,11 +160,16 @@ Finally, the lever arm and the variance on these values are set. The lever arm i
    gv.SetAidingLeverArmVar(0.1,0.1,0.1);
 
 
-Next, we set up the velocity data, which follows a similar pattern to the position data. This aiding data is given stream ID 130.
+Next, we set up the velocity data, which follows a similar pattern to the 
+position data. This aiding data is given stream ID 130.
 
-The velocity is set in the North, East, Up (left-handed) coordinate system. Since we are creating _static_ data, the velocity is zero in all axes. 
+The velocity is set in the North, East, Up (left-handed) coordinate system. 
+Since we are creating *static* data, the velocity is zero in all axes. 
 
- The lever arm for the velocity data is set to the same values as the position data for this example. This might suggest that the data is coming from the same source which is capable of calculating both types of measurement; perhaps a GNSS receiver. 
+The lever arm for the velocity data is set to the same values as the position 
+data for this example. This might suggest that the data is coming from the 
+same source which is capable of calculating both types of measurement; perhaps 
+a GNSS receiver. 
 
 .. code-block:: c++
 
@@ -143,12 +181,24 @@ The velocity is set in the North, East, Up (left-handed) coordinate system. Sinc
    ga.SetAidingAlignmentVar(5.0,5.0,5.0);
 
 
-The attitude data differs slightly from the two previous aiding types since it has an alignment, instead of a lever arm. This is due to the fact that when providing orientation aiding data to an INS, it is not the linear displacement between the aiding device and the INS which is relevant. Rather, it is the angular offsets between the two frames of reference which is important. In addition, this alignment is "Optimising" where the lever arms for the previous two datums were "Fixed". The "Optimising" tag indicates a couple of things to the INS:
+The attitude data differs slightly from the two previous aiding types since it 
+has an alignment, instead of a lever arm. This is due to the fact that when 
+providing orientation aiding data to an INS, it is not the linear displacement 
+between the aiding device and the INS which is relevant. Rather, it is the 
+angular offsets between the two frames of reference which is important. In 
+addition, this alignment is "Optimising" where the lever arms for the previous 
+two datums were "Fixed". The "Optimising" tag indicates a couple of things to 
+the INS:
 
-- This alignment should be taken from the mobile.att file on the INS. The accuracy for the alignment should be taken from mobile.ata
-- This alignment should be optimised by the INS during operation, in order to find the angles more accurately and therefore improve the quality of the aiding.
+- This alignment should be taken from the mobile.att file on the INS. The 
+  accuracy for the alignment should be taken from mobile.ata
+- This alignment should be optimised by the INS during operation, in order to 
+  find the angles more accurately and therefore improve the quality of the aiding.
 
-Note that when the alignment for a Generic Aiding attitude device is set to "Optimising", GNSS Dual Antenna cannot be used.
+.. note:: 
+   When the alignment for a Generic Aiding attitude device is set to 
+   "Optimising", alignment for GNSS Dual Antenna must be reassigned. For more 
+   information, see :ref:`reassigningtraditionaldatasources` .
 
 .. code-block:: c++
 
@@ -170,7 +220,9 @@ Note that when the alignment for a Generic Aiding attitude device is set to "Opt
    }
 
 
-This block of code initialises an instance of the `GadHandler` and sets it up to either send Generic Aiding data via UDP or to CSV file, based on the configuration option at the start of the file. 
+This block of code initialises an instance of the `GadHandler` and sets it up 
+to either send Generic Aiding data via UDP or to CSV file, based on the 
+configuration option at the start of the file. 
 
 .. code-block:: c++
 
@@ -187,12 +239,18 @@ This block of code initialises an instance of the `GadHandler` and sets it up to
    }
 
 
-This final code block creates a for loop in which the Generic Aiding data is encoded and sent to its configured destination (file or UDP). With  `OxTS::Sleep(100)`, the data will be sent at a rate of ~10Hz.
+This final code block creates a for loop in which the Generic Aiding data is 
+encoded and sent to its configured destination (file or UDP). With 
+`OxTS::Sleep(100)`, the data will be sent at a rate of ~10Hz.
 
 
 
-That's it! This is all of the code necessary to send the three main types of aiding to an OxTS INS. For many applications, three additional sources of aiding across three types of aiding is far more than is required. The kind of setup which would require this number of aiding sources would be one in which GNSS performance is heavily degraded.  
+That's it! This is all of the code necessary to send the three main types of 
+aiding to an OxTS INS. For many applications, three additional sources of 
+aiding across three types of aiding is more than is required. The kind 
+of setup which would require this number of aiding sources would be one in 
+which GNSS performance is heavily degraded.  
 
 Recommended next steps:
 
-- 
+- Read more on creating aiding for each type: :ref:`aidingtypestoc`.

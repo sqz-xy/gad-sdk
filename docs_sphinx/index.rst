@@ -31,6 +31,7 @@ Table of Contents
 .. toctree::
    :maxdepth: 2
    :caption: Aiding types
+   :name: aidingtypestoc
 
    longform/generic-aiding-position-updates
    longform/generic-aiding-velocity-updates
@@ -51,7 +52,7 @@ Table of Contents
 
    longform/defining-a-local-reference-frame
    longform/gad-files
-   longform/reassigning-traditional-source
+   longform/reassigning-traditional-sources
    longform/all-options
 
 

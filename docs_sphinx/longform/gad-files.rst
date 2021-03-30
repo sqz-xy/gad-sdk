@@ -30,6 +30,14 @@ There are two main purposes for this:
    :widths: 30, 30, 50 
    :header-rows: 1
 
+.. _usinggadfiles:
+
+Using .gad files
+****************
+
+To use a .gad file, place it in the same directory as the RD file being 
+processed. Then run either blended.exe or NAVsolve on the RD file and the .gad 
+file will be automatically picked up. 
 
 .. _generatinggadfiles:
 

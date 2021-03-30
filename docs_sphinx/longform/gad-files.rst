@@ -44,5 +44,8 @@ The .gad CSV file is undeniably large. Since this is primarily a debugging /
 experimentation tool, it has been designed for human readability more than 
 efficiency.
 
-
+.. csv-table:: CSV File Format
+   :file: assets/gad-file-format.csv
+   :widths: 30, 30, 30, 100 
+   :header-rows: 1
 

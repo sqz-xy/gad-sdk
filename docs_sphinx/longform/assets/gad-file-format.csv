@@ -1,0 +1,71 @@
+Col,Type,Value,Description
+0,ver,0,.gad file version. Currently must be 0.
+1,type,#,"The type of GAD for this packet e.g. position, velocity, heading, speed"
+2,stream_id,#,Stream ID of the packet. 129 - 254
+3,val_valid,0/1,Validity of the val struct
+4,mode,0,Currently unused. Set to 0.
+5,x_type,#,Format of measurement. e.g. For position: WGS84. Specified in Enum.
+6,x[0],#,Measurement value
+7,x[1],#,Measurement value
+8,x[2],#,Measurement value
+9,v_type,#,"Covariance matrix type (single value, diagonal matrix, half-matrix)"
+10,v[0],#,Covariance value
+11,v[1],#,Covariance value
+12,v[2],#,Covariance value
+13,v[3],#,Covariance value
+15,v[5],#,Covariance value
+16,time_valid,0/1,Validity of the time struct
+17,mode,0,Currently unused. Set to 0.
+18,x_type,#,"Type of time. e.g. Void, Latency, PPS relative, GPS. Specified in Enum."
+19,x[0],#,Measurement value
+20,x[1],#,Measurement value
+21,x[2],#,Measurement value
+22,v_type,0,Variance for time not currently supported (GEN_VAR_VOID)
+23,v[0],#,Covariance value
+24,v[1],#,Covariance value
+25,v[2],#,Covariance value
+26,v[3],#,Covariance value
+27,v[4],#,Covariance value
+28,v[5],#,Covariance value
+29,acq_valid,0/1,Validity of the acquisition timestamp.
+30,acq,#,Acquisition timestamp (ns). Not to be added by users for PP.
+31,loc_valid,0/1,Validity of the loc struct
+32,mode,#,"Lever arm: in packet, associated to KF, in config. Specified in Enum."
+33,x_type,0,Not currently used.
+34,x[0],#,Measurement value
+35,x[1],#,Measurement value
+36,x[2],#,Measurement value
+37,v_type,#,"Covariance matrix type (single value, diagonal matrix, half-matrix)"
+38,v[0],#,Covariance value
+39,v[1],#,Covariance value
+40,v[2],#,Covariance value
+41,v[3],#,Covariance value
+42,v[4],#,Covariance value
+43,v[5],#,Covariance value
+44,res1_valid,0,res1 not currently supported.
+45,mode,,
+46,x_type,,
+47,x[0],,
+48,x[1],,
+49,x[2],,
+50,v_type,,
+51,v[0],,
+52,v[1],,
+53,v[2],,
+54,v[3],,
+55,v[4],,
+56,v[5],,
+57,res2_valid,0,res2 not currently supported.
+58,mode,,
+59,x_type,,
+60,x[0],,
+61,x[1],,
+62,x[2],,
+63,v_type,,
+64,v[0],,
+65,v[1],,
+66,v[2],,
+67,v[3],,
+68,v[4],,
+69,v[5],,
+

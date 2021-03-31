@@ -6,9 +6,11 @@ Timestamping Data
 When sending aiding data to an OxTS, a decision must be made about how this 
 data is timestamped. 
 
+Some methods of timestamping are more complex than others, requiring 
+synchronisation of devices. These methods are often more accurate and robust. 
 
-Void (No timestamp)
-*******************
+Void
+****
 
 Void timestamps are the simplest to set up for users, since there is no need to 
 calculate any time or synchronise time between devices. When data is sent with 

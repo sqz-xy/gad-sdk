@@ -3,7 +3,7 @@
 Static Aiding
 #############
 
-The simplest example of Generic Aiding comes in the form of static aiding. The 
+This example of Generic Aiding is designed to be used with a stationary INS. The 
 full source code for this example can be found in 
 `/examples/gal/static-aiding.cpp`.
 

@@ -45,6 +45,7 @@ Table of Contents
    :maxdepth: 2
    :caption: Examples
 
+   longform/example-my-first-gad
    longform/example-static-aiding
    longform/example-static-aiding-no-boost
 

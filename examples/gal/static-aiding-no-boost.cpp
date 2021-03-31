@@ -26,7 +26,7 @@ void Sleep(int sleepMs)
 
 int main(int argc, char * argv[])
 {
-  int sendPackets = 30; // Total number of packets to send
+  int sendPackets = 1000; // Total number of packets to send
 
   //============================================================================
   // Construct the position aiding class with stream ID 129.
@@ -39,7 +39,7 @@ int main(int argc, char * argv[])
   // With no timestamp, the INS will timestamp the data upon arrival.
   gp.SetTimeVoid();
   // Set the lever arm between the aiding source and the IMU, in the IMU frame.
-  gp.SetAidingLeverArmFixed(0.0,0.0,0.1);
+  gp.SetAidingLeverArmFixed(0.5,0.5,1.0);
   gp.SetAidingLeverArmVar(0.1,0.1,0.1);
   //============================================================================
   // Initialise the encoder

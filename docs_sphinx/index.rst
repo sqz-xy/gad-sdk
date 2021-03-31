@@ -45,6 +45,7 @@ Table of Contents
    :caption: Examples
 
    longform/example-static-aiding
+   longform/example-static-aiding-no-boost
 
 
 .. toctree:: 
@@ -54,6 +55,7 @@ Table of Contents
    longform/defining-a-local-reference-frame
    longform/gad-files
    longform/reassigning-traditional-sources
+   longform/stream-priority
    longform/all-options
 
 

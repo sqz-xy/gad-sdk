@@ -32,7 +32,7 @@ There are two main purposes for this:
 
 .. _usinggadfiles:
 
-Using .gad files
+Using .gad Files
 ****************
 
 To use a .gad file, place it in the same directory as the RD file being 
@@ -65,7 +65,8 @@ File format
 The .gad CSV file is undeniably large. Since this is primarily a debugging / 
 experimentation tool, it has been designed for human readability more than 
 efficiency. Most users will find it easier to generate theses files using the 
-CSV encoding functionality in the SDK, though they can be created manually.
+CSV encoding functionality in the SDK, though they can be created manually 
+using the file format below.
 
 .. csv-table:: CSV File Format
    :file: assets/gad-file-format.csv

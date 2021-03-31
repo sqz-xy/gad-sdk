@@ -3,12 +3,11 @@
 Static Aiding (No Boost)
 ########################
 
-The simplest example of Generic Aiding comes in the form of static aiding. The 
-full source code for this example can be found in 
+The is a simplified version of :ref:`staticaidingexample`, which can be used 
+when Boost is not available. Since the socket functionality in this SDK is based 
+on Boost, the socket functionality must be replaced by users with their chosen 
+socket implementation. The full source code for this example can be found in 
 `/examples/gal/static-aiding-no-boost.cpp`.
-
-In this example, position, velocity, and attitude data is sent to an OxTS INS 
-in real time. 
 
 Recommended prior reading:
 
@@ -37,7 +36,7 @@ Linux
 
 1. Navigate to the relevant directory in the build folder: 
    `cd <build_dir>/examples/gal`.
-2. Run the executable: `./static-aiding-example`. This will begin sending 
+2. Run the executable: `./static-aiding-no-boost-example`. This will begin sending 
    Generic Aiding packets.
 
 Windows
@@ -92,16 +91,9 @@ Now we enter the `main()` function:
 
 .. code-block:: c++
 
-   int sendPackets = 30; 
-   std::string unit_ip = "192.168.25.22";
-   std::string file_out = "out.gad";
-   int output_type = OUTPUT_TYPE::UDP;
+   int sendPackets = 1000; 
 
-
-These variables determine some of the setup of the example, including the 
-number of packets to send, the IP address to send the packets to, the output 
-file, and whether to output to CSV or UDP. Naturally, only one of the IP 
-address and output file are actually used on a given run.  
+This variable determines how many packets to send before exiting the program. 
 
 .. code-block:: c++
 

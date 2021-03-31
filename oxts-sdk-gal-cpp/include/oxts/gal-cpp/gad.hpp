@@ -266,23 +266,18 @@ public:
    */
   void SetAidingLeverArmFixed(double x, double y, double z);
   /**
-   * Set lever arm from the INS to the aiding source. This lever arm will be
+   * Set lever arm from the INS to the position aiding source. to be
    * optimised by the Kalman Filter during navigation.
-   * 
-   * @param x Offset from INS to aiding source in the x axis of the IMU frame.
-   * @param y Offset from INS to aiding source in the y axis of the IMU frame.
-   * @param z Offset from INS to aiding source in the z axis of the IMU frame.
    */
-  void SetAidingLeverArmOptimising(double x, double y, double z);
+  void SetAidingLeverArmOptimising();
   /** 
    * Indicate that lever arm will be configured in the configuration file on 
    * the INS.
-   * @todo Remove and set this mode to be default 
    */
   void SetAidingLeverArmConfig();
   /**
    * Set the variance (accuracy) of the lever arm measurements from the INS to 
-   * the aiding source. 
+   * the aiding source. Only required for fixed lever-arm.
    * 
    * @param x Variance on the lever arm from INS to aiding source in the x axis of the IMU frame.
    * @param y Variance on the lever arm from INS to aiding source in the y axis of the IMU frame.

@@ -296,10 +296,10 @@ void GadPosition::SetAidingLeverArmFixed(double x, double y, double z)
   this->SetLocVal(x,y,z);
 }
 
-void GadPosition::SetAidingLeverArmOptimising(double x, double y, double z)
+void GadPosition::SetAidingLeverArmOptimising()
 {
   this->SetLocMode(LOC_SYS::LOC_KF);
-  this->SetLocVal(x,y,z);
+  this->SetLocVal(0.0,0.0,0.0);
 }
 
 void GadPosition::SetAidingLeverArmConfig()

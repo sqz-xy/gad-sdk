@@ -3,7 +3,8 @@
 Attitude
 ########
 
-Attitude (otherwise known as orientation).
+Attitude (otherwise known as orientation). Each of the fields for this data 
+type can be set using functions from the :ref:`gadattitudeclass` class.
 
 .. _attitudeaidingframes:
 
@@ -41,7 +42,7 @@ This matrix is formed from the covariances:
 
 .. math:: 
 
-   \sigma_h \sigma_h = \sigma_p \sigma_p = \sigma_r \sigma_r = 0.01^{\circ}^2
+   \sigma_h \sigma_h = \sigma_p \sigma_p = \sigma_r \sigma_r = 0.01^{\circ^2}
 
 Which implies a standard deviation of :math:`0.1^{\circ}` on each measurement, 
 and that each measurement is independent (two independent measurements have 

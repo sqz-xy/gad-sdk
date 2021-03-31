@@ -4,7 +4,8 @@ Speed
 #####
 
 Speed / Wheelspeed Updates. This update type allows for a 1D speed measurement 
-to be provided to the INS as aiding.
+to be provided to the INS as aiding. Each of the fields for this data 
+type can be set using functions from the :ref:`gadspeedclass` class.
 
 .. warning::
     When using Generic Aiding wheelspeed, it is necessary to disable an 

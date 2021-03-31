@@ -3,7 +3,10 @@
 Velocity
 ********
 
-The GA interface allows users to send a number of measurement updates to an OxTS INS from external devices/ sensors, including velocity estimates. Velocity can currently be accepted in a few different coordinate frames.
+The GA interface allows users to send a number of measurement updates to an 
+OxTS INS from external devices/ sensors, including velocity estimates. Each of 
+the fields for this data type can be set using functions from the 
+:ref:`gadvelocityclass` class.
 
 .. _velocityaidingframes:
 

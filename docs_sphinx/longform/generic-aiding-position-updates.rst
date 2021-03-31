@@ -6,7 +6,9 @@ Position
 The GA interface allows users to send a number of measurement updates to an 
 OxTS Inertial Navigation System (INS) from external devices / sensors, 
 including position estimates. Position aiding can currently be accepted in a 
-few different coordinate frames, explained in detail below. 
+few different coordinate frames, explained in detail below. Each of the fields 
+for this data type can be set using functions from the 
+:ref:`gadpositionclass` class.
 
 .. _positionaidingframes:
 
@@ -29,7 +31,7 @@ frame.
 User-defined Local Frame
 ========================
 
-Position aiding is one of the aiding types which supports a user=defined local 
+Position aiding is one of the aiding types which supports a user-defined local 
 frame. More information on how to define the frame itself can be found here: 
 :ref:`definingalocalreferenceframe`.
 
@@ -50,6 +52,8 @@ For position aiding, the values in covariance matrices are  expected with units
 :math:`m^2` . For example, a covariance matrix where position in all axes is 
 found to be (or assumed to be) independent might look like this:
 
+.. _positioncovariancematrix:
+
 .. math::
 
    \begin{bmatrix}
@@ -57,7 +61,7 @@ found to be (or assumed to be) independent might look like this:
    0.0  & 0.01 & 0.0  \\
    0.0  & 0.0  & 0.01 \\
    \end{bmatrix}
-   \label{CovExampleMatrix}
+
 
 This matrix shows that 
 
@@ -98,12 +102,12 @@ Optimising
 
 An Optimising lever-arm differs slightly from the other two types of lever-arm. 
 
-= The lever-arm will be taken from the .gap file on the INS (accuracy set in 
-.gpa file). This can be set using NAVconfig in the Primary GNSS Antenna 
-configuration.
-= The lever-arm will be optimised by the Kalman Filter during operation, 
-increasing its accuracy and therefore improving the quality of data provided 
-to the system.
+- The lever-arm will be taken from the .gap file on the INS (accuracy set in 
+  .gpa file). This can be set using NAVconfig in the Primary GNSS Antenna 
+  configuration.
+- The lever-arm will be optimised by the Kalman Filter during operation, 
+  increasing its accuracy and therefore improving the quality of data provided 
+  to the system.
 
 .. warning::
    If an optimising lever-arm is used for a Generic Aiding source alongside a 
@@ -116,4 +120,4 @@ to the system.
 References
 **********
 
-[1]: https://en.wikipedia.org/wiki/Euler_angles "Information on Tait=Bryan angles"
+[1]: https://en.wikipedia.org/wiki/Euler_angles "Information on Tait-Bryan angles"

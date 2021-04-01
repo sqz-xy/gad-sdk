@@ -43,6 +43,7 @@ other CMake projects on the machine can link to the libraries using:
 
 ```
 find_package(oxts-sdk-gal-cpp REQUIRED)
+find_package(Boost COMPONENTS system thread regex)
 
 target_link_libraries(${PROJECT_NAME} 
     PUBLIC
@@ -50,8 +51,8 @@ target_link_libraries(${PROJECT_NAME}
 )
 ```
 in their CMakeLists.txt. 
-Header files can then be included in code files using `#include 
-"oxts/<oxts-sdk-module>/<filename>.hpp".
+Header files can then be included in code files using 
+`#include "oxts/<oxts-sdk-module>/<filename>.hpp".
 
 ### Build options
 
@@ -59,7 +60,7 @@ The CMakeLists.txt file in the root of the repository contains some options for 
 
 | Option | Description | Default |
 |-------------|---------------|----|
-|OXTS_SDK_BUILD_DOCS|Build SDK documentation.| OFF |
+<!-- |OXTS_SDK_BUILD_DOCS|Build SDK documentation.| OFF | -->
 |OXTS_SDK_BUILD_EXAMPLES|Enable examples targets.| ON |
 |OXTS_SDK_DISABLE_BOOST|Use Boost library when building. Note that not using boost will limit UDP functionality, which will need to be replaced by the user in order to send GAD to an INS.| OFF |
 
@@ -79,29 +80,4 @@ The documentation for this project is generated using a few tools: Doxygen, Brea
 ```
   sphinx-build -b html . public
 ```
-
-## Examples
-
-The SDK contains a some examples to demonstrate Generic Aiding and NCom 
-decoding in action. These are contained in the /examples directory. To build 
-the examples, ensure that the option OXTS_SDK_BUILD_EXAMPLES is enabled in the
-CMakeLists.txt file at the root of the repository.
-
-### GAL
-
-
-#### Static Aiding
-
-This is one of the simplest Generic Aiding examples, ideal for getting to grips 
-with the interface without leaving your desk.
-
-Static position and attitude measurements are created alongside zero velocity 
-updates, all of which are sent to the INS.
-
-#### Static Aiding (No Boost)
-
-A stripped out version of the above example for users who cannot use the Boost 
-library. Since UDP socket functionality in this SDK relies on Boost, users will
-need to add code to send encoded Generic Aiding packets to an INS using their
-chosen library.
 

@@ -48,9 +48,9 @@ macro(export_config)
     install (
         TARGETS ${PROJECT_NAME}
         EXPORT "${PROJECT_NAME}-targets"
-        ARCHIVE DESTINATION ${ARCHIVE_DIRECTORY}
-        LIBRARY DESTINATION ${LIBRARY_DIRECTORY}
-        RUNTIME DESTINATION ${BINARY_DIRECTORY}
+        ARCHIVE DESTINATION "${ARCHIVE_DIRECTORY}"
+        LIBRARY DESTINATION "${LIBRARY_DIRECTORY}"
+        RUNTIME DESTINATION "${BINARY_DIRECTORY}"
     )
     export(EXPORT "${PROJECT_NAME}-targets"
         FILE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-targets.cmake"
@@ -69,17 +69,17 @@ macro(export_config)
     )
     if(${PROJECT_NAME} STREQUAL "oxts-sdk-core")
         configure_file(
-            "${OXTS_SDK_ROOT}/cmake/core-config.cmake"
+            "${OXTS_SDK_ROOT}/cmake/oxts-sdk-core-config.cmake"
             "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
             @ONLY)
     elseif(${PROJECT_NAME} STREQUAL "oxts-sdk-gal-c")
          configure_file(
-             "${OXTS_SDK_ROOT}/cmake/gal-c-config.cmake"
+             "${OXTS_SDK_ROOT}/cmake/oxts-sdk-gal-c-config.cmake"
              "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
              @ONLY)
     elseif(${PROJECT_NAME} STREQUAL "oxts-sdk-gal-cpp")
          configure_file(
-             "${OXTS_SDK_ROOT}/cmake/gal-cpp-config.cmake"
+             "${OXTS_SDK_ROOT}/cmake/oxts-sdk-gal-cpp-config.cmake"
              "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
              @ONLY)
     else()

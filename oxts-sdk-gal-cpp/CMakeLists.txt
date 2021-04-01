@@ -13,7 +13,6 @@ CACHE STRING "version" FORCE
 project(oxts-sdk-gal-cpp VERSION ${OXTS_SDK_GAL_VERSION})
 set(DESCRIPTION "Generic Aiding library for the OxTS SDK in C++.")
 
-find_package(oxts-sdk-gal-c CONFIG REQUIRED)
 # If Boost isn't disabled, find it. If it can't be found, disable it.
 if(NOT OXTS_SDK_DISABLE_BOOST)
     find_package(Boost COMPONENTS system thread regex)

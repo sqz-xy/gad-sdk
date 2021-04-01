@@ -5,8 +5,6 @@ set(CMAKE_CXX_STANDARD 11)
 
 project(oxts-sdk-examples-gal VERSION 0.1.0)
 
-find_package(oxts-sdk-gal-cpp REQUIRED)
-
 if(NOT OXTS_SDK_DISABLE_BOOST)
     # Example 1 - My First GAD
     set(OXTS_SDK_EXAMPLES_GAL_STATIC my-first-gad-example)

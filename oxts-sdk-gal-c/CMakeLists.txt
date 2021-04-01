@@ -3,8 +3,6 @@ cmake_minimum_required(VERSION 3.1)
 project(oxts-sdk-gal-c VERSION 0.1.0)
 set(DESCRIPTION "OxTS library for base Generic Aiding API in C.")
 
-find_package(oxts-sdk-core REQUIRED)
-
 set(OXTS_GAL_C_HEADERS
     ./include/oxts/gal-c/gad_decode.h
     ./include/oxts/gal-c/gad_defines.h
@@ -48,10 +46,4 @@ target_compile_definitions(${PROJECT_NAME}
     PRIVATE GAL_C_LIBRARY)
 
 install (FILES ${OXTS_GAL_C_HEADERS} DESTINATION ${INCLUDE_DIRECTORY}/oxts/gal-c)
-
 export_config()
-
-# TODO: Add testing
-# if(OXTS_SDK_ENABLE_TESTING)
-#     add_subdirectory(tests)
-# endif()

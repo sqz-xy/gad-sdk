@@ -49,8 +49,3 @@ target_compile_definitions(${PROJECT_NAME}
 
 install (FILES ${OXTS_CORE_HEADERS} DESTINATION ${INCLUDE_DIRECTORY}/oxts/core)
 export_config()
-
-# TODO: Add testing
-# if(OLP_SDK_ENABLE_TESTING)
-#     add_subdirectory(tests)
-# endif()

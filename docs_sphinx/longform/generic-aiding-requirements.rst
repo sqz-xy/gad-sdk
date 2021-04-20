@@ -5,8 +5,8 @@ Generic Aiding Requirements
 
 This page outlines everything necessary to use the Generic Aiding interface.
 
-An OxTS INS
-***********
+OxTS INS
+********
 
 Generic Aiding is designed to be sent to OxTS INS devices, so it is only 
 natural that an INS is required. More specifically though, units which support 

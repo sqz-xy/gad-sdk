@@ -37,7 +37,7 @@ Linux
    `cd <build_dir>/examples/gal`.
 2. Run the executable: `./my-first-gad-example <IP>`. This will begin sending 
    Generic Aiding packets to the specified IP address, which should be set as 
-   the IP address of the INS, e.g. `192.168.25.10`. 
+   the IP address of the INS, e.g. `./my-first-gad-example 192.168.25.10`. 
 
 
 Source Code Breakdown
@@ -79,11 +79,23 @@ The other variable here sets the number of packets to send.
    gv.SetAidingLeverArmFixed(0.0,0.0,1.0);
    gv.SetAidingLeverArmVar(0.01,0.01,0.01);
 
-Next, we set up the velocity data, which follows a similar pattern to the 
-position data. This aiding data is given stream ID 130.
+Next, we set up the velocity data with stream ID 130. 
 
 The velocity is set in the North, East, Up (left-handed) coordinate system. 
-Since we are creating *static* data, the velocity is zero in all axes. 
+Since we are creating *static* data, the velocity is zero in all axes. The 
+covariance values for this data are set using the function 
+:cpp:`SetVelNeuVar()`. For more information on covariances, see 
+:ref:`estimatingerrors` or :ref:`velocitycovariancematrix`. 
+
+The function :cpp:`SetTimeVoid()` indicates that the data will be sent with no 
+timestamp, making it the simplest way to handle timing when working with 
+Generic Aiding. In this setup, the INS will timestamp the packet upon receipt. 
+
+The final step to fill out the data packet is to set the lever-arm between the 
+IMU and the aiding device. The lever-arm is a 3D translation in the IMU frame 
+from the IMU (marked on the case of the INS) to the aiding device, measured in 
+metres. The covariance values on this lever-arm are then set according to how 
+accurately each translation could be measured. 
 
 .. code-block:: c++
 
@@ -92,7 +104,7 @@ Since we are creating *static* data, the velocity is zero in all axes.
    gh.SetOutputModeToUdp(unit_ip);
 
 This block of code initialises an instance of the `GadHandler` and sets it up 
-to either send Generic Aiding data via UDP. 
+to send binary Generic Aiding data via UDP. 
 
 .. code-block:: c++
 
@@ -103,8 +115,8 @@ to either send Generic Aiding data via UDP.
    }
 
 
-This final code block creates a for loop in which the Generic Aiding data is 
-encoded and sent via UDP to the INS. With `OxTS::Sleep(100)`, the data will be 
+This final code block creates a `for` loop in which the Generic Aiding data is 
+encoded and sent via UDP to the INS. With :cpp:`OxTS::Sleep(100)`, the data will be 
 sent at a rate of ~10Hz.
 
 

@@ -60,9 +60,9 @@ The CMakeLists.txt file in the root of the repository contains some options for 
 
 | Option | Description | Default |
 |-------------|---------------|----|
-<!-- |OXTS_SDK_BUILD_DOCS|Build SDK documentation.| OFF | -->
 |OXTS_SDK_BUILD_EXAMPLES|Enable examples targets.| ON |
 |OXTS_SDK_DISABLE_BOOST|Use Boost library when building. Note that not using boost will limit UDP functionality, which will need to be replaced by the user in order to send GAD to an INS.| OFF |
+<!-- |OXTS_SDK_BUILD_DOCS|Build SDK documentation.| OFF | -->
 
 ### Building the docs
 

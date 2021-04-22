@@ -41,13 +41,17 @@ set(OXTS_GAL_CPP_SOURCES
     ./src/gal-cpp/gad_handler.cpp
 )
 
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/oxts/gal-cpp/config.h.in 
+               ${CMAKE_CURRENT_BINARY_DIR}/include/oxts/gal-cpp/config.h @ONLY
+)
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
 if(OXTS_SDK_DISABLE_BOOST)
-    include_directories(${Boost_INCLUDE_DIR})
+include_directories(${Boost_INCLUDE_DIR})
 endif()
 
-configure_file(./include/oxts/gal-cpp/config.h.in ./include/oxts/gal-cpp/config.h @ONLY)
+
 
 ####
 # Create targets
@@ -80,7 +84,14 @@ target_compile_definitions(${PROJECT_NAME}
     PRIVATE GAL_CPP_LIBRARY
 )
 
-install (FILES ${OXTS_GAL_CPP_HEADERS} DESTINATION ${INCLUDE_DIRECTORY}/oxts/gal-cpp)
+# install (FILES ${OXTS_GAL_CPP_HEADERS} DESTINATION ${INCLUDE_DIRECTORY}/oxts/gal-cpp)
+install (DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/oxts/gal-cpp 
+         DESTINATION ${INCLUDE_DIRECTORY}/oxts
+)
+# It's possible that this can be done more elegantly
+install (FILES ${CMAKE_CURRENT_BINARY_DIR}/include/oxts/gal-cpp/config.h 
+         DESTINATION ${INCLUDE_DIRECTORY}/oxts/gal-cpp
+)
 message(STATUS "install prefix: ${CMAKE_INSTALL_PREFIX}")
 export_config()
 

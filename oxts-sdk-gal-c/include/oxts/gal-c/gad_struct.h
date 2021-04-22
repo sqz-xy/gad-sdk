@@ -73,6 +73,7 @@ typedef enum
    TIME_PPS_RELATIVE,   /** Time since PPS. */
    TIME_EST_LATENCY,    /** Not a full timestamp, just an estimate of latency. */
    TIME_SDN,            /** This is internal timing for xbns. */
+   TIME_EXT,
 }TIME_SYS;
 
 //==============================================================================

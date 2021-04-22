@@ -169,17 +169,26 @@ public:
   void SetTimeInvalid();
   /** Set Time Valid flag to true */
   void SetTimeValid();
+  /** Set time from an external clock
+   * @param week Week in the external time frame
+   * @param seconds Seconds in the external time frame
+   */
+  void   SetTimeExternal(double week, double secs);
+  /** Get the week in the external time */
+  double GetTimeExternalWeek();
+  /** Get the seconds into the week in the external time */
+  double GetTimeExternalSecondsFromSunday();
   /** Set timestamp for this data 
    * @param week GPS Week 
    * @param seconds_from_sunday Seconds from Midnight Sunday (s)
    */
-  void   SetGpsTime(double week, double seconds_from_sunday);
+  void   SetTimeGps(double week, double seconds_from_sunday);
   /** Get the GPS Week value. Note that this function assumes that 
    *  the time has been set in this format, there is no check. */
-  double GetGpsWeek();
+  double GetTimeGpsWeek();
   /** Get the Seconds from Sunday value. Note that this function assumes that 
    *  the time has been set in this format, there is no check. */
-  double GetGpsSecondsFromSunday();
+  double GetTimeGpsSecondsFromSunday();
   /** Set a PPS relative timestamp
    * @param ns Time since PPS timestamp (nanoseconds)
    */

@@ -186,17 +186,26 @@ void Gad::SetDataVarSingle(double v0)
 // time
 void Gad::SetTimeInvalid(){this->time_valid = 0;}
 void Gad::SetTimeValid()  {this->time_valid = 1;}
-
+//
+void Gad::SetTimeExternal(double week, double secs)
+{
+  this->SetTimeValid();
+  this->time.SetMode(0);
+  this->time.SetValType(TIME_SYS::TIME_EXT);
+  this->time.SetVal(week,secs,0);
+}
+double Gad::GetTimeExternalWeek(){ return this->time.GetValX(); }
+double Gad::GetTimeExternalSecondsFromSunday(){ return this->time.GetValY(); }
 // GPS
-void   Gad::SetGpsTime(double week, double seconds_from_sunday)
+void   Gad::SetTimeGps(double week, double seconds_from_sunday)
 {
   this->SetTimeValid();
   this->time.SetMode(0);
   this->time.SetValType(TIME_SYS::TIME_GPS);
   this->time.SetVal(week,seconds_from_sunday, 0);
 }
-double Gad::GetGpsWeek(){ return this->time.GetValX(); }
-double Gad::GetGpsSecondsFromSunday(){ return this->time.GetValY(); }
+double Gad::GetTimeGpsWeek(){ return this->time.GetValX(); }
+double Gad::GetTimeGpsSecondsFromSunday(){ return this->time.GetValY(); }
 // PPS
 void   Gad::SetTimePpsRelative(double ns)
 {

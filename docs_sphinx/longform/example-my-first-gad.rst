@@ -35,9 +35,10 @@ Linux
 
 1. Navigate to the relevant directory in the build folder: 
    `cd <build_dir>/examples/gal`.
-2. Run the executable: `./my-first-gad-example <IP>`. This will begin sending 
-   Generic Aiding packets to the specified IP address, which should be set as 
-   the IP address of the INS, e.g. `./my-first-gad-example 192.168.25.10`. 
+2. Run the executable: `./my-first-gad-example <IP> <Packets>`. This will begin 
+   sending Generic Aiding packets to the specified IP address, which should be 
+   set as the IP address of the INS, 
+   e.g. `./my-first-gad-example 192.168.25.10 1000`. 
 
 
 Source Code Breakdown
@@ -63,12 +64,13 @@ Now we enter the `main()` function:
    int main(int argc, char * argv[])
    {
      std::string unit_ip   = argv[1];
-     int num_packets       = 100;
+     int num_packets       = argv[2];
 
-There is one input argument for this executable, which is the IPv4 address of 
-the INS which will be receiving the data. Note that there is no advanced parsing 
-or error handling to check that the argument has been inputted correctly. 
-The other variable here sets the number of packets to send.
+There are two input arguments for this executable: the IPv4 address of 
+the INS which will be receiving the data, and the number of packets to send. 
+Note that there is no advanced parsing or error handling to check that the 
+argument has been inputted correctly. The other variable here sets the number 
+of packets to send.
 
 .. code-block:: c++
 
@@ -108,7 +110,7 @@ to send binary Generic Aiding data via UDP.
 
 .. code-block:: c++
 
-   for (int i = 0; i < send_packets; ++i)
+   for (int i = 0; i < num_packets; ++i)
    {
      gh.SendPacket(gv);
      OxTS::Sleep(100);
@@ -116,8 +118,8 @@ to send binary Generic Aiding data via UDP.
 
 
 This final code block creates a `for` loop in which the Generic Aiding data is 
-encoded and sent via UDP to the INS. With :cpp:`OxTS::Sleep(100)`, the data will be 
-sent at a rate of ~10Hz.
+encoded and sent via UDP to the INS. With :cpp:`OxTS::Sleep(100)`, the data 
+will be sent at a rate of ~10Hz.
 
 
 Recommended next steps:

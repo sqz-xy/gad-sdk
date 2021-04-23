@@ -27,7 +27,7 @@ void Sleep(int sleepMs)
 int main(int argc, char * argv[])
 {
   std::string unit_ip   = argv[1]; // Unit to send GAD to
-  int num_packets       = 100;     // Number of packets to send.
+  int num_packets       = std::stoi(argv[2]); // Number of packets to send.
 
   // Construct the velocity aiding with stream ID 130.
   OxTS::GadVelocity gv = OxTS::GadVelocity(130);

@@ -192,7 +192,7 @@ void Gad::SetTimeExternal(double week, double secs)
   this->SetTimeValid();
   this->time.SetMode(0);
   this->time.SetValType(TIME_SYS::TIME_EXT);
-  this->time.SetVal(week,secs,0);
+  this->time.SetVal(week,secs,0.0);
 }
 double Gad::GetTimeExternalWeek(){ return this->time.GetValX(); }
 double Gad::GetTimeExternalSecondsFromSunday(){ return this->time.GetValY(); }

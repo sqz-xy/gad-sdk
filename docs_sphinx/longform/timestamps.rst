@@ -72,8 +72,8 @@ External (in development)
   * Synchronsing the INS *output* time to the externa time currently causes GPS 
     data to be rejected, and can only be consequently used for indoor 
     applications.
-  * The external time must be greater than the internal INS time (counts up 
-    from 0 at power on) in order to synchronise output times. 
+  * Known bug: The external time must be greater than the internal INS time 
+    (counts up from 0 at power on) in order to synchronise output times. 
 
 The external timestamp allows users to stamp data with time from an external 
 clock. The INS will then attempt to track the offset between its own internal 

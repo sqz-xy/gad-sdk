@@ -85,17 +85,19 @@ The following advanced commands are are relevant for this aiding type:
 -gad_time_sync_id[x]
   [x] = The Generic Aiding stream ID which will be considered the external 
   time leader. Currently only one lead stream is available.
--gad_time_out
-  This configures the INS to use the external clock time for output data. This 
-  is not required for basic use of the synchronisation.
-  Be warned:
 -gad_time_min_stable_pkts[x]
   Minimum number of packets from the lead stream with a stable time offset 
   before external time is considered synchronised. (Default: 5)
 -gad_time_min_stable_secs[x.xx]
   Minimum number of seconds from the lead stream with a stable time offset 
   before external time is considered synchronised. (Default: 5.0)
-
+-gad_time_out
+  This configures the INS to use the external clock time for output data. This 
+  is not required for basic use of the synchronisation.
+-time_sync_int
+  Configures the INS to synchronise to its own internal PPS. This is required 
+  in order to allow output time synchronisation.
+  
 The time can be set in the :cpp:`Gad` class by the function 
 :cpp:`SetTimeExternal(week, secs)`.
 

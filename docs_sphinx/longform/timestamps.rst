@@ -61,6 +61,41 @@ for clock synchronisation:
 
 
 
+External (in development)
+*************************
 
+.. warning::
 
+  * This timestamp type is still in development and is therefore not fully 
+    supported or recommended for use. It is not guaranteed that this feature 
+    will make it to a full release.
+  * Synchronsing the INS *output* time to the externa time currently causes GPS 
+    data to be rejected, and can only be consequently used for indoor 
+    applications.
+  * The external time must be greater than the internal INS time (counts up 
+    from 0 at power on) in order to synchronise output times. 
+
+The external timestamp allows users to stamp data with time from an external 
+clock. The INS will then attempt to track the offset between its own internal 
+time and the time of the external clock. If the offset is stable, the data will 
+be used.
+
+The following advanced commands are are relevant for this aiding type:
+
+-gad_time_sync_id[x]
+  [x] = The Generic Aiding stream ID which will be considered the external 
+  time leader. Currently only one lead stream is available.
+-gad_time_out
+  This configures the INS to use the external clock time for output data. This 
+  is not required for basic use of the synchronisation.
+  Be warned:
+-gad_time_min_stable_pkts[x]
+  Minimum number of packets from the lead stream with a stable time offset 
+  before external time is considered synchronised. (Default: 5)
+-gad_time_min_stable_secs[x.xx]
+  Minimum number of seconds from the lead stream with a stable time offset 
+  before external time is considered synchronised. (Default: 5.0)
+
+The time can be set in the :cpp:`Gad` class by the function 
+:cpp:`SetTimeExternal(week, secs)`.
 

@@ -66,9 +66,10 @@ public:
   /*! Set the value array. Used to store the aiding data.*/
   void   SetVal(double x, double y,double z);
 
-  void SetVarUpperDiag(double v0, double v1, double v2, double v3, double v4, double v5);
-  void SetVarDiag(double v0, double v1,double v2);
-  void SetVarSingle(double v0);
+  void SetVarUpperDiag(double v_00, double v_11, double v_22, 
+                       double v_01, double v_02, double v_12);
+  void SetVarDiag(double v_00, double v_11,double v_22);
+  void SetVarSingle(double v_0);
 };
 
 
@@ -120,19 +121,21 @@ protected:
   void SetValInvalid();
   void SetDataMode(int mode);
   void SetDataValType(int x_type);
-  void SetDataVal(double x0, double x1,double x2);
-  void SetDataVarUpperDiag(double v0, double v1, double v2, double v3, double v4, double v5);
-  void SetDataVarDiag(double v0, double v1,double v2);
-  void SetDataVarSingle(double v0);
+  void SetDataVal(double x_0, double x_1,double x_2);
+  void SetDataVarUpperDiag(double v_00, double v_11, double v_22, 
+                           double v_01, double v_02, double v_12);
+  void SetDataVarDiag(double v_0, double v_1,double v_2);
+  void SetDataVarSingle(double v_0);
   // loc  
   void SetLocValid();
   void SetLocInvalid();
   void SetLocMode(int mode);
   void SetLocValType(int x_type);
-  void SetLocVal(double x0, double x1,double x2);
-  void SetLocVarUpperDiag(double v0, double v1, double v2, double v3, double v4, double v5);
-  void SetLocVarDiag(double v0, double v1,double v2);
-  void SetLocVarSingle(double v0);
+  void SetLocVal(double x_0, double x_1,double x_2);
+  void SetLocVarUpperDiag(double v_00, double v_11, double v_22, 
+                          double v_01, double v_02, double v_12);
+  void SetLocVarDiag(double v_00, double v_11,double v_22);
+  void SetLocVarSingle(double v_0);
 
 public:
   /*! Default Constructor */

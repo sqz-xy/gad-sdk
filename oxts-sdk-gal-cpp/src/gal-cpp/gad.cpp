@@ -36,29 +36,31 @@ void   Gen3d::SetVal(double x, double y,double z)
   SetValY(y);
   SetValZ(z);
 }
-void   Gen3d::SetVarUpperDiag(double v0, double v1, double v2, double v3, double v4, double v5)
+
+void   Gen3d::SetVarUpperDiag(double v_00, double v_11, double v_22, 
+                       double v_01, double v_02, double v_12)
 {
   this->v_type = GEN_VAR_TYPE::GEN_VAR_HMAT;
-  this->v[0] = v0;
-  this->v[1] = v1;
-  this->v[2] = v2;
-  this->v[3] = v3;
-  this->v[4] = v4;
-  this->v[5] = v5;
+  this->v[0] = v_00;
+  this->v[1] = v_11;
+  this->v[2] = v_22;
+  this->v[3] = v_01;
+  this->v[4] = v_02;
+  this->v[5] = v_12;
 }
 
-void Gen3d::SetVarDiag(double v0, double v1,double v2)
+void Gen3d::SetVarDiag(double v_00, double v_11,double v_22)
 {
   this->v_type = GEN_VAR_TYPE::GEN_VAR_DIAG;
-  this->v[0] = v0;
-  this->v[1] = v1;
-  this->v[2] = v2;
+  this->v[0] = v_00;
+  this->v[1] = v_11;
+  this->v[2] = v_22;
 }
 
-void Gen3d::SetVarSingle(double v0)
+void Gen3d::SetVarSingle(double v_0)
 {
   this->v_type = GEN_VAR_TYPE::GEN_VAR_SINGLE;
-  this->v[0] = v0;
+  this->v[0] = v_0;
 }
 
 //==============================================================================
@@ -162,25 +164,26 @@ void Gad::SetValValid(){this->val_valid = 1;}
 
 void Gad::SetDataMode(int mode){ this->val.SetMode(mode); }
 void Gad::SetDataValType(int x_type) { this->val.SetValType(x_type); }
-void Gad::SetDataVal(double x0, double x1,double x2)
+void Gad::SetDataVal(double x_0, double x_1,double x_2)
 {
   this->SetValValid();
-  this->val.SetVal(x0,x1,x2);
+  this->val.SetVal(x_0,x_1,x_2);
 }
 
-void Gad::SetDataVarUpperDiag(double v0, double v1, double v2, double v3, double v4, double v5)
+void Gad::SetDataVarUpperDiag(double v_00, double v_11, double v_22, 
+                              double v_01, double v_02, double v_12)
 {
-  this->val.SetVarUpperDiag(v0,v1,v2,v3,v4,v5);
+  this->val.SetVarUpperDiag(v_00,v_11,v_22,v_01,v_02,v_12);
 }
 
-void Gad::SetDataVarDiag(double v0, double v1,double v2)
+void Gad::SetDataVarDiag(double v_00, double v_11,double v_22)
 {
-  this->val.SetVarDiag(v0,v1,v2);
+  this->val.SetVarDiag(v_00,v_11,v_22);
 }
 
-void Gad::SetDataVarSingle(double v0)
+void Gad::SetDataVarSingle(double v_0)
 {
-  this->val.SetVarSingle(v0);
+  this->val.SetVarSingle(v_0);
 }
 
 // time
@@ -239,22 +242,23 @@ void Gad::SetLocValid(){this->loc_valid = 1;}
 
 void Gad::SetLocMode(int mode) { this->loc.SetMode(mode); }
 void Gad::SetLocValType(int x_type) { this->loc.SetValType(x_type);}
-void Gad::SetLocVal(double x0, double x1,double x2)
+void Gad::SetLocVal(double x_0, double x_11,double x_22)
 {
   this->SetLocValid();
-  this->loc.SetVal(x0,x1,x2);
+  this->loc.SetVal(x_0,x_11,x_22);
 }
-void Gad::SetLocVarUpperDiag(double v0, double v1, double v2, double v3, double v4, double v5)
+void Gad::SetLocVarUpperDiag(double v_00, double v_11, double v_22,
+                             double v_01, double v_02, double v_12)
 {
-  this->loc.SetVarUpperDiag(v0,v1,v2,v3,v4,v5);
+  this->loc.SetVarUpperDiag(v_00,v_11,v_22,v_01,v_02,v_12);
 }
-void Gad::SetLocVarDiag(double v0, double v1,double v2)
+void Gad::SetLocVarDiag(double v_00, double v_11,double v_22)
 {
-  this->loc.SetVarDiag(v0,v1,v2);
+  this->loc.SetVarDiag(v_00,v_11,v_22);
 }
-void Gad::SetLocVarSingle(double v0)
+void Gad::SetLocVarSingle(double v_0)
 {
-  this->loc.SetVarSingle(v0);
+  this->loc.SetVarSingle(v_0);
 }
 
 void Gad::SetRes1Invalid(){ this->res1_valid = 0; }

@@ -29,6 +29,7 @@ Table of Contents
    longform/generic-aiding-requirements
    longform/estimating-errors
    longform/timestamps
+   longform/data-rates
 
 
 .. toctree::

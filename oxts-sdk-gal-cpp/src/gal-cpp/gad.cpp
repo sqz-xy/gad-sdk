@@ -280,23 +280,28 @@ uint32_t  Gad::GetAcqTimestamp()
 
 GadPosition::GadPosition(uint8_t stream_id) : Gad(stream_id, GEN_TYPE::GEN_POS){}
 
-void GadPosition::SetWgs84Pos(double lat, double lon, double alt)
+void GadPosition::SetPosGeodetic(double lat, double lon, double alt)
 {
   this->SetDataMode(0);
   this->SetDataValType(POS_SYS_TYPE::POS_SYS_WGS84);
   this->SetDataVal(lat,lon,alt);
 }
 
-void GadPosition::SetLocalPos(double x, double y, double z)
+void GadPosition::SetPosLocal(double x, double y, double z)
 {
   this->SetDataMode(0);
   this->SetDataValType(POS_SYS_TYPE::POS_SYS_LOCAL);
   this->SetDataVal(x,y,z);
 }
 
-void GadPosition::SetPosVar(double var_x, double var_y, double var_z)
+void GadPosition::SetPosGeodeticVar(double v_n, double v_e, double v_d)
 {
-  this->SetDataVarDiag(var_x,var_y,var_z);
+  this->SetDataVarDiag(v_n,v_e,v_d);
+}
+
+void GadPosition::SetPosLocalVar(double v_x, double v_y, double v_z)
+{
+  this->SetDataVarDiag(v_x,v_y,v_z);
 }
 
 void GadPosition::SetAidingLeverArmFixed(double x, double y, double z)

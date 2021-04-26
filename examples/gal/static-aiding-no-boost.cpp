@@ -32,9 +32,9 @@ int main(int argc, char * argv[])
   // Construct the position aiding class with stream ID 129.
   OxTS::GadPosition gp = OxTS::GadPosition(129);
   // Set the aiding position
-  gp.SetWgs84Pos(51.91520330,-1.24479140,111.525);
+  gp.SetPosGeodetic(51.91520330,-1.24479140,111.525);
   // Set the estimated variance on this position
-  gp.SetPosVar(1,1,1);
+  gp.SetPosGeodeticVar(1.0,1.0,1.0);
   // Set the time mode to Void, since we are not timestamping the aiding data.
   // With no timestamp, the INS will timestamp the data upon arrival.
   gp.SetTimeVoid();

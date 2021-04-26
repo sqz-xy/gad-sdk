@@ -244,27 +244,29 @@ public:
    * @param lat Latitude of the position estimate (deg).
    * @param lon Longitude of the position estimate (deg).
    * @param alt Altitude of the position estimate (deg).
-   * 
-   * @todo Verify WGS84 coordinate frame
    */
-  void SetWgs84Pos(double lat, double lon, double alt);
+  void SetPosGeodetic(double lat, double lon, double alt);
   /**
-   * Set the aiding position in the WGS84 coordinate frame.
+   * Set the aiding position in the user-defined local coordinate frame.
    * @param x Position in the x axis of the local frame (m).
    * @param y Position in the y axis of the local frame (m).
    * @param z Position in the z axis of the local frame (m).
-   * 
-   * @todo Verify WGS84 coordinate frame
    */
-  void SetLocalPos(double x, double y, double z);
+  void SetPosLocal(double x, double y, double z);
   /**
    * Set the variance aiding position in the coordinate frame.
-   * @param var_x Variance of the position estimate (m^2).
-   * @param var_y Variance of the position estimate (m^2).
-   * @param var_z Variance of the position estimate (m^2).
+   * @param v_n Variance of the position estimate (m^2).
+   * @param v_e Variance of the position estimate (m^2).
+   * @param v_d Variance of the position estimate (m^2).
    */
-  void SetPosVar(double var_x, double var_y, double var_z); // Check these args
-
+  void SetPosGeodeticVar(double v_n, double v_e, double v_d);
+  /**
+   * Set the variance aiding position in the coordinate frame.
+   * @param v_x Variance of the position estimate (m^2).
+   * @param v_y Variance of the position estimate (m^2).
+   * @param v_z Variance of the position estimate (m^2).
+   */
+  void SetPosLocalVar(double v_x, double v_y, double v_z);
   /**
    * Set lever arm from the INS to the aiding source. This lever arm will not be
    * optimised by the Kalman Filter.

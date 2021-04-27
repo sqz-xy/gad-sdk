@@ -1,43 +1,83 @@
 #include "oxts/gal-cpp/gad.hpp"
 
-using namespace OxTS;
+using std::vector;
+
+namespace OxTS
+{
+
 //==============================================================================
 // Gen3d
 
-Gen3d::Gen3d(const GEN_3D& g)
+Gen3d::Gen3d() : GEN_3D()
 {
-  mode = g.mode;
-  x_type = g.x_type;
-  x[0] = g.x[0];
-  x[1] = g.x[1];
-  x[2] = g.x[2];
-  v_type = g.v_type;
-  v[0] = g.v[0];
-  v[1] = g.v[1];
-  v[2] = g.v[2];
-  v[3] = g.v[3];
-  v[4] = g.v[4];
-  v[5] = g.v[5];
+  SetMode(0);
+  SetValType(0);
+  SetVal(0.0,0.0,0.0);
+  SetVarUpperDiag(0.0,0.0,0.0,0.0,0.0,0.0);
 }
 
+Gen3d::Gen3d(const GEN_3D& g) : GEN_3D()
+{
+  SetMode(g.mode);
+  SetValType(g.x_type);
+  SetVal(g.x[0], g.x[1], g.x[2]);
+  this->v_type = g.v_type;
+  switch (g.v_type)
+  {
+    case GEN_VAR_TYPE::GEN_VAR_HMAT:
+      SetVarUpperDiag(g.v[0],g.v[1],g.v[2],g.v[3],g.v[4],g.v[5]);
+      break;
+    case GEN_VAR_TYPE::GEN_VAR_DIAG:
+      SetVarDiag(g.v[0],g.v[1],g.v[2]);
+      break;
+    case GEN_VAR_TYPE::GEN_VAR_SINGLE:
+      SetVarSingle(g.v[0]);
+      break;
+    default:
+      break;
+  }
+}
 
-void   Gen3d::SetMode(int mode){ this->mode = mode; }
-void   Gen3d::SetValType(int x_type){ this->x_type = x_type; }
-void   Gen3d::SetValX(double x){this->x[0] = x;}
-double Gen3d::GetValX(){return this->x[0];}
-void   Gen3d::SetValY(double y){this->x[1] = y;}
-double Gen3d::GetValY(){return this->x[1];}
-void   Gen3d::SetValZ(double z){this->x[2] = z;}
-double Gen3d::GetValZ(){return this->x[2];}
+auto Gen3d::GetVarType() const -> int {return static_cast<int>(this->v_type);}
 
-void   Gen3d::SetVal(double x, double y,double z)
+auto Gen3d::getCStruct() const -> GEN_3D
+{
+  GEN_3D g;
+  g.mode   = this->GetMode(); 
+  g.v_type = this->GetValType();
+  g.x[0]   = this->GetValX();
+  g.x[1]   = this->GetValY();
+  g.x[2]   = this->GetValZ();
+  g.v_type = this->GetVarType();
+  std::vector<double> cov = this->GetVar();
+  for (int i = 0; i < cov.size(); ++i)
+  {
+    g.v[i] = cov.at(i);
+  }
+  
+  return g;
+}
+
+void Gen3d::SetMode(int mode){ this->mode = mode; }
+auto Gen3d::GetMode() const -> int {return this->mode;}
+void Gen3d::SetValType(int x_type){ this->x_type = x_type; }
+auto Gen3d::GetValType() const -> int {return this->v_type;}
+
+void Gen3d::SetValX(double x){this->x[0] = x;}
+auto Gen3d::GetValX() const -> double{return this->x[0];}
+void Gen3d::SetValY(double y){this->x[1] = y;}
+auto Gen3d::GetValY() const -> double{return this->x[1];}
+void Gen3d::SetValZ(double z){this->x[2] = z;}
+auto Gen3d::GetValZ() const -> double{return this->x[2];}
+
+void Gen3d::SetVal(double x, double y,double z)
 {
   SetValX(x);
   SetValY(y);
   SetValZ(z);
 }
 
-void   Gen3d::SetVarUpperDiag(double v_00, double v_11, double v_22, 
+void Gen3d::SetVarUpperDiag(double v_00, double v_11, double v_22, 
                        double v_01, double v_02, double v_12)
 {
   this->v_type = GEN_VAR_TYPE::GEN_VAR_HMAT;
@@ -63,87 +103,84 @@ void Gen3d::SetVarSingle(double v_0)
   this->v[0] = v_0;
 }
 
+auto Gen3d::GetVar() const -> std::vector<double>
+{
+  std::vector<double> cov;
+  int length = 0;
+
+  switch (this->v_type)
+  {
+    case GEN_VAR_TYPE::GEN_VAR_HMAT:
+      length = 6;
+      break;
+    case GEN_VAR_TYPE::GEN_VAR_DIAG:
+      length = 3;
+      break;
+    case GEN_VAR_TYPE::GEN_VAR_SINGLE:
+      length = 1;
+      break;
+  }
+
+  for (int i = 0; i<length; ++i) {
+    cov.push_back(v[i]);
+  } 
+
+  return cov;
+}
+
+
 //==============================================================================
 // Gad superclass
-
+const int DEFAULT_STREAM_ID = 128;
 // Default Constructor
-Gad::Gad()
-{
-  this->SetStreamId(128);
-  this->SetDataType(GEN_TYPE::GEN_VOID);
-  this->SetValInvalid();
-  this->SetTimeInvalid();
-  this->SetLocInvalid();
-  this->SetRes1Invalid();
-  this->SetRes2Invalid();
-}
+Gad::Gad() :
+     stream_id(DEFAULT_STREAM_ID),
+     type(GEN_TYPE::GEN_VOID)
+{}
 // Constructor
-Gad::Gad(uint8_t stream_id, int8_t aiding_type)
-{
-  this->SetStreamId(stream_id);
-  this->SetDataType(aiding_type);
-  this->SetValInvalid();
-  this->SetTimeInvalid();
-  this->SetLocInvalid();
-  this->SetRes1Invalid();
-  this->SetRes2Invalid();
-  this->SetAcqInvalid();
-  this->SetAcqTimestamp(0.0);
-}
+Gad::Gad(uint8_t stream_id, int8_t aiding_type) : 
+     stream_id(stream_id),
+     type(aiding_type)
+{}
 
-Gad::~Gad(){}
+Gad::~Gad() = default;
+Gad::Gad(const Gad& g) = default;
+auto Gad::operator=(const Gad& g) -> Gad& = default;
 
-Gad::Gad(const Gad& g)
+
+auto Gad::operator=(const GEN_AIDING_DATA& g) -> Gad&
 {
   this->SetDataType(g.type);
   this->SetStreamId(g.stream_id);
-  this->val        = g.val;
+  this->val        = Gen3d(g.val);
   this->val_valid  = g.val_valid;
-  this->time       = g.time;
+  this->time       = Gen3d(g.time);
   this->time_valid = g.time_valid;
-  this->loc        = g.loc;
+  this->loc        = Gen3d(g.loc);
   this->loc_valid  = g.loc_valid;
-  this->res1       = g.res1;
+  this->res1       = Gen3d(g.res1);
   this->res1_valid = g.res1_valid;
-  this->res2       = g.res2;
-  this->res2_valid = g.res2_valid;
-  this->acq        = g.acq;
-  this->acq_valid  = g.acq_valid;
-}
-
-Gad& Gad::operator=(const GEN_AIDING_DATA& g)
-{
-  this->SetDataType(g.type);
-  this->SetStreamId(g.stream_id);
-  this->val        = g.val;
-  this->val_valid  = g.val_valid;
-  this->time       = g.time;
-  this->time_valid = g.time_valid;
-  this->loc        = g.loc;
-  this->loc_valid  = g.loc_valid;
-  this->res1       = g.res1;
-  this->res1_valid = g.res1_valid;
-  this->res2       = g.res2;
+  this->res2       = Gen3d(g.res2);
   this->res2_valid = g.res2_valid;
   this->acq        = g.acq;
   this->acq_valid  = g.acq_valid;
   return *this;
 }
 
-GEN_AIDING_DATA Gad::getCStruct()
+auto Gad::getCStruct() -> GEN_AIDING_DATA
 {
   GEN_AIDING_DATA g;
   g.type       = GetDataType();
   g.stream_id  = GetStreamId();
-  g.val      = *(this->val);
+  g.val        = GEN_3D(this->val);
   g.val_valid  = this->val_valid;
-  g.time     = *(this->time);
+  g.time       = GEN_3D(this->time);
   g.time_valid = this->time_valid;
-  g.loc      = *(this->loc);
+  g.loc        = GEN_3D(this->loc);
   g.loc_valid  = this->loc_valid;
-  g.res1     = *(this->res1);
+  g.res1       = GEN_3D(this->res1);
   g.res1_valid = this->res1_valid;
-  g.res2     = *(this->res2);
+  g.res2       = GEN_3D(this->res2);
   g.res2_valid = this->res2_valid;
   g.acq        = this->acq;
   g.acq_valid  = this->acq_valid;
@@ -154,10 +191,10 @@ GEN_AIDING_DATA Gad::getCStruct()
 
 // streamId
 void Gad::SetStreamId(int id) { this->stream_id = id; }
-int  Gad::GetStreamId() { return this->stream_id; }
+auto  Gad::GetStreamId() const -> int { return this->stream_id; }
 // type 
 void Gad::SetDataType(int type){ this->type = type; } 
-int  Gad::GetDataType(){ return this->type; } 
+auto  Gad::GetDataType() const -> int{ return this->type; } 
 // val
 void Gad::SetValInvalid(){this->val_valid = 0;}
 void Gad::SetValValid(){this->val_valid = 1;}
@@ -197,8 +234,8 @@ void Gad::SetTimeExternal(double week, double secs)
   this->time.SetValType(TIME_SYS::TIME_EXT);
   this->time.SetVal(week,secs,0.0);
 }
-double Gad::GetTimeExternalWeek(){ return this->time.GetValX(); }
-double Gad::GetTimeExternalSecondsFromSunday(){ return this->time.GetValY(); }
+auto Gad::GetTimeExternalWeek() const -> double { return time.GetValX(); }
+auto Gad::GetTimeExternalSecondsFromSunday() const -> double { return this->time.GetValY(); }
 // GPS
 void   Gad::SetTimeGps(double week, double seconds_from_sunday)
 {
@@ -207,8 +244,8 @@ void   Gad::SetTimeGps(double week, double seconds_from_sunday)
   this->time.SetValType(TIME_SYS::TIME_GPS);
   this->time.SetVal(week,seconds_from_sunday, 0);
 }
-double Gad::GetTimeGpsWeek(){ return this->time.GetValX(); }
-double Gad::GetTimeGpsSecondsFromSunday(){ return this->time.GetValY(); }
+auto Gad::GetTimeGpsWeek() const -> double { return this->time.GetValX(); }
+auto Gad::GetTimeGpsSecondsFromSunday() const -> double{ return this->time.GetValY(); }
 // PPS
 void   Gad::SetTimePpsRelative(double ns)
 {
@@ -218,7 +255,7 @@ void   Gad::SetTimePpsRelative(double ns)
   this->time.SetValType(TIME_SYS::TIME_PPS_RELATIVE);
   this->time.SetVal(0.0, 0.0, ns);
 }
-double Gad::GetTimePpsRelative(){ return this->time.GetValY(); }
+auto Gad::GetTimePpsRelative() const -> double { return this->time.GetValY(); }
 // Latency
 void   Gad::SetTimeLatency(double ns)
 {
@@ -227,7 +264,7 @@ void   Gad::SetTimeLatency(double ns)
   this->time.SetValType(TIME_SYS::TIME_EST_LATENCY);
   this->time.SetVal(0.0, ns, 0.0);
 }
-double Gad::GetTimeLatency(){ return this->time.GetValY(); }
+auto Gad::GetTimeLatency() const -> double{ return this->time.GetValY(); }
 // Void
 void   Gad::SetTimeVoid()
 {
@@ -272,9 +309,8 @@ void Gad::SetAcqTimestamp(uint32_t acq_time)
 {
   this->acq = acq_time;
   this->acq_valid = 1;
-
 }
-uint32_t  Gad::GetAcqTimestamp()
+auto Gad::GetAcqTimestamp() const -> uint32_t
 {
   return this->acq;
 }
@@ -391,11 +427,11 @@ void GadVelocity::SetAidingLeverArmVar(double x, double y, double z)
 GadSpeed::GadSpeed(uint8_t stream_id) : Gad(stream_id, GEN_TYPE::GEN_SPEED){}
 
 // val
-void GadSpeed::SetSpeedFw(double s_f)
+void GadSpeed::SetSpeedFw(double speed)
 {
   this->SetDataMode(0);
   this->SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_FW_VEL);
-  this->SetDataVal(s_f,0.0,0.0); /** @todo Implement with time interval */
+  this->SetDataVal(speed,0.0,0.0); /** @todo Implement with time interval */
 }
 void GadSpeed::SetSpeedFwVar(double v_s)
 {
@@ -459,3 +495,4 @@ void GadAttitude::SetAidingAlignmentVar(double x, double y, double z)
   this->SetDataVarDiag(x,y,z);
 }
 
+} // namespace OxTS

@@ -30,7 +30,7 @@ public:
    * @param packet Encoded data to be sent.
    * @param packet_size Size of the packet in bytes.
    */
-  void virtual OutputPacket(unsigned char * packet, int packet_size) override
+  void OutputPacket(unsigned char * packet, int packet_size) override
   {
     udpServer_->send(packet, packet_size);
   }

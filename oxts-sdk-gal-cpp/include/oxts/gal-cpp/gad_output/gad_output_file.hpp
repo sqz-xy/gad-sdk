@@ -2,6 +2,8 @@
 #define GAD_OUTPUT_FILE_HPP
 /** @file gad_output_file.hpp */
 
+#include <string>
+
 #include "oxts/gal-cpp/gad_output/gad_output.hpp"
 
 namespace OxTS
@@ -24,7 +26,7 @@ public:
   }
 
   /** Output the packet to file */
-  void virtual OutputPacket(unsigned char * packet, int packet_size) override
+  void OutputPacket(unsigned char * packet, int packet_size) override
   {
     fprintf(file_ptr, "%s", packet);
     fflush(file_ptr);
@@ -34,7 +36,7 @@ public:
   FILE * file_ptr;       /** Pointer to file handler object */
 };
 
-}
+} // namespace OxTS
 
 
 #endif // GAD_OUTPUT_FILE_HPP

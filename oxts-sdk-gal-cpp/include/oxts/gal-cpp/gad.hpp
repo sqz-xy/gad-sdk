@@ -2,74 +2,67 @@
 #define GAD_HPP
 /*! @file gad.hpp */
 
-extern "C"
-{
-  #include "oxts/gal-c/gad_struct.h"
-}
+#include <vector>
+
+#include "oxts/gal-c/gad_struct.h"
+
 
 namespace OxTS
 {
   
 
-typedef GEN_BOOL GenFlag;
-
+using GenFlag = GEN_BOOL;
 /**
  * Cpp wrapper class for C struct GEN_3D.
  * 
  * Provides an interface for concrete data structures used in Gad.
  */
-class Gen3d : private GEN_3D
+class Gen3d : public GEN_3D
 {
 public:
   /*! Default Constructor */
-  Gen3d()
-  {
-    SetMode(0);
-    SetValType(0);
-    SetVal(0.0,0.0,0.0);
-    SetVarUpperDiag(0.0,0.0,0.0,0.0,0.0,0.0);
-  }
+  Gen3d();
   /*! Destructor */
-  ~Gen3d(){ }
+  ~Gen3d() = default;
   /*! Copy constructor */
-  Gen3d(const GEN_3D& g);
+  explicit Gen3d(const GEN_3D& g);
 
   /*! Implicit conversion from Gen3d to GEN_3D* */
-  operator ::GEN_3D*(){ return this; }
+  explicit operator ::GEN_3D*(){ return this; }
   /*! Implicit const conversion from Gen3d to GEN_3D* */
-  operator const ::GEN_3D*() const { return this; }
+  explicit operator const ::GEN_3D*() const { return this; }
 
-  /*! Copy assignment operator Gen3d -> GEN_3D */
-  // Gen3d& operator=(const GEN_3D);
-  /*! Copy assignment operator Gen3d -> Gen3d */
-  //Gen3d& operator=(const Gen3d& g);
 
+  auto getCStruct() const -> GEN_3D;
 
   // Accessor functions 
   /*! Set the struct mode. Typically set to 0.*/
   void SetMode(int mode);
   /*! Set the struct mode.*/
-  int  GetMode();
+  auto GetMode() const -> int;
   /** Set the value type. Index source depends on use of the struct. Sources
    *  include ::POS_SYS_TYPE, ::VEL_SYS_TYPE, ::SPEED_SYS_TYPE, ::LOC_SYS.
    */
   void SetValType(int x_type);
   /*! Get the value type. See ::GetMode() for indexes */
-  int  GetValType();
+  auto GetValType() const -> int;
 
-  void   SetValX(double x);
-  double GetValX();
-  void   SetValY(double y);
-  double GetValY();
-  void   SetValZ(double z);
-  double GetValZ();
+  void SetValX(double x);
+  auto GetValX() const -> double;
+  void SetValY(double y);
+  auto GetValY() const -> double;
+  void SetValZ(double z);
+  auto GetValZ() const -> double;
   /*! Set the value array. Used to store the aiding data.*/
-  void   SetVal(double x, double y,double z);
+  void SetVal(double x, double y,double z);
 
+  auto GetVarType() const -> int;
   void SetVarUpperDiag(double v_00, double v_11, double v_22, 
                        double v_01, double v_02, double v_12);
   void SetVarDiag(double v_00, double v_11,double v_22);
   void SetVarSingle(double v_0);
+  auto GetVar() const -> std::vector<double>;
+
 };
 
 
@@ -79,43 +72,41 @@ public:
 class Gad 
 {
 private:
-  /** 
-   * Type of Aiding (position, velocity, ...). For enumerated values see 
+  /** Type of Aiding (position, velocity, ...). For enumerated values see 
    * GEN_TYPE. 
    */
-  int8_t        type;
-  /** 
-   * Aiding stream ID to identify the source device. 
-   * Values 128-254. Each stream should have a unique ID. 
+  int8_t        type = {0};
+  /** Aiding stream ID to identify the source device. 
+   *  Values 128-254. Each stream should have a unique ID. 
    */
-  uint8_t       stream_id;
+  uint8_t       stream_id = {0};
   /** Sub-struct VALUE. Contains navigation aiding data. */
   Gen3d         val;
-  GenFlag       val_valid;
+  GenFlag       val_valid = {0};
   /** Sub-struct TIME. Contains the time the data was recorded. */
   Gen3d         time;
-  GenFlag       time_valid;
+  GenFlag       time_valid = {0};
   /** Sub-struct LOCATION. Contains lever arm (or alignment) data between the 
    * IMU and aiding source.
    */
   Gen3d         loc;
-  GenFlag       loc_valid;
+  GenFlag       loc_valid = {0};
   // Sub-struct RESERVED
   Gen3d         res1;
-  GenFlag       res1_valid;
+  GenFlag       res1_valid = {0};
   // Sub-struct RESERVED
   Gen3d         res2;
-  GenFlag       res2_valid;
+  GenFlag       res2_valid = {0};
   /** 
    * Acquisition Time Stamp. The INS will fill in this timestamp upon its 
    * arrival to the INS. Leave blank.
    */ 
-  uint32_t      acq;                 // Timestamp from INS. Leave empty.
-  GenFlag       acq_valid;
+  uint32_t      acq = {0};                 // Timestamp from INS. Leave empty.
+  GenFlag       acq_valid = {0};
 protected:
   // type 
   void SetDataType(int type); 
-  int  GetDataType(); 
+  auto  GetDataType() const -> int; 
   // val
   void SetValValid();
   void SetValInvalid();
@@ -144,28 +135,22 @@ public:
   Gad(uint8_t stream_id, int8_t aiding_type);
   /*! Destructor */
   ~Gad();
-  /*! Copy constructor to allow direct copy to C struct. */
-  Gad(const GEN_AIDING_DATA& g);
+  /*! Copy constructor */
   Gad(const Gad& g);
-
-  /*! Implicit conversion from Gad to GEN_AIDING_DATA* */
-  //operator ::GEN_AIDING_DATA*(){ return this; }
-  /*! Implicit const conversion from Gad to GEN_AIDING_DATA* */
-  //operator const ::GEN_AIDING_DATA*() const { return this; }
-
-  GEN_AIDING_DATA  getCStruct();
-  /** Copy assignment operator GEN_AIDING_DATA -> Gad 
-   *  @todo Implement the copy assignment operator GEN_AIDING_DATA -> Gad
-  */
-  Gad& operator=(const GEN_AIDING_DATA& g);
+  /*! Copy constructor to allow direct copy to C struct. */
+  explicit Gad(const GEN_AIDING_DATA& g);
   // Copy assignment operator Gad -> Gad */
-  Gad& operator=(const Gad& g);
+  auto operator=(const Gad& g) -> Gad&;
+  // Copy data from Gad to an instance of the C struct GEN_AIDING_DATA
+  auto  getCStruct() -> GEN_AIDING_DATA;
+  /** Copy assignment operator GEN_AIDING_DATA -> Gad   */
+  auto operator=(const GEN_AIDING_DATA& g) -> Gad&;
 
   // General Accessors
   /** Set Stream ID for this GAD packet */
   void SetStreamId(int id);
   /** Get Stream ID for this GAD packet */
-  int  GetStreamId();
+  auto GetStreamId() const -> int;
 
   // Time accessors
   /** Set Time Valid flag to false */
@@ -178,9 +163,9 @@ public:
    */
   void   SetTimeExternal(double week, double secs);
   /** Get the week in the external time */
-  double GetTimeExternalWeek();
+  auto GetTimeExternalWeek() const -> double;
   /** Get the seconds into the week in the external time */
-  double GetTimeExternalSecondsFromSunday();
+  auto GetTimeExternalSecondsFromSunday() const -> double;
   /** Set timestamp for this data 
    * @param week GPS Week 
    * @param seconds_from_sunday Seconds from Midnight Sunday (s)
@@ -188,15 +173,15 @@ public:
   void   SetTimeGps(double week, double seconds_from_sunday);
   /** Get the GPS Week value. Note that this function assumes that 
    *  the time has been set in this format, there is no check. */
-  double GetTimeGpsWeek();
+  auto GetTimeGpsWeek() const -> double;
   /** Get the Seconds from Sunday value. Note that this function assumes that 
    *  the time has been set in this format, there is no check. */
-  double GetTimeGpsSecondsFromSunday();
+  auto GetTimeGpsSecondsFromSunday() const -> double;
   /** Set a PPS relative timestamp
    * @param ns Time since PPS timestamp (nanoseconds)
    */
   void   SetTimePpsRelative(double ns);
-  double GetTimePpsRelative();
+  auto GetTimePpsRelative() const -> double;
   /**
    * Set the timestamp type for this data to Latency. The latency is an estimate
    * of the time taken for the packet to travel from the aiding source to the 
@@ -206,7 +191,7 @@ public:
    */
   void   SetTimeLatency(double ns);
   /** Get latency estimate.   */
-  double GetTimeLatency();
+  auto GetTimeLatency() const -> double;
   /**
    * Set the timestamp type for this data to void. Data with a void timestamp
    * will be timestamped by the INS upon receipt.
@@ -224,7 +209,7 @@ public:
   /*! Set the acquisition time of the data. Not to be used outside of the INS.*/
   void SetAcqTimestamp(uint32_t acq_time);
   /*! Get the acquisition time of the data. Not expected to be set outside of the INS.*/
-  uint32_t  GetAcqTimestamp();
+  auto  GetAcqTimestamp() const -> uint32_t;
 
 };
 
@@ -241,7 +226,7 @@ public:
    * 
    * @param stream_id Stream ID for the position aiding source. Must be unique 128-254.
    */
-  GadPosition(uint8_t stream_id);
+  explicit GadPosition(uint8_t stream_id);
   /**
    * Set the aiding position in the WGS84 coordinate frame.
    * @param lat Latitude of the position estimate (deg).
@@ -313,7 +298,7 @@ public:
    * 
    * @param stream_id Stream ID for the velocity aiding source. Must be unique 128-254.
    */
-  GadVelocity(uint8_t stream_id);
+  explicit GadVelocity(uint8_t stream_id);
   /**
    * Set the aiding velocity estimate in the local NEU coordinate frame.
    * @param v_n Velocity estimate in the North direction (m/s).
@@ -397,7 +382,7 @@ class GadSpeed : public Gad
 private:
 
 public:
-  GadSpeed(uint8_t stream_id);
+  explicit GadSpeed(uint8_t stream_id);
 
   /**
    * Set the forward speed aiding estimate. 
@@ -470,7 +455,7 @@ public:
   /** Constructor. 
    *  @param stream_id Stream ID for the attitude aiding source. Must be unique 128-254.
   */
-  GadAttitude(uint8_t stream_id);
+  explicit GadAttitude(uint8_t stream_id);
   // val
   /**
    * Set the aiding attitude measurement relative to the NED coordinate frame.
@@ -511,7 +496,7 @@ public:
   void SetAidingAlignmentVar(double x, double y, double z);
 };
 
-}
+} // namespace OxTS
 
 
 

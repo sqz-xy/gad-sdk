@@ -16,12 +16,12 @@ private:
 
   int EncodeGen3d(Gen3d& g)
   {
-    return encode_gen_3d(*g, this->buffer, &this->buffer_offset, this->buffer_size);
+    return encode_gen_3d(GEN_3D(g), this->buffer, &this->buffer_offset, this->buffer_size);
   }
 
   int EncodeGen3dVar(Gen3d& g)
   {
-    return encode_gen_3d_var(*g, this->buffer, &this->buffer_offset, this->buffer_size);
+    return encode_gen_3d_var(GEN_3D(g), this->buffer, &this->buffer_offset, this->buffer_size);
   }
 
   int BufferOverrunCheck(size_t expected_data_size)
@@ -59,14 +59,14 @@ public:
   /** Override of the GetPacket function to retrieve the CCom message to be 
    *  sent to an INS.
    */
-  virtual unsigned char * GetPacket() override
+  unsigned char * GetPacket() override
   {
     return this->ccom_gad.msg;
   }
   /** Override of the GetPacketSize function, to retrieve the size of the 
    * generic aiding packet (wrapped in CCom) to be transmitted to an INS.
    */
-  virtual std::size_t GetPacketSize() override
+  std::size_t GetPacketSize() override
   {
     return this->ccom_gad.msg_len;
   }

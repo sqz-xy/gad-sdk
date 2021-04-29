@@ -10,7 +10,7 @@
 #include "oxts/gal-c/gad_encode_csv.h"
 #include "oxts/gal-cpp/gad.hpp"
 
-#define CCOM_PKT_GEN_AIDING  (0x0b01)
+const uint16_t CCOM_PKT_GEN_AIDING  = 0x0b01;
 
 namespace OxTS
 {
@@ -28,7 +28,6 @@ protected:
   unsigned char buffer[buffer_size];
   std::size_t buffer_offset;
   std::size_t gad_size;
-
 public:
   GadEncoder()
   {
@@ -36,7 +35,7 @@ public:
     this->gad_size = 0;
   }
   /** Virtual Destructor. */
-  virtual ~GadEncoder() {}
+  virtual ~GadEncoder() = default;
   /** Encode data in the Gad class to either binary or csv string */
   virtual void EncodePacket(Gad& g) = 0;
   /** Get the encoded packet.

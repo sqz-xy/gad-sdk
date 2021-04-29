@@ -24,7 +24,7 @@ private:
     return encode_gen_3d_var(GEN_3D(g), this->buffer, &this->buffer_offset, OxTS::GadEncoderBin::buffer_size);
   }
 
-  auto BufferOverrunCheck(size_t expected_data_size) -> int const
+  static auto BufferOverrunCheck(size_t expected_data_size) -> int const 
   {
     return buffer_overrun_chk(OxTS::GadEncoderBin::buffer_size, expected_data_size);
   }
@@ -43,6 +43,7 @@ public:
   {
     this->buffer_offset = 0;
     this->gad_size = 0;
+    this->ccom_gad = CCOM_MSG();
   }
   /** Override of EncodePacket function to encode data from Gad class to a 
    *  binary CCom packet for transmission to an OxTS INS.

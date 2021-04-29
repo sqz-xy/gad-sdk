@@ -167,7 +167,7 @@ public:
     * dest_ip - the ip of the destination endpoint
     * dest_port - port of the destination endpoint
   */
-  void set_remote_endpoint(std::string dest_ip, short dest_port)
+  void set_remote_endpoint(std::string dest_ip, int dest_port)
   {
     remote_endpoint = udp::endpoint(address::from_string(dest_ip), dest_port);
   }

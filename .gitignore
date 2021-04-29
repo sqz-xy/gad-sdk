@@ -4,3 +4,4 @@ _install/
 install/
 .vscode/
 public/
+.cache/

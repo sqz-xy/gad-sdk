@@ -5,11 +5,14 @@
 #include "oxts/gal-cpp/gad_output/gad_output.hpp"
 
 #ifndef OXTS_SDK_DISABLE_BOOST
-#include "oxts/gal-cpp/udp_server_client.h"
+#include "oxts/gal-cpp/udp_server_client.hpp"
 #endif
 
 namespace OxTS
 {
+
+const int GAD_PORT = 50485;
+
 #ifndef OXTS_SDK_DISABLE_BOOST
 class GadOutputUdp : public GadOutput
 {
@@ -18,7 +21,7 @@ private:
 
   std::shared_ptr<networking_udp::server> udpServer_;
   /** Port on the INS to recieve GAD. */
-  short unitGaPort = 50485;
+  int unitGaPort = GAD_PORT;
 public:
   /** Constructor */
   GadOutputUdp(std::string ip)

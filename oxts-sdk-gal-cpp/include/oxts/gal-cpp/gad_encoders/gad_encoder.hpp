@@ -42,11 +42,11 @@ public:
   /** Get the encoded packet.
    * @return The packet as an unsigned char array
    */
-  virtual unsigned char * GetPacket() = 0;
+  virtual auto GetPacket() -> unsigned char * = 0;
   /** Get the size of the encoded packet (bytes).
    * @return Size of the packet.
    */
-  virtual std::size_t GetPacketSize() = 0;
+  virtual auto GetPacketSize() -> std::size_t = 0;
 
 };
 

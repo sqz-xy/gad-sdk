@@ -77,7 +77,10 @@ public:
     return:
     number of bytes received, if it fails prints error code and returns 0.
   */
-  std::size_t receive_from(byte* recv_buffer, std::size_t size_of_buffer, udp::endpoint required_sender_endpoint)
+  auto receive_from(byte* recv_buffer,
+                           std::size_t size_of_buffer,
+                           udp::endpoint required_sender_endpoint
+                          ) -> std::size_t
   {
     boost::system::error_code error_code;
     std::size_t bytes_received = 0;
@@ -116,7 +119,7 @@ public:
     return:
     number of bytes received, if it fails prints error code and returns 0.
   */
-  std::size_t receive(byte* recv_buffer, std::size_t size_of_buffer)
+  auto receive(byte* recv_buffer, std::size_t size_of_buffer) -> std::size_t
   {
     boost::system::error_code ec;
     std::size_t bytes_received = 0;
@@ -179,7 +182,7 @@ public:
     return:
     * the number of bytes sent to the endpoint
   */
-  std::size_t send(byte* buffer, std::size_t buffer_size)
+  auto send(byte* buffer, std::size_t buffer_size) -> std::size_t
   {
     boost::system::error_code error_code;
     std::size_t sent = 0;
@@ -211,7 +214,10 @@ public:
     return:
     * the number of bytes sent to the endpoint
   */
-  std::size_t send_to(byte* buffer, std::size_t buffer_size, udp::endpoint remote_endpoint)
+  auto send_to(byte* buffer,
+               std::size_t buffer_size,
+               udp::endpoint remote_endpoint
+              ) -> std::size_t
   {
     boost::system::error_code error_code;
     std::size_t sent = 0;
@@ -245,7 +251,10 @@ public:
     return:
     * the number of bytes sent to the endpoint
   */
-  std::size_t send_to_port(byte* buffer, std::size_t buffer_size, short port)
+  auto send_to_port(byte* buffer, 
+                    std::size_t buffer_size,
+                    short port) 
+                    -> std::size_t
   {
     boost::system::error_code error_code;
     std::size_t sent = 0;

@@ -50,14 +50,14 @@ public:
   /** Retrieve the encoded packet 
    * @return Char array containing the packet encoded in csv form.
   */
-  unsigned char * GetPacket() override
+  auto GetPacket() -> unsigned char * override
   {
     return reinterpret_cast<unsigned char *>(this->out_string);
   }
   /** 
    * @return The encoded packet size (bytes)
   */
-  std::size_t GetPacketSize() override
+  auto GetPacketSize() -> std::size_t override 
   {
     return this->offset;
   }

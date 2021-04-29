@@ -3,7 +3,7 @@
 
 #include <cstddef>
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib>
 
 #include "oxts/core/ccomtx.h"
 #include "oxts/gal-c/gad_encode_bin.h"
@@ -30,6 +30,11 @@ protected:
   std::size_t gad_size;
 
 public:
+  GadEncoder()
+  {
+    this->buffer_offset = 0;
+    this->gad_size = 0;
+  }
   /** Virtual Destructor. */
   virtual ~GadEncoder() {}
   /** Encode data in the Gad class to either binary or csv string */

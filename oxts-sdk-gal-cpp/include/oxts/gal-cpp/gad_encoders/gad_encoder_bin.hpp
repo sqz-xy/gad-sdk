@@ -14,26 +14,26 @@ class GadEncoderBin : public GadEncoder
 {
 private:
 
-  int EncodeGen3d(Gen3d& g)
+  auto EncodeGen3d(Gen3d& g) -> int
   {
-    return encode_gen_3d(GEN_3D(g), this->buffer, &this->buffer_offset, this->buffer_size);
+    return encode_gen_3d(GEN_3D(g), this->buffer, &this->buffer_offset, OxTS::GadEncoderBin::buffer_size);
   }
 
-  int EncodeGen3dVar(Gen3d& g)
+  auto EncodeGen3dVar(Gen3d& g) -> int
   {
-    return encode_gen_3d_var(GEN_3D(g), this->buffer, &this->buffer_offset, this->buffer_size);
+    return encode_gen_3d_var(GEN_3D(g), this->buffer, &this->buffer_offset, OxTS::GadEncoderBin::buffer_size);
   }
 
-  int BufferOverrunCheck(size_t expected_data_size)
+  auto BufferOverrunCheck(size_t expected_data_size) -> int const
   {
-    return buffer_overrun_chk(this->buffer_size, expected_data_size);
+    return buffer_overrun_chk(OxTS::GadEncoderBin::buffer_size, expected_data_size);
   }
 
-  int EncodeGadBin(Gad& g )
+  auto EncodeGadBin(Gad& g ) -> int
   {
     // Copy Gad -> GEN_AIDING_DATA
     GEN_AIDING_DATA genaid = g.getCStruct();
-    return encode_gen_aid(&genaid, this->buffer, this->buffer_size,&this->gad_size);
+    return encode_gen_aid(&genaid, this->buffer, OxTS::GadEncoderBin::buffer_size,&this->gad_size);
   }
 
   CCOM_MSG ccom_gad;
@@ -59,14 +59,14 @@ public:
   /** Override of the GetPacket function to retrieve the CCom message to be 
    *  sent to an INS.
    */
-  unsigned char * GetPacket() override
+  auto GetPacket() -> unsigned char * override
   {
     return this->ccom_gad.msg;
   }
   /** Override of the GetPacketSize function, to retrieve the size of the 
    * generic aiding packet (wrapped in CCom) to be transmitted to an INS.
    */
-  std::size_t GetPacketSize() override
+  auto GetPacketSize() -> std::size_t override
   {
     return this->ccom_gad.msg_len;
   }

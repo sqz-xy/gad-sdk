@@ -38,8 +38,7 @@ cmake ..
 cmake --build . --target install
 ```
 
-This will build the SDK and install it to your machine. Once this is complete, 
-other CMake projects on the machine can link to the libraries using:
+This will build the SDK and install it to your machine. Your machine may report an error from the INSTALL that permission to copy a file has been denied. In this case run the last command again, but add `sudo` to the start. This should provide the correct access rights to install files to the correct location. Once this is complete, other CMake projects on the machine can link to the libraries using:
 
 ```
 find_package(oxts-sdk-gal-cpp REQUIRED)

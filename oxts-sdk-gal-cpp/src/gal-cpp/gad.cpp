@@ -363,7 +363,7 @@ void GadPosition::SetAidingLeverArmConfig()
 
 void GadPosition::SetAidingLeverArmVar(double x, double y, double z)
 {
-  this->SetDataVarDiag(x,y,z);
+  this->SetLocVarDiag(x,y,z);
 }
 
 //==============================================================================
@@ -461,7 +461,7 @@ void GadSpeed::SetAidingLeverArmOptimising()
 }
 void GadSpeed::SetAidingLeverArmVar(double x, double y, double z)
 {
-  this->SetDataVarDiag(x,y,z);
+  this->SetLocVarDiag(x,y,z);
 }
 //==============================================================================
 // GadAttitude

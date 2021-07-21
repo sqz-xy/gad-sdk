@@ -413,6 +413,11 @@ void GadVelocity::SetAidingLeverArmFixed(double x, double y, double z)
   this->SetLocMode(LOC_SYS::LOC_FIXED);
   this->SetLocVal(x,y,z);
 }
+
+void GadVelocity::SetAidingLeverArmConfig()
+{
+  this->SetLocMode(LOC_SYS::LOC_CONFIG);
+}
 void GadVelocity::SetAidingLeverArmOptimising()
 {
   this->SetLocMode(LOC_SYS::LOC_KF);
@@ -453,6 +458,10 @@ void GadSpeed::SetAidingLeverArmFixed(double x, double y, double z)
 {
   this->SetLocMode(LOC_SYS::LOC_FIXED);
   this->SetLocVal(x,y,z);
+}
+void GadSpeed::SetAidingLeverArmConfig()
+{
+  this->SetLocMode(LOC_SYS::LOC_CONFIG);
 }
 void GadSpeed::SetAidingLeverArmOptimising()
 {

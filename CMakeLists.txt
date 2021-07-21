@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.4)
 
-project(oxts-sdk)
+project(oxts-sdk LANGUAGES CXX C)
 
 # Add preprocessor definitions for the SDK version and platform name
 add_definitions(-DOXTS_SDK_VERSION_STRING=\"${oxts-sdk_VERSION}\")
@@ -11,6 +11,7 @@ add_definitions(-DOXTS_SDK_VERSION_PATCH=${oxts-sdk_VERSION_PATCH})
 # Building and installation options
 #option(OXTS_SDK_BUILD_DOCS "Build SDK documentation." OFF)
 option(OXTS_SDK_BUILD_EXAMPLES "Enable examples targets." ON) 
+option(OXTS_SDK_BUILD_PYTHON "Build SDK Python wrapper." OFF) 
 option(OXTS_SDK_DISABLE_BOOST "Use Boost library when building." OFF)
 # Used for cpp linting by clang-tidy
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -40,3 +41,15 @@ if (OXTS_SDK_BUILD_EXAMPLES)
     add_subdirectory(examples)
 endif()
 
+if (OXTS_SDK_BUILD_PYTHON)
+    add_subdirectory(oxts-sdk-py/pybind11)
+    pybind11_add_module(oxts_sdk oxts-sdk-py/gal-py-bindings.cpp 
+                                 oxts-sdk-gal-cpp/src/gal-cpp/gad.cpp
+                                 oxts-sdk-gal-cpp/src/gal-cpp/gad_handler.cpp
+                                 oxts-sdk-gal-c/src/gad_encode_bin.c
+                                 oxts-sdk-gal-c/src/gad_encode_csv.c
+                                 oxts-sdk-core/src/BasicCasts.c
+                                 oxts-sdk-core/src/ccomtx.cpp
+    )
+
+endif()

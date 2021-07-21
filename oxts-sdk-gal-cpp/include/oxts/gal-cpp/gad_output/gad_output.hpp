@@ -1,6 +1,8 @@
 #ifndef GAD_OUTPUT_HPP
 #define GAD_OUTPUT_HPP
 
+namespace OxTS
+{
 
 /**
  * Virtual interface class for different methods of outputting GAD.
@@ -17,5 +19,6 @@ public:
 };
 
 
+}
 
 #endif //GAD_OUTPUT_HPP

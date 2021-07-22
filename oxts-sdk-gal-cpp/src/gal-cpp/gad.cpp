@@ -225,7 +225,7 @@ void Gad::SetDataVarSingle(double v_0)
 
 // time
 void Gad::SetTimeValid(bool flag)  {this->time_valid = flag;}
-bool Gad::GetTimeValid()  {return this->time_valid;}
+auto Gad::GetTimeValid() const -> bool {return this->time_valid;}
 //
 void Gad::SetTimeExternal(double week, double secs)
 {

@@ -160,13 +160,12 @@ public:
   /** Set Time Valid flag 
   * @return flag boolean to indicate whether time validity
   */
-  bool GetTimeValid();
-
+  auto GetTimeValid() const -> bool;
   /** Set time from an external clock
    * @param week Week in the external time frame
    * @param seconds Seconds in the external time frame
    */
-  void   SetTimeExternal(double week, double secs);
+  void SetTimeExternal(double week, double secs);
   /** Get the week in the external time */
   auto GetTimeExternalWeek() const -> double;
   /** Get the seconds into the week in the external time */

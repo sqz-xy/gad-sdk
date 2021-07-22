@@ -55,6 +55,7 @@ public:
   auto GetValZ() const -> double;
   /*! Set the value array. Used to store the aiding data.*/
   void SetVal(double x, double y,double z);
+  auto GetVal() const -> std::vector<double>;
 
   auto GetVarType() const -> int;
   void SetVarUpperDiag(double v_00, double v_11, double v_22, 
@@ -108,25 +109,35 @@ protected:
   void SetDataType(int type); 
   auto  GetDataType() const -> int; 
   // val
-  void SetValValid();
-  void SetValInvalid();
+  /** Set Time Valid flag 
+   * @param flag boolean to indicate whether time is valid or invalid
+   */
+  void SetValValid(bool flag);
+  /** Set Time Valid flag 
+  * @return flag boolean to indicate whether time validity
+  */
+  auto GetValValid() const -> bool;
   void SetDataMode(int mode);
   void SetDataValType(int x_type);
   void SetDataVal(double x_0, double x_1,double x_2);
+  auto GetDataVal() const -> std::vector<double>;
   void SetDataVarUpperDiag(double v_00, double v_11, double v_22, 
                            double v_01, double v_02, double v_12);
   void SetDataVarDiag(double v_0, double v_1,double v_2);
   void SetDataVarSingle(double v_0);
+  auto GetDataVar() const -> std::vector<double>;
   // loc  
-  void SetLocValid();
-  void SetLocInvalid();
+  void SetLocValid(bool flag);
+  auto GetLocValid() const -> bool;
   void SetLocMode(int mode);
   void SetLocValType(int x_type);
   void SetLocVal(double x_0, double x_1,double x_2);
+  auto GetLocVal() const -> std::vector<double>;
   void SetLocVarUpperDiag(double v_00, double v_11, double v_22, 
                           double v_01, double v_02, double v_12);
   void SetLocVarDiag(double v_00, double v_11,double v_22);
   void SetLocVarSingle(double v_0);
+  auto GetLocVar() const -> std::vector<double>;
 
 public:
   /*! Default Constructor */
@@ -170,11 +181,13 @@ public:
   auto GetTimeExternalWeek() const -> double;
   /** Get the seconds into the week in the external time */
   auto GetTimeExternalSecondsFromSunday() const -> double;
+  auto GetTimeExternal() const -> std::vector<double>;
   /** Set timestamp for this data 
    * @param week GPS Week 
    * @param seconds_from_sunday Seconds from Midnight Sunday (s)
    */
-  void   SetTimeGps(double week, double seconds_from_sunday);
+  void SetTimeGps(double week, double seconds_from_sunday);
+  auto GetTimeGps() const -> std::vector<double>;
   /** Get the GPS Week value. Note that this function assumes that 
    *  the time has been set in this format, there is no check. */
   auto GetTimeGpsWeek() const -> double;
@@ -184,7 +197,7 @@ public:
   /** Set a PPS relative timestamp
    * @param ns Time since PPS timestamp (nanoseconds)
    */
-  void   SetTimePpsRelative(double ns);
+  void SetTimePpsRelative(double ns);
   auto GetTimePpsRelative() const -> double;
   /**
    * Set the timestamp type for this data to Latency. The latency is an estimate
@@ -193,23 +206,23 @@ public:
    * latency.
    * @param ns Latency estimate in (nanoseconds).
    */
-  void   SetTimeLatency(double ns);
+  void SetTimeLatency(double ns);
   /** Get latency estimate.   */
   auto GetTimeLatency() const -> double;
   /**
    * Set the timestamp type for this data to void. Data with a void timestamp
    * will be timestamped by the INS upon receipt.
    */
-  void   SetTimeVoid();
-  
-  void SetRes1Invalid();
-  void SetRes1Valid();
-  void SetRes2Invalid();
-  void SetRes2Valid();
+  void SetTimeVoid();
+
+  void SetRes1Valid(bool flag);
+  auto GetRes1Valid() const -> bool;
+  void SetRes2Valid(bool flag);
+  auto GetRes2Valid() const -> bool;
 
   // Acquisiton time accessors.
-  void SetAcqInvalid();
-  void SetAcqValid();
+  void SetAcqValid(bool flag);
+  auto GetAcqValid() const -> bool;
   /*! Set the acquisition time of the data. Not to be used outside of the INS.*/
   void SetAcqTimestamp(uint32_t acq_time);
   /*! Get the acquisition time of the data. Not expected to be set outside of the INS.*/
@@ -246,6 +259,10 @@ public:
    */
   void SetPosLocal(double x, double y, double z);
   /**
+   * Get the aiding position.
+   */
+  auto GetPos() const -> std::vector<double>;
+  /**
    * Set the variance aiding position in the coordinate frame.
    * @param v_n Variance of the position estimate (m^2).
    * @param v_e Variance of the position estimate (m^2).
@@ -260,6 +277,10 @@ public:
    */
   void SetPosLocalVar(double v_x, double v_y, double v_z);
   /**
+   * Get the aiding position variance.
+   */
+  auto GetPosVar() const -> std::vector<double>;
+  /**
    * Set lever arm from the INS to the aiding source. This lever arm will not be
    * optimised by the Kalman Filter.
    * 
@@ -268,6 +289,7 @@ public:
    * @param z Offset from INS to aiding source in the z axis of the IMU frame (m).
    */
   void SetAidingLeverArmFixed(double x, double y, double z);
+  auto GetAidingLeverArm() const -> std::vector<double>;
   /**
    * Set lever arm from the INS to the position aiding source. to be
    * optimised by the Kalman Filter during navigation.
@@ -287,6 +309,7 @@ public:
    * @param z Variance on the lever arm from INS to aiding source in the z axis of the IMU frame.
    */ 
   void SetAidingLeverArmVar(double x, double y, double z);
+  auto GetAidingLeverArmVar() const -> std::vector<double>;
 };
 
 /**
@@ -325,6 +348,10 @@ public:
    */
   void SetVelLocal(double v_x, double v_y, double v_z);
   /**
+   * Get the aiding velocity estimate.
+   */
+  auto GetVel() const -> std::vector<double>;
+  /**
    * Set the aiding velocity variance estimate in the local NEU coordinate frame.
    * @param v_n Velocity variance estimate in the North direction (m/s)^2.
    * @param v_e Velocity variance estimate in the East direction (m/s)^2.
@@ -346,6 +373,10 @@ public:
    */
   void SetVelLocalVar(double v_x, double v_y, double v_z);
   /**
+   * Get the aiding velocity variance estimate.
+   */
+  auto GetVelVar() const -> std::vector<double>;
+  /**
    * Set lever arm from the INS to the aiding source. This lever arm will not be
    * optimised by the Kalman Filter.
    * 
@@ -354,6 +385,7 @@ public:
    * @param z Offset from INS to aiding source in the z axis of the IMU frame (m).
    */
   void SetAidingLeverArmFixed(double x, double y, double z);
+  auto GetAidingLeverArm() const -> std::vector<double>;
   /**
    * Set lever arm from the INS to the aiding source to be taken from the .gap
    * file. This lever arm will be optimised by the Kalman Filter during 
@@ -376,6 +408,7 @@ public:
    * @param z Variance on the lever arm from INS to aiding source in the z axis of the IMU frame.
    */ 
   void SetAidingLeverArmVar(double x, double y, double z);
+  auto GetAidingLeverArmVar() const -> std::vector<double>;
 };
 
 /**
@@ -394,12 +427,14 @@ public:
    * @param speed Forward speed estimate in the vehicle frame (m/s).
    */
   void SetSpeedFw(double speed);
+  auto GetSpeedFw() const -> double;
   /**
    * Set estimated variance on the forward speed aiding measurement. 
    * 
    * @param v_s Forward speed estimate in the vehicle frame (units).
    */
   void SetSpeedFwVar(double v_s);
+  auto GetSpeedFwVar() const -> double;
   /**
    * Set the pulse count measurement from a wheelspeed encoder. 
    * 
@@ -410,6 +445,7 @@ public:
    * start, middle, end.
    */
   void SetWheelspeedCount(double count, double period);
+  auto GetWheelspeedCount() const -> std::vector<double>;
   /**
    * Set the estimated variance on the wheelspeed pulse count. 
    * 
@@ -417,6 +453,7 @@ public:
    * @todo Clarify units
    */
   void SetWheelspeedVar(double v_c);
+  auto GetWheelspeedVar() const -> double;
   /**
    * Set lever arm from the INS to the aiding source. This lever arm will not be
    * optimised by the Kalman Filter.
@@ -426,6 +463,7 @@ public:
    * @param z Offset from INS to aiding source in the z axis of the IMU frame (m).
    */
   void SetAidingLeverArmFixed(double x, double y, double z);
+  auto GetAidingLeverArm() const -> std::vector<double>;
   /**
    * Set lever arm from the INS to the aiding source to be taken from the .gap
    * file. This lever arm will be optimised by the Kalman Filter during 
@@ -448,6 +486,7 @@ public:
    * @param z Variance on the lever arm from INS to aiding source in the z axis of the IMU frame.
    */ 
   void SetAidingLeverArmVar(double x, double y, double z);
+  auto GetAidingLeverArmVar() const -> std::vector<double>;
 };
 
 /**
@@ -460,6 +499,7 @@ public:
    *  @param stream_id Stream ID for the attitude aiding source. Must be unique 128-254.
   */
   explicit GadAttitude(uint8_t stream_id);
+  auto GetAtt() const -> std::vector<double>;
   // val
   /**
    * Set the aiding attitude measurement relative to the NED coordinate frame.
@@ -477,6 +517,7 @@ public:
    * @param v_r Variance estimate on the roll angle (deg)^2
    */
   void SetAttVar(double v_h, double v_p, double v_r);
+  auto GetAttVar() const -> std::vector<double>;
   /**
    * Set the angles which specify the rotation required to align the IMU and 
    * aiding sensor frames. This alignment will not be optimised by the INS.
@@ -484,6 +525,7 @@ public:
    * @param y
    * @param z
    */
+  auto GetAidingAlignment() const -> std::vector<double>;
   void SetAidingAlignmentFixed(double x, double y, double z);
   /**
    * Set alignment to be optimised by the INS. The alignment values will be read
@@ -498,6 +540,7 @@ public:
    * @param z
    */
   void SetAidingAlignmentVar(double x, double y, double z);
+  auto GetAidingAlignmentVar() const -> std::vector<double>;
 };
 
 } // namespace OxTS

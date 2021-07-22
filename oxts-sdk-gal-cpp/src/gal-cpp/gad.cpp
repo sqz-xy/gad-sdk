@@ -224,12 +224,12 @@ void Gad::SetDataVarSingle(double v_0)
 }
 
 // time
-void Gad::SetTimeInvalid(){this->time_valid = 0;}
-void Gad::SetTimeValid()  {this->time_valid = 1;}
+void Gad::SetTimeValid(bool flag)  {this->time_valid = flag;}
+bool Gad::GetTimeValid()  {return this->time_valid;}
 //
 void Gad::SetTimeExternal(double week, double secs)
 {
-  this->SetTimeValid();
+  this->SetTimeValid(true);
   this->time.SetMode(0);
   this->time.SetValType(TIME_SYS::TIME_EXT);
   this->time.SetVal(week,secs,0.0);
@@ -239,7 +239,7 @@ auto Gad::GetTimeExternalSecondsFromSunday() const -> double { return this->time
 // GPS
 void   Gad::SetTimeGps(double week, double seconds_from_sunday)
 {
-  this->SetTimeValid();
+  this->SetTimeValid(true);
   this->time.SetMode(0);
   this->time.SetValType(TIME_SYS::TIME_GPS);
   this->time.SetVal(week,seconds_from_sunday, 0);
@@ -249,7 +249,7 @@ auto Gad::GetTimeGpsSecondsFromSunday() const -> double{ return this->time.GetVa
 // PPS
 void   Gad::SetTimePpsRelative(double ns)
 {
-  this->SetTimeValid();
+  this->SetTimeValid(true);
 
   this->time.SetMode(0);
   this->time.SetValType(TIME_SYS::TIME_PPS_RELATIVE);
@@ -259,7 +259,7 @@ auto Gad::GetTimePpsRelative() const -> double { return this->time.GetValY(); }
 // Latency
 void   Gad::SetTimeLatency(double ns)
 {
-  this->SetTimeValid();
+  this->SetTimeValid(true);
   this->time.SetMode(0);
   this->time.SetValType(TIME_SYS::TIME_EST_LATENCY);
   this->time.SetVal(0.0, ns, 0.0);
@@ -268,7 +268,7 @@ auto Gad::GetTimeLatency() const -> double{ return this->time.GetValY(); }
 // Void
 void   Gad::SetTimeVoid()
 {
-  this->SetTimeValid();
+  this->SetTimeValid(true);
   this->time.SetMode(0);
   this->time.SetValType(TIME_SYS::TIME_VOID);
 }

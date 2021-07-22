@@ -153,10 +153,15 @@ public:
   auto GetStreamId() const -> int;
 
   // Time accessors
-  /** Set Time Valid flag to false */
-  void SetTimeInvalid();
-  /** Set Time Valid flag to true */
-  void SetTimeValid();
+  /** Set Time Valid flag 
+   * @param flag boolean to indicate whether time is valid or invalid
+   */
+  void SetTimeValid(bool flag);
+  /** Set Time Valid flag 
+  * @return flag boolean to indicate whether time validity
+  */
+  bool GetTimeValid();
+
   /** Set time from an external clock
    * @param week Week in the external time frame
    * @param seconds Seconds in the external time frame

@@ -1,5 +1,8 @@
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+
 #include <string>
+#include <vector>
 
 #include "oxts/gal-cpp/gad.hpp"
 #include "oxts/gal-cpp/gad_handler.hpp"
@@ -10,109 +13,100 @@
 
 namespace py = pybind11;
 
+#define UNPACK2(cls, func) [](OxTS::cls &c, std::vector<double> vec) {c.func(vec[0], vec[1]);}
+#define UNPACK3(cls, func) [](OxTS::cls &c, std::vector<double> vec) {c.func(vec[0], vec[1], vec[2]);}
+
 PYBIND11_MODULE(oxts_sdk, m) {
     m.doc() = "OxTS SDK"; // optional module docstring
 
     py::class_<OxTS::Gad>(m, "Gad")
         // Constructors
         .def(py::init<>())
-        .def(py::init<uint8_t, int8_t>())
+        .def(py::init<uint8_t, int8_t>(), py::arg("stream_id"), py::arg("aiding_type"))
         // General Accessors
-        .def("set_stream_id", &OxTS::Gad::SetStreamId)
-        .def("get_stream_id", &OxTS::Gad::GetStreamId)
+        .def_property("stream_id", &OxTS::Gad::GetStreamId, &OxTS::Gad::SetStreamId)
         // Time accessors
-        .def("set_time_invalid", &OxTS::Gad::SetTimeInvalid)
-        .def("set_time_valid", &OxTS::Gad::SetTimeValid)
-        .def("set_time_external", &OxTS::Gad::SetTimeExternal)
-        .def("get_time_external_week", &OxTS::Gad::GetTimeExternalWeek)
-        .def("get_time_external_seconds_from_sunday", &OxTS::Gad::GetTimeExternalSecondsFromSunday)
-        .def("set_time_gps", &OxTS::Gad::SetTimeGps)
-        .def("get_time_gps_week", &OxTS::Gad::GetTimeGpsWeek)
-        .def("get_time_gps_seconds_from_sunday", &OxTS::Gad::GetTimeGpsSecondsFromSunday)
-        .def("set_time_pps_relative", &OxTS::Gad::SetTimePpsRelative)
-        .def("get_time_pps_relative", &OxTS::Gad::GetTimePpsRelative)
-        .def("set_time_latency", &OxTS::Gad::SetTimeLatency)
-        .def("get_time_latency", &OxTS::Gad::GetTimeLatency)
+        .def_property("time_valid", &OxTS::Gad::GetTimeValid, &OxTS::Gad::SetTimeValid)
+        .def_property("time_external", &OxTS::Gad::GetTimeExternal, UNPACK2(Gad, SetTimeExternal))
+        .def_property("time_gps", &OxTS::Gad::GetTimeGps, UNPACK2(Gad, SetTimeGps))
+        .def_property("time_pps_relative", &OxTS::Gad::GetTimePpsRelative, &OxTS::Gad::SetTimePpsRelative)
+        .def_property("time_latency", &OxTS::Gad::GetTimeLatency, &OxTS::Gad::SetTimeLatency)
         .def("set_time_void", &OxTS::Gad::SetTimeVoid)
         // Acquisiton time accessors.
-        .def("set_acq_invalid", &OxTS::Gad::SetAcqInvalid)
-        .def("set_acq_valid", &OxTS::Gad::SetAcqValid)
-        .def("set_acq_timestamp", &OxTS::Gad::SetAcqTimestamp)
-        .def("get_acq_timestamp", &OxTS::Gad::GetAcqTimestamp);
+        .def_property("acq_valid", &OxTS::Gad::GetAcqValid, &OxTS::Gad::SetAcqValid)
+        .def_property("acq_timestamp", &OxTS::Gad::GetAcqTimestamp, &OxTS::Gad::SetAcqTimestamp);
 
     py::class_<OxTS::GadPosition, OxTS::Gad>(m, "GadPosition")
-        .def(py::init<uint8_t>())
-        .def("set_pos_geodetic", &OxTS::GadPosition::SetPosGeodetic)
-        .def("set_pos_local", &OxTS::GadPosition::SetPosLocal)
-        .def("set_pos_geodetic_var", &OxTS::GadPosition::SetPosGeodeticVar)
-        .def("set_pos_local_var", &OxTS::GadPosition::SetPosLocalVar)
-        .def("set_aiding_lever_arm_fixed", &OxTS::GadPosition::SetAidingLeverArmFixed)
+        .def(py::init<uint8_t>(), py::arg("stream_id"))
+        .def_property("pos_geodetic", &OxTS::GadPosition::GetPos, UNPACK3(GadPosition, SetPosGeodetic))
+        .def_property("pos_local", &OxTS::GadPosition::GetPos, UNPACK3(GadPosition, SetPosLocal))
+        .def_property("pos_geodetic_var", &OxTS::GadPosition::GetPosVar, UNPACK3(GadPosition, SetPosGeodeticVar))
+        .def_property("pos_local_var", &OxTS::GadPosition::GetPosVar, UNPACK3(GadPosition, SetPosLocalVar))
+        .def_property("aiding_lever_arm_fixed", &OxTS::GadPosition::GetAidingLeverArm, UNPACK3(GadPosition, SetAidingLeverArmFixed))
+        .def_property("aiding_lever_arm_var", &OxTS::GadPosition::GetAidingLeverArmVar, UNPACK3(GadPosition, SetAidingLeverArmVar))
         .def("set_aiding_lever_arm_optimising", &OxTS::GadPosition::SetAidingLeverArmOptimising)
-        .def("set_aiding_lever_arm_config", &OxTS::GadPosition::SetAidingLeverArmConfig)
-        .def("set_aiding_lever_arm_var", &OxTS::GadPosition::SetAidingLeverArmVar);
+        .def("set_aiding_lever_arm_config", &OxTS::GadPosition::SetAidingLeverArmConfig);
 
     py::class_<OxTS::GadVelocity, OxTS::Gad>(m, "GadVelocity")
-        .def(py::init<uint8_t>())
-        .def("set_vel_neu", &OxTS::GadVelocity::SetVelNeu)
-        .def("set_vel_odom", &OxTS::GadVelocity::SetVelOdom)
-        .def("set_vel_local", &OxTS::GadVelocity::SetVelLocal)
-        .def("set_vel_neu_var", &OxTS::GadVelocity::SetVelNeuVar)
-        .def("set_vel_odom_var", &OxTS::GadVelocity::SetVelOdomVar)
-        .def("set_vel_local_var", &OxTS::GadVelocity::SetVelLocalVar)
-        .def("set_aiding_lever_arm_fixed", &OxTS::GadVelocity::SetAidingLeverArmFixed)
+        .def(py::init<uint8_t>(), py::arg("stream_id"))
+        .def_property("vel_neu", &OxTS::GadVelocity::GetVel, UNPACK3(GadVelocity, SetVelNeu))
+        .def_property("vel_odom", &OxTS::GadVelocity::GetVel, UNPACK3(GadVelocity, SetVelOdom))
+        .def_property("vel_local", &OxTS::GadVelocity::GetVel, UNPACK3(GadVelocity, SetVelLocal))
+        .def_property("vel_neu_var", &OxTS::GadVelocity::GetVelVar, UNPACK3(GadVelocity, SetVelNeuVar))
+        .def_property("vel_odom_var", &OxTS::GadVelocity::GetVelVar, UNPACK3(GadVelocity, SetVelOdomVar))
+        .def_property("vel_local_var", &OxTS::GadVelocity::GetVelVar, UNPACK3(GadVelocity, SetVelLocalVar))
+        .def_property("aiding_lever_arm_fixed", &OxTS::GadVelocity::GetAidingLeverArm, UNPACK3(GadVelocity, SetAidingLeverArmFixed))
+        .def_property("aiding_lever_arm_var", &OxTS::GadVelocity::GetAidingLeverArmVar, UNPACK3(GadVelocity, SetAidingLeverArmVar))
         .def("set_aiding_lever_arm_optimising", &OxTS::GadVelocity::SetAidingLeverArmOptimising)
-        .def("set_aiding_lever_arm_config", &OxTS::GadVelocity::SetAidingLeverArmConfig)
-        .def("set_aiding_lever_arm_var", &OxTS::GadVelocity::SetAidingLeverArmVar);
+        .def("set_aiding_lever_arm_config", &OxTS::GadVelocity::SetAidingLeverArmConfig);
 
     py::class_<OxTS::GadSpeed, OxTS::Gad>(m, "GadSpeed")
-        .def(py::init<uint8_t>())
-        .def("set_speed_fw", &OxTS::GadSpeed::SetSpeedFw)
-        .def("set_speed_fw_var", &OxTS::GadSpeed::SetSpeedFwVar)
-        .def("set_wheelspeed_count", &OxTS::GadSpeed::SetWheelspeedCount)
-        .def("set_wheelspeed_var", &OxTS::GadSpeed::SetWheelspeedVar)
-        .def("set_aiding_lever_arm_fixed", &OxTS::GadSpeed::SetAidingLeverArmFixed)
+        .def(py::init<uint8_t>(), py::arg("stream_id"))
+        .def_property("speed_fw", &OxTS::GadSpeed::GetSpeedFw, &OxTS::GadSpeed::SetSpeedFw)
+        .def_property("speed_fw_var", &OxTS::GadSpeed::GetSpeedFwVar, &OxTS::GadSpeed::SetSpeedFwVar)
+        .def_property("wheelspeed_count", &OxTS::GadSpeed::GetWheelspeedCount, UNPACK2(GadSpeed, SetWheelspeedCount))
+        .def_property("wheelspeed_var", &OxTS::GadSpeed::GetWheelspeedVar, &OxTS::GadSpeed::SetWheelspeedVar)
+        .def_property("aiding_lever_arm_fixed", &OxTS::GadSpeed::GetAidingLeverArm, UNPACK3(GadSpeed, SetAidingLeverArmFixed))
+        .def_property("aiding_lever_arm_var", &OxTS::GadSpeed::GetAidingLeverArmVar, UNPACK3(GadSpeed, SetAidingLeverArmVar))
         .def("set_aiding_lever_arm_optimising", &OxTS::GadSpeed::SetAidingLeverArmOptimising)
-        .def("set_aiding_lever_arm_config", &OxTS::GadSpeed::SetAidingLeverArmConfig)
-        .def("set_aiding_lever_arm_var", &OxTS::GadSpeed::SetAidingLeverArmVar);
+        .def("set_aiding_lever_arm_config", &OxTS::GadSpeed::SetAidingLeverArmConfig);
 
     py::class_<OxTS::GadAttitude, OxTS::Gad>(m, "GadAttitude")
-        .def(py::init<uint8_t>())
-        .def("set_att", &OxTS::GadAttitude::SetAtt)
-        .def("set_att_var", &OxTS::GadAttitude::SetAttVar)
-        .def("set_aiding_alignment_fixed", &OxTS::GadAttitude::SetAidingAlignmentFixed)
-        .def("set_aiding_alignment_optimising", &OxTS::GadAttitude::SetAidingAlignmentOptimising)
-        .def("set_aiding_alignment_var", &OxTS::GadAttitude::SetAidingAlignmentVar);
+        .def(py::init<uint8_t>(), py::arg("stream_id"))
+        .def_property("att", &OxTS::GadAttitude::GetAtt, UNPACK3(GadAttitude, SetAtt))
+        .def_property("att_var", &OxTS::GadAttitude::GetAttVar, UNPACK3(GadAttitude, SetAttVar))
+        .def_property("aiding_alignment_var", &OxTS::GadAttitude::GetAidingAlignmentVar, UNPACK3(GadAttitude, SetAidingAlignmentVar))
+        .def_property("aiding_alignment_fixed", &OxTS::GadAttitude::GetAidingAlignment, UNPACK3(GadAttitude, SetAidingAlignmentFixed))
+        .def("set_aiding_alignment_optimising", &OxTS::GadAttitude::SetAidingAlignmentOptimising);
 
     py::class_<OxTS::GadHandler>(m, "GadHandler")
         .def(py::init<>())
-        .def(py::init<OxTS::GadEncoder*>(), py::arg("encoder_strategy"))
+        // .def(py::init<OxTS::GadEncoder*>(), py::arg("encoder_strategy"))
         .def("set_encoder_to_bin", &OxTS::GadHandler::SetEncoderToBin)
         .def("set_encoder_to_csv", &OxTS::GadHandler::SetEncoderToCsv)
         .def("set_output_mode_to_file", &OxTS::GadHandler::SetOutputModeToFile, py::arg("file_path"))
         .def("set_output_mode_to_udp", &OxTS::GadHandler::SetOutputModeToUdp, py::arg("ip"))
-        .def("send_packet", &OxTS::GadHandler::SendPacket, py::arg("g"));
+        .def("send_packet", &OxTS::GadHandler::SendPacket, py::arg("gad"));
 
     py::class_<OxTS::GadEncoderCsv>(m,"GadEncoderCsv")
         .def(py::init<>())
-        .def("EncodePacket", &OxTS::GadEncoderCsv::EncodePacket)
-        .def("GetPacket", &OxTS::GadEncoderCsv::GetPacket)
-        .def("GetPacketSize", &OxTS::GadEncoderCsv::GetPacketSize);
+        .def("encode_packet", &OxTS::GadEncoderCsv::EncodePacket, py::arg("gad"))
+        .def("get_packet", &OxTS::GadEncoderCsv::GetPacket)
+        .def("get_packet_size", &OxTS::GadEncoderCsv::GetPacketSize);
 
     py::class_<OxTS::GadEncoderBin>(m,"GadEncoderBin")
         .def(py::init<>())
-        .def("EncodePacket", &OxTS::GadEncoderBin::EncodePacket)
-        .def("GetPacket", &OxTS::GadEncoderBin::GetPacket)
-        .def("GetPacketSize", &OxTS::GadEncoderBin::GetPacketSize);
+        .def("encode_packet", &OxTS::GadEncoderBin::EncodePacket, py::arg("gad"))
+        .def("get_packet", &OxTS::GadEncoderBin::GetPacket)
+        .def("get_packet_size", &OxTS::GadEncoderBin::GetPacketSize);
 
     py::class_<OxTS::GadOutputUdp>(m,"GadOutputUdp")
-        .def(py::init<std::string>())
-        .def("output_packet", &OxTS::GadOutputUdp::OutputPacket);
+        .def(py::init<std::string>(), py::arg("ip"))
+        .def("output_packet", &OxTS::GadOutputUdp::OutputPacket, py::arg("gad_packet"), py::arg("packet_size"));
 
     py::class_<OxTS::GadOutputFile>(m,"GadOutputFile")
-        .def(py::init<std::string>())
-        .def("output_packet", &OxTS::GadOutputFile::OutputPacket)
-        .def("set_output_file", &OxTS::GadOutputFile::SetOutputFile)
-        .def("get_output_file", &OxTS::GadOutputFile::GetOutputFile)
-        .def("set_output_file_path", &OxTS::GadOutputFile::SetOutputFilePath)
-        .def("get_output_file_path", &OxTS::GadOutputFile::GetOutputFilePath);
+        .def(py::init<std::string>(), py::arg("file_path"))
+        .def("output_packet", &OxTS::GadOutputFile::OutputPacket, py::arg("gad_packet"), py::arg("packet_size"))
+        .def_property("output_file", &OxTS::GadOutputFile::GetOutputFile, &OxTS::GadOutputFile::SetOutputFile)
+        .def_property("output_file_path", &OxTS::GadOutputFile::GetOutputFilePath, &OxTS::GadOutputFile::SetOutputFilePath);
 }

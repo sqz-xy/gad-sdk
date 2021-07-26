@@ -80,3 +80,13 @@ The documentation for this project is generated using a few tools: Doxygen, Brea
   sphinx-build -b html . public
 ```
 
+
+## Python GAD SDK
+
+The C++ SDK has been wrapped in Python using PyBind11. The interface for the Python code largely matches that of the C++ code, though class accessors have been replaced with Python properties.
+
+The Python SDK is not yet  documented, though its binding to the C++ can be found in `oxts-sdk-py/gal-py-bindings.cpp`. There is also an example in `examples/python/my-first-gad.py`.
+
+To install the package, use `pip install ./oxts-sdk` from the directory above the repository folder. After that, it can be imported using `import oxts_sdk`.
+
+

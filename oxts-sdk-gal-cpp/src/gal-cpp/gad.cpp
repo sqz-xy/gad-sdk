@@ -72,9 +72,17 @@ auto Gen3d::GetValZ() const -> double{return this->x[2];}
 
 void Gen3d::SetVal(double x, double y,double z)
 {
-  SetValX(x);
-  SetValY(y);
-  SetValZ(z);
+  this->SetValX(x);
+  this->SetValY(y);
+  this->SetValZ(z);
+}
+auto Gen3d::GetVal() const -> std::vector<double>
+{
+  return std::vector<double> {
+    this->GetValX(),
+    this->GetValY(),
+    this->GetValZ()
+  };
 }
 
 void Gen3d::SetVarUpperDiag(double v_00, double v_11, double v_22, 
@@ -196,15 +204,19 @@ auto  Gad::GetStreamId() const -> int { return this->stream_id; }
 void Gad::SetDataType(int type){ this->type = type; } 
 auto  Gad::GetDataType() const -> int{ return this->type; } 
 // val
-void Gad::SetValInvalid(){this->val_valid = 0;}
-void Gad::SetValValid(){this->val_valid = 1;}
+void Gad::SetValValid(bool flag)  {this->val_valid = flag;}
+auto Gad::GetValValid() const -> bool {return this->val_valid;}
 
 void Gad::SetDataMode(int mode){ this->val.SetMode(mode); }
 void Gad::SetDataValType(int x_type) { this->val.SetValType(x_type); }
 void Gad::SetDataVal(double x_0, double x_1,double x_2)
 {
-  this->SetValValid();
+  this->SetValValid(true);
   this->val.SetVal(x_0,x_1,x_2);
+}
+auto Gad::GetDataVal() const -> std::vector<double>
+{
+  return this->val.GetVal();
 }
 
 void Gad::SetDataVarUpperDiag(double v_00, double v_11, double v_22, 
@@ -223,33 +235,46 @@ void Gad::SetDataVarSingle(double v_0)
   this->val.SetVarSingle(v_0);
 }
 
+auto Gad::GetDataVar() const -> std::vector<double>
+{
+  return this->val.GetVar();
+}
+
 // time
-void Gad::SetTimeInvalid(){this->time_valid = 0;}
-void Gad::SetTimeValid()  {this->time_valid = 1;}
+void Gad::SetTimeValid(bool flag)  {this->time_valid = flag;}
+auto Gad::GetTimeValid() const -> bool {return this->time_valid;}
 //
 void Gad::SetTimeExternal(double week, double secs)
 {
-  this->SetTimeValid();
+  this->SetTimeValid(true);
   this->time.SetMode(0);
   this->time.SetValType(TIME_SYS::TIME_EXT);
   this->time.SetVal(week,secs,0.0);
 }
 auto Gad::GetTimeExternalWeek() const -> double { return time.GetValX(); }
 auto Gad::GetTimeExternalSecondsFromSunday() const -> double { return this->time.GetValY(); }
-// GPS
-void   Gad::SetTimeGps(double week, double seconds_from_sunday)
+auto Gad::GetTimeExternal() const -> std::vector<double>
 {
-  this->SetTimeValid();
+  return std::vector<double>{this->GetTimeExternalWeek(), this->GetTimeExternalSecondsFromSunday()};
+}
+// GPS
+void Gad::SetTimeGps(double week, double seconds_from_sunday)
+{
+  this->SetTimeValid(true);
   this->time.SetMode(0);
   this->time.SetValType(TIME_SYS::TIME_GPS);
   this->time.SetVal(week,seconds_from_sunday, 0);
 }
+auto Gad::GetTimeGps() const -> std::vector<double>
+{
+  return std::vector<double>{this->GetTimeGpsWeek(), this->GetTimeGpsSecondsFromSunday()};
+}
 auto Gad::GetTimeGpsWeek() const -> double { return this->time.GetValX(); }
 auto Gad::GetTimeGpsSecondsFromSunday() const -> double{ return this->time.GetValY(); }
 // PPS
-void   Gad::SetTimePpsRelative(double ns)
+void Gad::SetTimePpsRelative(double ns)
 {
-  this->SetTimeValid();
+  this->SetTimeValid(true);
 
   this->time.SetMode(0);
   this->time.SetValType(TIME_SYS::TIME_PPS_RELATIVE);
@@ -259,7 +284,7 @@ auto Gad::GetTimePpsRelative() const -> double { return this->time.GetValY(); }
 // Latency
 void   Gad::SetTimeLatency(double ns)
 {
-  this->SetTimeValid();
+  this->SetTimeValid(true);
   this->time.SetMode(0);
   this->time.SetValType(TIME_SYS::TIME_EST_LATENCY);
   this->time.SetVal(0.0, ns, 0.0);
@@ -268,21 +293,25 @@ auto Gad::GetTimeLatency() const -> double{ return this->time.GetValY(); }
 // Void
 void   Gad::SetTimeVoid()
 {
-  this->SetTimeValid();
+  this->SetTimeValid(true);
   this->time.SetMode(0);
   this->time.SetValType(TIME_SYS::TIME_VOID);
 }
 
 // loc  
-void Gad::SetLocInvalid(){this->loc_valid = 0;}
-void Gad::SetLocValid(){this->loc_valid = 1;}
+void Gad::SetLocValid(bool flag)  {this->loc_valid = flag;}
+auto Gad::GetLocValid() const -> bool {return this->loc_valid;}
 
 void Gad::SetLocMode(int mode) { this->loc.SetMode(mode); }
 void Gad::SetLocValType(int x_type) { this->loc.SetValType(x_type);}
 void Gad::SetLocVal(double x_0, double x_11,double x_22)
 {
-  this->SetLocValid();
+  this->SetLocValid(true);
   this->loc.SetVal(x_0,x_11,x_22);
+}
+auto Gad::GetLocVal() const -> std::vector<double>
+{
+  return this->loc.GetVal();
 }
 void Gad::SetLocVarUpperDiag(double v_00, double v_11, double v_22,
                              double v_01, double v_02, double v_12)
@@ -297,13 +326,17 @@ void Gad::SetLocVarSingle(double v_0)
 {
   this->loc.SetVarSingle(v_0);
 }
+auto Gad::GetLocVar() const -> std::vector<double>
+{
+  return this->loc.GetVar();
+}
 
-void Gad::SetRes1Invalid(){ this->res1_valid = 0; }
-void Gad::SetRes1Valid()  { this->res1_valid = 1; }
-void Gad::SetRes2Invalid(){ this->res2_valid = 0; }
-void Gad::SetRes2Valid()  { this->res2_valid = 1; }
-void Gad::SetAcqInvalid() { this->acq_valid = 0;  }
-void Gad::SetAcqValid()   { this->acq_valid = 1;  }
+void Gad::SetRes1Valid(bool flag)  {this->res1_valid = flag;}
+auto Gad::GetRes1Valid() const -> bool {return this->res1_valid;}
+void Gad::SetRes2Valid(bool flag)  {this->res2_valid = flag;}
+auto Gad::GetRes2Valid() const -> bool {return this->res2_valid;}
+void Gad::SetAcqValid(bool flag)  {this->acq_valid = flag;}
+auto Gad::GetAcqValid() const -> bool {return this->acq_valid;}
 
 void Gad::SetAcqTimestamp(uint32_t acq_time)
 {
@@ -334,6 +367,11 @@ void GadPosition::SetPosLocal(double x, double y, double z)
   this->SetDataVal(x,y,z);
 }
 
+auto GadPosition::GetPos() const -> std::vector<double>
+{
+  return this->GetDataVal();
+}
+
 void GadPosition::SetPosGeodeticVar(double v_n, double v_e, double v_d)
 {
   this->SetDataVarDiag(v_n,v_e,v_d);
@@ -344,16 +382,25 @@ void GadPosition::SetPosLocalVar(double v_x, double v_y, double v_z)
   this->SetDataVarDiag(v_x,v_y,v_z);
 }
 
+auto GadPosition::GetPosVar() const -> std::vector<double>
+{
+  return this->GetDataVar();
+}
+
 void GadPosition::SetAidingLeverArmFixed(double x, double y, double z)
 {
   this->SetLocMode(LOC_SYS::LOC_FIXED);
   this->SetLocVal(x,y,z);
 }
 
+auto GadPosition::GetAidingLeverArm() const -> std::vector<double>
+{
+  return this->GetLocVal();
+}
+
 void GadPosition::SetAidingLeverArmOptimising()
 {
   this->SetLocMode(LOC_SYS::LOC_KF);
-  this->SetLocVal(0.0,0.0,0.0);
 }
 
 void GadPosition::SetAidingLeverArmConfig()
@@ -363,7 +410,12 @@ void GadPosition::SetAidingLeverArmConfig()
 
 void GadPosition::SetAidingLeverArmVar(double x, double y, double z)
 {
-  this->SetDataVarDiag(x,y,z);
+  this->SetLocVarDiag(x,y,z);
+}
+
+auto GadPosition::GetAidingLeverArmVar() const -> std::vector<double>
+{
+  return this->GetLocVar();
 }
 
 //==============================================================================
@@ -392,6 +444,11 @@ void GadVelocity::SetVelLocal(double v_x, double v_y, double v_z)
   this->SetDataVal(v_x,v_y,v_z);
 }
 
+auto GadVelocity::GetVel() const -> std::vector<double>
+{
+  return this->GetDataVal();
+}
+
 void GadVelocity::SetVelNeuVar(double v_n, double v_e, double v_u)
 {
   this->SetDataVarDiag(v_n,v_e,v_u);
@@ -407,20 +464,39 @@ void GadVelocity::SetVelLocalVar(double v_x, double v_y, double v_z)
   this->SetDataVarDiag(v_x,v_y,v_z);
 }
 
+auto GadVelocity::GetVelVar() const -> std::vector<double> 
+{
+  return this->GetDataVar();
+}
+
 // loc 
 void GadVelocity::SetAidingLeverArmFixed(double x, double y, double z)
 {
   this->SetLocMode(LOC_SYS::LOC_FIXED);
   this->SetLocVal(x,y,z);
 }
+
+auto GadVelocity::GetAidingLeverArm() const -> std::vector<double> 
+{
+  return this->GetLocVal();
+}
+
+void GadVelocity::SetAidingLeverArmConfig()
+{
+  this->SetLocMode(LOC_SYS::LOC_CONFIG);
+}
 void GadVelocity::SetAidingLeverArmOptimising()
 {
   this->SetLocMode(LOC_SYS::LOC_KF);
-  this->SetLocVal(0.0,0.0,0.0);
 }
 void GadVelocity::SetAidingLeverArmVar(double x, double y, double z)
 {
   this->SetDataVarDiag(x,y,z);
+}
+
+auto GadVelocity::GetAidingLeverArmVar() const -> std::vector<double> 
+{
+  return this->GetLocVar();
 }
 //==============================================================================
 // GadSpeed
@@ -433,19 +509,42 @@ void GadSpeed::SetSpeedFw(double speed)
   this->SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_FW_VEL);
   this->SetDataVal(speed,0.0,0.0); /** @todo Implement with time interval */
 }
+
+auto GadSpeed::GetSpeedFw() const -> double
+{
+  return this->GetDataVal()[0];
+}
+
 void GadSpeed::SetSpeedFwVar(double v_s)
 {
   this->SetDataVarSingle(v_s);
 }
+
+auto GadSpeed::GetSpeedFwVar() const -> double
+{
+  return this->GetDataVar()[0];
+}
+
 void GadSpeed::SetWheelspeedCount(double count, double period)
 {
   this->SetDataMode(0);
   this->SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_FW_VEL);
   this->SetDataVal(count,period,0.0); /** @todo Implement with time interval */
 }
+
+auto GadSpeed::GetWheelspeedCount() const -> std::vector<double>
+{
+  return std::vector<double>{this->GetDataVal()[0], this->GetDataVal()[1]};
+}
+
 void GadSpeed::SetWheelspeedVar(double v_c)
 {
   this->SetDataVarSingle(v_c);
+}
+
+auto GadSpeed::GetWheelspeedVar() const -> double
+{
+    return this->GetDataVar()[0];
 }
 
 // loc 
@@ -454,14 +553,30 @@ void GadSpeed::SetAidingLeverArmFixed(double x, double y, double z)
   this->SetLocMode(LOC_SYS::LOC_FIXED);
   this->SetLocVal(x,y,z);
 }
+
+void GadSpeed::SetAidingLeverArmConfig()
+{
+  this->SetLocMode(LOC_SYS::LOC_CONFIG);
+}
+
 void GadSpeed::SetAidingLeverArmOptimising()
 {
   this->SetLocMode(LOC_SYS::LOC_KF);
   this->SetLocVal(0.0,0.0,0.0);
 }
+
+auto GadSpeed::GetAidingLeverArm() const -> std::vector<double>
+{
+  return this->GetLocVal();
+}
 void GadSpeed::SetAidingLeverArmVar(double x, double y, double z)
 {
-  this->SetDataVarDiag(x,y,z);
+  this->SetLocVarDiag(x,y,z);
+}
+
+auto GadSpeed::GetAidingLeverArmVar() const -> std::vector<double>
+{
+  return this->GetLocVar();
 }
 //==============================================================================
 // GadAttitude
@@ -474,25 +589,47 @@ void GadAttitude::SetAtt(double heading, double pitch, double roll)
   this->SetDataValType(ATT_SYS_TYPE::ATT_SYS_HPR);
   this->SetDataVal(heading,pitch,roll); 
 }
+
+auto GadAttitude::GetAtt() const -> std::vector<double>
+{
+  return this->GetDataVal();
+}
+
 void GadAttitude::SetAttVar(double v_h, double v_p, double v_r)
 {
   this->SetDataVarDiag(v_h,v_p,v_r);
 }
 
+auto GadAttitude::GetAttVar() const -> std::vector<double>
+{
+  return this->GetDataVar();
+}
 // loc 
+auto GadAttitude::GetAidingAlignment() const -> std::vector<double>
+{
+  return this->GetLocVal();
+}
+
 void GadAttitude::SetAidingAlignmentFixed(double x, double y, double z)
 {
   this->SetLocMode(LOC_SYS::LOC_FIXED);
   this->SetLocVal(x,y,z);
 }
+
 void GadAttitude::SetAidingAlignmentOptimising()
 {
   this->SetLocMode(LOC_SYS::LOC_KF);
   this->SetLocVal(0.0,0.0,0.0);
 }
+
 void GadAttitude::SetAidingAlignmentVar(double x, double y, double z)
 {
   this->SetDataVarDiag(x,y,z);
+}
+
+auto GadAttitude::GetAidingAlignmentVar() const -> std::vector<double>
+{
+  return this->GetLocVar();
 }
 
 } // namespace OxTS

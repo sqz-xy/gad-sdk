@@ -61,6 +61,7 @@ Table of Contents
    longform/reassigning-traditional-sources
    longform/stream-priority
    longform/all-options
+   longform/is-my-data-being-received
 
 
 .. toctree::

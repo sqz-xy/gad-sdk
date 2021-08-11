@@ -401,11 +401,13 @@ auto GadPosition::GetAidingLeverArm() const -> std::vector<double>
 void GadPosition::SetAidingLeverArmOptimising()
 {
   this->SetLocMode(LOC_SYS::LOC_KF);
+  this->SetLocVal(0.0,0.0,0.0);
 }
 
 void GadPosition::SetAidingLeverArmConfig()
 {
   this->SetLocMode(LOC_SYS::LOC_CONFIG);
+  this->SetLocVal(0.0,0.0,0.0);
 }
 
 void GadPosition::SetAidingLeverArmVar(double x, double y, double z)
@@ -484,10 +486,12 @@ auto GadVelocity::GetAidingLeverArm() const -> std::vector<double>
 void GadVelocity::SetAidingLeverArmConfig()
 {
   this->SetLocMode(LOC_SYS::LOC_CONFIG);
+  this->SetLocVal(0.0,0.0,0.0);
 }
 void GadVelocity::SetAidingLeverArmOptimising()
 {
   this->SetLocMode(LOC_SYS::LOC_KF);
+  this->SetLocVal(0.0,0.0,0.0);
 }
 void GadVelocity::SetAidingLeverArmVar(double x, double y, double z)
 {
@@ -557,6 +561,7 @@ void GadSpeed::SetAidingLeverArmFixed(double x, double y, double z)
 void GadSpeed::SetAidingLeverArmConfig()
 {
   this->SetLocMode(LOC_SYS::LOC_CONFIG);
+  this->SetLocVal(0.0,0.0,0.0);
 }
 
 void GadSpeed::SetAidingLeverArmOptimising()
@@ -610,11 +615,11 @@ auto GadAttitude::GetAidingAlignment() const -> std::vector<double>
   return this->GetLocVal();
 }
 
-void GadAttitude::SetAidingAlignmentFixed(double x, double y, double z)
-{
-  this->SetLocMode(LOC_SYS::LOC_FIXED);
-  this->SetLocVal(x,y,z);
-}
+// void GadAttitude::SetAidingAlignmentFixed(double x, double y, double z)
+// {
+//   this->SetLocMode(LOC_SYS::LOC_FIXED);
+//   this->SetLocVal(x,y,z);
+// }
 
 void GadAttitude::SetAidingAlignmentOptimising()
 {

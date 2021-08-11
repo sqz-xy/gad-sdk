@@ -518,15 +518,15 @@ public:
    */
   void SetAttVar(double v_h, double v_p, double v_r);
   auto GetAttVar() const -> std::vector<double>;
-  /**
-   * Set the angles which specify the rotation required to align the IMU and 
-   * aiding sensor frames. This alignment will not be optimised by the INS.
-   * @param x
-   * @param y
-   * @param z
-   */
+  // /**
+  //  * Set the angles which specify the rotation required to align the IMU and 
+  //  * aiding sensor frames. This alignment will not be optimised by the INS.
+  //  * @param x
+  //  * @param y
+  //  * @param z
+  //  */
+  // void SetAidingAlignmentFixed(double x, double y, double z);
   auto GetAidingAlignment() const -> std::vector<double>;
-  void SetAidingAlignmentFixed(double x, double y, double z);
   /**
    * Set alignment to be optimised by the INS. The alignment values will be read
    * from the mobile.att file, so are not set here.

@@ -76,7 +76,7 @@ PYBIND11_MODULE(oxts_sdk, m) {
         .def_property("att", &OxTS::GadAttitude::GetAtt, UNPACK3(GadAttitude, SetAtt))
         .def_property("att_var", &OxTS::GadAttitude::GetAttVar, UNPACK3(GadAttitude, SetAttVar))
         .def_property("aiding_alignment_var", &OxTS::GadAttitude::GetAidingAlignmentVar, UNPACK3(GadAttitude, SetAidingAlignmentVar))
-        .def_property("aiding_alignment_fixed", &OxTS::GadAttitude::GetAidingAlignment, UNPACK3(GadAttitude, SetAidingAlignmentFixed))
+        // .def_property("aiding_alignment_fixed", &OxTS::GadAttitude::GetAidingAlignment, UNPACK3(GadAttitude, SetAidingAlignmentFixed))
         .def("set_aiding_alignment_optimising", &OxTS::GadAttitude::SetAidingAlignmentOptimising);
 
     py::class_<OxTS::GadHandler>(m, "GadHandler")

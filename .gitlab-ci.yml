@@ -1,14 +1,17 @@
-image: python:3.7-alpine
+stages:
+  - build
+  - deploy
 
-before_script:
-- apk update
-- apk add doxygen
-## Uncomment the following line if you use graphviz dot graphs
-#- apk add ttf-freefont graphviz
 
-test:
+docs:test:
   stage: test
+  tags: docs
+  image: python:3.7-alpine
+  before_script:
+  - apk update
+  - apk add doxygen
   script:
+  - "echo Building docs for test..."
   - pip install -U sphinx
   - pip3 install sphinx-rtd-theme
   - pip3 install breathe
@@ -20,9 +23,16 @@ test:
   except:
   - master
 
-pages:
+docs:pages:
   stage: deploy
+  tags:
+    - docs
+  image: python:3.7-alpine
+  before_script:
+  - apk update
+  - apk add doxygen
   script:
+  - "echo Deploying docs..."
   - pip install -U sphinx
   - pip3 install sphinx-rtd-theme
   - pip3 install breathe

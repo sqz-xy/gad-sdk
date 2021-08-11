@@ -10,6 +10,7 @@ docs:test:
   before_script:
   - apk update
   - apk add doxygen
+  - apk add ttf-freefont graphviz
   script:
   - "echo Building docs for test..."
   - pip install -U sphinx
@@ -29,6 +30,7 @@ docs:pages:
   before_script:
   - apk update
   - apk add doxygen
+  - apk add ttf-freefont graphviz
   script:
   - "echo Deploying docs..."
   - pip install -U sphinx

@@ -47,7 +47,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/oxts/gal-cpp/config.h.in
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
-if(OXTS_SDK_DISABLE_BOOST)
+if(NOT OXTS_SDK_DISABLE_BOOST)
 include_directories(${Boost_INCLUDE_DIR})
 endif()
 

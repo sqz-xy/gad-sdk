@@ -5,7 +5,8 @@ stages:
 
 docs:test:
   stage: test
-  tags: docs
+  tags: 
+    - docs
   image: python:3.7-alpine
   before_script:
   - apk update

@@ -12,7 +12,7 @@ add_definitions(-DOXTS_SDK_VERSION_PATCH=${oxts-sdk_VERSION_PATCH})
 #option(OXTS_SDK_BUILD_DOCS "Build SDK documentation." OFF)
 option(OXTS_SDK_BUILD_EXAMPLES "Enable examples targets." ON) 
 option(OXTS_SDK_BUILD_PYTHON "Build SDK Python wrapper." OFF) 
-option(OXTS_SDK_DISABLE_BOOST "Use Boost library when building." OFF)
+option(OXTS_SDK_DISABLE_BOOST "Disable Boost library when building." OFF)
 # Used for cpp linting by clang-tidy
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 

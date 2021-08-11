@@ -11,7 +11,8 @@ linux:build:
   image: ubuntu:20.04
   before_script:
     - apt-get update --yes
-    - DEBIAN_FRONTEND="noninteractive" apt-get install --yes 
+    - DEBIAN_FRONTEND="noninteractive" apt-get install --yes
+        build-essential 
         cmake
         libboost-all-dev
   script:

@@ -54,13 +54,18 @@ The `-vo_point` option specifies the lever arm :math:`(x,y,z)`. This defines the
 Example
 ^^^^^^^
 
-Defining the lever arm in the IMU frame is relatively intuitive, but finding the angles of rotation can be less so for those who have not done it before. Hence, we provide an example.
+Defining the lever arm in the IMU frame is relatively intuitive, but finding 
+the angles of rotation can be less so for those who have not done it before. 
+Hence, we provide an example.
 
-Say we are using a LiDAR as our odometry source, and we want to define the YPR angles.
+Say we are using a LiDAR as our odometry source, and we want to define the 
+YPR angles.
 
 .. image:: assets/velocity-odom-frame-rotation-georef.gif
 
-We can do this by most intuitively by starting with the LiDAR frame and rotating it until it aligns with the IMU frame. This is shown in the diagram below:
+We can do this by most intuitively by starting with the LiDAR frame and 
+rotating it until it aligns with the IMU frame. This is shown in the diagram 
+below:
 
 .. image:: assets/velocity-odom-frame-rotation.gif
 
@@ -69,6 +74,12 @@ Once we have these, the configuration option can be added:
 .. code-block::
 
    -vo_angles-90.0_180.0_0.0
+
+.. warning::
+
+   This update frame requires that the lever arm is set to fixed in the packet,
+   otherwise the data will not be used by the INS. The values are irrelevant: 
+   actual values are taken from the config options.
 
 .. _velocitycovariancematrix:
 

@@ -270,12 +270,42 @@ public:
    */
   void SetPosGeodeticVar(double v_n, double v_e, double v_d);
   /**
+   * Set the full covariance matrix of aiding position in the geodetic 
+   * coordinate frame. Only six values required due to the symmetry of 
+   * covariance matrices. (Indices row major)
+   * @param v_00 Variance of the position estimate (m^2).
+   * @param v_11 Variance of the position estimate (m^2).
+   * @param v_22 Variance of the position estimate (m^2).
+   * @param v_01 Variance of the position estimate (m^2).
+   * @param v_02 Variance of the position estimate (m^2).
+   * @param v_12 Variance of the position estimate (m^2).
+   */
+  void SetPosGeodeticVarFull(
+    double v_00, double v_11, double v_22, 
+    double v_01, double v_02, double v_12
+  );
+  /**
    * Set the variance aiding position in the coordinate frame.
    * @param v_x Variance of the position estimate (m^2).
    * @param v_y Variance of the position estimate (m^2).
    * @param v_z Variance of the position estimate (m^2).
    */
   void SetPosLocalVar(double v_x, double v_y, double v_z);
+  /**
+   * Set the full covariance matrix of aiding position in the local 
+   * coordinate frame. Only six values required due to the symmetry of 
+   * covariance matrices. (Indices row major)
+   * @param v_00 Variance of the position estimate (m^2).
+   * @param v_11 Variance of the position estimate (m^2).
+   * @param v_22 Variance of the position estimate (m^2).
+   * @param v_01 Variance of the position estimate (m^2).
+   * @param v_02 Variance of the position estimate (m^2).
+   * @param v_12 Variance of the position estimate (m^2).
+   */
+  void SetPosLocalVarFull(
+    double v_00, double v_11, double v_22, 
+    double v_01, double v_02, double v_12
+  );
   /**
    * Get the aiding position variance.
    */
@@ -359,6 +389,21 @@ public:
    */
   void SetVelNeuVar(double v_n, double v_e, double v_u);
   /**
+   * Set the full covariance matrix of aiding velocity in the NEU 
+   * frame. Only six values required due to the symmetry of 
+   * covariance matrices. (Indices row major)
+   * @param v_nn Variance of the position estimate (m/s)^2.
+   * @param v_ee Variance of the position estimate (m/s)^2.
+   * @param v_uu Variance of the position estimate (m/s)^2.
+   * @param v_ne Variance of the position estimate (m/s)^2.
+   * @param v_nu Variance of the position estimate (m/s)^2.
+   * @param v_eu Variance of the position estimate (m/s)^2.
+   */
+  void SetVelNeuVarFull(
+    double v_nn, double v_ee, double v_uu, 
+    double v_ne, double v_nu, double v_eu
+  );
+  /**
    * Set the aiding velocity variance estimate in the local NEU coordinate frame.
    * @param v_x Velocity variance estimate in the x direction (m/s)^2.
    * @param v_y Velocity variance estimate in the y direction (m/s)^2.
@@ -366,12 +411,42 @@ public:
    */
   void SetVelOdomVar(double v_x, double v_y, double v_z);
   /**
+   * Set the full covariance matrix of aiding velocity in the odometry 
+   * frame. Only six values required due to the symmetry of 
+   * covariance matrices. (Indices row major)
+   * @param v_xx Variance of the position estimate (m/s)^2.
+   * @param v_yy Variance of the position estimate (m/s)^2.
+   * @param v_zz Variance of the position estimate (m/s)^2.
+   * @param v_xy Variance of the position estimate (m/s)^2.
+   * @param v_xz Variance of the position estimate (m/s)^2.
+   * @param v_yz Variance of the position estimate (m/s)^2.
+   */
+  void SetVelOdomVarFull(
+    double v_xx, double v_yy, double v_zz, 
+    double v_xy, double v_xz, double v_yz
+  );
+  /**
    * Set the aiding velocity variance estimate in the local NEU coordinate frame.
    * @param v_x Velocity variance estimate in the x direction (m/s)^2.
    * @param v_y Velocity variance estimate in the y direction (m/s)^2.
    * @param v_z Velocity variance estimate in the z direction (m/s)^2.
    */
   void SetVelLocalVar(double v_x, double v_y, double v_z);
+  /**
+   * Set the full covariance matrix of aiding velocity in the local 
+   * coordinate frame. Only six values required due to the symmetry of 
+   * covariance matrices. (Indices row major)
+   * @param v_xx Variance of the position estimate (m^2).
+   * @param v_yy Variance of the position estimate (m^2).
+   * @param v_zz Variance of the position estimate (m^2).
+   * @param v_xy Variance of the position estimate (m^2).
+   * @param v_xz Variance of the position estimate (m^2).
+   * @param v_yz Variance of the position estimate (m^2).
+   */
+  void SetVelLocalVarFull(
+    double v_xx, double v_yy, double v_zz, 
+    double v_xy, double v_xz, double v_yz
+  );
   /**
    * Get the aiding velocity variance estimate.
    */

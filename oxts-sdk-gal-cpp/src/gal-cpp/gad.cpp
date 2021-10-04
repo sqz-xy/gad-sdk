@@ -495,7 +495,7 @@ void GadVelocity::SetAidingLeverArmOptimising()
 }
 void GadVelocity::SetAidingLeverArmVar(double x, double y, double z)
 {
-  this->SetDataVarDiag(x,y,z);
+  this->SetLocVarDiag(x,y,z);
 }
 
 auto GadVelocity::GetAidingLeverArmVar() const -> std::vector<double> 

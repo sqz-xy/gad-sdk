@@ -15,6 +15,7 @@ namespace py = pybind11;
 
 #define UNPACK2(cls, func) [](OxTS::cls &c, std::vector<double> vec) {c.func(vec[0], vec[1]);}
 #define UNPACK3(cls, func) [](OxTS::cls &c, std::vector<double> vec) {c.func(vec[0], vec[1], vec[2]);}
+#define UNPACK6(cls, func) [](OxTS::cls &c, std::vector<double> vec) {c.func(vec[0], vec[1], vec[2], vec[3], vec[4], vec[5]);}
 
 PYBIND11_MODULE(oxts_sdk, m) {
     m.doc() = "OxTS SDK"; // optional module docstring
@@ -41,7 +42,9 @@ PYBIND11_MODULE(oxts_sdk, m) {
         .def_property("pos_geodetic", &OxTS::GadPosition::GetPos, UNPACK3(GadPosition, SetPosGeodetic))
         .def_property("pos_local", &OxTS::GadPosition::GetPos, UNPACK3(GadPosition, SetPosLocal))
         .def_property("pos_geodetic_var", &OxTS::GadPosition::GetPosVar, UNPACK3(GadPosition, SetPosGeodeticVar))
+        .def_property("pos_geodetic_var", &OxTS::GadPosition::GetPosVar, UNPACK6(GadPosition, SetPosGeodeticVarFull))
         .def_property("pos_local_var", &OxTS::GadPosition::GetPosVar, UNPACK3(GadPosition, SetPosLocalVar))
+        .def_property("pos_local_var", &OxTS::GadPosition::GetPosVar, UNPACK6(GadPosition, SetPosLocalVarFull))
         .def_property("aiding_lever_arm_fixed", &OxTS::GadPosition::GetAidingLeverArm, UNPACK3(GadPosition, SetAidingLeverArmFixed))
         .def_property("aiding_lever_arm_var", &OxTS::GadPosition::GetAidingLeverArmVar, UNPACK3(GadPosition, SetAidingLeverArmVar))
         .def("set_aiding_lever_arm_optimising", &OxTS::GadPosition::SetAidingLeverArmOptimising)
@@ -53,8 +56,11 @@ PYBIND11_MODULE(oxts_sdk, m) {
         .def_property("vel_odom", &OxTS::GadVelocity::GetVel, UNPACK3(GadVelocity, SetVelOdom))
         .def_property("vel_local", &OxTS::GadVelocity::GetVel, UNPACK3(GadVelocity, SetVelLocal))
         .def_property("vel_neu_var", &OxTS::GadVelocity::GetVelVar, UNPACK3(GadVelocity, SetVelNeuVar))
+        .def_property("vel_neu_var", &OxTS::GadVelocity::GetVelVar, UNPACK6(GadVelocity, SetVelNeuVarFull))
         .def_property("vel_odom_var", &OxTS::GadVelocity::GetVelVar, UNPACK3(GadVelocity, SetVelOdomVar))
+        .def_property("vel_odom_var", &OxTS::GadVelocity::GetVelVar, UNPACK6(GadVelocity, SetVelOdomVarFull))
         .def_property("vel_local_var", &OxTS::GadVelocity::GetVelVar, UNPACK3(GadVelocity, SetVelLocalVar))
+        .def_property("vel_local_var", &OxTS::GadVelocity::GetVelVar, UNPACK6(GadVelocity, SetVelLocalVarFull))
         .def_property("aiding_lever_arm_fixed", &OxTS::GadVelocity::GetAidingLeverArm, UNPACK3(GadVelocity, SetAidingLeverArmFixed))
         .def_property("aiding_lever_arm_var", &OxTS::GadVelocity::GetAidingLeverArmVar, UNPACK3(GadVelocity, SetAidingLeverArmVar))
         .def("set_aiding_lever_arm_optimising", &OxTS::GadVelocity::SetAidingLeverArmOptimising)

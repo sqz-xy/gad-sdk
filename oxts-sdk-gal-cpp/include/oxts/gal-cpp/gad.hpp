@@ -495,9 +495,13 @@ public:
 class GadAttitude : public Gad
 {
 public:
+  /**
+   * Default constructor
+   */
+  GadAttitude();
   /** Constructor. 
    *  @param stream_id Stream ID for the attitude aiding source. Must be unique 128-254.
-  */
+   */
   explicit GadAttitude(uint8_t stream_id);
   auto GetAtt() const -> std::vector<double>;
   // val

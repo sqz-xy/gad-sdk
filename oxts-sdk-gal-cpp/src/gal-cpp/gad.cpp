@@ -585,6 +585,8 @@ auto GadSpeed::GetAidingLeverArmVar() const -> std::vector<double>
 }
 //==============================================================================
 // GadAttitude
+GadAttitude::GadAttitude() : Gad(DEFAULT_STREAM_ID, GEN_TYPE::GEN_ATT){}
+
 GadAttitude::GadAttitude(uint8_t stream_id) : Gad(stream_id, GEN_TYPE::GEN_ATT){}
 
 // val

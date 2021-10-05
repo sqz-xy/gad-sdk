@@ -377,7 +377,7 @@ void GadPosition::SetPosGeodeticVar(double v_n, double v_e, double v_d)
   this->SetDataVarDiag(v_n,v_e,v_d);
 }
 
-void GadPosition::SetPosGeodeticVarFull(
+void GadPosition::SetPosGeodeticVar(
   double v_00, double v_11, double v_22, 
   double v_01, double v_02, double v_12
 ){
@@ -389,11 +389,11 @@ void GadPosition::SetPosLocalVar(double v_x, double v_y, double v_z)
   this->SetDataVarDiag(v_x,v_y,v_z);
 }
 
-void GadPosition::SetPosLocalVarFull(
-    double v_00, double v_11, double v_22, 
-    double v_01, double v_02, double v_12
+void GadPosition::SetPosLocalVar(
+    double v_xx, double v_yy, double v_zz, 
+    double v_xy, double v_xz, double v_yz
 ){
-  this->SetDataVarUpperDiag(v_00,v_11,v_22,v_01,v_02,v_12);
+  this->SetDataVarUpperDiag(v_xx,v_yy,v_zz,v_xy,v_xz,v_yz);
 }
 
 auto GadPosition::GetPosVar() const -> std::vector<double>
@@ -470,7 +470,7 @@ void GadVelocity::SetVelNeuVar(double v_n, double v_e, double v_u)
   this->SetDataVarDiag(v_n,v_e,v_u);
 }
 
-void GadVelocity::SetVelNeuVarFull(
+void GadVelocity::SetVelNeuVar(
   double v_nn, double v_ee, double v_uu, 
   double v_ne, double v_nu, double v_eu
 ){
@@ -482,7 +482,7 @@ void GadVelocity::SetVelOdomVar(double v_x, double v_y, double v_z)
   this->SetDataVarDiag(v_x,v_y,v_z);
 }
 
-void GadVelocity::SetVelOdomVarFull(
+void GadVelocity::SetVelOdomVar(
   double v_xx, double v_yy, double v_zz, 
   double v_xy, double v_xz, double v_yz
 ){
@@ -494,7 +494,7 @@ void GadVelocity::SetVelLocalVar(double v_x, double v_y, double v_z)
   this->SetDataVarDiag(v_x,v_y,v_z);
 }
 
-void GadVelocity::SetVelLocalVarFull(
+void GadVelocity::SetVelLocalVar(
   double v_xx, double v_yy, double v_zz, 
   double v_xy, double v_xz, double v_yz
 ){

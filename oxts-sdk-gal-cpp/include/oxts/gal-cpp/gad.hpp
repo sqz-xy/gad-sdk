@@ -280,7 +280,7 @@ public:
    * @param v_02 Variance of the position estimate (m^2).
    * @param v_12 Variance of the position estimate (m^2).
    */
-  void SetPosGeodeticVarFull(
+  void SetPosGeodeticVar(
     double v_00, double v_11, double v_22, 
     double v_01, double v_02, double v_12
   );
@@ -302,7 +302,7 @@ public:
    * @param v_02 Variance of the position estimate (m^2).
    * @param v_12 Variance of the position estimate (m^2).
    */
-  void SetPosLocalVarFull(
+  void SetPosLocalVar(
     double v_00, double v_11, double v_22, 
     double v_01, double v_02, double v_12
   );
@@ -399,7 +399,7 @@ public:
    * @param v_nu Variance of the position estimate (m/s)^2.
    * @param v_eu Variance of the position estimate (m/s)^2.
    */
-  void SetVelNeuVarFull(
+  void SetVelNeuVar(
     double v_nn, double v_ee, double v_uu, 
     double v_ne, double v_nu, double v_eu
   );
@@ -421,7 +421,7 @@ public:
    * @param v_xz Variance of the position estimate (m/s)^2.
    * @param v_yz Variance of the position estimate (m/s)^2.
    */
-  void SetVelOdomVarFull(
+  void SetVelOdomVar(
     double v_xx, double v_yy, double v_zz, 
     double v_xy, double v_xz, double v_yz
   );
@@ -443,7 +443,7 @@ public:
    * @param v_xz Variance of the position estimate (m^2).
    * @param v_yz Variance of the position estimate (m^2).
    */
-  void SetVelLocalVarFull(
+  void SetVelLocalVar(
     double v_xx, double v_yy, double v_zz, 
     double v_xy, double v_xz, double v_yz
   );

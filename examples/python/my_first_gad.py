@@ -7,7 +7,7 @@ gh.set_output_mode_to_file("my_first.gad")
 
 gp = oxts_sdk.GadPosition(122)
 gp.pos_local = [0.0,0.0,0.0]
-gp.pos_local_var = [0.1,0.1,0.1,0.01,0.02,0.04]
+gp.pos_local_var = [0.11,0.12,0.13,0.01,0.02,0.04]
 gp.time_gps = [10, 0]
 gp.aiding_lever_arm_fixed = [0.0,0.0,1.0]
 gp.aiding_lever_arm_var = [0.01,0.01,0.01]

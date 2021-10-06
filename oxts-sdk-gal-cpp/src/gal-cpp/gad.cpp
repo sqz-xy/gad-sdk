@@ -103,12 +103,20 @@ void Gen3d::SetVarDiag(double v_00, double v_11,double v_22)
   this->v[0] = v_00;
   this->v[1] = v_11;
   this->v[2] = v_22;
+  this->v[3] = 0.0;
+  this->v[4] = 0.0;
+  this->v[5] = 0.0;
 }
 
 void Gen3d::SetVarSingle(double v_0)
 {
   this->v_type = GEN_VAR_TYPE::GEN_VAR_SINGLE;
   this->v[0] = v_0;
+  this->v[1] = 0.0;
+  this->v[2] = 0.0;
+  this->v[3] = 0.0;
+  this->v[4] = 0.0;
+  this->v[5] = 0.0;
 }
 
 auto Gen3d::GetVar() const -> std::vector<double>

@@ -12,6 +12,10 @@ type can be set using functions from the :ref:`gadspeedclass` class.
     internal mechanism in order to avoid interference. Use config option 
     :code:`-aid_wspeed_off` to do this.
 
+.. warning::
+    If zero velocity is sent then the update type will internally be changed to a "zero velocity update".
+    Therefore to check the INS is receiving the update the zero velocity innovations should be inspected.
+
 Aiding Frames
 *************
 
@@ -38,7 +42,7 @@ These two values alone cannot provide a full speed measurement. The additional
 piece of information required is the Pulses Per Metre (PPM), which is set in 
 the configuration of the INS. 
 
--wheelspeed[X]_[Y]  
+`-wheelspeed[X]_[Y]`  
     [X] = PPM (unitless), [Y] = % accuracy of the PPM value.
 
 The INS will attempt to optimise the PPM value during operation. The accuracy 
@@ -57,6 +61,8 @@ wheelspeed measurement. As a consequence, it is still a little rough around the
 edges. When using this update type, users must configure 
 :code:`-wheelspeed1000_10` on the INS, despite the fact that this is not 
 "wheel"speed. 
+
+.. _speedcovariancematrix:
 
 Covariance Matrix
 *****************

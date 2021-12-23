@@ -5,7 +5,7 @@
    :language: cpp
 
 OxTS C++ Generic Aiding SDK
-======================================================
+===========================
 
 .. toctree::
    :maxdepth: 2
@@ -50,6 +50,7 @@ Table of Contents
    longform/example-my-first-gad
    longform/example-static-aiding
    longform/example-static-aiding-no-boost
+   longform/example-zv-wheelspeed
 
 
 .. toctree:: 

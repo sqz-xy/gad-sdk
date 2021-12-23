@@ -12,7 +12,7 @@
 // This is a basic cross-platform sleep function
 namespace OxTS
 {
-void Sleep(int sleepMs)
+void sleep(int sleepMs)
 {
 #ifdef __linux__
     usleep(sleepMs * 1000);   // usleep takes sleep time in us (1 millionth of a second)
@@ -48,7 +48,7 @@ int main(int argc, char * argv[])
   for (int i = 0; i < num_packets; ++i)
   {
     gh.SendPacket(gv);
-    OxTS::Sleep(100);
+    OxTS::sleep(100);
   }
 
   return 0;

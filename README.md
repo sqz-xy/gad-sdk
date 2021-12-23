@@ -1,5 +1,7 @@
 # OxTS Generic Aiding SDK
 
+Note: Clone this repository with the --recursive option to ensure pybind11 is available. 
+
 This project contains the OxTS GAD SDK, written in C++. This SDK is designed to allow users to encode aiding data to GAD packets and send them to an OxTS INS for use in the navigation solution. It also contains NCom decoder functionality, for those who wish to receive data from the unit.
 
 Find the full code documentation for this project at: [https://oxts.gitlab.io/navigation/generic-aiding/gad-sdk/](https://oxts.gitlab.io/navigation/generic-aiding/gad-sdk/)
@@ -10,6 +12,7 @@ Find the full code documentation for this project at: [https://oxts.gitlab.io/na
 - Boost 1.71 (requirement can be disabled, though this will remove UDP functionality)
 - Generic Aiding Feature Codes.
 - Ethernet connection to an OxTS INS, for real-time aiding.
+- C/C++ Compiler (Easiest option is to install Visual Studio Professional 2019 (not 2022 - boost won't install) on Windows. For Linux use GCC)
 
 ### Installing requirements on Linux
 
@@ -17,6 +20,14 @@ Find the full code documentation for this project at: [https://oxts.gitlab.io/na
 sudo apt-get install cmake
 sudo apt-get install libboost-all-dev
 ```
+
+### Installing requirements on Windows 
+
+- Download and install [CMake](https://cmake.org/download/)
+- Download [Boost](https://www.boost.org/users/download/)
+  - Extract the files to a sensible location such as C:\Libs. Note you do not need to create an extra containing folder. The full path to the boost libraries should resemble C:\Libs\boost_1_77_0.
+  - In a command prompt navigate to the boost directory and run ``` bootstrap.bat ``` - Then run ```b2.exe link=shared``` to install boost.
+  - Edit your environment variables and add the variable ```BOOST_ROOT``` with value equal to the path to your boost library. In this example the value would be ```C:\Libs\boost_1_77_0```
 
 ## Getting Started
 
@@ -32,13 +43,25 @@ Users can also build the SDK from source, using the following instructions:
    configure options, such as enabling building of examples and documentation.
 4. Execute the commands:
 
+### Linux
 ```
 mkdir _build && cd _build 
 cmake ..
 cmake --build . --target install
 ```
+This will build the SDK and install it to your machine. Your machine may report an error from the INSTALL that permission to copy a file has been denied. In this case run the last command again, but add `sudo` to the start. This should provide the correct access rights to install files to the correct location. 
 
-This will build the SDK and install it to your machine. Your machine may report an error from the INSTALL that permission to copy a file has been denied. In this case run the last command again, but add `sudo` to the start. This should provide the correct access rights to install files to the correct location. Once this is complete, other CMake projects on the machine can link to the libraries using:
+### Windows
+```
+mkdir _build
+cd _build
+cmake ..
+cmake --build . --target install
+```
+This will build the SDK and install it on your machine. You may need to run CMD or Powershell as an adminitrator if the SDK fails to install.
+
+
+Once this is complete, other CMake projects on the machine can link to the libraries using:
 
 ```
 find_package(oxts-sdk-gal-cpp REQUIRED)
@@ -81,12 +104,14 @@ The documentation for this project is generated using a few tools: Doxygen, Brea
 ```
 
 
-## Python GAD SDK
+## Python GAD SDK (Windows and Linux)
+
+Note: As of PIP 21.3 pip creates build files locally in a folder called build instead of a temporary folder. If the boost install directory changes or the path isn't set properly then the build folder should be manually deleted before trying to install again. Likewise if modifying the code and installing again then the build folder should be deleted.  
 
 The C++ SDK has been wrapped in Python using PyBind11. The interface for the Python code largely matches that of the C++ code, though class accessors have been replaced with Python properties.
 
 The Python SDK is not yet  documented, though its binding to the C++ can be found in `oxts-sdk-py/gal-py-bindings.cpp`. There is also an example in `examples/python/my-first-gad.py`.
 
-To install the package, use `pip install ./oxts-sdk` from the directory above the repository folder. After that, it can be imported using `import oxts_sdk`.
+To install the package, use `pip install ./gad-sdk` from the directory above the repository folder. After that, it can be imported using `import oxts_sdk`.
 
 

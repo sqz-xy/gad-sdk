@@ -554,7 +554,7 @@ void GadSpeed::SetSpeedFw(double speed)
 {
   this->SetDataMode(0);
   this->SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_FW_VEL);
-  this->SetDataVal(speed,0.0,0.0); /** @todo Implement with time interval */
+  this->SetDataVal(speed,1.0,0.0);
 }
 
 auto GadSpeed::GetSpeedFw() const -> double
@@ -576,7 +576,7 @@ void GadSpeed::SetWheelspeedCount(double count, double period)
 {
   this->SetDataMode(0);
   this->SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_FW_VEL);
-  this->SetDataVal(count,period,0.0); /** @todo Implement with time interval */
+  this->SetDataVal(count,period,0.0); 
 }
 
 auto GadSpeed::GetWheelspeedCount() const -> std::vector<double>

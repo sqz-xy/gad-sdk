@@ -12,7 +12,7 @@
 
 namespace OxTS
 {
-void Sleep(int sleepMs)
+void sleep(int sleepMs)
 {
 #ifdef __linux__
     usleep(sleepMs * 1000);   // usleep takes sleep time in us (1 millionth of a second)
@@ -59,7 +59,7 @@ int main(int argc, char * argv[])
     if(i % 10 == 0)
       std::cout << i << " packets sent" << std::endl;
 
-    OxTS::Sleep(100);
+    OxTS::sleep(100);
   }
 
   return 0;

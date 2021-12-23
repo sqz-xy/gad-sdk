@@ -72,10 +72,9 @@ int main(int argc, char * argv[])
   ga.SetAttVar(0.1,0.1,0.1);
   // Set the time mode to Void
   ga.SetTimeVoid();
-  // Set the aiding source -> IMU frame alignment with the frames aligned.
+  // Indicates the aiding source -> IMU frame alignment will be set in the 
+  // .att file. The navigation engine will attempt to optimise this alignment.
   ga.SetAidingAlignmentOptimising();
-  // Set the variance on the alignment to 5.0 deg in HPR.
-  ga.SetAidingAlignmentVar(5.0,5.0,5.0);
   //============================================================================
   // Initialise the handler
   OxTS::GadHandler gh = OxTS::GadHandler();

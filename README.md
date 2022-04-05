@@ -12,7 +12,7 @@ Find the full code documentation for this project at: [https://oxts.gitlab.io/na
 - Boost 1.71 (requirement can be disabled, though this will remove UDP functionality)
 - Generic Aiding Feature Codes.
 - Ethernet connection to an OxTS INS, for real-time aiding.
-- C/C++ Compiler (Easiest option is to install Visual Studio Professional 2019 (not 2022 - boost won't install) on Windows. For Linux use GCC)
+- C/C++ Compiler (Easiest option is to install Visual Studio Professional 2019 (not 2022 - boost won't install) on Windows, Linux GCC)
 
 ### Installing requirements on Linux
 
@@ -59,6 +59,8 @@ cmake ..
 cmake --build . --target install
 ```
 This will build the SDK and install it on your machine. You may need to run CMD or Powershell as an adminitrator if the SDK fails to install.
+
+You must ensure your CMake generator is the same compiler used to build boost or the libraries will not found correctly.
 
 
 Once this is complete, other CMake projects on the machine can link to the libraries using:

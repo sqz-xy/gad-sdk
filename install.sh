@@ -20,7 +20,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     fi    
     cd build
     echo "Build directory: " $PWD
-    cmake .
+    cmake ..
     cmake --build . --target install
 
     # TODO: Add docs setup

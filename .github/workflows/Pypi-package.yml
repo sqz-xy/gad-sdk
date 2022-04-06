@@ -9,14 +9,15 @@ jobs:
     
     steps:
     - uses: actions/checkout@master
+      with:
+        submodules: recursive
     - name: Set up Python 3.8
       uses: actions/setup-python@v1
       with:
         python-version: 3.8
-        submodules: recursive
     - name: Install Cmake & boost
       run: >-
-        apt-get update --yes
+        apt-get update
         apt-get install -y build-essential gcc clang clang-tools cmake libboost-all-dev
 
     - name: Install pypa/build

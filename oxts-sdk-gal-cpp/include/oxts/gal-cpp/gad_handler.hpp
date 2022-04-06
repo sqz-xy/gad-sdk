@@ -11,40 +11,39 @@
 
 namespace OxTS
 {
+	/** Class to handle encoding and sending Generic Aiding packets. This can be to
+	 *  an INS in real time via UDP or to a .gad csv file.
+	 */
+	class GadHandler
+	{
+	private:
+		std::shared_ptr<GadEncoder> encoder_;
+		std::shared_ptr<GadOutput> output_;
 
-/** Class to handle encoding and sending Generic Aiding packets. This can be to 
- *  an INS in real time via UDP or to a .gad csv file.
- */
-class GadHandler
-{
-private:
-  std::shared_ptr<GadEncoder> encoder_;
-  std::shared_ptr<GadOutput> output_;
+	public:
+		/**  Constructor */
+		GadHandler(GadEncoder* encoder_strategy = nullptr) : encoder_(encoder_strategy) { }
 
-public:
-  /**  Constructor */
-  GadHandler(GadEncoder *encoder_strategy = nullptr) : encoder_(encoder_strategy){ }
-  
-  /** Set the output encoder to binary. */
-  void SetEncoderToBin() { this->encoder_.reset(new GadEncoderBin()); }
-  /** Set the output encoder to csv. */
-  void SetEncoderToCsv() { this->encoder_.reset(new GadEncoderCsv()); }
+		/** Set the output encoder to binary. */
+		void SetEncoderToBin() { encoder_.reset(new GadEncoderBin()); }
+		/** Set the output encoder to csv. */
+		void SetEncoderToCsv() { encoder_.reset(new GadEncoderCsv()); }
 
-  /** Set Generic Aiding output to file 
-   *  @param file_path Absolute path to the file to output the data to. Will be 
-   *  created if it does not already exist.
-  */
-  void SetOutputModeToFile(std::string file_path) { this->output_.reset(new GadOutputFile(file_path));}
-  /** Set Generic Aiding output to UDP.
-   *  @param ip The IPv4 address of the OxTS INS to send the data to.
-   */
-  void SetOutputModeToUdp(std::string ip)  { this->output_.reset(new GadOutputUdp(ip)); }
+		/** Set Generic Aiding output to file
+		 *  @param file_path Absolute path to the file to output the data to. Will be
+		 *  created if it does not already exist.
+		*/
+		void SetOutputModeToFile(std::string file_path) { output_.reset(new GadOutputFile(file_path)); }
+		/** Set Generic Aiding output to UDP.
+		 *  @param ip The IPv4 address of the OxTS INS to send the data to.
+		 */
+		void SetOutputModeToUdp(std::string ip) { output_.reset(new GadOutputUdp(ip)); }
 
-  /** Send packet via pre-configured output method.
-   *  @param g Generic Aiding data to be encoded and sent 
-  */
-  void SendPacket(Gad g);
-};
+		/** Send packet via pre-configured output method.
+		 *  @param g Generic Aiding data to be encoded and sent
+		*/
+		void SendPacket(Gad g);
+	};
 
 } // OxTS
 

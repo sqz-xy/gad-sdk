@@ -3,22 +3,19 @@
 
 namespace OxTS
 {
+	/**
+	 * Virtual interface class for different methods of outputting GAD.
+	 */
+	class GadOutput
+	{
+	private:
 
-/**
- * Virtual interface class for different methods of outputting GAD.
- */
-class GadOutput
-{
-private:
-
-public:
-  /**
-   * Output a GAD packet
-   */
-  void virtual OutputPacket(unsigned char * packet, int packet_size) = 0;
-};
-
-
+	public:
+		/**
+		 * Output a GAD packet
+		 */
+		void virtual OutputPacket(unsigned char* packet, int packet_size) = 0;
+	};
 }
 
 #endif //GAD_OUTPUT_HPP

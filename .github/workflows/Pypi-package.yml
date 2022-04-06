@@ -42,6 +42,9 @@ jobs:
         --wheel
         --outdir dist/
         .
+    - name: check directory content
+      run: |
+        ls
     - name: Publish distribution 📦 to Test PyPI
       uses: pypa/gh-action-pypi-publish@master
       with:

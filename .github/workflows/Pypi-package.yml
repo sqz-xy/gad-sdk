@@ -1,10 +1,7 @@
-name: Wheels
+name: Publish Python 🐍 distributions 📦 to PyPI and TestPyPI
 
-on:
-  workflow_dispatch:
-  release:
-    types:
-    - published
+on: push
+
 jobs:
   build-n-publish:
     name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI

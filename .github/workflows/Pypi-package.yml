@@ -64,7 +64,7 @@ jobs:
         path: wheelhouse/*.whl
         
   upload_all:
-    needs: [build_wheels, build-n-publish]
+    needs: [build-n-publish, build_wheels]
     runs-on: ubuntu-latest
     if: github.event_name == 'release' && github.event.action == 'published'
     steps:

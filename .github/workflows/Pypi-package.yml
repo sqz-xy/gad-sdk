@@ -24,7 +24,7 @@ jobs:
     - name: Install Cmake
       run: >-
         sudo apt-get install cmake
-    - name: Install Boost
+    - name: install-boost
       run: >-
         sudo apt-get install libboost-all-dev
 
@@ -39,10 +39,11 @@ jobs:
       run: python -m pip install cibuildwheel==2.4.0     
 
     - name: Build wheels
-      run: | 
-        sudo apt-get install libboost-all-dev
-        sudo apt-get install cmake
-        python -m cibuildwheel --output-dir wheelhouse
+      run: python -m cibuildwheel --output-dir wheelhouse
+      env:
+        CIBW_BUILD: "cp36-* cp37-* cp38-* cp39-*"
+        BOOST_ROOT: '${{ steps.install-boost.outputs.BOOST_ROOT }}'
+        BOOST_ROOT_PIPELINE: '${{ steps.install-boost.outputs.BOOST_ROOT }}'
       # to supply options, put them in 'env', like:
       # env:
       #   CIBW_SOME_OPTION: value

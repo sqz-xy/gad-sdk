@@ -42,7 +42,7 @@ jobs:
       run: >-
         python -m
         cibuildwheel
-        --outdir dist/
+        --output-dir dist/
         .
 
     - name: check directory content

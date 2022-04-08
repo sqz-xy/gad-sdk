@@ -1,70 +1,43 @@
-name: Publish Python 🐍 distributions 📦 to PyPI and TestPyPI
+name: Upload to PIP
 
+# Controls when the action will run. 
 on: push
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build-n-publish:
-    name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
-    runs-on: ubuntu-18.04
-    
+  # This workflow contains a single job called "upload"
+  upload:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - uses: actions/checkout@master
-      with:
-        submodules: recursive
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.8
-    - name: Setup virtual environment
-      run: |
-        pip install --upgrade pip
-        python3.8 -m venv env
-        source env/bin/activate
-        echo "VIRTUAL ENV:" $VIRTUAL_ENV
-    - name: Install Cmake
-      run: >-
-        sudo apt-get install cmake
-    - name: install-boost
-      run: >-
-        sudo apt-get install libboost-all-dev
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-    - name: Install pypa/build
-      run: >-
-        python -m
-        pip install
-        build
-        --user
-        
-    - name: Install cibuildwheel
-      run: python -m pip install cibuildwheel==2.4.0     
+      # Sets up python
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Setup virtual environment
+        run: |
+          pip install --upgrade pip
+          python3.8 -m venv env
+          source env/bin/activate
+          echo "VIRTUAL ENV:" $VIRTUAL_ENV
+      # Install dependencies
+      - name: "Installs dependencies"
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install setuptools wheel twine
+          sudo apt-gt install cmake
+          sudo apt-get install libboost-all-dev
 
-    - name: Build wheels
-      run: |
-        echo "::set-env name=BOOST_ROOT::$BOOST_ROOT_1_65_1"
-        python -m cibuildwheel --output-dir wheelhouse
-     # env:
-     #   CIBW_BUILD: "cp36-* cp37-* cp38-* cp39-*"
-     #   BOOST_ROOT: '${{ steps.install-boost.outputs.BOOST_ROOT }}'
-     #   BOOST_ROOT_PIPELINE: '${{ steps.install-boost.outputs.BOOST_ROOT }}'
-      # to supply options, put them in 'env', like:
-      # env:
-      #   CIBW_SOME_OPTION: value
-
-    - uses: actions/upload-artifact@v2
-      with:
-        path: ./wheelhouse/*.whl
-
-
-    - name: check directory content
-      run: |
-        ls
-    - name: Publish distribution 📦 to Test PyPI
-      uses: pypa/gh-action-pypi-publish@master
-      with:
-        password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-        repository_url: https://test.pypi.org/legacy/
-    - name: Publish distribution 📦 to PyPI
-      if: startsWith(github.ref, 'refs/tags')
-      uses: pypa/gh-action-pypi-publish@master
-      with:
-        password: ${{ secrets.PYPI_API_TOKEN }}
+      # Build and upload to PyPI
+      - name: "Builds and uploads to PyPI"
+        run: |
+          python3 setup.py sdist bdist_wheel
+          python3 -m twine upload dist/*
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}

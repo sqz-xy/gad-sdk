@@ -48,8 +48,9 @@ jobs:
         source env/bin/activate
         python -m cibuildwheel --output-dir dist/
         env:
-          BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
-
+          CIBW_ENVIRONMENT: BOOST_ROOT=${{ steps.install-boost.outputs.BOOST_ROOT }}
+          CIBW_ENVIRONMENT_PASS_LINUX: BOOST_ROOT
+          
     - name: check directory content
       run: |
         ls

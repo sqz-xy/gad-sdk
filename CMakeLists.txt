@@ -58,7 +58,7 @@ if (OXTS_SDK_BUILD_PYTHON)
     include_directories(oxts-sdk-gal-c/include)
     include_directories(oxts-sdk-core/include)
     if(NOT OXTS_SDK_DISABLE_BOOST)
-        include_directories(${Boost_INCLUDE_DIR})
+        include_directories(${BOOST_INCLUDE_DIR})
     endif()
 
 

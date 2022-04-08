@@ -30,7 +30,7 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           python3 -m pip install setuptools wheel twine
-          sudo apt-gt install cmake
+          sudo apt-get install cmake
           sudo apt-get install libboost-all-dev
 
       # Build and upload to PyPI

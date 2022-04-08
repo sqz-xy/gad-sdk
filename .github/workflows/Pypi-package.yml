@@ -25,11 +25,12 @@ jobs:
     - name: Install Cmake
       run: >-
         sudo apt-get install cmake
-    - name: Install Boost
-      run: >-
-        sudo apt-get install libboost-all-dev
+   # - name: Install Boost
+   #   run: >-
+   #     sudo apt-get install libboost-all-dev
     - name: check directory content
       run: |
+        cd env
         ls
     - name: Install pypa/build
       run: >-
@@ -41,11 +42,12 @@ jobs:
       run: python -m pip install cibuildwheel==2.4.0
       
     - name: Build a binary wheel and a source tarball
-      run: >-
-        python -m
-        cibuildwheel
-        --output-dir dist/
-        .
+      run: |
+        source env/bin/activate
+        sudo apt-get install libboost-all-dev
+        python -m cibuildwheel --output-dir dist/
+        env:
+          
 
     - name: check directory content
       run: |

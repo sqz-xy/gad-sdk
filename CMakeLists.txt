@@ -12,6 +12,7 @@ add_definitions(-DOXTS_SDK_VERSION_PATCH=${oxts-sdk_VERSION_PATCH})
 
 # Building and installation options
 #option(OXTS_SDK_BUILD_DOCS "Build SDK documentation." OFF)
+option(OXTS_SDK_BUILD_TESTS "Enable unit test targets." ON) 
 option(OXTS_SDK_BUILD_EXAMPLES "Enable examples targets." ON) 
 option(OXTS_SDK_BUILD_PYTHON "Build SDK Python wrapper." OFF) 
 option(OXTS_SDK_DISABLE_BOOST "Disable Boost library when building." OFF)
@@ -43,6 +44,10 @@ if (OXTS_SDK_BUILD_EXAMPLES)
     add_subdirectory(examples)
 endif()
 
+if (OXTS_SDK_BUILD_TESTS)
+    add_subdirectory(tests)
+endif()
+
 if (OXTS_SDK_BUILD_PYTHON)
     add_subdirectory(oxts-sdk-py/pybind11)
     pybind11_add_module(oxts_sdk oxts-sdk-py/gal-py-bindings.cpp 
@@ -58,7 +63,7 @@ if (OXTS_SDK_BUILD_PYTHON)
     include_directories(oxts-sdk-gal-c/include)
     include_directories(oxts-sdk-core/include)
     if(NOT OXTS_SDK_DISABLE_BOOST)
-        include_directories(${BOOST_INCLUDE_DIR})
+        include_directories(${Boost_INCLUDE_DIR})
     endif()
 
 

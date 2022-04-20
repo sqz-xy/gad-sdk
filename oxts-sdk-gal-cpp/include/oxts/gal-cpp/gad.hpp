@@ -142,7 +142,7 @@ namespace OxTS
 		/*! Constructor */
 		Gad(uint8_t stream_id, int8_t aiding_type);
 		/*! Destructor */
-		~Gad();
+		virtual ~Gad();
 		/*! Copy constructor */
 		Gad(const Gad& g);
 		/*! Copy constructor to allow direct copy to C struct. */

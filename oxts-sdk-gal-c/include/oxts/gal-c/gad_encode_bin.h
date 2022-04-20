@@ -35,7 +35,7 @@ extern "C"
       * gad - the generic aiding data structure, this holds the data which will be used when encoding
       * buffer - this is a pointer to the start of a buffer which will hold all the encoded data
       * size_of_buffer - size of the buffer which is being written to
-      * payload_size - the amount of byte sof the buffer which have been populated by the payload
+      * packet_size - the amount of bytes of the buffer which have been populated by the payload
    */
    int encode_gen_aid(GEN_AIDING_DATA* gad, unsigned char* buffer, size_t buffer_size, size_t* packet_size);
 
@@ -44,7 +44,7 @@ extern "C"
 
       params:
       * field - this is the inbound data, it is the struct which holds the data
-      * data - buffer the data si copied into
+      * data - buffer the data is copied into
       * offset - this is the offset into the data buffer the data is being written to.
    */
    int encode_gen_3d(GEN_3D field, unsigned char* data, size_t* offset, size_t buffer_size);

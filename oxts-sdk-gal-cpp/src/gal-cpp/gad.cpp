@@ -159,6 +159,11 @@ namespace OxTS
 	Gad::Gad(const Gad& g) = default;
 	Gad& Gad::operator=(const Gad& g) = default;
 
+	Gad::Gad(const GEN_AIDING_DATA& g)
+	{
+		//call assignment operator
+		*this = g;
+	}
 
 	Gad& Gad::operator=(const GEN_AIDING_DATA& g)
 	{

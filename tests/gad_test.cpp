@@ -816,7 +816,9 @@ namespace OxTS
 
 				BOOST_CHECK(decoded == 0);
 
-				OxTS::GadVelocity* ret_g = static_cast<OxTS::GadVelocity*>(&OxTS::Gad(g_c_struct_out));
+				OxTS::Gad gad_temp = OxTS::Gad(g_c_struct_out);
+
+				OxTS::GadVelocity* ret_g = static_cast<OxTS::GadVelocity*>(&gad_temp);
 
 				auto ret = ret_g->GetVelVar();
 

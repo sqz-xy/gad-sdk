@@ -70,6 +70,8 @@ jobs:
           Boost_INCLUDE_DIR: "boost_1_77_0"
           DBoost_USE_STATIC_LIBS=ON
           DBoost_NO_BOOST_CMAKE=ON
+          DBOOST_ROOT="boost_1_77_0"
+          DBOOST_LIBRARYDIR="boost_1_77_0"
           Boost_DEBUG=ON
           
     - name: check directory content

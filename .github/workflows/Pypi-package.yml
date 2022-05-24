@@ -57,7 +57,7 @@ jobs:
     - name: Check directory
       run:  |      
         ls
-        ls boost/boost
+        ls boost_1_77_0
     - name: Build a binary wheel and a source tarball
       uses: pypa/cibuildwheel@v2.4.0
       env:

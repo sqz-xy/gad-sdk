@@ -32,7 +32,7 @@ jobs:
         wget https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.gz
         tar -zxvf boost_1_77_0.tar.gz
         ls
-        cd boost_1_77_0.tar.gz
+        cd boost_1_77_0
         cpuCores=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk '{print $NF}'`
         echo "Available CPU cores: "$cpuCores
         ./bootstrap.sh 

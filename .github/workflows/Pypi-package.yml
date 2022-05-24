@@ -59,7 +59,6 @@ jobs:
         echo "VIRTUAL ENV:" $VIRTUAL_ENV
         cat /usr/local/include/boost/version.hpp | grep "BOOST_LIB_VERSION"
         ls
-        cmake -DBOOST_ROOT="boost_1_77_0" -DBOOST_LIBRARYDIR="boost_1_77_0"
         python -m cibuildwheel --output-dir dist/
         env:
           CIBW_BUILD: "cp36-* cp37-* cp38-* cp39-*"

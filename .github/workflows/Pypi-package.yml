@@ -46,6 +46,8 @@ jobs:
     - name: Build a binary wheel and a source tarball
       run: |
         source env/bin/activate
+        echo "VIRTUAL ENV:" $VIRTUAL_ENV
+        sudo apt-get install libboost-all-dev
         python -m cibuildwheel --output-dir dist/
         env:
           CIBW_BUILD: "cp36-* cp37-* cp38-* cp39-*"

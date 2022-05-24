@@ -27,7 +27,7 @@ jobs:
         sudo apt-get install cmake
     - name: Install Boost
       run: >-
-        sudo apt-get install libboost-all-dev
+        sudo apt-get install libboost-all-dev_1.71.0.0ubuntu2_amd64.deb
     - name: check directory content
       run: |
         cd env/lib
@@ -47,7 +47,6 @@ jobs:
       run: |
         source env/bin/activate
         echo "VIRTUAL ENV:" $VIRTUAL_ENV
-        sudo apt-get install libboost-all-dev
         python -m cibuildwheel --output-dir dist/
         env:
           CIBW_BUILD: "cp36-* cp37-* cp38-* cp39-*"

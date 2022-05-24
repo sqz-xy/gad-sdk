@@ -37,7 +37,7 @@ jobs:
         --user
     - name: Install cibuildwheel
       run: |
-        ls boost
+        ls 
         source env/bin/activate
         python -m pip install cibuildwheel==2.4.0
         
@@ -48,7 +48,7 @@ jobs:
         boost_version: 1.77.0
         boost_install_dir: ${{ matrix.boost_install_dir }}
     - name: Check directory
-      run:  ls
+      run:  ls boost
     - name: Build a binary wheel and a source tarball
       uses: pypa/cibuildwheel@v2.4.0
       env:

@@ -25,19 +25,6 @@ jobs:
     - name: Install Cmake
       run: >-
         sudo apt-get install cmake
-    - name: Install Boost
-      run: |
-        sudo apt-get update
-        sudo apt-get -y install build-essential g++ python-dev autotools-dev libicu-dev libbz2-dev
-        wget https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.gz
-        tar -zxvf boost_1_77_0.tar.gz
-        ls
-        cd boost_1_77_0
-        cpuCores=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk '{print $NF}'`
-        echo "Available CPU cores: "$cpuCores
-        ./bootstrap.sh 
-        sudo ./b2 --with=all -j $cpuCores install
-        cat /usr/local/include/boost/version.hpp | grep "BOOST_LIB_VERSION"
     - name: check directory content
       run: |
         cd env/lib

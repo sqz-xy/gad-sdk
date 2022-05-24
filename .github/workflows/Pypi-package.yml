@@ -37,7 +37,7 @@ jobs:
         --user
     - name: Install cibuildwheel
       run: |
-        ls
+        ls boost
         source env/bin/activate
         python -m pip install cibuildwheel==2.4.0
         
@@ -57,20 +57,13 @@ jobs:
         CIBW_BEFORE_BUILD: python -m pip install cmake
         CIBW_BEFORE_BUILD_LINUX: echo $BOOST_ROOT
         CIBW_BEFORE_ALL_LINUX: >-
-          ls &&
           sudo apt-get update &&
-          sudo apt-get -y install build-essential g++ python-dev autotools-dev libicu-dev libbz2-dev &&
-          wget https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.gz &&
-          tar -zxvf boost_1_77_0.tar.gz &&
-          ls &&
-          cd boost_1_77_0 &&
-          cpuCores=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk '{print $NF}'` &&
           echo "Available CPU cores: "$cpuCores &&
           ./bootstrap.sh &&
           sudo ./b2 --with=all -j $cpuCores install &&
           cat /usr/local/include/boost/version.hpp | grep "BOOST_LIB_VERSION" &&
           ls        
-        CIBW_ENVIRONMENT: BOOST_ROOT=/boost_1_77_0
+        CIBW_ENVIRONMENT: BOOST_ROOT=boost/boost_1_77_0
         CIBW_ENVIRONMENT_LINUX: BOOST_ROOT=/boost_1_77_0
         CIBW_ENVIRONMENT_WINDOWS: BOOST_ROOT_PIPELINE=/boost_1_77_0          
         CIBW_ENVIRONMENT_PASS_LINUX: /boost_1_77_0

@@ -42,6 +42,10 @@ jobs:
       run: |
         cd env/lib
         ls
+    - name: _build
+      run:
+        mkdir _build && cd _build   
+        cmake .. -DBOOST_ROOT="boost_1_77_0" -DBOOST_LIBRARYDIR="boost_1_77_0" -DBoost_USE_STATIC_LIBS=ON
     - name: Install pypa/build
       run: >-
         python -m
@@ -65,6 +69,7 @@ jobs:
           CIBW_BUILD: "cp36-* cp37-* cp38-* cp39-*"
           BOOST_DIR: "boost_1_77_0"
           BOOST_ROOT: "boost_1_77_0"
+          DBoost_USE_STATIC_LIBS=ON
           DBoost_NO_BOOST_CMAKE=ON
           
     - name: check directory content

@@ -33,8 +33,11 @@ jobs:
         tar -zxvf boost_1_71_0.tar.gz
         ls
         cd boost_1_71_0
+        cpuCores=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk '{print $NF}'`
+        echo "Available CPU cores: "$cpuCores
         ./bootstrap.sh 
-        sudo ./b2 --with=all -j 4 install
+        sudo ./b2 --with=all -j $cpuCores install
+        cat /usr/local/include/boost/version.hpp | grep "BOOST_LIB_VERSION"
     - name: check directory content
       run: |
         cd env/lib
@@ -47,6 +50,7 @@ jobs:
         --user
     - name: Install cibuildwheel
       run: |
+        cat /usr/local/include/boost/version.hpp | grep "BOOST_LIB_VERSION"
         source env/bin/activate
         python -m pip install cibuildwheel==2.4.0
       

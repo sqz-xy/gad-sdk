@@ -50,7 +50,6 @@ jobs:
         --user
     - name: Install cibuildwheel
       run: |
-        cat /usr/local/include/boost/version.hpp | grep "BOOST_LIB_VERSION"
         source env/bin/activate
         python -m pip install cibuildwheel==2.4.0
       
@@ -58,11 +57,14 @@ jobs:
       run: |
         source env/bin/activate
         echo "VIRTUAL ENV:" $VIRTUAL_ENV
+        cat /usr/local/include/boost/version.hpp | grep "BOOST_LIB_VERSION"
+        ls
+        cmake .. -DBOOST_ROOT="boost_1_77_0" -DBOOST_LIBRARYDIR="boost_1_77_0"
         python -m cibuildwheel --output-dir dist/
         env:
           CIBW_BUILD: "cp36-* cp37-* cp38-* cp39-*"
-          BOOST_ROOT: '${{ steps.install-boost.outputs.BOOST_ROOT }}'
-          BOOST_ROOT_PIPELINE: '${{ steps.install-boost.outputs.BOOST_ROOT }}'
+          BOOST_DIR: "boost_1_77_0"
+          DBoost_NO_BOOST_CMAKE=ON
           
     - name: check directory content
       run: |

@@ -28,7 +28,7 @@ jobs:
     - name: Install Boost
       run: |
         sudo apt-get update
-        sudo apt-get install libboost-context1.71.0
+        sudo apt-get install -yq libboost1.71-dev
     - name: check directory content
       run: |
         cd env/lib

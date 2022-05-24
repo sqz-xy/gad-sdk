@@ -67,10 +67,13 @@ jobs:
         python -m cibuildwheel --output-dir dist/
         env:
           CIBW_BUILD: "cp38-* cp39-*"
-          BOOST_DIR: "boost_1_77_0"
-          BOOST_ROOT: "boost_1_77_0"
+          BOOST_DIR: "/boost_1_77_0"
+          BOOST_ROOT: "/boost_1_77_0"
           DBoost_USE_STATIC_LIBS=ON
           DBoost_NO_BOOST_CMAKE=ON
+          CIBW_ENVIRONMENT: BOOST_ROOT=/boost_1_77_0
+          CIBW_ENVIRONMENT_WINDOWS: BOOST_ROOT_PIPELINE=/boost_1_77_0
+          CIBW_ENVIRONMENT_PASS_LINUX: /boost_1_77_0
           
     - name: check directory content
       run: |

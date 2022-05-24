@@ -57,12 +57,7 @@ jobs:
         CIBW_BEFORE_BUILD: python -m pip install cmake
         CIBW_BEFORE_BUILD_LINUX: echo $BOOST_ROOT
         CIBW_BEFORE_ALL_LINUX: >-
-          sudo apt-get update &&
-          echo "Available CPU cores: "$cpuCores &&
-          ./bootstrap.sh &&
-          sudo ./b2 --with=all -j $cpuCores install &&
-          cat /usr/local/include/boost/version.hpp | grep "BOOST_LIB_VERSION" &&
-          ls        
+          sudo apt-get update
         CIBW_ENVIRONMENT: BOOST_ROOT=boost/boost-1.77.0-ubuntu-18.04
         CIBW_ENVIRONMENT_LINUX: BOOST_ROOT=/boost/boost-1.77.0-ubuntu-18.04
         CIBW_ENVIRONMENT_WINDOWS: BOOST_ROOT_PIPELINE=/boost/boost-1.77.0-ubuntu-18.04          

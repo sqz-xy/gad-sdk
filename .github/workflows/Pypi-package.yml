@@ -52,7 +52,7 @@ jobs:
       run: |
         mkdir _build && cd _build 
         cmake ..
-        cmake --build . --target install
+        sudo cmake --build . --target install
     - name: Install cibuildwheel
       run: |
         ls

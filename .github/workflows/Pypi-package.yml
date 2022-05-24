@@ -48,11 +48,6 @@ jobs:
         pip install
         build
         --user
-    - name: _build
-      run: |
-        mkdir _build && cd _build 
-        cmake ..
-        sudo cmake --build . --target install
     - name: Install cibuildwheel
       run: |
         ls
@@ -70,7 +65,10 @@ jobs:
           CIBW_BUILD: "cp36-* cp37-* cp38-* cp39-*"
           BOOST_DIR: "boost_1_77_0"
           BOOST_ROOT: "boost_1_77_0"
+          DBoost_INCLUDE_DIR="boost_1_77_0"
+          Boost_INCLUDE_DIR="boost_1_77_0"
           DBoost_NO_BOOST_CMAKE=ON
+          Boost_DEBUG=ON
           
     - name: check directory content
       run: |

@@ -41,26 +41,34 @@ jobs:
         source env/bin/activate
         python -m pip install cibuildwheel==2.4.0
         
-    - name: Install boost
-      uses: MarkusJx/install-boost@v2.3.0
-      id: install-boost
-      with:
-        boost_version: 1.77.0
-        boost_install_dir: boost_1_77_0
+    - name: Install Boost
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install build-essential g++ python-dev autotools-dev libicu-dev libbz2-dev
+        wget https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.gz
+        tar -zxvf boost_1_77_0.tar.gz
+        ls
+        cd boost_1_77_0
+        cpuCores=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk '{print $NF}'`
+        echo "Available CPU cores: "$cpuCores
+        ./bootstrap.sh 
+        sudo ./b2 --with=all -j $cpuCores install
+        cat /usr/local/include/boost/version.hpp | grep "BOOST_LIB_VERSION"
     - name: Check directory
       run:  |      
         ls
+        ls boost/boost
     - name: Build a binary wheel and a source tarball
       uses: pypa/cibuildwheel@v2.4.0
       env:
         CIBW_BUILD: "cp38-*"
-        CIBW_SKIP: "*-win32 *-musllinux_x86_64 *_i686"        
+        CIBW_SKIP: "*-win32 *-musllinux_x86_64 *_i686"       
         CIBW_BEFORE_BUILD: python -m pip install cmake
         CIBW_BEFORE_BUILD_LINUX: echo $BOOST_ROOT
-        CIBW_ENVIRONMENT: BOOST_ROOT=boost/boost
-        CIBW_ENVIRONMENT_LINUX: BOOST_ROOT=/boost/boost
-        CIBW_ENVIRONMENT_WINDOWS: BOOST_ROOT_PIPELINE=/boost/boost       
-        CIBW_ENVIRONMENT_PASS_LINUX: /boost/boost
+        CIBW_ENVIRONMENT: BOOST_ROOT=/boost_1_77_0
+        CIBW_ENVIRONMENT_LINUX: BOOST_ROOT=/boost_1_77_0
+        CIBW_ENVIRONMENT_WINDOWS: BOOST_ROOT_PIPELINE=/boost_1_77_0    
+        CIBW_ENVIRONMENT_PASS_LINUX: /boost_1_77_0
           
     - name: check directory content
       run: |

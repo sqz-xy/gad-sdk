@@ -49,7 +49,6 @@ jobs:
         boost_install_dir: ${{ matrix.boost_install_dir }}
     - name: Check directory
       run:  |
-        ls boost/boost
         ls boost/boost-1.77.0-ubuntu-18.04
     - name: Build a binary wheel and a source tarball
       uses: pypa/cibuildwheel@v2.4.0
@@ -58,10 +57,10 @@ jobs:
         CIBW_SKIP: "*-win32 *-musllinux_x86_64 *_i686"        
         CIBW_BEFORE_BUILD: python -m pip install cmake
         CIBW_BEFORE_BUILD_LINUX: echo $BOOST_ROOT
-        CIBW_ENVIRONMENT: BOOST_ROOT=boost/boost-1.77.0-ubuntu-18.04
-        CIBW_ENVIRONMENT_LINUX: BOOST_ROOT=/boost/boost-1.77.0-ubuntu-18.04
-        CIBW_ENVIRONMENT_WINDOWS: BOOST_ROOT_PIPELINE=/boost/boost-1.77.0-ubuntu-18.04          
-        CIBW_ENVIRONMENT_PASS_LINUX: /boost/boost-1.77.0-ubuntu-18.04
+        CIBW_ENVIRONMENT: BOOST_ROOT=boost/boost
+        CIBW_ENVIRONMENT_LINUX: BOOST_ROOT=/boost/boost
+        CIBW_ENVIRONMENT_WINDOWS: BOOST_ROOT_PIPELINE=/boost/boost       
+        CIBW_ENVIRONMENT_PASS_LINUX: /boost/boost
           
     - name: check directory content
       run: |

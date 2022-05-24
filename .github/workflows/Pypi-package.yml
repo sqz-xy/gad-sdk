@@ -48,7 +48,7 @@ jobs:
         boost_version: 1.77.0
         boost_install_dir: ${{ matrix.boost_install_dir }}
     - name: Check directory
-      run:  ls boost
+      run:  ls boost/boost
     - name: Build a binary wheel and a source tarball
       uses: pypa/cibuildwheel@v2.4.0
       env:
@@ -63,10 +63,10 @@ jobs:
           sudo ./b2 --with=all -j $cpuCores install &&
           cat /usr/local/include/boost/version.hpp | grep "BOOST_LIB_VERSION" &&
           ls        
-        CIBW_ENVIRONMENT: BOOST_ROOT=boost/boost_1_77_0
-        CIBW_ENVIRONMENT_LINUX: BOOST_ROOT=/boost_1_77_0
-        CIBW_ENVIRONMENT_WINDOWS: BOOST_ROOT_PIPELINE=/boost_1_77_0          
-        CIBW_ENVIRONMENT_PASS_LINUX: /boost_1_77_0
+        CIBW_ENVIRONMENT: BOOST_ROOT=boost/boost-1.77.0-ubuntu-18.04
+        CIBW_ENVIRONMENT_LINUX: BOOST_ROOT=/boost/boost-1.77.0-ubuntu-18.04
+        CIBW_ENVIRONMENT_WINDOWS: BOOST_ROOT_PIPELINE=/boost/boost-1.77.0-ubuntu-18.04          
+        CIBW_ENVIRONMENT_PASS_LINUX: /boost/boost-1.77.0-ubuntu-18.04
           
     - name: check directory content
       run: |

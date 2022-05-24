@@ -28,7 +28,10 @@ jobs:
     - name: Install Boost
       run: |
         sudo apt-get update
-        sudo apt-get install libboost1.71-all-dev
+        wget https://boostorg.jfrog.io/artifactory/main/release/1.71.0/source/boost_1_71_0.tar.gz
+        cd boost_1_71_0
+        ./bootstrap.sh 
+        sudo ./b2 --with=all -j 4 install
     - name: check directory content
       run: |
         cd env/lib

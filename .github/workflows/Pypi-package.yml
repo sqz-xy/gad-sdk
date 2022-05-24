@@ -48,8 +48,14 @@ jobs:
         pip install
         build
         --user
+    - name: _build
+      run: |
+        mkdir _build && cd _build 
+        cmake ..
+        cmake --build . --target install
     - name: Install cibuildwheel
       run: |
+        ls
         source env/bin/activate
         python -m pip install cibuildwheel==2.4.0
       

@@ -30,6 +30,7 @@ jobs:
         sudo apt-get update
         sudo apt-get -y install build-essential g++ python-dev autotools-dev libicu-dev libbz2-dev
         wget https://boostorg.jfrog.io/artifactory/main/release/1.71.0/source/boost_1_71_0.tar.gz
+        tar -zxvf boost_1_54_0.tar.gz
         ls
         cd boost_1_71_0
         ./bootstrap.sh 

@@ -58,6 +58,7 @@ jobs:
       run: |
         source env/bin/activate
         echo "VIRTUAL ENV:" $VIRTUAL_ENV
+        echo "::set-env name=BOOST_ROOT::$BOOST_ROOT"
         cat /usr/local/include/boost/version.hpp | grep "BOOST_LIB_VERSION"
         ls
         python -m cibuildwheel --output-dir dist/

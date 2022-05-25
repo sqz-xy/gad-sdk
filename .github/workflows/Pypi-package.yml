@@ -68,7 +68,6 @@ jobs:
           tar xf boost_1_77_0.tar.bz2 && echo "First List:" && ls && cd boost_1_77_0 &&
           echo "Boost_1_77_0 LIST:" && ls &&
           cd {package} && echo "PACKAGE LIST:" && ls
-        BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
         CIBW_ENVIRONMENT_WINDOWS: BOOST_ROOT='${{ steps.install-boost.outputs.BOOST_ROOT }}'
         CIBW_ENVIRONMENT_MACOS: BOOST_ROOT='${{ steps.install-boost.outputs.BOOST_ROOT }}'
         CIBW_ENVIRONMENT_LINUX: BOOST_ROOT='${{ steps.install-boost.outputs.BOOST_ROOT }}'

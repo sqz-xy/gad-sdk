@@ -65,12 +65,8 @@ jobs:
           yum install -y wget &&
           cd / &&  mkdir boost && cd boost &&
           wget --no-check-certificate 'https://sourceforge.net/projects/boost/files/boost/1.77.0/boost_1_77_0.tar.bz2' && 
-          tar xf boost_1_77_0.tar.bz2 && ls && cd boost_1_77_0 && ./bootstrap.sh && ./b2 install && ls &&
+          tar xf boost_1_77_0.tar.bz2 && ls && cd boost_1_77_0 && ls &&
           cd {package} &&
-          ls &&
-          ls env
-        CIBW_TEST_COMMAND: python -m pytest --rootdir={package} {package}
-        CIBW_TEST_REQUIRES: pytest
         CIBW_ENVIRONMENT_WINDOWS: BOOST_ROOT='${{ steps.install-boost.outputs.BOOST_ROOT }}'
         CIBW_ENVIRONMENT_MACOS: BOOST_ROOT='${{ steps.install-boost.outputs.BOOST_ROOT }}'
         CIBW_ENVIRONMENT_LINUX: BOOST_ROOT=/boost

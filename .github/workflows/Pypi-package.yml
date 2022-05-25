@@ -66,7 +66,7 @@ jobs:
           cd / &&  mkdir boost && cd boost &&
           wget --no-check-certificate 'https://sourceforge.net/projects/boost/files/boost/1.77.0/boost_1_77_0.tar.bz2' && 
           tar xf boost_1_77_0.tar.bz2 && ls && cd boost_1_77_0 && ls &&
-          cd {package} &&
+          cd {package}
         CIBW_ENVIRONMENT_WINDOWS: BOOST_ROOT='${{ steps.install-boost.outputs.BOOST_ROOT }}'
         CIBW_ENVIRONMENT_MACOS: BOOST_ROOT='${{ steps.install-boost.outputs.BOOST_ROOT }}'
         CIBW_ENVIRONMENT_LINUX: BOOST_ROOT=/boost

@@ -65,10 +65,9 @@ jobs:
         CIBW_SKIP: "*-win32 *-musllinux_x86_64 *_i686"       
         CIBW_BEFORE_BUILD: python -m pip install cmake
         CIBW_BEFORE_BUILD_LINUX: echo $BOOST_ROOT
-        CIBW_ENVIRONMENT: BOOST_ROOT=/boost_1_77_0
-        CIBW_ENVIRONMENT_LINUX: BOOST_ROOT=/boost_1_77_0
-        CIBW_ENVIRONMENT_WINDOWS: BOOST_ROOT_PIPELINE=/boost_1_77_0    
-        CIBW_ENVIRONMENT_PASS_LINUX: /boost_1_77_0
+        CIBW_ENVIRONMENT: PATH=$PATH:/boost_1_77_0
+        CIBW_ENVIRONMENT_LINUX: PATH=$PATH:/boost_1_77_0
+        CIBW_ENVIRONMENT_WINDOWS: PATH=$PATH:/boost_1_77_0
           
     - name: check directory content
       run: |

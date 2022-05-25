@@ -42,11 +42,10 @@ jobs:
         python -m pip install cibuildwheel==2.4.0
         
     - name: Install boost
-      if: ${{ runner.os == 'Windows' || runner.os == 'macOS' }}
       uses: MarkusJx/install-boost@v2.1.0
       id: install-boost
       with:
-        boost_version: 1.76.0
+        boost_version: 1.77.0
         boost_install_dir: ${{ matrix.boost_install_dir }}
 
     - name: Build wheels

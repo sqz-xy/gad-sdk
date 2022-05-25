@@ -49,8 +49,8 @@ jobs:
       id: install-boost
       with:
         boost_version: 1.77.0
-        boost_install_dir: ${{ matrix.boost_install_dir }}
-
+        boost_install_dir: ${{ matrix.boost_install_dir }}      
+        
     - name: Build wheels
       uses: pypa/cibuildwheel@v2.3.1
       env:
@@ -62,12 +62,14 @@ jobs:
         CIBW_BEFORE_BUILD: python -m pip install cmake
         CIBW_BEFORE_BUILD_LINUX: echo $BOOST_ROOT
         CIBW_BEFORE_ALL_LINUX: >
+          cmake . -DCMAKE_BUILD_TYPE=$BUILD_TYPE -B build &&
           yum install -y wget &&
           cd / &&  mkdir boost && cd boost &&
           wget --no-check-certificate 'https://sourceforge.net/projects/boost/files/boost/1.77.0/boost_1_77_0.tar.bz2' && 
           tar xf boost_1_77_0.tar.bz2 && echo "First List:" && ls && cd boost_1_77_0 &&
-          echo "Boost_1_77_0 LIST:" && ls && cd ../boost && ls &&
+          echo "Boost_1_77_0 LIST:" && ls &&
           cd {package} && echo "PACKAGE LIST:" && ls
+        BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
         CIBW_ENVIRONMENT_WINDOWS: BOOST_ROOT='${{ steps.install-boost.outputs.BOOST_ROOT }}'
         CIBW_ENVIRONMENT_MACOS: BOOST_ROOT='${{ steps.install-boost.outputs.BOOST_ROOT }}'
         CIBW_ENVIRONMENT_LINUX: BOOST_ROOT=/boost

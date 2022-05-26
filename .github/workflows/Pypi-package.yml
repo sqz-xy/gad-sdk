@@ -56,8 +56,7 @@ jobs:
         cd boost
         wget --no-check-certificate 'https://sourceforge.net/projects/boost/files/boost/1.77.0/boost_1_77_0.tar.bz2'
         tar xf boost_1_77_0.tar.bz2
-        ls
-        cd ${{github.workspace}}
+        cd ${{github.workspace}}/boost
         ls
     - name: Build wheels      
       uses: pypa/cibuildwheel@v2.3.1

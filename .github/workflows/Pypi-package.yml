@@ -74,7 +74,7 @@ jobs:
           cd {package}
         CIBW_ENVIRONMENT_WINDOWS: BOOST_ROOT='${{ steps.install-boost.outputs.BOOST_ROOT }}'
         CIBW_ENVIRONMENT_MACOS: BOOST_ROOT='${{ steps.install-boost.outputs.BOOST_ROOT }}'
-        CIBW_ENVIRONMENT_LINUX: BOOST_ROOT=/boost
+        CIBW_ENVIRONMENT_LINUX: BOOST_ROOT=/boost/boost_1_77_0
         CIBW_ENVIRONMENT_PASS_LINUX: BOOST_ROOT
       
         

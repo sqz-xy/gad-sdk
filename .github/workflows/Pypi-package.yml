@@ -50,14 +50,7 @@ jobs:
       with:
         boost_version: 1.77.0
         boost_install_dir: ${{ matrix.boost_install_dir }}
-    - name: Install boosty
-      run: |
-        mkdir boost
-        cd boost
-        wget --no-check-certificate 'https://sourceforge.net/projects/boost/files/boost/1.77.0/boost_1_77_0.tar.bz2'
-        tar xf boost_1_77_0.tar.bz2
-        cd ${{github.workspace}}/boost
-        ls
+
     - name: Build wheels      
       uses: pypa/cibuildwheel@v2.3.1
       env:
@@ -70,6 +63,10 @@ jobs:
           python -m pip install cmake && python -m pip install --upgrade pip
         CIBW_BEFORE_BUILD_LINUX: echo $BOOST_ROOT
         CIBW_BEFORE_ALL_LINUX: >
+          yum install -y wget &&
+          cd / &&  mkdir boost && cd boost &&
+          wget --no-check-certificate 'https://sourceforge.net/projects/boost/files/boost/1.77.0/boost_1_77_0.tar.bz2' && 
+          tar xf boost_1_77_0.tar.bz2 &&
           cd {package} && ls
         CIBW_ENVIRONMENT_WINDOWS: BOOST_ROOT='${{ steps.install-boost.outputs.BOOST_ROOT }}'
         CIBW_ENVIRONMENT_MACOS: BOOST_ROOT='${{ steps.install-boost.outputs.BOOST_ROOT }}'

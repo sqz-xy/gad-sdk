@@ -52,12 +52,10 @@ jobs:
         boost_install_dir: ${{ matrix.boost_install_dir }}
     - name: Install boosty
       run: |
-        yum install -y wget
-        cd / &&  mkdir boost
+        mkdir boost
         cd boost
         wget --no-check-certificate 'https://sourceforge.net/projects/boost/files/boost/1.77.0/boost_1_77_0.tar.bz2'
         tar xf boost_1_77_0.tar.bz2
-        mv boost_1_77_0 ${{github.workspace}}
         ls
         cd ${{github.workspace}}
         ls

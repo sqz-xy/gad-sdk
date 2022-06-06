@@ -46,7 +46,6 @@ linux:build:
     paths:
       - _build
 
-
 docs:test:
   stage: test
   image: python:3.7-alpine

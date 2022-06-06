@@ -1,8 +1,30 @@
 stages:
   - build
+  - build_pypi_package
   - test
   - deploy
 
+build_and_publish_template:
+  stage: build_pypi_package
+  image: python:3.8
+  variables:
+    GIT_SUBMODULE_STRATEGY: "recursive"
+  before_script:
+    - apt-get update --yes
+    - apt-get install -y build-essential gcc clang clang-tools cmake libboost-all-dev
+    - python -V
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+  script:
+    - pip install twine 
+    - ls
+    - python setup.py sdist bdist_wheel
+    - TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }} TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }} python -m twine upload --skip-existing --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi dist/*
+  artifacts:
+    paths:
+      - dist/*.whl
+    expire_in: 1 days
 
 linux:build:
   stage: build
@@ -17,12 +39,12 @@ linux:build:
         libboost-all-dev
   script:
     - echo "Starting build..."
-    - mkdir build && cd build
+    - mkdir _build && cd _build
     - cmake ..
-    - cmake --build .
+    - cmake --build . --target install
   artifacts:
     paths:
-      - build
+      - _build
 
 
 docs:test:

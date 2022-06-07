@@ -62,8 +62,8 @@ jobs:
           python -m pip install cmake && python -m pip install --upgrade pip
         CIBW_BEFORE_BUILD_LINUX: echo $BOOST_ROOT
         CIBW_BEFORE_ALL_LINUX: >
-          yum install -y wget &&
-          cd / &&  mkdir boost && cd boost &&
+          ls &&
+          cd / && mkdir boost && cd boost &&
           apt-get install libboost-all-dev && echo "PACKAGE" && cd {package} && ls
         CIBW_ENVIRONMENT_WINDOWS: BOOST_ROOT='${{ steps.install-boost.outputs.BOOST_ROOT }}'
         CIBW_ENVIRONMENT_MACOS: BOOST_ROOT='${{ steps.install-boost.outputs.BOOST_ROOT }}'

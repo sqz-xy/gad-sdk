@@ -39,7 +39,7 @@ jobs:
           # OPTIONAL: Specify a custon install location
           boost_install_dir: C:\lib
           # OPTIONAL: Specify a platform version
-          platform_version: 2022
+          platform_version: 2019
           # OPTIONAL: Specify a toolset
           toolset: msvc
     

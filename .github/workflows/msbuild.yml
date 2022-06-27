@@ -41,7 +41,7 @@ jobs:
           # OPTIONAL: Specify a platform version
           platform_version: 2019
           # OPTIONAL: Specify a toolset
-          toolset: msvc
+          #toolset: msvc
           #link: shared
     
       - name: Configure CMake

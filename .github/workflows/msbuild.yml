@@ -55,7 +55,7 @@ jobs:
             BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
 
       - name: Build
-        working-directory: ${{env.GITHUB_WORKSPACE}}
+        working-directory: ${{github.workspace}}/build 
         # Add additional options to the MSBuild command line here (like platform or verbosity level).
         # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-        run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
+        run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{github.workspace}}/build

@@ -25,7 +25,7 @@ jobs:
 
     - name: Build docs
     
-      run:
+      run: |
         apt-get update
         apt-get add doxygen
         apt-get add ttf-freefont graphviz

@@ -39,4 +39,4 @@ jobs:
         cd ..
         mkdir public
         mv docs_sphinx/public/* public
-      shell: python
+      shell: bash

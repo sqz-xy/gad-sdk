@@ -1,0 +1,39 @@
+name: Build docs
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can convert this to a matrix build if you need cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+   runs-on: ${{ matrix.os }}
+   strategy:
+      matrix:
+        os: [ubuntu-18.04]
+   steps:
+    - uses: actions/checkout@v3
+
+    - name: Build docs
+      run:
+        apk update
+        apk add doxygen
+        apk add ttf-freefont graphviz
+        "echo Deploying docs..."
+        pip install -U sphinx
+        pip3 install sphinx-rtd-theme
+        pip3 install breathe
+        pip3 install sphinx-sitemap
+        cd docs_sphinx
+        sphinx-build -b html . public
+        cd ..
+        mkdir public
+        mv docs_sphinx/public/* public

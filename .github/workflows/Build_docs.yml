@@ -18,7 +18,7 @@ jobs:
    runs-on: ${{ matrix.os }}
    strategy:
       matrix:
-        os: [ubuntu-18.04]
+        os: [ubuntu-latest]
    steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v3
@@ -26,9 +26,9 @@ jobs:
     - name: Build docs
     
       run:
-        apk update
-        apk add doxygen
-        apk add ttf-freefont graphviz
+        apt-get update
+        apt-get add doxygen
+        apt-get add ttf-freefont graphviz
         "echo Deploying docs..."
         pip install -U sphinx
         pip3 install sphinx-rtd-theme

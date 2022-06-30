@@ -26,9 +26,9 @@ jobs:
     - name: Build docs
     
       run: |
-        apt-get update
-        apt-get add doxygen
-        apt-get add ttf-freefont graphviz
+        sudo apt-get update
+        sudo apt-get install doxygen
+        sudo apt-get install ttf-freefont graphviz
         "echo Deploying docs..."
         pip install -U sphinx
         pip3 install sphinx-rtd-theme

@@ -22,10 +22,7 @@ jobs:
    steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v3
-    - uses: actions/upload-artifact@v3
-      with:
-       name: doxygen docs
-       path: public
+    
 
     - name: Build docs
     
@@ -43,5 +40,10 @@ jobs:
         mkdir public
         mv docs_sphinx/public/* public
       shell: bash
+  
+    - uses: actions/upload-artifact@v3
+      with:
+       name: doxygen docs
+       path: public
       
 

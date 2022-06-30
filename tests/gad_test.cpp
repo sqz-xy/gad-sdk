@@ -666,9 +666,10 @@ namespace OxTS
 			{
 				GEN_AIDING_DATA g_struct;
 
-				unsigned char g[100];
+				//this should probably fail for any garbage data but give it specific data for now
+				unsigned char garbage[100] = { 9 };
 
-				int decoded = update_genaid_from_bin(&g_struct, g, 100);
+				int decoded = update_genaid_from_bin(&g_struct, garbage, 100);
 
 				BOOST_CHECK(decoded != 0);
 			}
@@ -688,7 +689,8 @@ namespace OxTS
 
 				BOOST_CHECK(check == 0);
 
-				unsigned char garbage[100];
+				//this should probably fail for any garbage data but give it specific data for now
+				unsigned char garbage[100] = {255};
 
 				//garbage data
 				check = genaid_basic_checks_bin(garbage, 100);

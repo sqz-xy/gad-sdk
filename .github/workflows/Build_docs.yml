@@ -29,7 +29,6 @@ jobs:
         sudo apt-get update
         sudo apt-get install doxygen
         sudo apt-get install graphviz
-        "echo Deploying docs..."
         pip install -U sphinx
         pip3 install sphinx-rtd-theme
         pip3 install breathe

@@ -8,6 +8,8 @@ for some measurement types. Currently supported types are:
 
 - Position
 - Velocity
+- Attitude
+- Heading
 
 More detail on how to use the local frame with each update type can be found in 
 the relevant document for the individual update type. 

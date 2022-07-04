@@ -40,42 +40,42 @@ int main(int argc, char* argv[])
 	// Construct the position aiding class with stream ID 129.
 	OxTS::GadPosition gp = OxTS::GadPosition(129);
 	// Set the aiding position
-	gp.SetPosGeodetic(51.91520330, -1.24479140, 111.525);
+	gp.SetPosGeodetic(51.91520330,-1.24479140,111.525);
 	// Set the estimated variance on this position
-	gp.SetPosGeodeticVar(1.0, 1.0, 1.0);
+	gp.SetPosGeodeticVar(1.0,1.0,1.0);
 	// Set the time mode to Void, since we are not timestamping the aiding data.
 	// With no timestamp, the INS will timestamp the data upon arrival.
 	gp.SetTimeVoid();
 	// Set the lever arm between the aiding source and the IMU, in the IMU frame.
-	gp.SetAidingLeverArmFixed(0.5, 0.5, 1.0);
-	gp.SetAidingLeverArmVar(0.1, 0.1, 0.1);
+	gp.SetAidingLeverArmFixed(0.5,0.5,1.0);
+	gp.SetAidingLeverArmVar(0.1,0.1,0.1);
 	//============================================================================
 	// Construct the velocity aiding class with stream ID 130.
 	OxTS::GadVelocity gv = OxTS::GadVelocity(130);
 	// Set the aiding velocity
-	gv.SetVelNeu(0.0, 0.0, 0.0);
+	gv.SetVelNed(0.0,0.0,0.0);
 	// Set the estimated variance on this velocity
-	gv.SetVelNeuVar(0.1, 0.1, 0.1);
+	gv.SetVelNedVar(0.1,0.1,0.1);
 	// Set the time mode to Void, since we are not timestamping the aiding data.
 	gv.SetTimeVoid();
 	// Set the lever arm between the aiding source and the IMU, in the IMU frame.
 	// In this example, the velocity is coming from the same source as the
 	// position.
-	gv.SetAidingLeverArmFixed(0.5, 0.5, 1.0);
-	gv.SetAidingLeverArmVar(0.1, 0.1, 0.1);
+	gv.SetAidingLeverArmFixed(0.5,0.5,1.0);
+	gv.SetAidingLeverArmVar(0.1,0.1,0.1);
 	//============================================================================
 	// Construct the attitude aiding class with stream ID 131.
 	OxTS::GadAttitude ga = OxTS::GadAttitude(131);
 	// Set the aiding attitude
-	ga.SetAtt(0.0, 0.0, 0.0);
+	ga.SetAtt(0.0,0.0,0.0);
 	// Set the estimated variance on this attitude
-	ga.SetAttVar(0.1, 0.1, 0.1);
+	ga.SetAttVar(0.1,0.1,0.1);
 	// Set the time mode to Void
 	ga.SetTimeVoid();
 	// Set the aiding source -> IMU frame alignment with the frames aligned.
 	ga.SetAidingAlignmentOptimising();
 	// Set the variance on the alignment to 5.0 deg in HPR.
-	ga.SetAidingAlignmentVar(5.0, 5.0, 5.0);
+	ga.SetAidingAlignmentVar(5.0,5.0,5.0);
 	//============================================================================
 	// Initialise the handler
 	OxTS::GadHandler gh = OxTS::GadHandler();

@@ -35,6 +35,15 @@ GadAttitude
 .. doxygenclass:: OxTS::GadAttitude
    :project: OxTS C++ Generic Aiding SDK
    :members:
+   
+.. _gadheadingclass:
+
+GadHeading
+***********
+
+.. doxygenclass:: OxTS::GadHeading
+   :project: OxTS C++ Generic Aiding SDK
+   :members:
 
 .. _gadspeedclass:
 

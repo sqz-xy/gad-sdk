@@ -40,6 +40,7 @@ Table of Contents
    longform/generic-aiding-position-updates
    longform/generic-aiding-velocity-updates
    longform/generic-aiding-attitude-updates
+   longform/generic-aiding-heading-updates
    longform/generic-aiding-speed-updates
 
 
@@ -51,6 +52,7 @@ Table of Contents
    longform/example-static-aiding
    longform/example-static-aiding-no-boost
    longform/example-zv-wheelspeed
+   longform/example-heading
 
 
 .. toctree:: 
@@ -61,6 +63,7 @@ Table of Contents
    longform/gad-files
    longform/reassigning-traditional-sources
    longform/stream-priority
+   longform/position-only-initialisation
    longform/all-options
    longform/is-my-data-being-received
 

@@ -36,6 +36,13 @@ if(NOT OXTS_SDK_DISABLE_BOOST)
         PUBLIC 
             oxts-sdk-gal-cpp
     )
+    # Example 4 - Heading
+    set(OXTS_SDK_EXAMPLES_GAL_STATIC heading-example)
+    add_executable(${OXTS_SDK_EXAMPLES_GAL_STATIC} ./heading.cpp)
+    target_link_libraries(${OXTS_SDK_EXAMPLES_GAL_STATIC} 
+        PUBLIC 
+            oxts-sdk-gal-cpp
+    )
 endif()
     
 # Example 4 - Static Aiding No Boost

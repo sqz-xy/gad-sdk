@@ -194,6 +194,11 @@ namespace OxTS
 		/** Set a PPS relative timestamp
 		 * @param ns Time since PPS timestamp (nanoseconds)
 		 */
+		/*Set TAI timestamp in seconds*/
+		void SetTimeTAI(double secs);
+		/** Get TAI timestamp.  */
+		double GetTimeTAI() const;
+
 		void SetTimePpsRelative(double ns);
 		double GetTimePpsRelative() const;
 		/**
@@ -206,6 +211,12 @@ namespace OxTS
 		void SetTimeLatency(double ns);
 		/** Get latency estimate.   */
 		double GetTimeLatency() const;
+		/** Set the timestamp as UTC time encoded as the number of seconds from the UNIX epoch.
+		*  @param secs Time since unic epoch including leap seconds (seconds).
+		*/
+		void SetTimeUTCUnix(double secs);
+		/** Get unix timestamp.  */
+		double GetTimeUTCUnix() const;
 		/**
 		 * Set the timestamp type for this data to void. Data with a void timestamp
 		 * will be timestamped by the INS upon receipt.
@@ -354,12 +365,12 @@ namespace OxTS
 		 */
 		explicit GadVelocity(uint8_t stream_id);
 		/**
-		 * Set the aiding velocity estimate in the local NEU coordinate frame.
-		 * @param v_n Velocity estimate in the North direction (m/s).
+		 * Set the aiding velocity estimate in the local NED coordinate frame.
 		 * @param v_e Velocity estimate in the East direction (m/s).
-		 * @param v_u Velocity estimate in the Up direction (m/s).
+		 * @param v_n Velocity estimate in the North direction (m/s).
+		 * @param v_d Velocity estimate in the Down direction (m/s).
 		 */
-		void SetVelNeu(double v_n, double v_e, double v_u);
+		void SetVelNed(double v_n, double v_e, double v_d);
 		/**
 		 * Set the aiding velocity estimate in the odometry frame.
 		 * @param v_x Velocity estimate in the x direction (m/s).
@@ -379,14 +390,14 @@ namespace OxTS
 		 */
 		std::vector<double> GetVel() const;
 		/**
-		 * Set the aiding velocity variance estimate in the local NEU coordinate frame.
+		 * Set the aiding velocity variance estimate in the local NED coordinate frame.
 		 * @param v_n Velocity variance estimate in the North direction (m/s)^2.
 		 * @param v_e Velocity variance estimate in the East direction (m/s)^2.
 		 * @param v_u Velocity variance estimate in the Up direction (m/s)^2.
 		 */
-		void SetVelNeuVar(double v_n, double v_e, double v_u);
+		void SetVelNedVar(double v_n, double v_e, double v_d);
 		/**
-		 * Set the full covariance matrix of aiding velocity in the NEU
+		 * Set the full covariance matrix of aiding velocity in the NED
 		 * frame. Only six values required due to the symmetry of
 		 * covariance matrices. (Indices row major)
 		 * @param v_nn Variance of the position estimate (m/s)^2.
@@ -396,12 +407,12 @@ namespace OxTS
 		 * @param v_nu Variance of the position estimate (m/s)^2.
 		 * @param v_eu Variance of the position estimate (m/s)^2.
 		 */
-		void SetVelNeuVar(
-			double v_nn, double v_ee, double v_uu,
-			double v_ne, double v_nu, double v_eu
+		void SetVelNedVar(
+			double v_nn, double v_ee, double v_dd,
+			double v_ne, double v_nd, double v_ed
 		);
 		/**
-		 * Set the aiding velocity variance estimate in the local NEU coordinate frame.
+		 * Set the aiding velocity variance estimate in the local NED coordinate frame.
 		 * @param v_x Velocity variance estimate in the x direction (m/s)^2.
 		 * @param v_y Velocity variance estimate in the y direction (m/s)^2.
 		 * @param v_z Velocity variance estimate in the z direction (m/s)^2.
@@ -423,7 +434,7 @@ namespace OxTS
 			double v_xy, double v_xz, double v_yz
 		);
 		/**
-		 * Set the aiding velocity variance estimate in the local NEU coordinate frame.
+		 * Set the aiding velocity variance estimate in the local NED coordinate frame.
 		 * @param v_x Velocity variance estimate in the x direction (m/s)^2.
 		 * @param v_y Velocity variance estimate in the y direction (m/s)^2.
 		 * @param v_z Velocity variance estimate in the z direction (m/s)^2.
@@ -583,9 +594,17 @@ namespace OxTS
 		 * @param pitch   (deg)
 		 * @param roll    (deg)
 		 *
-		 * @todo Confirm whether the roll estimate is used from the update.
+		 * @note Roll is not yet used
 		 */
 		void SetAtt(double heading, double pitch, double roll);
+		/**
+		* Set the aiding attitude measurement relative to the local coordinate frame. 
+		* @param heading (deg)
+		* @param pitch   (deg)
+		* @param roll    (deg)
+		* @note Roll is not yet used!
+		*/
+		void SetAttLocal(double heading, double pitch, double roll);
 		/**
 		 * Set the estimated variance on the aiding attitude measurement.
 		 * @param v_h Variance estimate on the heading angle (deg)^2
@@ -601,7 +620,7 @@ namespace OxTS
 		//  * @param y
 		//  * @param z
 		//  */
-		// void SetAidingAlignmentFixed(double x, double y, double z);
+		void SetAidingAlignmentFixed(double x, double y, double z);
 		std::vector<double> GetAidingAlignment() const;
 		/**
 		 * Set alignment to be optimised by the INS. The alignment values will be read
@@ -616,6 +635,59 @@ namespace OxTS
 		 * @param z
 		 */
 		void SetAidingAlignmentVar(double x, double y, double z);
+		std::vector<double> GetAidingAlignmentVar() const;
+	};
+
+	/**
+	 * Generic Aiding Heading.
+	 */
+	class GadHeading : public Gad
+	{
+	public:
+		/**
+		 * Default constructor
+		 */
+		GadHeading();
+		/** Constructor.
+		 *  @param stream_id Stream ID for the attitude aiding source. Must be unique 128-254.
+		 */
+		explicit GadHeading(uint8_t stream_id);
+		double GetHeading() const;
+		// val
+		/**
+		 * Set the aiding heading measurement relative to the NED coordinate frame.
+		 * @param heading (deg)
+		 */
+		void SetHeading(double heading);
+
+		/**
+		 * Set the aiding heading measurement relative to the local coordinate frame.
+		 * @param heading (deg)
+		 */
+		void SetHeadingLocal(double heading);
+		/**
+		 * Set the estimated variance on the aiding attitude measurement.
+		 * @param v_h Variance estimate on the heading angle (deg)^2
+		 */
+		void SetHeadingVar(double v_h);
+		double GetHeadingVar() const;
+		/**
+		 * Set the angles which specify the rotation required to align the IMU and 
+		 * aiding sensor frames. This alignment will not be optimised by the INS.
+		 * @param h
+		 * @param p
+		 * @param r
+		 */
+		void SetAidingAlignmentFixed(double h, double p, double r);
+		std::vector<double> GetAidingAlignment() const;
+		/**
+		 * Set the estimated variance (error) on the alignment angles between the IMU
+		 * and aiding sensor frames.
+		 * @param h_v
+		 * @param h_p
+		 * @param h_r
+		 */
+		void SetAidingAlignmentVar(double h_v, double p_v, double r_v);
 		std::vector<double> GetAidingAlignmentVar() const;
 	};
 

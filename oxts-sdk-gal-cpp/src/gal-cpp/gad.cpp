@@ -281,11 +281,21 @@ namespace OxTS
 	}
 	double Gad::GetTimeGpsWeek() const { return time.GetValX(); }
 	double Gad::GetTimeGpsSecondsFromSunday() const { return time.GetValY(); }
+
+	// TAI
+	void Gad::SetTimeTAI(double secs)
+	{
+		SetTimeValid(true);
+		time.SetMode(0);
+		time.SetValType(TIME_SYS::TIME_TAI);
+		time.SetVal(secs, 0.0, 0.0);
+	}
+	double Gad::GetTimeTAI() const { return time.GetValX(); }
+
 	// PPS
 	void Gad::SetTimePpsRelative(double ns)
 	{
 		SetTimeValid(true);
-
 		time.SetMode(0);
 		time.SetValType(TIME_SYS::TIME_PPS_RELATIVE);
 		time.SetVal(0.0, 0.0, ns);
@@ -300,6 +310,15 @@ namespace OxTS
 		time.SetVal(0.0, ns, 0.0);
 	}
 	double Gad::GetTimeLatency() const { return time.GetValY(); }
+	// UTC - Unix
+	void Gad::SetTimeUTCUnix(double secs)
+	{
+		SetTimeValid(true);
+		time.SetMode(0);
+		time.SetValType(TIME_SYS::TIME_UNIX_UTC);
+		time.SetVal(secs, 0.0, 0.0);
+	}
+	double Gad::GetTimeUTCUnix() const { return time.GetValX(); }
 	// Void
 	void   Gad::SetTimeVoid()
 	{
@@ -449,11 +468,11 @@ namespace OxTS
 	GadVelocity::GadVelocity(uint8_t stream_id) : Gad(stream_id, GEN_TYPE::GEN_VEL) {}
 
 	// val
-	void GadVelocity::SetVelNeu(double v_n, double v_e, double v_u)
+	void GadVelocity::SetVelNed(double v_n, double v_e, double v_d)
 	{
 		SetDataMode(0);
-		SetDataValType(VEL_SYS_TYPE::VEL_SYS_NEU);
-		SetDataVal(v_n, v_e, v_u);
+		SetDataValType(VEL_SYS_TYPE::VEL_SYS_NED);
+		SetDataVal(v_n, v_e, v_d);
 	}
 
 	void GadVelocity::SetVelOdom(double v_x, double v_y, double v_z)
@@ -475,16 +494,16 @@ namespace OxTS
 		return GetDataVal();
 	}
 
-	void GadVelocity::SetVelNeuVar(double v_n, double v_e, double v_u)
+	void GadVelocity::SetVelNedVar(double v_n, double v_e, double v_d)
 	{
-		SetDataVarDiag(v_n, v_e, v_u);
+		SetDataVarDiag(v_n, v_e, v_d);
 	}
 
-	void GadVelocity::SetVelNeuVar(
-		double v_nn, double v_ee, double v_uu,
-		double v_ne, double v_nu, double v_eu
-	) {
-		SetDataVarUpperDiag(v_nn, v_ee, v_uu, v_ne, v_nu, v_eu);
+	void GadVelocity::SetVelNedVar(
+		double v_nn, double v_ee, double v_dd,
+		double v_ne, double v_nd, double v_ed
+	){
+		SetDataVarUpperDiag(v_nn, v_ee, v_dd, v_ne, v_nd, v_ed);
 	}
 
 	void GadVelocity::SetVelOdomVar(double v_x, double v_y, double v_z)
@@ -641,6 +660,13 @@ namespace OxTS
 		SetDataValType(ATT_SYS_TYPE::ATT_SYS_HPR);
 		SetDataVal(heading, pitch, roll);
 	}
+	
+	void GadAttitude::SetAttLocal(double heading, double pitch, double roll)
+	{
+		SetDataMode(0);
+		SetDataValType(ATT_SYS_TYPE::ATT_SYS_LOCAL);
+		SetDataVal(heading,pitch,roll); 
+	}
 
 	std::vector<double> GadAttitude::GetAtt() const
 	{
@@ -662,11 +688,11 @@ namespace OxTS
 		return GetLocVal();
 	}
 
-	// void GadAttitude::SetAidingAlignmentFixed(double x, double y, double z)
-	// {
-	//   this->SetLocMode(LOC_SYS::LOC_FIXED);
-	//   this->SetLocVal(x,y,z);
-	// }
+	void GadAttitude::SetAidingAlignmentFixed(double h, double p, double r)
+	{
+	   SetLocMode(LOC_SYS::LOC_FIXED);
+	   SetLocVal(h,p,r);
+	}
 
 	void GadAttitude::SetAidingAlignmentOptimising()
 	{
@@ -674,12 +700,69 @@ namespace OxTS
 		SetLocVal(0.0, 0.0, 0.0);
 	}
 
-	void GadAttitude::SetAidingAlignmentVar(double x, double y, double z)
+	// In here was orignally SetData rather than SetLoc
+	void GadAttitude::SetAidingAlignmentVar(double h_v, double p_v, double r_v)
 	{
-		SetDataVarDiag(x, y, z);
+		SetLocVarDiag(h_v, p_v, r_v);
 	}
 
 	std::vector<double> GadAttitude::GetAidingAlignmentVar() const
+	{
+		return GetLocVar();
+	}
+
+	//==============================================================================
+	// GadHeading
+	GadHeading::GadHeading() : Gad(DEFAULT_STREAM_ID, GEN_TYPE::GEN_HEADING) {}
+
+	GadHeading::GadHeading(uint8_t stream_id) : Gad(stream_id, GEN_TYPE::GEN_HEADING) {}
+
+	// val
+	void GadHeading::SetHeading(double heading)
+	{
+		SetDataMode(0);
+		SetDataValType(HEA_SYS_TYPE::HEA_SYS_NAV);
+		SetDataVal(heading, 0.0, 0.0);
+	}
+	void GadHeading::SetHeadingLocal(double heading)
+	{
+		SetDataMode(0);
+		SetDataValType(HEA_SYS_TYPE::HEA_SYS_LOCAL);
+		SetDataVal(heading, 0.0, 0.0);
+	}
+
+	double GadHeading::GetHeading() const
+	{
+		return GetDataVal()[0];
+	}
+
+	void GadHeading::SetHeadingVar(double v_h)
+	{
+		SetDataVarSingle(v_h);
+	}
+
+	double GadHeading::GetHeadingVar() const
+	{
+		return GetDataVar()[0];
+	}
+	// loc 
+	std::vector<double> GadHeading::GetAidingAlignment() const
+	{
+		return GetLocVal();
+	}
+
+	void GadHeading::SetAidingAlignmentFixed(double h, double p, double r)
+	{
+	  this->SetLocMode(LOC_SYS::LOC_FIXED);
+	  this->SetLocVal(h, p, r);
+	}
+
+	void GadHeading::SetAidingAlignmentVar(double h_v, double p_v, double r_v)
+	{
+		SetLocVarDiag(h_v, p_v, r_v);
+	}
+
+	std::vector<double> GadHeading::GetAidingAlignmentVar() const
 	{
 		return GetLocVar();
 	}

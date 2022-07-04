@@ -375,11 +375,11 @@ namespace OxTS
 
 		namespace GadVelocity
 		{
-			BOOST_AUTO_TEST_CASE(GadVelocity_VelNeu)
+			BOOST_AUTO_TEST_CASE(GadVelocity_VelNed)
 			{
 				OxTS::GadVelocity g(0);
 
-				g.SetVelNeu(1.99, 2.99, 3.99);
+				g.SetVelNed(1.99, 2.99, 3.99);
 
 				auto ret = g.GetVel();
 
@@ -414,11 +414,11 @@ namespace OxTS
 				BOOST_CHECK(ret[2] == 3.99);
 			}
 
-			BOOST_AUTO_TEST_CASE(GadVelocity_VelNeuVar3)
+			BOOST_AUTO_TEST_CASE(GadVelocity_VelNedVar3)
 			{
 				OxTS::GadVelocity g(0);
 
-				g.SetVelNeuVar(1.99, 2.99, 3.99);
+				g.SetVelNedVar(1.99, 2.99, 3.99);
 
 				auto ret = g.GetVelVar();
 
@@ -427,11 +427,11 @@ namespace OxTS
 				BOOST_CHECK(ret[2] == 3.99);
 			}
 
-			BOOST_AUTO_TEST_CASE(GadVelocity_VelNeuVar6)
+			BOOST_AUTO_TEST_CASE(GadVelocity_VelNedVar6)
 			{
 				OxTS::GadVelocity g(0);
 
-				g.SetVelNeuVar(1.99, 2.99, 3.99, 4.99, 5.99, 6.99);
+				g.SetVelNedVar(1.99, 2.99, 3.99, 4.99, 5.99, 6.99);
 
 				auto ret = g.GetVelVar();
 

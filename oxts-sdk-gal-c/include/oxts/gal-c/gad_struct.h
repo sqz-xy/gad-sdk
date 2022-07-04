@@ -72,8 +72,10 @@ typedef enum
    TIME_GPS,            /** Standard GPS time format. */
    TIME_PPS_RELATIVE,   /** Time since PPS. */
    TIME_EST_LATENCY,    /** Not a full timestamp, just an estimate of latency. */
-   TIME_SDN,            /** This is internal timing for xbns. */
-   TIME_EXT,
+   TIME_SDN,            /** This is internal timing for xbns. (DO NOT USE) */
+   TIME_EXT,            /** IN DEVELOPMENT, DO NOT USE */
+   TIME_UNIX_UTC,       /** Time since unix epoch, including leap seconds. */
+   TIME_TAI             // Time in TAI format
 }TIME_SYS;
 
 //==============================================================================
@@ -109,7 +111,7 @@ typedef enum
 typedef enum
 {
    VEL_SYS_VOID,
-   VEL_SYS_NEU,             /** North East Upwards */
+   VEL_SYS_NED,             /** North East Down */
    VEL_SYS_ODO,             /** Aiding source frame - x/y/z */
    VEL_SYS_LOCAL            /** User defined right-handed local coordinate system - x/y/z */
 } VEL_SYS_TYPE;
@@ -128,8 +130,18 @@ typedef enum
 typedef enum
 {
    ATT_SYS_VOID,
-   ATT_SYS_HPR,      /** Attitude measurement given as Heading, Pitch, Roll in the vehicle frame. */
+   ATT_SYS_HPR,      /** Attitude measurement given as Heading, Pitch, Roll in the navigation (NED) frame. */
+   ATT_SYS_LOCAL,    /** Attitude measurement given as Heading, Pitch, Roll in a static local reference frame. */
 } ATT_SYS_TYPE;
+
+//============================================================================================================
+//! \brief Heading types
+typedef enum
+{
+   HEA_SYS_VOID,
+   HEA_SYS_NAV,        // Heading measurement in the navigation frame (NED).
+   HEA_SYS_LOCAL       // Heading measurement in a local frame. 
+} HEA_SYS_TYPE;
 
 //==============================================================================
 //! \brief Location types. (lever arm)

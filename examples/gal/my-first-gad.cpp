@@ -27,18 +27,18 @@ namespace OxTS
 
 int main(int argc, char* argv[])
 {
-	std::string unit_ip = argv[1]; // Unit to send GAD to
-	int num_packets = std::stoi(argv[2]); // Number of packets to send.
+	std::string unit_ip   = argv[1]; // Unit to send GAD to
+	int num_packets       = std::stoi(argv[2]); // Number of packets to send.
 
 	// Construct the velocity aiding with stream ID 130.
 	OxTS::GadVelocity gv = OxTS::GadVelocity(130);
 
 	// Set the required data
-	gv.SetVelNeu(0.0, 0.0, 0.0);
-	gv.SetVelNeuVar(0.1, 0.1, 0.1);
+	gv.SetVelNed(0.0,0.0,0.0);
+	gv.SetVelNedVar(0.1,0.1,0.1);
 	gv.SetTimeVoid();
-	gv.SetAidingLeverArmFixed(0.0, 0.0, 1.0);
-	gv.SetAidingLeverArmVar(0.01, 0.01, 0.01);
+	gv.SetAidingLeverArmFixed(0.0,0.0,1.0);
+	gv.SetAidingLeverArmVar(0.01,0.01,0.01);
 
 	// Initialise the handler
 	OxTS::GadHandler gh = OxTS::GadHandler();

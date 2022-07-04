@@ -15,7 +15,7 @@ namespace py = pybind11;
 
 #define UNPACK2(cls, func) [](OxTS::cls &c, std::vector<double> vec) {c.func(vec[0], vec[1]);}
 #define UNPACK3(cls, func) [](OxTS::cls &c, std::vector<double> vec) {c.func(vec[0], vec[1], vec[2]);}
-#define UNPACK(cls, func) [](OxTS::cls &c, std::vector<double> vec) {if(vec.size() == 6){c.func(vec[0], vec[1], vec[2], vec[3], vec[4], vec[5]);} else if(vec.size() == 3){c.func(vec[0], vec[1], vec[2]);} else{char *func_name = #func; func_name+=3;std::cout<<func_name<<" has an invalid variance length (must be 3 or 6)"<<"\n";}}
+#define UNPACK(cls, func)  [](OxTS::cls &c, std::vector<double> vec) {if(vec.size() == 6){c.func(vec[0], vec[1], vec[2], vec[3], vec[4], vec[5]);} else if(vec.size() == 3){c.func(vec[0], vec[1], vec[2]);} else{std::cout<< "invalid variance length (must be 3 or 6)"<<std::endl;}}
 
 
 PYBIND11_MODULE(oxts_sdk, m) {
@@ -31,8 +31,10 @@ PYBIND11_MODULE(oxts_sdk, m) {
         .def_property("time_valid", &OxTS::Gad::GetTimeValid, &OxTS::Gad::SetTimeValid)
         .def_property("time_external", &OxTS::Gad::GetTimeExternal, UNPACK2(Gad, SetTimeExternal))
         .def_property("time_gps", &OxTS::Gad::GetTimeGps, UNPACK2(Gad, SetTimeGps))
+        .def_property("time_tai", &OxTS::Gad::GetTimeTAI, &OxTS::Gad::SetTimeTAI)
         .def_property("time_pps_relative", &OxTS::Gad::GetTimePpsRelative, &OxTS::Gad::SetTimePpsRelative)
         .def_property("time_latency", &OxTS::Gad::GetTimeLatency, &OxTS::Gad::SetTimeLatency)
+        .def_property("time_utc_unix", &OxTS::Gad::GetTimeUTCUnix, &OxTS::Gad::SetTimeUTCUnix)
         .def("set_time_void", &OxTS::Gad::SetTimeVoid)
         // Acquisiton time accessors.
         .def_property("acq_valid", &OxTS::Gad::GetAcqValid, &OxTS::Gad::SetAcqValid)
@@ -51,10 +53,10 @@ PYBIND11_MODULE(oxts_sdk, m) {
 
     py::class_<OxTS::GadVelocity, OxTS::Gad>(m, "GadVelocity")
         .def(py::init<uint8_t>(), py::arg("stream_id"))
-        .def_property("vel_neu", &OxTS::GadVelocity::GetVel, UNPACK3(GadVelocity, SetVelNeu))
+        .def_property("vel_ned", &OxTS::GadVelocity::GetVel, UNPACK3(GadVelocity, SetVelNed))
         .def_property("vel_odom", &OxTS::GadVelocity::GetVel, UNPACK3(GadVelocity, SetVelOdom))
         .def_property("vel_local", &OxTS::GadVelocity::GetVel, UNPACK3(GadVelocity, SetVelLocal))
-        .def_property("vel_neu_var", &OxTS::GadVelocity::GetVelVar, UNPACK(GadVelocity, SetVelNeuVar))
+        .def_property("vel_ned_var", &OxTS::GadVelocity::GetVelVar, UNPACK(GadVelocity, SetVelNedVar))
         .def_property("vel_odom_var", &OxTS::GadVelocity::GetVelVar, UNPACK(GadVelocity, SetVelOdomVar))
         .def_property("vel_local_var", &OxTS::GadVelocity::GetVelVar, UNPACK(GadVelocity, SetVelLocalVar))
         .def_property("aiding_lever_arm_fixed", &OxTS::GadVelocity::GetAidingLeverArm, UNPACK3(GadVelocity, SetAidingLeverArmFixed))
@@ -76,10 +78,19 @@ PYBIND11_MODULE(oxts_sdk, m) {
     py::class_<OxTS::GadAttitude, OxTS::Gad>(m, "GadAttitude")
         .def(py::init<uint8_t>(), py::arg("stream_id"))
         .def_property("att", &OxTS::GadAttitude::GetAtt, UNPACK3(GadAttitude, SetAtt))
+        .def_property("att_local", &OxTS::GadAttitude::GetAtt, UNPACK3(GadAttitude, SetAttLocal))
         .def_property("att_var", &OxTS::GadAttitude::GetAttVar, UNPACK3(GadAttitude, SetAttVar))
         .def_property("aiding_alignment_var", &OxTS::GadAttitude::GetAidingAlignmentVar, UNPACK3(GadAttitude, SetAidingAlignmentVar))
-        // .def_property("aiding_alignment_fixed", &OxTS::GadAttitude::GetAidingAlignment, UNPACK3(GadAttitude, SetAidingAlignmentFixed))
+        .def_property("aiding_alignment_fixed", &OxTS::GadAttitude::GetAidingAlignment, UNPACK3(GadAttitude, SetAidingAlignmentFixed))
         .def("set_aiding_alignment_optimising", &OxTS::GadAttitude::SetAidingAlignmentOptimising);
+    
+    py::class_<OxTS::GadHeading, OxTS::Gad>(m, "GadHeading")
+        .def(py::init<uint8_t>(), py::arg("stream_id"))
+        .def_property("heading", &OxTS::GadHeading::GetHeading, &OxTS::GadHeading::SetHeading)
+        .def_property("heading_local", &OxTS::GadHeading::GetHeading, &OxTS::GadHeading::SetHeadingLocal)
+        .def_property("heading_var", &OxTS::GadHeading::GetHeadingVar, &OxTS::GadHeading::SetHeadingVar)
+        .def_property("aiding_alignment_var", &OxTS::GadHeading::GetAidingAlignmentVar, UNPACK3(GadHeading, SetAidingAlignmentVar))
+        .def_property("aiding_alignment_fixed", &OxTS::GadHeading::GetAidingAlignment, UNPACK3(GadHeading, SetAidingAlignmentFixed));
 
     py::class_<OxTS::GadHandler>(m, "GadHandler")
         .def(py::init<>())
@@ -112,3 +123,4 @@ PYBIND11_MODULE(oxts_sdk, m) {
         .def_property("output_file", &OxTS::GadOutputFile::GetOutputFile, &OxTS::GadOutputFile::SetOutputFile)
         .def_property("output_file_path", &OxTS::GadOutputFile::GetOutputFilePath, &OxTS::GadOutputFile::SetOutputFilePath);
 }
+

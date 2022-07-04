@@ -40,14 +40,18 @@ Odometry frame (beta)
 
 For this aiding frame, data is expected in the frame of an odometry sensor fixed to the vehicle. In order to use this frame, the transformation between the sensor and the INS must be specified in the INS configuration. This can be done with advanced commands in NAVconfig or in the mobile.cfg file directly on the unit.
 
+The odometry frame requires a rotational transformation as well as the standard lever arm, which is specified in much the same way in the config file:
+
 .. code-block::
 
-   -vo_angles[yaw]_[pitch]_[roll]
-   -vo_point[x]_[y]_[z]
+   -attitude[att_id]_[heading]_[pitch]_[roll]_[var_hea]_[*var_pit]_[*var_roll]
+   -gad_on[stream_id]
+   -gad_att_id[stream_id]_[att_id]
 
-The `-vo_angle` option sets the orientation of the sensor frame with respect to the IMU frame.  The angles are defined intrinsically, following the Tait-Bryan :math:`Z_1 Y_2 X_3` convention.
+The `-attitude` option sets the orientation of the sensor frame with respect to the IMU frame.  The angles are defined intrinsically, following the Tait-Bryan :math:`Z_1 Y_2 X_3` convention in degrees.
+The `var_pit` and `var_roll` inputs are optional, with the `var_hea` option being used for all 3 variances if the others are not specified. Note you must specify either one or three variances.
 
-The `-vo_point` option specifies the lever arm :math:`(x,y,z)`. This defines the translation from the IMU to the aiding sensor, in the IMU frame. 
+The `-location` option specifies the lever arm :math:`(x,y,z)`. This defines the translation from the IMU to the aiding sensor, in the IMU frame. See the lever arm documentation for further information.
 
 .. _velocityodomexample:
 
@@ -73,7 +77,9 @@ Once we have these, the configuration option can be added:
 
 .. code-block::
 
-   -vo_angles-90.0_180.0_0.0
+   -gad_on130
+   -attitude3_90.0_180.0_0.0_0.1
+   -gad_att_id130_3
 
 .. warning::
 
@@ -117,4 +123,4 @@ Lever Arm
 
 Velocity measurements must be provided with a lever arm :math:`(x,y,z)` which 
 defines the translation from the IMU to the aiding sensor, in the IMU frame. 
-The exception to this rule is measurements in the odometry frame.  
+

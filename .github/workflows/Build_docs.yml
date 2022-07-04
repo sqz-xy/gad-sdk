@@ -1,0 +1,49 @@
+name: Build docs
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can convert this to a matrix build if you need cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+   runs-on: ${{ matrix.os }}
+   strategy:
+      matrix:
+        os: [ubuntu-latest]
+   steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v3
+    
+
+    - name: Build docs
+    
+      run: |
+        sudo apt-get update
+        sudo apt-get install doxygen
+        sudo apt-get install graphviz
+        pip install -U sphinx
+        pip3 install sphinx-rtd-theme
+        pip3 install breathe
+        pip3 install sphinx-sitemap
+        cd docs_sphinx
+        sphinx-build -b html . public
+        cd ..
+        mkdir public
+        mv docs_sphinx/public/* public
+      shell: bash
+  
+    - uses: actions/upload-artifact@v3
+      with:
+       name: doxygen docs
+       path: public
+      
+

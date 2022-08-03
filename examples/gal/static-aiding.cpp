@@ -31,9 +31,27 @@ enum OUTPUT_TYPE
 
 int main(int argc, char* argv[])
 {
-	int sendPackets = 30; // Total number of packets to send
+	//defaults
+	int num_packets = 30; // Total number of packets to send
 	std::string unit_ip = "192.168.25.22"; // Unit to send GAD to
 	std::string file_out = "out.gad";    // File to send GAD to
+
+	//Get from user input if provided
+	if (argc > 1)
+	{
+		unit_ip = argv[1];
+	}
+
+	if (argc > 2)
+	{
+		num_packets = std::stoi(argv[2]);
+	}
+
+	if (argc > 3)
+	{
+		file_out = argv[3];
+	}
+
 	int output_type = OUTPUT_TYPE::UDP;   // Set output to UDP or CSV
 
 	//============================================================================
@@ -98,14 +116,16 @@ int main(int argc, char* argv[])
 	}
 
 	//============================================================================
-	for (int i = 0; i < sendPackets; ++i)
+	for (int i = 0; i < num_packets; ++i)
 	{
 		gh.SendPacket(gp);
 		gh.SendPacket(gv);
 		gh.SendPacket(ga);
 
 		if (i % 10 == 0)
+		{
 			std::cout << i << " packets sent" << std::endl;
+		}
 
 		OxTS::sleep(100);
 	}

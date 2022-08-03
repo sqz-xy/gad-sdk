@@ -39,6 +39,16 @@ Linux
    sending Generic Aiding packets to the specified IP address, which should be 
    set as the IP address of the INS, 
    e.g. `./my-first-gad-example 192.168.25.10 1000`. 
+   
+Windows
+-----
+
+1. Navigate to the relevant configuration type directory in the build folder: 
+   `cd <build_dir>/examples/gal/Debug`.
+2. From the command line run the executable: `my-first-gad-example <IP> <Packets>`. This will begin 
+   sending Generic Aiding packets to the specified IP address, which should be 
+   set as the IP address of the INS, 
+   e.g. `my-first-gad-example 192.168.25.10 1000`. 
 
 
 Source Code Breakdown

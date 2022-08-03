@@ -41,9 +41,9 @@ jobs:
         mv docs_sphinx/public/* public
       shell: bash
   
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-pages-artifact@v0
       with:
-       name: doxygen docs
+       name: github-pages
        path: public
       
 

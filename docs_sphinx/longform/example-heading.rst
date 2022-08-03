@@ -24,18 +24,41 @@ Requirements
 - The GAD SDK has been built on this machine / pre-built binaries have been 
   downloaded (not currently available).
 
-
 Method
-======
+============
 
-How to run the executable:
+How to run the executable.
 
-1. Navigate to the relevant directory in the build folder: 
+Linux 
+-----
+
+1. Navigate to the relevant project confiugration directory in the build folder: 
    `cd <build_dir>/examples/gal`.
-2. Run the executable: `./heading-example <IP> <Packets>`. This will begin outputting heading data to the CSV or
-   sending Generic Aiding packets to the specified IP address, which should be 
-   set as the IP address of the INS, 
-   e.g. `./heading-example 192.168.25.10 1000`. 
+2. Run the executable: `./heading-example`. This will begin sending 
+   Generic Aiding packets.  There are four possible optional argumnts that can be provided:   
+   
+   * Device IP address
+   * Number of packets
+   * Output type (csv)
+   * Output file (if outputting to csv)
+   
+   For example: `./heading-example.exe 192.168.25.10 70 csv debug_out.csv` will output 70 packets of data to debug_out.csv.
+   To output to a live device omit the final 2 arguments: `./heading-example 192.168.25.10 70`
+
+Windows
+-------
+1. Navigate to the relevant directory in the build folder: 
+   `cd <build_dir>/examples/gal/Debug`.
+2. From the command line run the executable: `./heading-example.exe`. This will begin sending 
+   Generic Aiding packets.  There are four possible optional argumnts that can be provided:   
+   
+   * Device IP address
+   * Number of packets
+   * Output type (csv)
+   * Output file (if outputting to csv)
+   
+   For example: `./static-aiding-example 192.168.25.10 70 csv debug_out.csv` will output 70 packets of data to debug_out.csv.
+   To output to a live device omit the final 2 arguments: `./heading-example.exe 192.168.25.10 70`
 
 
 Source Code Breakdown
@@ -66,7 +89,7 @@ Now we enter the `main()` function:
 	 int output_type = OUTPUT_TYPE::CSV;
 
 Here we set the number of packets to send, the IPv4 adress of the unit recieving data or if we are instead outputing to csv. 
-To send to the INS instead of a CSV change output_type to OUTPUT_TYPE::UDP.
+To send to the INS instead of a CSV change output_type to OUTPUT_TYPE::UDP.  These variables are also set form user input if provided.
 
 .. code-block:: c++
 

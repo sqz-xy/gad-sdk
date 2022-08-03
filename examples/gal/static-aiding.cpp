@@ -23,7 +23,7 @@ namespace OxTS
 	}
 } // OxTS
 
-enum OUTPUT_TYPE
+enum class OUTPUT_TYPE
 {
 	UDP = 0,
 	CSV = 1
@@ -35,6 +35,7 @@ int main(int argc, char* argv[])
 	int num_packets = 30; // Total number of packets to send
 	std::string unit_ip = "192.168.25.22"; // Unit to send GAD to
 	std::string file_out = "out.gad";    // File to send GAD to
+	OUTPUT_TYPE output_type = OUTPUT_TYPE::UDP;   // Set output to UDP or CSV
 
 	//Get from user input if provided
 	if (argc > 1)
@@ -49,10 +50,19 @@ int main(int argc, char* argv[])
 
 	if (argc > 3)
 	{
-		file_out = argv[3];
+		if (!strcmp(argv[3], "csv"))
+		{
+			output_type = OUTPUT_TYPE::CSV;
+		}
 	}
 
-	int output_type = OUTPUT_TYPE::UDP;   // Set output to UDP or CSV
+
+	if (argc > 4)
+	{
+		file_out = argv[4];
+	}
+
+
 
 	//============================================================================
 	// Construct the position aiding class with stream ID 129.

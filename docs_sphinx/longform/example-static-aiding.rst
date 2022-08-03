@@ -35,15 +35,33 @@ How to run the executable.
 Linux 
 -----
 
-1. Navigate to the relevant directory in the build folder: 
+1. Navigate to the relevant project confiugration directory in the build folder: 
    `cd <build_dir>/examples/gal`.
 2. Run the executable: `./static-aiding-example`. This will begin sending 
-   Generic Aiding packets.
+   Generic Aiding packets.  There are four possible optional argumnts that can be provided:   
+   
+   * Device IP address
+   * Number of packets
+   * Output type (csv)
+   * Output file (if outputting to csv)
+   
+   For example: `./static-aiding-example 192.168.25.10 70 csv debug_out.csv` will output 70 packets of data to debug_out.csv.
+   To output to a live device omit the final 2 arguments: `./static-aiding-example 192.168.25.10 70`
 
 Windows
 -------
-
-Not currently officially supported.
+1. Navigate to the relevant directory in the build folder: 
+   `cd <build_dir>/examples/gal/Debug`.
+2. From the command line run the executable: `./static-aiding-example`. This will begin sending 
+   Generic Aiding packets.  There are four possible optional argumnts that can be provided:   
+   
+   * Device IP address
+   * Number of packets
+   * Output type (csv)
+   * Output file (if outputting to csv)
+   
+   For example: `./static-aiding-example 192.168.25.10 70 csv debug_out.csv` will output 70 packets of data to debug_out.csv.
+   To output to a live device omit the final 2 arguments: `./static-aiding-example 192.168.25.10 70`
 
 Source Code Breakdown
 =====================
@@ -89,7 +107,7 @@ time before continuing execution.
 
 .. code-block:: c++
 
-   enum OUTPUT_TYPE
+   enum class OUTPUT_TYPE
    {
      UDP = 0,
      CSV = 1
@@ -112,7 +130,7 @@ Now we enter the `main()` function:
 These variables determine some of the setup of the example, including the 
 number of packets to send, the IP address to send the packets to, the output 
 file, and whether to output to CSV or UDP. Naturally, only one of the IP 
-address and output file are actually used on a given run.  
+address and output file are actually used on a given run.  These variables are also set form user input if provided.
 
 .. code-block:: c++
 

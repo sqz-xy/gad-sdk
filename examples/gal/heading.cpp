@@ -31,10 +31,35 @@ enum OUTPUT_TYPE
 
 int main(int argc, char* argv[])
 {
-	int sendPackets = 30; // Total number of packets to send
+	int num_packets = 30; // Total number of packets to send
 	std::string unit_ip = "192.168.25.22"; // Unit to send GAD to
 	std::string file_out = "out.gad";    // File to send GAD to
 	int output_type = OUTPUT_TYPE::CSV;   // Set output to UDP or CSV
+
+	//Get from user input if provided
+	if (argc > 1)
+	{
+		unit_ip = argv[1];
+	}
+
+	if (argc > 2)
+	{
+		num_packets = std::stoi(argv[2]);
+	}
+
+	if (argc > 3)
+	{
+		if (!strcmp(argv[3], "csv"))
+		{
+			output_type = OUTPUT_TYPE::CSV;
+		}
+	}
+
+	if (argc > 4)
+	{
+		file_out = argv[4];
+	}
+
 
 	//============================================================================
 	// Construct the heading aiding class with stream ID 131.
@@ -71,7 +96,7 @@ int main(int argc, char* argv[])
 	}
 
 	//============================================================================
-	for (int i = 0; i < sendPackets; ++i)
+	for (int i = 0; i < num_packets; ++i)
 	{
 		handler.SendPacket(gh);
 

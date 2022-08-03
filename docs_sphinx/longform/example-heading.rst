@@ -42,7 +42,7 @@ Linux
    * Output type (csv)
    * Output file (if outputting to csv)
    
-   For example: `./heading-example.exe 192.168.25.10 70 csv debug_out.csv` will output 70 packets of data to debug_out.csv.
+   For example: `./heading-example 192.168.25.10 70 csv debug_out.csv` will output 70 packets of data to debug_out.csv.
    To output to a live device omit the final 2 arguments: `./heading-example 192.168.25.10 70`
 
 Windows
@@ -57,7 +57,7 @@ Windows
    * Output type (csv)
    * Output file (if outputting to csv)
    
-   For example: `./static-aiding-example 192.168.25.10 70 csv debug_out.csv` will output 70 packets of data to debug_out.csv.
+   For example: `./heading-example.exe 192.168.25.10 70 csv debug_out.csv` will output 70 packets of data to debug_out.csv.
    To output to a live device omit the final 2 arguments: `./heading-example.exe 192.168.25.10 70`
 
 

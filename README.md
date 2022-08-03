@@ -93,6 +93,7 @@ The CMakeLists.txt file in the root of the repository contains some options for 
 ### Building the docs
 
 The documentation for this project is generated using a few tools: Doxygen, Breathe, and Sphinx. 
+It is only buildable in Linux currently.
 
 1. Install requirements (python 3.7 also required):
 ```

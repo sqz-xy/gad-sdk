@@ -8,7 +8,7 @@ Find the full code documentation for this project at: [https://oxts.gitlab.io/na
 
 ## Requirements
 
-- CMake 3.1
+- CMake >3.1 (Last version tested 3.23)
 - Boost 1.71 (requirement can be disabled, though this will remove UDP functionality)
 - Generic Aiding Feature Codes.
 - Ethernet connection to an OxTS INS, for real-time aiding.
@@ -23,7 +23,7 @@ sudo apt-get install libboost-all-dev
 
 ### Installing requirements on Windows 
 
-- Download and install [CMake](https://cmake.org/download/)
+- Download and install [CMake](https://cmake.org/download/) (the latest msi installer should be sufficient)
 - Download [Boost](https://www.boost.org/users/download/)
   - Extract the files to a sensible location such as C:\Libs. Note you do not need to create an extra containing folder. The full path to the boost libraries should resemble C:\Libs\boost_1_77_0.
   - In a command prompt navigate to the boost directory and run ``` bootstrap.bat ``` - Then run ```b2.exe link=shared``` to install boost.

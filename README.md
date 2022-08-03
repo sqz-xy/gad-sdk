@@ -107,7 +107,9 @@ It is only buildable in Linux currently.
 ```
   sphinx-build -b html . public
 ```
+## Running
 
+See the extended documentation for using the SDK.  If built using Visual Studio all code with examples and unit tests are avaialble in the solution (oxts-sdk.sln) in the build folder.  This automatically links to the source files in each specific folder in the root directory.
 
 ## Python GAD SDK (Windows and Linux)
 

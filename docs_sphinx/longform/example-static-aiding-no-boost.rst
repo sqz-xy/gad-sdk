@@ -94,7 +94,7 @@ Now we enter the `main()` function:
 
 .. code-block:: c++
 
-   int sendPackets = 1000; 
+   int num_packets = 1000; 
 
 This variable determines how many packets to send before exiting the program. This can also be provided as a command line argument.
 
@@ -144,7 +144,7 @@ provide the functionality to encode a Generic Aiding packet to binary.
 
 .. code-block:: c++
 
-   for (int i = 0; i < sendPackets; ++i)
+   for (int i = 0; i < num_packets; ++i)
    {
      gh.EncodePacket(gp);
 

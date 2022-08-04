@@ -39,6 +39,7 @@ jobs:
         cd ..
         mkdir public
         mv docs_sphinx/public/* public
+        echo "" > public/.nojekyll
       shell: bash
   
     - uses: actions/upload-pages-artifact@v0

@@ -37,12 +37,15 @@ Linux
 1. Navigate to the relevant directory in the build folder: 
    `cd <build_dir>/examples/gal`.
 2. Run the executable: `./static-aiding-no-boost-example`. This will begin sending 
-   Generic Aiding packets.
+   Generic Aiding packets. You can also provide the number of packets to send: `./static-aiding-no-boost-example 100`
 
 Windows
 -------
-
-Not currently officially supported.
+1. Navigate to the relevant configuration directory in the build folder: 
+   `cd <build_dir>/examples/gal/Debug`.
+2. Run the executable: `./static-aiding-no-boost-example.exe`. This will begin sending 
+   Generic Aiding packets.  You can also provide the number of packets to send: `./static-aiding-no-boost-example.exe 100`
+   
 
 Source Code Breakdown
 =====================
@@ -93,7 +96,7 @@ Now we enter the `main()` function:
 
    int sendPackets = 1000; 
 
-This variable determines how many packets to send before exiting the program. 
+This variable determines how many packets to send before exiting the program. This can also be provided as a command line argument.
 
 .. code-block:: c++
 
@@ -145,12 +148,14 @@ provide the functionality to encode a Generic Aiding packet to binary.
    {
      gh.EncodePacket(gp);
 
+     // Add your code here for interacting with the static aiding packets.
      // Use accessor functions geb.GetPacket() and geb.GetPacketSize() to send 
      // the packet via chosen UDP socket library to the INS IP address and port 
      // 50485.
 
      if(i % 10 == 0)
        std::cout << i << " packets sent" << std::endl;
+       std::cout << "packet size: " << geb.GetPacketSize() << std::endl;
 
      OxTS::Sleep(100);
    }

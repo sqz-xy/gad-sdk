@@ -4,9 +4,7 @@ Note: Clone this repository with the --recursive option to ensure pybind11 is av
 
 This project contains the OxTS GAD SDK, written in C++. This SDK is designed to allow users to encode aiding data to GAD packets and send them to an OxTS INS for use in the navigation solution. It also contains NCom decoder functionality, for those who wish to receive data from the unit.
 
-Find the full code documentation for this project at: [https://github.com/OxfordTechnicalSolutions/gad-sdk/actions/workflows/Build_docs.yml](https://github.com/OxfordTechnicalSolutions/gad-sdk/actions/workflows/Build_docs.yml)
-
-It can be downloaded as an artifact of the last build.  (TODO: upload the docs to a github pages site)
+Find the full code documentation for this project at: [https://oxfordtechnicalsolutions.github.io/index.html](https://oxfordtechnicalsolutions.github.io/index.html)
 
 ## Requirements
 

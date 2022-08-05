@@ -52,7 +52,7 @@ Windows
 -------
 1. Navigate to the relevant directory in the build folder: 
    `cd <build_dir>/examples/gal/Debug`.
-2. From the command line run the executable: `./static-aiding-example.exe`. This will begin sending 
+2. From the command line run the executable: `static-aiding-example.exe`. This will begin sending 
    Generic Aiding packets.  There are four possible optional argumnts that can be provided:   
    
    * Device IP address
@@ -60,8 +60,8 @@ Windows
    * Output type (csv)
    * Output file (if outputting to csv)
    
-   For example: `./static-aiding-example.exe 192.168.25.10 70 csv debug_out.csv` will output 70 packets of data to debug_out.csv.
-   To output to a live device omit the final 2 arguments: `./static-aiding-example.exe 192.168.25.10 70`
+   For example: `static-aiding-example.exe 192.168.25.10 70 csv debug_out.csv` will output 70 packets of data to debug_out.csv.
+   To output to a live device omit the final 2 arguments: `static-aiding-example.exe 192.168.25.10 70`
 
 Source Code Breakdown
 =====================

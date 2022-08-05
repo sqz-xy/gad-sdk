@@ -38,10 +38,12 @@ Install the pre-built binaries from... (TBC). Will require some form of deployme
 Users can also build the SDK from source, using the following instructions:
 
 1. Clone the repository onto the PC.
+
+   ```git clone https://github.com/OxfordTechnicalSolutions/gad-sdk.git --recursive```
 2. Navigate to the root directory of the repository
 3. (Optional) Edit the CMakeLists.txt file in the root of the repository to 
    configure options, such as enabling building of examples and documentation.
-4. Execute the commands:
+4. Execute the following commands:
 
 ### Linux
 ```

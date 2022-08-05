@@ -119,6 +119,6 @@ The C++ SDK has been wrapped in Python using PyBind11. The interface for the Pyt
 
 The Python SDK is not yet  documented, though its binding to the C++ can be found in `oxts-sdk-py/gal-py-bindings.cpp`. There is also an example in `examples/python/my-first-gad.py`.
 
-To install the package, use `pip install ./gad-sdk` from the directory above the repository folder. After that, it can be imported using `import oxts_sdk`.
+To install the package, use `pip install ./gad-sdk-master` from the directory above the repository folder. After that, it can be imported using `import oxts_sdk`.
 
 

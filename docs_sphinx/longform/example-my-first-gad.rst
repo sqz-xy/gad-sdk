@@ -73,6 +73,7 @@ Now we enter the `main()` function:
 
    int main(int argc, char * argv[])
    {
+    ...
      std::string unit_ip   = argv[1];
      int num_packets       = argv[2];
 
@@ -123,6 +124,7 @@ to send binary Generic Aiding data via UDP.
    for (int i = 0; i < num_packets; ++i)
    {
      gh.SendPacket(gv);
+     std::cout << "packet " << i << " sent" << std::endl;
      OxTS::Sleep(100);
    }
 

@@ -43,8 +43,8 @@ Windows
 -------
 1. Navigate to the relevant configuration directory in the build folder: 
    `cd <build_dir>/examples/gal/Debug`.
-2. Run the executable: `./static-aiding-no-boost-example.exe`. This will begin sending 
-   Generic Aiding packets.  You can also provide the number of packets to send: `./static-aiding-no-boost-example.exe 100`
+2. Run the executable: `static-aiding-no-boost-example.exe`. This will begin sending 
+   Generic Aiding packets.  You can also provide the number of packets to send: `static-aiding-no-boost-example.exe 100`
    
 
 Source Code Breakdown

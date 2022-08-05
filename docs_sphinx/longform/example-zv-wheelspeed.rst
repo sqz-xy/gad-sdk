@@ -45,10 +45,10 @@ Windows
 
 1. Navigate to the relevant configuration type directory in the build folder: cd 
    <build_dir>/examples/gal/Debug.
-2. Run the executable: `./zv-wheelspeed-example.exe <IP> <Packets>`. This will begin 
+2. Run the executable: `zv-wheelspeed-example.exe <IP> <Packets>`. This will begin 
    sending Generic Aiding packets to the specified IP address, which should be 
    set as the IP address of the INS, 
-   e.g. `./zv-wheelspeed-example.exe 192.168.25.10 1000`. 
+   e.g. `zv-wheelspeed-example.exe 192.168.25.10 1000`. 
    
 
 INS configuration

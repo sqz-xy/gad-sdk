@@ -1,6 +1,6 @@
 # OxTS Generic Aiding SDK
 
-For more information on OxTS Generic Aiding Solutions, see [here] (https://www.oxts.com/what-is-generic-aiding/)
+For more information on OxTS Generic Aiding Solutions, see [here](https://www.oxts.com/what-is-generic-aiding/)
 
 Note: Clone this repository with the --recursive option to ensure pybind11 is available. 
 

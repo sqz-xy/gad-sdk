@@ -1,5 +1,7 @@
 # OxTS Generic Aiding SDK
 
+For more information on OxTS Generic Aiding Solutions, see [here] (https://www.oxts.com/what-is-generic-aiding/)
+
 Note: Clone this repository with the --recursive option to ensure pybind11 is available. 
 
 This project contains the OxTS GAD SDK, written in C++. This SDK is designed to allow users to encode aiding data to GAD packets and send them to an OxTS INS for use in the navigation solution. It also contains NCom decoder functionality, for those who wish to receive data from the unit.

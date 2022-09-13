@@ -36,7 +36,7 @@ jobs:
         pip3 install sphinx-sitemap
         cd docs_sphinx
         sphinx-build -b html . public
-        mv custom.css public/_static/css/
+        mv custom.css public/_static/
         cd ..
         mkdir public
         mv docs_sphinx/public/* public

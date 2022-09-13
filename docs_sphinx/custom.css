@@ -21,3 +21,8 @@
     min-height: 100%;
     background: #CA181C;
 }
+a {
+    color: #ca181c;
+    text-decoration: none;
+    cursor: pointer;
+}

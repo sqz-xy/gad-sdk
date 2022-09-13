@@ -35,3 +35,14 @@ a:visited {
     padding: 6px 12px;
     border-color: #6e6e6e;
 }
+dt {
+    display: table;
+    margin: 6px 0;
+    font-size: 90%;
+    line-height: normal;
+    background: #d2d2d2;
+    color: #ca181c;
+    border-top: 3px solid #ca181c;
+    padding: 6px;
+    position: relative;
+}

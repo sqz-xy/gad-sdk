@@ -30,6 +30,8 @@ such, before getting started it is necessary to acquire the necessary Feature
 Codes for your OxTS INS. This can be done by contacting support@oxts.com. 
 Temporary Feature Codes can be acquired for development purposes.
 
+The Generic Aiding Feature Code is an optional extra that needs to be enabled before generic aiding will work. Please contact OxTS for further information.
+
 An Aiding Device
 ****************
 

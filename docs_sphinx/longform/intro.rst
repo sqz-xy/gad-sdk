@@ -58,15 +58,13 @@ for your application.
 Combining users' data
 =====================
 
-OxTS has been a global leader in inertial, GNSS, IMUs and sensor fusion since 1998. We are passionate about helping customers to measure with confidence, by combining the best high precision receivers with world-class inertial navigation expertise.
+No one technology provides reliable pose (position and orientation) estimation in all conditions. It makes sense to combine technologies and gain the advantage that each one has. The problems of combining several sensors include getting a common measurement time and common co-ordinate frame, weighing different measurements when combining them and arbitrating between conflicting measurements.
 
-Those with sensors capable of producing aiding data may find it beneficial to 
-send this data to an INS. Data from individual sensors can be noisy, an INS can 
-cut through the noise etc.
+Inertial navigation is ideal as the central “core” where other sensors with different measurement times, different accuracies and different measurement frames can be fused to give improved results. Inertial measurements are always available. They have a high, regular, update rate with low latency (delay). Their error model is very well known and deterministic. They provide robust solutions by rejecting unreliable measurements from other sensors. Through sensor fusion they can deliver a full pose (position and orientation) even if the additional sensors only provide a partial pose. Perhaps the most important point is that they provide an excellent statistical framework for combining other sensors.
 
-Passing data to an INS can bridge the gap between slower update rates of other 
-sensors in the same way as it does for GNSS. This can be crucial for 
-applications such as robot driving.
+Other sensors are added to inertial navigation to overcome its deficiencies, mostly long-term error growth. Sensors that measure position mitigate long term drift best, though velocity and orientation sensors can also help.
+
+OxTS has more than 20 years’ experience in combining inertial measurements with other sensors. Primarily we used GNSS but have experience with road vehicle models, wheel speed, Ultra-wide band (UWB) positioning, timing strips, cameras and compasses. We are opening our sensor fusion framework (GAD) to users who want to combine sensors that are suitable for their applications.
 
 
 Increasing robustness in challenging environments

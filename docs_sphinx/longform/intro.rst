@@ -6,7 +6,7 @@ measurement units (IMU) as the basis of their navigation, and combined this
 with data from GNSS receivers. 
 
 IMUs alone are incredibly useful, since they can provide data at much 
-higher rates than many other sensors (>100Hz). The drawback is that they have 
+higher rates than many other sensors (>100 Hz). The drawback is that they have 
 limited means of providing an absolute position relative to any global system 
 beyond the pose at the time they were powered on. Additionally, measurements of
 acceleration and angular rate must be integrated to produce velocity and 
@@ -15,8 +15,8 @@ prone to drift. Using inertial sensors in this way is often referred to as
 "dead reckoning".
 
 In contrast, GNSS receivers alone have much lower update rates, often in the 
-region of 1-10Hz. However, they are capable of providing position in a global 
-reference system up to ~2cm RMS in open sky conditions (with assistance from 
+region of 1-10 Hz. However, they are capable of providing position in a global 
+reference system up to ~2 cm RMS in open sky conditions (with assistance from 
 Ground Based Augmentation Services (GBAS)). Since these are measurements of 
 position in a global frame, they are not prone to drift.
 
@@ -58,7 +58,7 @@ for your application.
 Combining users' data
 =====================
 
-OxTS has over 25 years in GNSS, IMUs, and sensor fusion etc. etc.
+OxTS has been a global leader in inertial, GNSS, IMUs and sensor fusion since 1998. We are passionate about helping customers to measure with confidence, by combining the best high precision receivers with world-class inertial navigation expertise.
 
 Those with sensors capable of producing aiding data may find it beneficial to 
 send this data to an INS. Data from individual sensors can be noisy, an INS can 
@@ -88,7 +88,7 @@ a wider array of environments and applications.
 Indoor / GNSS denied
 ====================
 
-* The phrasing of this will need some discussion because of UWB
+In GNSS-denied environments, such as multi-storey car parks and enclosed test centres, OxTS' Poyzx 2GAD (ie. to Generic Aiding) solution enables Pozyx Ultra-wideband (UWB) to aid your INS.
 
 
 Next steps

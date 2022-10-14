@@ -17,3 +17,4 @@ attitudeA_B_C_D_X, "Create att ID [A] for Attitude ([B],[C],[D]), with common va
 attitudeA_B_C_D_X_Y_Z, "Create att ID [A] for Attitude ([B],[C],[D]), with variance ([X],[Y],[Z])"
 gad_init_vel_from_pos,"[X] = on: enable dynamic velocity initialisation from GAD position data, [X] = off: disable velocity initialisation from position data"
 gad_init_hea_from_pos,"[X] = on: enable dynamic heading initialisation from position data, [X] = off: disable heading initialisation from position data"
+gad_debug_stream[X], "[X] = stream ID: Enable additional debug measurement for this stream ID, and output the passthrough nibble for this stream."

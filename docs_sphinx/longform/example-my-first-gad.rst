@@ -138,7 +138,7 @@ Is my data being received by the INS?
 =====================================
 
 If you are unsure whether the INS is using the GAD, see 
-:ref:`ismydatabeingreceived`.
+:ref:`debugging`.
  
 
 Recommended next steps:

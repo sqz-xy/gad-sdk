@@ -65,7 +65,7 @@ Table of Contents
    longform/stream-priority
    longform/position-only-initialisation
    longform/all-options
-   longform/is-my-data-being-received
+   longform/debugging
    longform/ncom-updates
 
 

@@ -101,6 +101,10 @@ namespace OxTS
 		 */
 		uint32_t      acq = { 0 };                 // Timestamp from INS. Leave empty.
 		GenFlag       acq_valid = { 0 };
+
+		/** Passthrough nibble */
+		uint8_t       passthrough = { 0 };
+
 	protected:
 		// type 
 		void SetDataType(int type);
@@ -235,6 +239,11 @@ namespace OxTS
 		void SetAcqTimestamp(uint32_t acq_time);
 		/*! Get the acquisition time of the data. Not expected to be set outside of the INS.*/
 		uint32_t  GetAcqTimestamp() const;
+
+		/** Set the passthrough nibble (value: 0-15)*/
+		void    SetPassthrough(uint8_t pass);
+		/** Get the passthrough nibble */
+		uint8_t GetPassthrough() const;
 
 	};
 

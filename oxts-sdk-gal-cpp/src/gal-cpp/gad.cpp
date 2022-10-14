@@ -181,6 +181,7 @@ namespace OxTS
 		res2_valid = g.res2_valid;
 		acq = g.acq;
 		acq_valid = g.acq_valid;
+		SetPassthrough(g.passthrough);
 		return *this;
 	}
 
@@ -201,6 +202,7 @@ namespace OxTS
 		g.res2_valid = res2_valid;
 		g.acq = acq;
 		g.acq_valid = acq_valid;
+		g.passthrough = GetPassthrough();
 
 		return g;
 	}
@@ -376,6 +378,11 @@ namespace OxTS
 	{
 		return acq;
 	}
+
+	/** Set the passthrough nibble (value: 0-15) */
+	void Gad::SetPassthrough(uint8_t pass) { passthrough = pass; }
+	/** Get the passthrough nibble */
+	uint8_t Gad::GetPassthrough() const {return passthrough;}
 
 	//==============================================================================
 	// GadPosition

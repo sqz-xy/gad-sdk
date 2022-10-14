@@ -31,6 +31,7 @@ int reset_genaid_data(GEN_AIDING_DATA* gad)
    gad->res1_valid = 0;
    gad->val_valid = 0;
    gad->acq_valid = 0;
+   gad->passthrough = 0;
    memset(gad, 0, sizeof(*gad));
 
    return 0;

@@ -134,6 +134,14 @@ int encode_gen_aid(GEN_AIDING_DATA* gad, unsigned char* buffer, size_t buffer_si
    {
       bitmask |= Res2Bit;
    }
+
+   if (error_code || buffer_overrun_chk(available_payload_space, GEN_AID_HEADER_MIN_SIZE + b_offset));
+   else
+   {
+      cast_uint8_to_1_byte_LE(b + b_offset++, gad->passthrough);
+      bitmask |= PassthroughBit;
+   }
+
    cast_int16_to_2_byte_LE((h + h_offset), bitmask);
    h_offset += sizeof(int16_t); // move buffer past two reserved bytes (remove when we use these bytes) 
    //*packet_size = GEN_AID_HEADER_MIN_SIZE + ((b + b_offset) - b);

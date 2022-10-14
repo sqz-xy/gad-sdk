@@ -72,6 +72,8 @@ extern "C"
       else if (fprintf(gad_engine_file_ptr, "res2_valid,") < 0)
          i = -1;
       else if ((i = print_gen_3d_header(gad_engine_file_ptr)));
+      else if ((fprintf(gad_engine_file_ptr, "passthrough,") < 0))
+         i = -1;
       else if (fprintf(gad_engine_file_ptr, "\n") < 0);
       else if (fflush(gad_engine_file_ptr) != 0)
          i = -1;
@@ -198,7 +200,13 @@ extern "C"
       else if (!i && !data->res2_valid)
          (i = (*offset_ptr +=sprintf(out_string + *offset_ptr, ",,,,,,,,,,,,")) < 0) ? -1 : 0;
 
+      // write passthrough
+      if ((*offset_ptr +=sprintf(out_string + *offset_ptr, "%d,", data->passthrough)) < 0)
+         i = -1;
+
       *offset_ptr +=sprintf(out_string + *offset_ptr, "\n");
+
+      return i;
    }
 
 

@@ -194,6 +194,9 @@ typedef struct
    uint32_t       acq;
    GEN_BOOL       acq_valid;
 
+   /** Passthrough nibble (only 4 bits useable) for custom use */
+   uint8_t        passthrough;
+
 } GEN_AIDING_DATA;
 
 

@@ -96,8 +96,3 @@ install (FILES ${CMAKE_CURRENT_BINARY_DIR}/include/oxts/gal-cpp/config.h
 )
 message(STATUS "install prefix: ${CMAKE_INSTALL_PREFIX}")
 export_config()
-
-# TODO: Add testing
-# if(OXTS_SDK_ENABLE_TESTING)
-#     add_subdirectory(tests)
-# endif()

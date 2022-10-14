@@ -28,12 +28,12 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 elif [[ "$OSTYPE" == "msys" ]]; then
     # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
     # NOT IMPLEMENTED
-    echo "Windows install not yet supported. Contact smccarthy@oxts.com"
+    echo "Windows install not yet supported. Contact support@oxts.com"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # Mac OSX
     # NOT IMPLEMENTED
-    echo "Mac OSX install not yet supported. Contact smccarthy@oxts.com"
+    echo "Mac OSX install not yet supported. Contact support@oxts.com"
 
 else 
-    echo "OS not identified - install cancelled. Contact smccarthy@oxts.com"
+    echo "OS not identified - install cancelled. Contact support@oxts.com"
 fi

@@ -44,9 +44,12 @@ Converting between frames
 *************
 
 Euler angles are used to output the heading, pitch and roll, and these have singularities at two orientations. The RT has rules to avoid problems when operating close to the singularities; if you regenerate the rotation matrices given below then they will be correct.
-The Euler angles output are three consecutive rotations (first heading, then pitch and finally roll) that
-transform a vector measured in the navigation co-ordinate frame to the body co-ordinate frame. The navigation co-ordinate frame is the orientation on the earth at your current location with axes of north, east and down.
-If :math:`V_n` is vector V measured in the navigation co-ordinate frame and :math:`V_b` is the same vector measured in the body co-ordinate frame the two vectors are related by:
+
+
+The Euler angles output are three consecutive rotations (first heading, then pitch and finally roll) that transform a vector measured in the navigation co-ordinate frame to the body co-ordinate frame. The navigation co-ordinate frame is the orientation on the earth at your current location with axes of north, east and down.
+
+
+If :math:`V_n` is vector :math:`V` measured in the navigation co-ordinate frame and :math:`V_b` is the same vector measured in the body co-ordinate frame the two vectors are related by:
 
 .. math::
 
@@ -153,10 +156,3 @@ An optimising lever-arm differs slightly from the other two types of lever-arm.
    GNSS Antenna, it will create a conflict in the optimisation of the 
    lever-arm. This can be avoided by reassigning the dual antenna lever-arm. 
    See :ref:`reassigningtraditionaldatasources` for more details.
-
-
-
-References
-**********
-
-[1]: https://en.wikipedia.org/wiki/Euler_angles "Information on Tait-Bryan angles"

@@ -46,14 +46,16 @@ Converting between frames
 Euler angles are used to output the heading, pitch and roll, and these have singularities at two orientations. The RT has rules to avoid problems when operating close to the singularities; if you regenerate the rotation matrices given below then they will be correct.
 The Euler angles output are three consecutive rotations (first heading, then pitch and finally roll) that
 transform a vector measured in the navigation co-ordinate frame to the body co-ordinate frame. The navigation co-ordinate frame is the orientation on the earth at your current location with axes of north, east and down.
-If **:math: `V_n`** is vector **V** measured in the navigation co-ordinate frame and **:math: `V_b`** is the same vector measured in the body co-ordinate frame the two vectors are related by:
-
-.. math::
-V_n = C_bn V_b
+If :math:`V_n` is vector V measured in the navigation co-ordinate frame and :math:`V_b` is the same vector measured in the body co-ordinate frame the two vectors are related by:
 
 .. math::
 
-V_n = \begin{bmatrix}
+   V_n = C_bn V_b
+
+.. math::
+
+   V_n = 
+   \begin{bmatrix}
    cos(Ψ) & -sin(Ψ)  & 0  \\
    sin(Ψ)  & cos(Ψ) & 0  \\
    0  & 0  & 1 \\
@@ -68,8 +70,11 @@ V_n = \begin{bmatrix}
    \end{bmatrix} V_b
 
 where:
+
 Ψ is the heading angle;
+
 θ is the pitch angle and 
+
 ϕ is the roll angle.
 
 

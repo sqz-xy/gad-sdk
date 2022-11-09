@@ -33,7 +33,7 @@ sudo apt-get install libboost-all-dev
 
 ## Building from source
 
-Users can also build the SDK from source, using the following instructions:
+Users can build the SDK from source, using the following instructions:
 
 1. Clone the repository onto the PC.
 
@@ -60,8 +60,7 @@ cmake --build . --target install
 ```
 This will build the SDK and install it on your machine. You may need to run CMD or Powershell as an adminitrator if the SDK fails to install.
 
-You must ensure your CMake generator is the same compiler used to build boost or the libraries will not found correctly.
-
+Use the same compiler to build boost and to build the GAD SDK or the boost libraries will not be found.
 
 Once this is complete, other CMake projects on the machine can link to the libraries using:
 
@@ -90,7 +89,10 @@ The CMakeLists.txt file in the root of the repository contains some options for 
 
 ### Building the docs
 
-The documentation for this project is generated using a few tools: Doxygen, Breathe, and Sphinx. 
+The documentation for this project can be found [here](https://oxfordtechnicalsolutions.github.io/index.html).
+
+This can be generated using the following tools: Doxygen, Breathe, and Sphinx. 
+
 It is only buildable in Linux currently.
 
 1. Install requirements (python 3.7 also required):
@@ -118,5 +120,3 @@ The C++ SDK has been wrapped in Python using PyBind11. The interface for the Pyt
 The Python SDK is not yet  documented, though its binding to the C++ can be found in `oxts-sdk-py/gal-py-bindings.cpp`. There is also an example in `examples/python/my-first-gad.py`.
 
 To install the package, use `pip install ./gad-sdk-master` from the directory above the repository folder. After that, it can be imported using `import oxts_sdk`.
-
-

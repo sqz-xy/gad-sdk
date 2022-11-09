@@ -31,10 +31,6 @@ sudo apt-get install libboost-all-dev
   - In a command prompt navigate to the boost directory and run ``` bootstrap.bat ``` - Then run ```b2.exe link=shared``` to install boost.
   - Edit your environment variables and add the variable ```BOOST_ROOT``` with value equal to the path to your boost library. In this example the value would be ```C:\Libs\boost_1_77_0```
 
-## Getting Started
-
-Install the pre-built binaries from... (TBC). Will require some form of deployment.
-
 ## Building from source
 
 Users can also build the SDK from source, using the following instructions:

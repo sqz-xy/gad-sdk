@@ -8,7 +8,7 @@ type can be set using functions from the :ref:`gadheadingclass` class.
 
 .. _headingaidingframes:
 
-Aiding Frames
+Aiding frames
 *************
 
 Currently, heading aiding can only be provided in the navigation frame. The heading angle is the projection of the vehicle’s body x-axis in the navigation frame’s north-east plane. How we find this angle is normally to use the heading from the body to navigation frame heading, pitch, roll rotations. 
@@ -33,7 +33,7 @@ Heading measurements in this frame are expected in degrees.
 
 .. _headingvariance:
 
-Heading Variance
+Heading variance
 *****************
 
 The heading variance provides an estimate of the error on the measurements 

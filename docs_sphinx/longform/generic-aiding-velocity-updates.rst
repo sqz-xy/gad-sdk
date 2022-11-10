@@ -53,6 +53,9 @@ The `var_pit` and `var_roll` inputs are optional, with the `var_hea` option bein
 
 The `-location` option specifies the lever arm :math:`(x,y,z)`. This defines the translation from the IMU to the aiding sensor, in the IMU frame. See the lever arm documentation for further information.
 
+A stream Id is a unique identifier for each GAD input.  One device can output any number of streams, these streams would each have different Ids.  When sending your data to the INS you should ensure each data source has a unique Id.
+
+
 .. _velocityodomexample:
 
 Example

@@ -11,7 +11,7 @@ type can be set using functions from the :ref:`gadheadingclass` class.
 Aiding Frames
 *************
 
-Currently, heading aiding can only be provided in the navigation frame. 
+Currently, heading aiding can only be provided in the navigation frame. The heading angle is the projection of the vehicle’s body x-axis in the navigation frame’s north-east plane. How we find this angle is normally to use the heading from the body to navigation frame heading, pitch, roll rotations. 
 
 .. _headingaidingframesnavigation:
 
@@ -44,7 +44,7 @@ being provided to the INS.
 Alignment
 *********
 
-Simimilarly to attitude measurements, heading measurements have an 
+Similarly to attitude measurements, heading measurements have an 
 associated alignment, as opposed to a lever-arm. This is because the linear 
 offset between the attitude sensor and the IMU does not affect the 
 measurements, it is only the angular offset between the two which must be 
@@ -55,5 +55,5 @@ accounted for.
 Fixed
 =====
 
-A fixed heading allignment is set within the Generic Aiding packet itself, 
-using: SetAidingAllignmentFixed. 
+A fixed heading alignment is set within the Generic Aiding packet itself, 
+using: SetAidingAlignmentFixed. 

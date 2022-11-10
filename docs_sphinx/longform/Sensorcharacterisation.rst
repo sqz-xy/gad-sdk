@@ -20,3 +20,8 @@ Generally speaking, the ideal rate for an OxTS INS to receive data from an
 aiding source will lie in the range of 1-10Hz. GNSS receivers like those found 
 in OxTS devices typically output in this range, and they are excellent sources 
 of aiding.
+
+Stream Id
+========
+
+The generic aiding interface supports multiple sensors and it is useful to be able to see the effect each sensor has on the navigation solution. To track each update an identification number should be associated with each sensor. This identification number is known as the “GAD packet stream Id”, or simply “stream Id”. Together with the time, it allows users to identify each individual sensor’s update.

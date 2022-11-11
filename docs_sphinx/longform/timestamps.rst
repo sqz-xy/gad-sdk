@@ -6,6 +6,21 @@ Timestamping Data
 When sending aiding data to an OxTS, a decision must be made about how this 
 data is timestamped. 
 
+On older systems, the Kalman filter runs about 1 second behind, 
+so Generic Aiding updates must arrive well before the 1 second has passed. 
+Newer systems run 0.5 seconds behind, so Generic Aiding updates need to arrive 
+well within 0.5 seconds. The Kalman filter’s delay can be adjusted using (very) 
+advanced commands.
+
+To adjust the Kalman filter’s delay add the following line to the advanced options in NAVconfig:
+
+-bns_delay1.0
+
+changing “1.0” to the value in seconds that the Kalman filter should be delayed. 
+OxTS does not test delays longer than 1.0 seconds and normally runs with 0.5 seconds delay. 
+Delaying the Kalman filter by more time will increase the drift and decrease the 
+stability of the navigation system.
+
 Some methods of timestamping are more complex than others, requiring 
 synchronisation of devices. These methods are often more accurate and robust. 
 
@@ -69,7 +84,7 @@ External (in development)
   * This timestamp type is still in development and is therefore not fully 
     supported or recommended for use. It is not guaranteed that this feature 
     will make it to a full release.
-  * Synchronsing the INS *output* time to the externa time currently causes GPS 
+  * Synchronsing the INS *output* time to the external time currently causes GPS 
     data to be rejected, and can only be consequently used for indoor 
     applications.
   * Known bug: The external time must be greater than the internal INS time 

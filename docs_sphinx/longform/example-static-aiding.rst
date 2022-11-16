@@ -135,7 +135,7 @@ address and output file are actually used on a given run.  These variables are a
 .. code-block:: c++
 
    OxTS::GadPosition gp = OxTS::GadPosition(129);
-   gp.SetWgs84Pos(51.91520330,-1.24479140,111.525);
+   gp.SetPosGeodetic(51.91520330,-1.24479140,111.525);
    gp.SetPosVar(1,1,1);
    gp.SetTimeVoid();
    gp.SetAidingLeverArmFixed(0.5,0.5,1.0);
@@ -148,8 +148,8 @@ superclass. These subclasses are designed to simplify the process of setting
 data for users when working with the different data types. 
 
 When initialising an instance of any `Gad` class, it is necessary to assign it 
-a unique stream ID. These can take values in the range 128-254, and each one 
-must be unique. 
+a unique stream Id. These can take values in the range 128-254, and each one 
+must be unique. See :ref:`streamiddefinition` for more details on stream Ids.
 
 This particular position data is set in the WGS84 coordinate frame, using 
 Latitude, Longitude, Altitude. The default values here correspond to the OxTS 

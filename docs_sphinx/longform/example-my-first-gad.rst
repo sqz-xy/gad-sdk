@@ -150,7 +150,7 @@ If you are unsure whether the INS is using the GAD, see
 Example
 =======
 
-A camera that measures position might use 130 for its GAD packet stream Id. This stream Id is carried through the system and output with each camera’s update. In NCOM, for example, status channel 95 will include the stream id with the innovations and time. By monitoring NCOM status channel 95 you can tell whether the GAD update was received, how it matched the navigation solution and whether it was accepted by the navigation system. See https://www.oxts.com/wp-content/uploads/2022/09/OxTS-NCOM-Manual.pdf for details on NCOM status channel 95. If two (or more) cameras are used then the effect of each camera can be analysed independently by assigning a different stream Id to each camera.
+A camera that measures position might use 130 for its GAD packet stream Id. This stream Id is carried through the system and output with each camera’s update. In NCOM, for example, status channel 95 will include the stream id with the innovations and time. By monitoring NCOM status channel 95 you can tell whether the GAD update was received, how it matched the navigation solution and whether it was accepted by the navigation system. See the [NCOM manual](https://www.oxts.com/wp-content/uploads/2022/09/OxTS-NCOM-Manual.pdf) for details on NCOM status channel 95. If two (or more) cameras are used then the effect of each camera can be analysed independently by assigning a different stream Id to each camera.
 
 
 

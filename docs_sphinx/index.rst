@@ -68,7 +68,7 @@ Table of Contents
    longform/all-options
    longform/is-my-data-being-received
    longform/ncom-updates
-   longform/advancedcommands
+   longform/advanced-commands
 
 
 .. toctree::

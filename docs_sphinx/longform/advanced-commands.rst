@@ -15,8 +15,7 @@ It is downloadable from the OxTS website https://support.oxts.com/hc/en-us/secti
 All configuration options
 #########################
 
-This page contains a comprehensive list of configuration options relevant to 
-Generic Aiding which can be used with blended/xbns.
+This page contains a comprehensive list of configuration options relevant to Generic Aiding.
 
 .. csv-table:: All Generic Aiding Options
    :file: assets/options-all.csv

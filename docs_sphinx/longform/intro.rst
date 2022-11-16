@@ -36,7 +36,7 @@ include, but are not limited to:
 - Ultra-wideband (UWB)
 - RADAR
 
-This is where the Generic Aiding Interface comes in. This interface has been 
+This is where the Generic Aiding Data (GAD) interface comes in. This interface has been 
 designed to accept multiple forms of aiding data and pass them to the INS to 
 be used in the navigation solution. As long as the data is in this format, the 
 sensor used to obtain it is irrelevant to the system. The types of aiding data 
@@ -47,8 +47,9 @@ which can be provided to the system are:
 - :ref:`gadattitudepage`
 - :ref:`gadspeedpage`
 
+This data can be used for post-processing using GAD files :ref:`gadfiles` or by supplying the data to the INS in real time. Additional configuration options may be required. 
 
-Reasons to use Generic Aiding
+Reasons to use generic aiding
 *****************************
 
 There are a number of different reasons why Generic Aiding might be effective 

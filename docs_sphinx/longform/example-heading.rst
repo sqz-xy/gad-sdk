@@ -102,7 +102,10 @@ To send to the INS instead of a CSV change output_type to OUTPUT_TYPE::UDP.  The
 
 
 Next, we set up the heading data with stream ID 132.   The heading is set to 180 degress,
-with a variance of 0.1.  The alignment offsets are all set to 0.0 with an associated variance of 5.0.
+with a variance of 0.1.  The alignment offsets are all set to 0.0 with an associated variance of 5.0. 
+
+.. note::
+Note that the offsets between the sensor and IMU should be given in the navigation frame.
 
 The function :cpp:`SetTimeVoid()` indicates that the data will be sent with no 
 timestamp, making it the simplest way to handle timing when working with 

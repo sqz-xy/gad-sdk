@@ -105,10 +105,16 @@ timestamp, making it the simplest way to handle timing when working with
 Generic Aiding. In this setup, the INS will timestamp the packet upon receipt. 
 
 The final step to fill out the data packet is to set the lever-arm between the 
-IMU and the aiding device. The lever-arm is a 3D translation in the IMU frame 
+IMU and the aiding device. Each object has its own frame of reference, and how we describe movement depends on the frame of reference being used.
+
+For example, picture yourself stood on a train platform. Imagine you can see someone stood inside the train carriage looking for a seat. As the train pulls out of the station the person starts to walk towards the rear of the train. From the person’s point of view, they are walking forwards at a constant speed. But to you, looking into the train from the platform’s reference frame, the person initially appears not to be moving—because they’re walking forwards (in their frame) at the same speed as the train is moving forward in its frame. As the train gets faster, however, the person will appear to move in the direction of the train’s travel. To you, they are moving backwards, but to the person on the train, they are still moving forward. Both points of view are correct, they’re just using different frames of reference.
+
+Luckily most inertial navigation systems are smart enough to be able to convert movement from one frame of reference to another – as long as they’re given a little bit of information to begin with. So imagine holding an INS upside down, so the z-axis points up. As long as we tell the INS it’s being held upside down before we start, then when you move your hand upwards the inertial measurement unit will register a positive value on the z-axis (which points down as far as it’s concerned) – but the inertial navigation system (the computer) knows it’s actually being held upside down in your hand. So it spins all the measurements around and puts them into a different reference frame that makes sense to us; one that says the INS is moving upwards.
+
+The lever-arm is a 3D translation in the IMU frame 
 from the IMU (marked on the case of the INS) to the aiding device, measured in 
 metres. The covariance values on this lever-arm are then set according to how 
-accurately each translation could be measured. 
+accurately each translation could be measured including rotation errors. 
 
 .. code-block:: c++
 
@@ -141,7 +147,33 @@ If you are unsure whether the INS is using the GAD, see
 :ref:`ismydatabeingreceived`.
  
 
+Example
+=======
+
+A camera that measures position might use 130 for its GAD packet stream Id. This stream Id is carried through the system and output with each camera’s update. In NCOM, for example, status channel 95 will include the stream id with the innovations and time. By monitoring NCOM status channel 95 you can tell whether the GAD update was received, how it matched the navigation solution and whether it was accepted by the navigation system. See the [NCOM manual](https://www.oxts.com/wp-content/uploads/2022/09/OxTS-NCOM-Manual.pdf) for details on NCOM status channel 95. If two (or more) cameras are used then the effect of each camera can be analysed independently by assigning a different stream Id to each camera.
+
+
+
+.. image:: ../GAD_SDK_GitHub_StreamId_image_221111.jpg
+  :alt: Generic aiding updates to innovation outputs   
+  :align: center
+
+
+
+Notes
+=====
+
+The current version of the NCOM decoder has not yet been updated to decode status channel 95. NCOM has limited bandwidth for status channels and so some updates will be skipped if there are too many.
+
+Future versions of NAVdisplay may include visualisation tools to help analyse generic aiding sensors and will use the stream Id to separate different sensors.
+
+Stream Id 0 to stream id 128 are reserved for internal use and will be ignored on the generic aiding interface. Stream Id 128 to stream Id 254 should be used. Note that currently there are no recommendations for which numbers to assign to which types of sensor though this may change in the future.
+
+Some generic aiding updates require configuration. For example, to use a local reference frame (XYZ measurements instead of latitude, longitude and altitude) the origin and orientation of the local reference frame need to be defined in advance. The configuration is associated with a stream Id and each stream Id can have a different configuration.
+
+
 Recommended next steps:
+======================
 
 - Read more on creating aiding for each type: :ref:`aidingtypestoc`.
 - See a more complex example: :ref:`staticaidingexample`.

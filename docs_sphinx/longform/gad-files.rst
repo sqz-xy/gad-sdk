@@ -1,7 +1,9 @@
 .. _gadfiles:
 
-.gad files
+.gad files (Advanced)
 ##########
+
+These files are not required for routine usage of GAD or developement, but can be useful when debugging for advanced users only.
 
 These files contain Generic Aiding data packets in CSV format (UTF-8 encoding). 
 They can be exported from blended as a debug tool, or created from other data 
@@ -14,7 +16,7 @@ solution of the INS.
 Extracting .gad files
 *********************
 
-If Generic Aiding Data (GAD) is sent to an OxTS INS in real-time, the unit will 
+If Generic Aiding Data (GAD) is sent to an OxTS INS in real time, the unit will 
 log this data in the RD file like any data on the INS. Blended.exe can be used 
 to extract this data from the RD file and place it into a CSV formatted file.
 
@@ -23,7 +25,7 @@ There are two main purposes for this:
 - To check the data is good
 - To edit the data and then feed the edited data back to the system in post-
   process. This can be useful to experiment with certain values or fix values 
-  which were set incorrectly in real-time.
+  which were set incorrectly in real time.
 
 .. csv-table:: .gad file extraction options from blended
    :file: assets/gad-file-blended-options.csv
@@ -32,12 +34,14 @@ There are two main purposes for this:
 
 .. _usinggadfiles:
 
-Using .gad Files
+Using .gad files
 ****************
 
 To use a .gad file, place it in the same directory as the RD file being 
 processed. Then run either blended.exe or NAVsolve on the RD file and the .gad 
 file will be automatically picked up. 
+
+RD files are created by the INS during operation. They store all of the raw data collected and can be post-processed using Blended to improve the accuracy and output readable data in compatible formats. Blended is OxTS' low-level application for processing RD files to usable data. 
 
 Points to note:
 

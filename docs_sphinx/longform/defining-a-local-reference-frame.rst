@@ -1,7 +1,7 @@
 .. _definingalocalreferenceframe:
 
-User-defined Local Frame (beta)
-###############################
+User-defined Local Frame
+########################
 
 Generic Aiding functionality allows users to define a local coordinate system 
 for some measurement types. Currently supported types are:
@@ -19,14 +19,11 @@ Define the frame
 
 This local frame is defined by two components:
 
-- **Translation**: (Lat, Long, Alt) in the WGS84 global frame. This sets the 
-- origin of the local coordinate frame in the global frame.
+- **Translation**: (Lat, Long, Alt) in the WGS84 global frame. This sets the origin of the local coordinate frame in the global frame.
 
 - **Rotation**: (Yaw, Pitch, Roll) angles relative to the North, East, Down 
-  local coordinate frame. These angles follow the Tait-Bryan 
-  :math:`Z_1 Y_2 X_3` convention with angles defined extrinsically. For more 
-  information see [here][1]. The rotation matrix is constructed from these 
-  values using the following formula:
+  local coordinate frame. These angles follow the :math:`Z_1 Y_2 X_3` convention. 
+  The rotation matrix is constructed from these values using the following formula:
 
 .. math::
 
@@ -47,11 +44,7 @@ in the configuration of the INS. Doing so requires the advanced commands:
    -gad_lrf_id[stream_id]_[lrf_id]
 
 
-Angles are expected in degrees. The `lrf_id` is a unique identifier for each 
-local reference frame. Up to 32 reference frames can be defined in this way. 
-Once the local refence frame has been defined, it must be associated to the 
-stream ID of the relevant aiding so that the INS knows which local reference 
-frame to use for a particular aiding source.
+See :ref:`advancedcommands` for more information.
 
 Note that this aiding type only supports right-handed coordinate systems.
 
@@ -71,15 +64,14 @@ No rotation is required around the x axis. The advanced command is then:
 
 .. code-block::
 
-   -gad_lrf[lrf_id]_[lat]_[lon]_[alt]_-90.0_180.0_0.0
+   -gad_lrf1_51.9151949168643_-1.2440690876840934_94.597_-90.0_180.0_0.0
 
 The Latitude, Longitude, and Altitude are independent of the orientation of the 
 local reference frame. They will need to be determined based on the location of 
 the origin of the local frame on the Earth.
 
 A simple way to verify whether the rotation has been defined correctly is to 
-create the rotation matrix from the YPR angles using ($\ref{TaitBryanMatrix}$) 
-and apply it to a dummy point :math:`p_{user}` in the user-defined local frame.
+create the rotation matrix from the yaw, pitch, and roll angles and apply it to a dummy point :math:`p_{user}` in the user-defined local frame.
 
 .. math::
 
@@ -87,8 +79,3 @@ and apply it to a dummy point :math:`p_{user}` in the user-defined local frame.
 
 
 For most rotations, it is clear whether this point is in the correct place in the NED frame.
-
-References
-==========
-
-[1]: https://en.wikipedia.org/wiki/Euler_angles "More information on Euler Angles"

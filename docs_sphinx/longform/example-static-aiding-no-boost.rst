@@ -101,7 +101,7 @@ This variable determines how many packets to send before exiting the program. Th
 .. code-block:: c++
 
    OxTS::GadPosition gp = OxTS::GadPosition(129);
-   gp.SetWgs84Pos(51.91520330,-1.24479140,111.525);
+   gp.SetPosGeodetic(51.91520330,-1.24479140,111.525);
    gp.SetPosVar(1,1,1);
    gp.SetTimeVoid();
    gp.SetAidingLeverArmFixed(0.5,0.5,1.0);

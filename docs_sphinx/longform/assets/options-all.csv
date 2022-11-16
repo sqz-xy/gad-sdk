@@ -17,3 +17,5 @@ attitudeA_B_C_D_X, "Create att ID [A] for Attitude ([B],[C],[D]), with common va
 attitudeA_B_C_D_X_Y_Z, "Create att ID [A] for Attitude ([B],[C],[D]), with variance ([X],[Y],[Z])"
 gad_init_vel_from_pos,"[X] = on: enable dynamic velocity initialisation from GAD position data, [X] = off: disable velocity initialisation from position data"
 gad_init_hea_from_pos,"[X] = on: enable dynamic heading initialisation from position data, [X] = off: disable heading initialisation from position data"
+gad_lrf[lrf_id]_[lat]_[lon]_[alt]_[yaw]_[pitch]_[roll],"Angles are expected in degrees. `lat`, `lon` and `alt` should be the origin of your local frame.  This command sets a new GAD local reference frame with a specified Id. The `lrf_id` is a unique identifier for each local reference frame. Up to 32 reference frames can be defined in this way. Once the local refence frame has been defined, it must be associated to the stream Id of the relevant aiding so that the INS knows which local reference frame to use for a particular aiding source."
+gad_lrf_id[stream_id]_[lrf_id],"This command sets a specific GAD `stream_id` to use the `lrf_id`."

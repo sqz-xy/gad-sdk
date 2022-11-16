@@ -1,4 +1,4 @@
-.. _Sensorcharacterisation:
+.. _sensorcharacterisation:
 
 Sensor characterisation
 ##########

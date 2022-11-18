@@ -1,6 +1,6 @@
 .. _streampriority:
 
-Stream Priority
+Stream priority
 ###############
 
 Typically, the INS will decide which data to use based on the estimated error 

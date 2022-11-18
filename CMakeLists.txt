@@ -11,7 +11,7 @@ add_definitions(-DOXTS_SDK_VERSION_MINOR=${oxts-sdk_VERSION_MINOR})
 add_definitions(-DOXTS_SDK_VERSION_PATCH=${oxts-sdk_VERSION_PATCH})
 
 # Building and installation options
-#option(OXTS_SDK_BUILD_DOCS "Build SDK documentation." OFF)
+option(OXTS_SDK_BUILD_DOCS "Build SDK documentation." OFF)
 option(OXTS_SDK_BUILD_TESTS "Enable unit test targets." ON) 
 option(OXTS_SDK_BUILD_EXAMPLES "Enable examples targets." ON) 
 option(OXTS_SDK_BUILD_PYTHON "Build SDK Python wrapper." OFF) 
@@ -37,7 +37,7 @@ add_sdks()
 
 # Optional extras
 if (OXTS_SDK_BUILD_DOCS)
-    add_subdirectory(docs)
+    add_subdirectory(docs_sphinx)
 endif()
 
 if (OXTS_SDK_BUILD_EXAMPLES)

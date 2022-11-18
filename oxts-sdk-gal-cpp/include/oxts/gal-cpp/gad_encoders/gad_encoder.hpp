@@ -24,7 +24,7 @@ namespace OxTS
 	{
 	protected:
 		static const std::size_t buffer_size = MAX_BUFF;
-		unsigned char buffer[buffer_size] = { 0 };
+		unsigned char buffer[buffer_size];
 		std::size_t buffer_offset;
 		std::size_t gad_size;
 	public:

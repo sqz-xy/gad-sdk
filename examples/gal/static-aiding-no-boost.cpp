@@ -26,12 +26,7 @@ namespace OxTS
 
 int main(int argc, char* argv[])
 {
-	int num_packets = 1000; // Total number of packets to send
-
-	if (argc > 1)
-	{
-		num_packets = std::stoi(argv[1]);
-	}
+	int sendPackets = 1000; // Total number of packets to send
 
 	//============================================================================
 	// Construct the position aiding class with stream ID 129.
@@ -52,22 +47,17 @@ int main(int argc, char* argv[])
 	OxTS::GadEncoderBin geb = OxTS::GadEncoderBin();
 
 	//============================================================================
-	for (int i = 0; i < num_packets; ++i)
+	for (int i = 0; i < sendPackets; ++i)
 	{
 		// Encode Packet
 		geb.EncodePacket(gp);
 
-		// Add your code here for interacting with the static aiding packets.
 		// Use accessor functions geb.GetPacket() and geb.GetPacketSize() to send 
 		// the packet via chosen UDP socket library to the INS IP address and port 
 		// 50485.
 
 		if (i % 10 == 0)
-		{
 			std::cout << i << " packets sent" << std::endl;
-			std::cout << "packet size: " << geb.GetPacketSize() << std::endl;
-		}
-
 
 		OxTS::sleep(100);
 	}

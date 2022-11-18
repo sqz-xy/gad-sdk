@@ -1,6 +1,6 @@
 .. _reassigningtraditionaldatasources:
 
-Reassigning traditional data sources
+Reassigning Traditional Data Sources
 ####################################
 
 There can only be one Optimising lever-arm and one Optimising Alignment 

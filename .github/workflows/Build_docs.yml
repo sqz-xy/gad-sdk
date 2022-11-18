@@ -36,27 +36,14 @@ jobs:
         pip3 install sphinx-sitemap
         cd docs_sphinx
         sphinx-build -b html . public
-        mv custom.css public/_static/
         cd ..
         mkdir public
         mv docs_sphinx/public/* public
-        echo "" > public/.nojekyll
-
       shell: bash
   
-    - uses: actions/upload-pages-artifact@v0
+    - uses: actions/upload-artifact@v3
       with:
+       name: doxygen docs
        path: public
-       
-    - name: Pushes to another repository
-      uses: cpina/github-action-push-to-another-repository@main
-      env:
-          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-      with:
-          source-directory: public
-          destination-github-username: 'OxfordTechnicalSolutions'
-          destination-repository-name: 'OxfordTechnicalSolutions.github.io'
-          user-email: slogan@oxts.com
-          target-branch: master
-        
+      
+

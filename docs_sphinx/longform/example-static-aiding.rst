@@ -52,7 +52,7 @@ Windows
 -------
 1. Navigate to the relevant directory in the build folder: 
    `cd <build_dir>/examples/gal/Debug`.
-2. From the command line run the executable: `static-aiding-example.exe`. This will begin sending 
+2. From the command line run the executable: `./static-aiding-example`. This will begin sending 
    Generic Aiding packets.  There are four possible optional argumnts that can be provided:   
    
    * Device IP address
@@ -60,8 +60,8 @@ Windows
    * Output type (csv)
    * Output file (if outputting to csv)
    
-   For example: `static-aiding-example.exe 192.168.25.10 70 csv debug_out.csv` will output 70 packets of data to debug_out.csv.
-   To output to a live device omit the final 2 arguments: `static-aiding-example.exe 192.168.25.10 70`
+   For example: `./static-aiding-example 192.168.25.10 70 csv debug_out.csv` will output 70 packets of data to debug_out.csv.
+   To output to a live device omit the final 2 arguments: `./static-aiding-example 192.168.25.10 70`
 
 Source Code Breakdown
 =====================
@@ -135,7 +135,7 @@ address and output file are actually used on a given run.  These variables are a
 .. code-block:: c++
 
    OxTS::GadPosition gp = OxTS::GadPosition(129);
-   gp.SetPosGeodetic(51.91520330,-1.24479140,111.525);
+   gp.SetWgs84Pos(51.91520330,-1.24479140,111.525);
    gp.SetPosVar(1,1,1);
    gp.SetTimeVoid();
    gp.SetAidingLeverArmFixed(0.5,0.5,1.0);
@@ -148,8 +148,8 @@ superclass. These subclasses are designed to simplify the process of setting
 data for users when working with the different data types. 
 
 When initialising an instance of any `Gad` class, it is necessary to assign it 
-a unique stream Id. These can take values in the range 128-254, and each one 
-must be unique. See :ref:`streamiddefinition` for more details on stream Ids.
+a unique stream ID. These can take values in the range 128-254, and each one 
+must be unique. 
 
 This particular position data is set in the WGS84 coordinate frame, using 
 Latitude, Longitude, Altitude. The default values here correspond to the OxTS 

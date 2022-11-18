@@ -37,15 +37,12 @@ Linux
 1. Navigate to the relevant directory in the build folder: 
    `cd <build_dir>/examples/gal`.
 2. Run the executable: `./static-aiding-no-boost-example`. This will begin sending 
-   Generic Aiding packets. You can also provide the number of packets to send: `./static-aiding-no-boost-example 100`
+   Generic Aiding packets.
 
 Windows
 -------
-1. Navigate to the relevant configuration directory in the build folder: 
-   `cd <build_dir>/examples/gal/Debug`.
-2. Run the executable: `static-aiding-no-boost-example.exe`. This will begin sending 
-   Generic Aiding packets.  You can also provide the number of packets to send: `static-aiding-no-boost-example.exe 100`
-   
+
+Not currently officially supported.
 
 Source Code Breakdown
 =====================
@@ -94,14 +91,14 @@ Now we enter the `main()` function:
 
 .. code-block:: c++
 
-   int num_packets = 1000; 
+   int sendPackets = 1000; 
 
-This variable determines how many packets to send before exiting the program. This can also be provided as a command line argument.
+This variable determines how many packets to send before exiting the program. 
 
 .. code-block:: c++
 
    OxTS::GadPosition gp = OxTS::GadPosition(129);
-   gp.SetPosGeodetic(51.91520330,-1.24479140,111.525);
+   gp.SetWgs84Pos(51.91520330,-1.24479140,111.525);
    gp.SetPosVar(1,1,1);
    gp.SetTimeVoid();
    gp.SetAidingLeverArmFixed(0.5,0.5,1.0);
@@ -144,18 +141,16 @@ provide the functionality to encode a Generic Aiding packet to binary.
 
 .. code-block:: c++
 
-   for (int i = 0; i < num_packets; ++i)
+   for (int i = 0; i < sendPackets; ++i)
    {
      gh.EncodePacket(gp);
 
-     // Add your code here for interacting with the static aiding packets.
      // Use accessor functions geb.GetPacket() and geb.GetPacketSize() to send 
      // the packet via chosen UDP socket library to the INS IP address and port 
      // 50485.
 
      if(i % 10 == 0)
        std::cout << i << " packets sent" << std::endl;
-       std::cout << "packet size: " << geb.GetPacketSize() << std::endl;
 
      OxTS::Sleep(100);
    }

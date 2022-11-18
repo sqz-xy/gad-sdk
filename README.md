@@ -1,12 +1,10 @@
 # OxTS Generic Aiding SDK
 
-For more information on OxTS Generic Aiding Solutions, see [here](https://www.oxts.com/what-is-generic-aiding/)
-
 Note: Clone this repository with the --recursive option to ensure pybind11 is available. 
 
 This project contains the OxTS GAD SDK, written in C++. This SDK is designed to allow users to encode aiding data to GAD packets and send them to an OxTS INS for use in the navigation solution. It also contains NCom decoder functionality, for those who wish to receive data from the unit.
 
-Find the full code documentation for this project at: [https://oxfordtechnicalsolutions.github.io/index.html](https://oxfordtechnicalsolutions.github.io/index.html)
+Find the full code documentation for this project at: [https://oxts.gitlab.io/navigation/generic-aiding/gad-sdk/](https://oxts.gitlab.io/navigation/generic-aiding/gad-sdk/)
 
 ## Requirements
 
@@ -31,17 +29,19 @@ sudo apt-get install libboost-all-dev
   - In a command prompt navigate to the boost directory and run ``` bootstrap.bat ``` - Then run ```b2.exe link=shared``` to install boost.
   - Edit your environment variables and add the variable ```BOOST_ROOT``` with value equal to the path to your boost library. In this example the value would be ```C:\Libs\boost_1_77_0```
 
+## Getting Started
+
+Install the pre-built binaries from... (TBC). Will require some form of deployment.
+
 ## Building from source
 
-Users can build the SDK from source, using the following instructions:
+Users can also build the SDK from source, using the following instructions:
 
 1. Clone the repository onto the PC.
-
-   ```git clone https://github.com/OxfordTechnicalSolutions/gad-sdk.git --recursive```
 2. Navigate to the root directory of the repository
 3. (Optional) Edit the CMakeLists.txt file in the root of the repository to 
    configure options, such as enabling building of examples and documentation.
-4. Execute the following commands:
+4. Execute the commands:
 
 ### Linux
 ```
@@ -60,7 +60,8 @@ cmake --build . --target install
 ```
 This will build the SDK and install it on your machine. You may need to run CMD or Powershell as an adminitrator if the SDK fails to install.
 
-Use the same compiler to build boost and to build the GAD SDK or the boost libraries will not be found.
+You must ensure your CMake generator is the same compiler used to build boost or the libraries will not found correctly.
+
 
 Once this is complete, other CMake projects on the machine can link to the libraries using:
 
@@ -89,11 +90,7 @@ The CMakeLists.txt file in the root of the repository contains some options for 
 
 ### Building the docs
 
-The documentation for this project can be found [here](https://oxfordtechnicalsolutions.github.io/index.html).
-
-This can be generated using the following tools: Doxygen, Breathe, and Sphinx. 
-
-It is only buildable in Linux currently.
+The documentation for this project is generated using a few tools: Doxygen, Breathe, and Sphinx. 
 
 1. Install requirements (python 3.7 also required):
 ```
@@ -107,9 +104,7 @@ It is only buildable in Linux currently.
 ```
   sphinx-build -b html . public
 ```
-## Running
 
-See the extended documentation for using the SDK.  If built using Visual Studio all code with examples and unit tests are avaialble in the solution (oxts-sdk.sln) in the build folder.  This automatically links to the source files in each specific folder in the root directory.
 
 ## Python GAD SDK (Windows and Linux)
 
@@ -119,4 +114,6 @@ The C++ SDK has been wrapped in Python using PyBind11. The interface for the Pyt
 
 The Python SDK is not yet  documented, though its binding to the C++ can be found in `oxts-sdk-py/gal-py-bindings.cpp`. There is also an example in `examples/python/my-first-gad.py`.
 
-To install the package, use `pip install ./gad-sdk-master` from the directory above the repository folder. After that, it can be imported using `import oxts_sdk`.
+To install the package, use `pip install ./gad-sdk` from the directory above the repository folder. After that, it can be imported using `import oxts_sdk`.
+
+

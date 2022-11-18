@@ -30,6 +30,7 @@ Table of Contents
    longform/estimating-errors
    longform/timestamps
    longform/data-rates
+   longform/sensorcharacterisation
 
 
 .. toctree::
@@ -66,6 +67,8 @@ Table of Contents
    longform/position-only-initialisation
    longform/all-options
    longform/is-my-data-being-received
+   longform/ncom-updates
+   longform/advanced-commands
 
 
 .. toctree::

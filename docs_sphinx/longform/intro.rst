@@ -90,6 +90,17 @@ Indoor / GNSS denied
 In GNSS-denied environments, such as multi-storey car parks and enclosed test centres, OxTS' Poyzx 2GAD (ie. to Generic Aiding) solution enables Pozyx Ultra-wideband (UWB) to aid your INS.
 
 
+Generic aiding process flow
+***************************
+
+The diagram below describes the generic aiding process flow.
+
+.. image:: ../Generic_aiding_process_flow_diagram.jpg
+  :alt: Generic aiding process flow
+  :align: center
+  
+  
+
 Next steps
 **********
 

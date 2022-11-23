@@ -16,10 +16,11 @@ Data rates
 A key question when providing aiding to any sensor fusion algorithm is: what 
 data rate will produce the best results?
 
-Generally speaking, the ideal rate for an OxTS INS to receive data from an 
-aiding source will lie in the range of 1-10Hz. GNSS receivers like those found 
-in OxTS devices typically output in this range, and they are excellent sources 
-of aiding.
+As a heuristic an ideal rate for an OxTS INS to receive data from an 
+aiding source will lie in the range of 1-10 Hz. GNSS receivers like those found in OxTS devices typically output in this range, and they are excellent sources of aiding. 
+
+The chosen data rate will depend on the type of error the aiding source has. 
+For example, some aiding sources will provide highly precise yet inaccurate measurements. For best results in this case, a lower data rate would be advised.
 
 
 .. _streamiddefinition:

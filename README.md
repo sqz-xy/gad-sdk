@@ -91,7 +91,7 @@ The CMakeLists.txt file in the root of the repository contains some options for 
 
 The documentation for this project can be found [here](https://oxfordtechnicalsolutions.github.io/index.html).
 
-This can be generated using the following tools: Doxygen, Breathe, and Sphinx. 
+It is not necessary to build the documentation, however for reference, this can be generated using the following tools: Doxygen, Breathe, and Sphinx. 
 
 It is only buildable in Linux currently.
 

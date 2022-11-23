@@ -41,6 +41,7 @@ An aiding device is a piece of hardware which outputs generic aiding data to be 
 - LiDAR (SLAM output)
 - Camera
 - Radar device
+- Ultra-wideband (UWB)
 
 There are some requirements for aiding devices:
 

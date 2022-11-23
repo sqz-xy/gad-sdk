@@ -31,10 +31,11 @@ improves, an ever-increasing number of sensors are capable of producing
 measurement data which can be used to improve navigation solutions. These 
 include, but are not limited to: 
 
-- LiDAR
-- Cameras
+- Wheelspeed sensors
+- LiDAR (SLAM output)
+- Camera
+- Radar device
 - Ultra-wideband (UWB)
-- RADAR
 
 This is where the Generic Aiding Data (GAD) interface comes in. This interface has been 
 designed to accept multiple forms of aiding data and pass them to the INS to 

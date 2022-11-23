@@ -79,3 +79,26 @@ create the rotation matrix from the yaw, pitch, and roll angles and apply it to 
 
 
 For most rotations, it is clear whether this point is in the correct place in the NED frame.
+
+To assign the local reference frame (1) to a stream id (128), use the following command:
+
+.. code-block::
+
+   -gad_lrf_id128_1
+   
+
+It is possible to define more than one local reference frame:
+
+.. code-block::
+
+   -gad_lrf1_51.9151949168643_-1.2440690876840934_94.597_-90.0_180.0_0.0
+   -gad_lrf2_52.9155379168678_-1.2440693776840221_94.597_0.0_-180.0_0.0
+   -gad_lrf_id128_1
+   -gad_lrf_id129_2
+   
+   
+   
+   
+
+
+

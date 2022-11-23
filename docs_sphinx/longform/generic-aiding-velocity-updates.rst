@@ -10,7 +10,7 @@ the fields for this data type can be set using functions from the
 
 .. _velocityaidingframes:
 
-Aiding Frames
+Aiding frames
 =============
 
 Velocity aiding can be provided to the INS in more than one coordinate frame, based on the needs of the user.
@@ -26,7 +26,7 @@ Velocity measurements in this frame are expected in :math:`m/s`.
 
 .. _velocityaidingframeslocal:
 
-User-defined Local frame 
+User-defined local frame 
 ------------------------
 
 Velocity aiding supports a user-defined local frame. More information on how to define the frame itself can be found on the relevant page.
@@ -40,7 +40,7 @@ Odometry frame (beta)
 
 For this aiding frame, data is expected in the frame of an odometry sensor fixed to the vehicle. In order to use this frame, the transformation between the sensor and the INS must be specified in the INS configuration. This can be done with advanced commands in NAVconfig or in the mobile.cfg file directly on the unit.
 
-The odometry frame requires a rotational transformation as well as the standard lever arm, which is specified in much the same way in the config file:
+The odometry frame requires a rotational transformation as well as the standard lever arm, which is specified in much the same way in the following commands:
 
 .. code-block::
 
@@ -48,8 +48,10 @@ The odometry frame requires a rotational transformation as well as the standard 
    -gad_on[stream_id]
    -gad_att_id[stream_id]_[att_id]
 
-The `-attitude` option sets the orientation of the sensor frame with respect to the IMU frame.  The angles are defined intrinsically, following the Tait-Bryan :math:`Z_1 Y_2 X_3` convention in degrees.
-The `var_pit` and `var_roll` inputs are optional, with the `var_hea` option being used for all 3 variances if the others are not specified. Note you must specify either one or three variances.
+See :ref:`advancedcommands` for more information.
+
+The `-attitude` option sets the orientation of the sensor frame with respect to the IMU frame.  The angles are defined intrinsically, following the :math:`Z_1 Y_2 X_3` convention in degrees.
+The `var_pit` and `var_roll` inputs are optional, with the `var_hea` option being used for all three variances if the others are not specified. Note you must specify either one or three variances.
 
 The `-location` option specifies the lever arm :math:`(x,y,z)`. This defines the translation from the IMU to the aiding sensor, in the IMU frame. See the lever arm documentation for further information.
 

@@ -34,3 +34,7 @@ GAD packets are logged in the RD file like all other data, provided they are
 not corrupt. This data can be extracted from the RD file to CSV in 
 post-process, which can be a useful tool for debugging issues with the data. To 
 find out more, see :ref:`extractinggadfiles`.
+
+Innovations are available for each aiding stream. For more information, see :ref:`ncomupdates`.
+
+

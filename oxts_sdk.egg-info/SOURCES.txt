@@ -1,7 +1,0 @@
-README.md
-setup.py
-oxts_sdk.egg-info/PKG-INFO
-oxts_sdk.egg-info/SOURCES.txt
-oxts_sdk.egg-info/dependency_links.txt
-oxts_sdk.egg-info/not-zip-safe
-oxts_sdk.egg-info/top_level.txt

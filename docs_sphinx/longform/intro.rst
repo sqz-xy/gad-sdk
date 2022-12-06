@@ -96,7 +96,7 @@ Generic aiding process flow
 
 The diagram below describes the generic aiding process flow.
 
-.. image:: ../Generic_aiding_process_flow_diagram.jpg
+.. image:: ../Generic_aiding_process_flow_diagram_V2.jpg
   :alt: Generic aiding process flow
   :align: center
   

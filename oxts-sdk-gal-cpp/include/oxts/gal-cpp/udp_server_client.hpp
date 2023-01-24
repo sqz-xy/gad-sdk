@@ -187,6 +187,8 @@ namespace networking_udp
 			try
 			{
 				socket.open(udp::v4(), error_code);
+				boost::asio::socket_base::broadcast option(true);
+				socket.set_option(option);
 				sent = socket.send_to(boost::asio::buffer(buffer, buffer_size),
 					remote_endpoint, 0, error_code);
 				socket.close();
@@ -223,6 +225,8 @@ namespace networking_udp
 			try
 			{
 				socket.open(udp::v4(), error_code);
+				boost::asio::socket_base::broadcast option(true);
+				socket.set_option(option);
 				sent = socket.send_to(boost::asio::buffer(buffer, buffer_size),
 					remote_endpoint, 0, error_code);
 				socket.close();
@@ -261,6 +265,8 @@ namespace networking_udp
 			try
 			{
 				socket.open(udp::v4(), error_code);
+				boost::asio::socket_base::broadcast option(true);
+				socket.set_option(option);
 				sent = socket.send_to(boost::asio::buffer(buffer, buffer_size),
 					remote_endpoint_port_change, 0, error_code);
 				socket.close();

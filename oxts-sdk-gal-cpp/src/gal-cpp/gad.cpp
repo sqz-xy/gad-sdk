@@ -43,7 +43,7 @@ namespace OxTS
 	{
 		GEN_3D g;
 		g.mode = GetMode();
-		g.v_type = GetValType();
+		g.x_type = GetValType();
 		g.x[0] = GetValX();
 		g.x[1] = GetValY();
 		g.x[2] = GetValZ();

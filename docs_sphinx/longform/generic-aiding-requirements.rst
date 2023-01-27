@@ -35,6 +35,14 @@ The Generic Aiding Feature Code is an optional extra that needs to be enabled be
 An Aiding Device
 ****************
 
+An aiding device is a piece of hardware which outputs generic aiding data to be input into the OxTS INS. Some examples include:
+
+- Wheelspeed sensors
+- LiDAR (SLAM output)
+- Camera
+- Radar device
+- Ultra-wideband (UWB)
+
 There are some requirements for aiding devices:
 
 - A rigid mounting relative to the INS.

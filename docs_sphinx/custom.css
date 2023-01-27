@@ -70,3 +70,34 @@ html.writer-html5 .rst-content dl[class]:not(.option-list):not(.field-list):not(
     padding: 6px 12px;
     margin: -12px -12px 12px;
 }
+.rst-content .admonition,.rst-content .admonition-todo,.rst-content .attention,.rst-content .caution,.rst-content .danger,.rst-content .error,.rst-content .hint,.rst-content .important,.rst-content .note,.rst-content .seealso,.rst-content .tip,.rst-content .warning,.wy-alert{
+padding:12px;
+line-height:24px;
+margin-bottom:24px;
+background:#d2d2d2
+}
+.rst-content .note,.rst-content .seealso,.rst-content .wy-alert-info.admonition,.rst-content .wy-alert-info.admonition-todo,.rst-content .wy-alert-info.attention,.rst-content .wy-alert-info.caution,.rst-content .wy-alert-info.danger,.rst-content .wy-alert-info.error,.rst-content .wy-alert-info.hint,.rst-content .wy-alert-info.important,.rst-content .wy-alert-info.tip,.rst-content .wy-alert-info.warning,.wy-alert.wy-alert-info{background:#d2d2d2}
+
+
+html.writer-html4 .rst-content dl:not(.docutils)>dt,html.writer-html5 .rst-content dl[class]:not(.option-list):not(.field-list):not(.footnote):not(.citation):not(.glossary):not(.simple)>dt{
+display:table;
+margin:6px 0;
+font-size:90%;
+line-height:normal;
+background:#d2d2d2;
+color:#6e6e6e;
+border-top:3px solid #999999;
+padding:6px;
+position:relative
+}
+
+.rst-content .guilabel{
+border:1px solid #99999;
+background:#d2d2d2;
+font-size:80%;
+font-weight:700;
+border-radius:4px;
+padding:2.4px 6px;
+margin:auto 2px
+}
+

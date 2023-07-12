@@ -32,10 +32,11 @@ int main(int argc, char* argv[])
 	// Construct the speed aiding with stream ID 130.
 	OxTS::GadSpeed gs = OxTS::GadSpeed(130);
 	// Set the required values for the data
-	gs.SetSpeedFw(0.0);
-	gs.SetSpeedFwVar(0.0001);
+	gs.SetSpeedFwMs(0.0);
+	gs.SetSpeedMsVar(0.0001);
 	gs.SetTimeVoid();
-	gs.SetAidingLeverArmOptimising();
+	gs.SetAidingLeverArmFixed(0.0, 0.0, 0.1);
+	gs.SetAidingLeverArmVar(0.01, 0.01, 0.01);
 	// Initialise the handler
 	OxTS::GadHandler gh = OxTS::GadHandler();
 	gh.SetEncoderToBin();

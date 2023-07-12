@@ -21,8 +21,8 @@ gv.aiding_lever_arm_var = [0.01,0.01,0.01]
 
 
 gs = oxts_sdk.GadSpeed(124)
-gs.wheelspeed_count = [3, 32]
-gs.wheelspeed_var = 0.5
+gs.speed_fw_ms = [3, 0.0]
+gs.speed_ms_var = 0.5
 gs.time_gps = [10, 0]
 gs.aiding_lever_arm_fixed = [0.0,0.0,1.0]
 gs.aiding_lever_arm_var = [0.01,0.01,0.01]

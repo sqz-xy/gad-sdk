@@ -64,15 +64,29 @@ PYBIND11_MODULE(oxts_sdk, m) {
         .def("set_aiding_lever_arm_optimising", &OxTS::GadVelocity::SetAidingLeverArmOptimising)
         .def("set_aiding_lever_arm_config", &OxTS::GadVelocity::SetAidingLeverArmConfig);
 
+    py::class_<OxTS::GadWheelSpeed, OxTS::Gad>(m, "GadWheelSpeed")
+        .def(py::init<uint8_t>(), py::arg("stream_id"))
+        .def_property("speed_fw", &OxTS::GadWheelSpeed::GetWheelSpeedFw, &OxTS::GadWheelSpeed::SetWheelSpeedFw)
+        .def_property("speed_fw_var", &OxTS::GadWheelSpeed::GetWheelSpeedFwVar, &OxTS::GadWheelSpeed::SetWheelSpeedFwVar)
+        .def_property("wheelspeed_count", &OxTS::GadWheelSpeed::GetWheelSpeedCount, UNPACK2(GadWheelSpeed, SetWheelSpeedCount))
+        .def_property("wheelspeed_var", &OxTS::GadWheelSpeed::GetWheelSpeedVar, &OxTS::GadWheelSpeed::SetWheelSpeedVar)
+        .def_property("aiding_lever_arm_fixed", &OxTS::GadWheelSpeed::GetAidingLeverArm, UNPACK3(GadWheelSpeed, SetAidingLeverArmFixed))
+        .def_property("aiding_lever_arm_var", &OxTS::GadWheelSpeed::GetAidingLeverArmVar, UNPACK3(GadWheelSpeed, SetAidingLeverArmVar))
+        .def("set_aiding_lever_arm_optimising", &OxTS::GadWheelSpeed::SetAidingLeverArmOptimising)
+        .def("set_aiding_lever_arm_config", &OxTS::GadWheelSpeed::SetAidingLeverArmConfig);
+
     py::class_<OxTS::GadSpeed, OxTS::Gad>(m, "GadSpeed")
         .def(py::init<uint8_t>(), py::arg("stream_id"))
-        .def_property("speed_fw", &OxTS::GadSpeed::GetSpeedFw, &OxTS::GadSpeed::SetSpeedFw)
-        .def_property("speed_fw_var", &OxTS::GadSpeed::GetSpeedFwVar, &OxTS::GadSpeed::SetSpeedFwVar)
-        .def_property("wheelspeed_count", &OxTS::GadSpeed::GetWheelspeedCount, UNPACK2(GadSpeed, SetWheelspeedCount))
-        .def_property("wheelspeed_var", &OxTS::GadSpeed::GetWheelspeedVar, &OxTS::GadSpeed::SetWheelspeedVar)
+        .def_property("speed_fw_ms", &OxTS::GadSpeed::GetSpeed, UNPACK2(GadSpeed, SetSpeedFwMs))
+        .def_property("speed_bw_ms", &OxTS::GadSpeed::GetSpeed, UNPACK2(GadSpeed, SetSpeedBwMs))
+        .def_property("speed_fw_pulsed", &OxTS::GadSpeed::GetSpeed, UNPACK3(GadSpeed, SetSpeedFwPulsed))
+        .def_property("speed_bw_pulsed", &OxTS::GadSpeed::GetSpeed, UNPACK3(GadSpeed, SetSpeedBwPulsed))
+        .def_property("speed_ms_var", &OxTS::GadSpeed::GetSpeedVar, &OxTS::GadSpeed::SetSpeedMsVar)
+        .def_property("speed_ms_var_period", &OxTS::GadSpeed::GetSpeedVar, UNPACK3(GadSpeed, SetSpeedMsVarPeriod))
+        .def_property("speed_pulsed_var", &OxTS::GadSpeed::GetSpeedVar, UNPACK2(GadSpeed, SetSpeedPulsedVar))
+        .def_property("speed_pulsed_var_period", &OxTS::GadSpeed::GetSpeedVar, UNPACK3(GadSpeed, SetSpeedPulsedVarPeriod))
         .def_property("aiding_lever_arm_fixed", &OxTS::GadSpeed::GetAidingLeverArm, UNPACK3(GadSpeed, SetAidingLeverArmFixed))
         .def_property("aiding_lever_arm_var", &OxTS::GadSpeed::GetAidingLeverArmVar, UNPACK3(GadSpeed, SetAidingLeverArmVar))
-        .def("set_aiding_lever_arm_optimising", &OxTS::GadSpeed::SetAidingLeverArmOptimising)
         .def("set_aiding_lever_arm_config", &OxTS::GadSpeed::SetAidingLeverArmConfig);
 
     py::class_<OxTS::GadAttitude, OxTS::Gad>(m, "GadAttitude")

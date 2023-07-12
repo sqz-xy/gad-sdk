@@ -495,29 +495,29 @@ namespace OxTS
 	};
 
 	/**
-	 * Generic Aiding speed.
+	 * Generic Aiding Wheelspeed (Legacy).
 	 */
-	class GadSpeed : public Gad
+	class GadWheelSpeed : public Gad
 	{
 	private:
 
 	public:
-		explicit GadSpeed(uint8_t stream_id);
+		explicit GadWheelSpeed(uint8_t stream_id);
 
 		/**
-		 * Set the forward speed aiding estimate.
+		 * Set the forward wheelspeed aiding estimate.
 		 *
-		 * @param speed Forward speed estimate in the vehicle frame (m/s).
+		 * @param wheelspeed Forward wheelspeed estimate in the vehicle frame (m/s).
 		 */
-		void SetSpeedFw(double speed);
-		double GetSpeedFw() const;
+		void SetWheelSpeedFw(double wheelspeed);
+		double GetWheelSpeedFw() const;
 		/**
-		 * Set estimated variance on the forward speed aiding measurement.
+		 * Set estimated variance on the forward wheelspeed aiding measurement.
 		 *
-		 * @param v_s Forward speed estimate in the vehicle frame (units).
+		 * @param v_s Forward wheelspeed estimate in the vehicle frame (units).
 		 */
-		void SetSpeedFwVar(double v_s);
-		double GetSpeedFwVar() const;
+		void SetWheelSpeedFwVar(double v_s);
+		double GetWheelSpeedFwVar() const;
 		/**
 		 * Set the pulse count measurement from a wheelspeed encoder.
 		 *
@@ -527,16 +527,16 @@ namespace OxTS
 		 * @todo Clarify where the timestamp should correspond to in the period:
 		 * start, middle, end.
 		 */
-		void SetWheelspeedCount(double count, double period);
-		std::vector<double> GetWheelspeedCount() const;
+		void SetWheelSpeedCount(double count, double period);
+		std::vector<double> GetWheelSpeedCount() const;
 		/**
 		 * Set the estimated variance on the wheelspeed pulse count.
 		 *
 		 * @param v_c Estimated variance (pulses).
 		 * @todo Clarify units
 		 */
-		void SetWheelspeedVar(double v_c);
-		double GetWheelspeedVar() const;
+		void SetWheelSpeedVar(double v_c);
+		double GetWheelSpeedVar() const;
 		/**
 		 * Set lever arm from the INS to the aiding source. This lever arm will not be
 		 * optimised by the Kalman Filter.
@@ -554,6 +554,108 @@ namespace OxTS
 		 * in mobile.cfg.
 		 */
 		void SetAidingLeverArmOptimising();
+		/**
+		 * Indicate that lever arm will be configured in the configuration file on
+		 * the INS.
+		 * @todo Remove and set this mode to be default
+		 */
+		void SetAidingLeverArmConfig();
+		/**
+		 * Set the variance (accuracy) of the lever arm measurements from the INS to
+		 * the aiding source.
+		 *
+		 * @param x Variance on the lever arm from INS to aiding source in the x axis of the IMU frame.
+		 * @param y Variance on the lever arm from INS to aiding source in the y axis of the IMU frame.
+		 * @param z Variance on the lever arm from INS to aiding source in the z axis of the IMU frame.
+		 */
+		void SetAidingLeverArmVar(double x, double y, double z);
+		std::vector<double> GetAidingLeverArmVar() const;
+	};
+
+	/**
+	 * Generic Aiding speed.
+	 */
+	class GadSpeed : public Gad
+	{
+	private:
+
+	public:
+		explicit GadSpeed(uint8_t stream_id);
+
+		/**
+		 * Set the forward speed aiding estimate.
+		 *
+		 * @param speed Forward speed estimate in the vehicle frame (m/s).
+		 * @param(optional) period Time over which the speed measurement is taken (if known) (s).
+		 */
+		void SetSpeedFwMs(double speed, double period=0.0);
+		/**
+		 * Set the backward speed aiding estimate.
+		 *
+		 * @param speed Backward speed estimate in the vehicle frame (m/s).
+		 * @param(optional) period Time over which the speed measurement is taken (if known) (s).
+		 */
+		void SetSpeedBwMs(double speed, double period=0.0);
+		/**
+		 * Set the forward speed aiding estimate.
+		 *
+		 * @param frequency Pulse frequency in the forward vehicle direction (counts/s).
+		 * @param scale_factor Scale factor converting counts to m, e.g. 0.01 for 100 counts/m.
+		 * @param(optional) period Time over which the speed measurement is taken (if known) (s).
+		 */
+		void SetSpeedFwPulsed(double frequency, double scale_factor, double period=0.0);
+		/**
+		 * Set the backward speed aiding estimate.
+		 *
+		 * @param frequency Pulse frequency in the backward vehicle direction (counts/s).
+		 * @param scale_factor Scale factor converting counts to m, e.g. 0.01 for 100 counts/m.
+		 * @param(optional) period Time over which the speed measurement is taken (if known) (s).
+		 */
+		void SetSpeedBwPulsed(double frequency, double scale_factor, double period=0.0);
+		/**
+		 * Get the aiding speed estimate.
+		 */
+		std::vector<double> GetSpeed() const;
+		/**
+		 * Set estimated variance on the speed aiding measurement.
+		 *
+		 * @param v_s Estimated variance on the speed measurement ((m/s)^2).
+		 */
+		void SetSpeedMsVar(double v_s);
+		/**
+		 * Set the aiding speed variance estimate including scale factor and period
+		 * @param v_s Speed variance estimate (variance on the measurement) ((m/s)^2).
+		 * @param v_sf Scale factor variance estimate (m^-2).
+		 * @param v_p Period variance estimate (s^2).
+		 */
+		void SetSpeedMsVarPeriod(double v_s, double v_sf, double v_p);
+		/**
+		 * Set the aiding speed variance estimate including scale factor and period
+		 * @param v_s Pulse frequency variance estimate (variance on the measurement) (s^-2).
+		 * @param v_sf Scale factor variance estimate (m^-2).
+		 */
+		void SetSpeedPulsedVar(double v_s, double v_sf);
+		/**
+		 * Set the aiding speed variance estimate including scale factor and period
+		 * @param v_s Pulse frequency variance estimate (variance on the measurement) (s^-2).
+		 * @param v_sf Scale factor variance estimate (m^-2).
+		 * @param v_p Period variance estimate (s^2).
+		 */
+		void SetSpeedPulsedVarPeriod(double v_s, double v_sf, double v_p);
+		/**
+		 * Get the aiding speed variance estimate.
+		 */
+		std::vector<double> GetSpeedVar() const;
+		/**
+		 * Set lever arm from the INS to the aiding source. This lever arm will not be
+		 * optimised by the Kalman Filter.
+		 *
+		 * @param x Offset from INS to aiding source in the x axis of the IMU frame (m).
+		 * @param y Offset from INS to aiding source in the y axis of the IMU frame (m).
+		 * @param z Offset from INS to aiding source in the z axis of the IMU frame (m).
+		 */
+		void SetAidingLeverArmFixed(double x, double y, double z);
+		std::vector<double> GetAidingLeverArm() const;
 		/**
 		 * Indicate that lever arm will be configured in the configuration file on
 		 * the INS.

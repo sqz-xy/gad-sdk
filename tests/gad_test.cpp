@@ -528,35 +528,197 @@ namespace OxTS
 			}
 		}
 
-		namespace GadSpeed
+		namespace GadWheelSpeed
 		{
-			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedFw)
+			BOOST_AUTO_TEST_CASE(GadWheelSpeed_WheelSpeedFw)
 			{
-				OxTS::GadSpeed g(0);
+				OxTS::GadWheelSpeed g(0);
 
-				g.SetSpeedFw(1.99);
+				g.SetWheelSpeedFw(1.99);
 
-				BOOST_CHECK(g.GetSpeedFw() == 1.99);
+				BOOST_CHECK(g.GetWheelSpeedFw() == 1.99);
 			}
 
-			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedFwVar)
+			BOOST_AUTO_TEST_CASE(GadWheelSpeed_WheelSpeedFwVar)
 			{
-				OxTS::GadSpeed g(0);
+				OxTS::GadWheelSpeed g(0);
 
-				g.SetSpeedFwVar(1.99);
+				g.SetWheelSpeedFwVar(1.99);
 
-				BOOST_CHECK(g.GetSpeedFwVar() == 1.99);
+				BOOST_CHECK(g.GetWheelSpeedFwVar() == 1.99);
 			}
 
-			BOOST_AUTO_TEST_CASE(GadSpeed_WheelSpeedCount)
+			BOOST_AUTO_TEST_CASE(GadWheelSpeed_WheelWheelSpeedCount)
 			{
-				OxTS::GadSpeed g(0);
+				OxTS::GadWheelSpeed g(0);
 
-				g.SetWheelspeedCount(1.99, 2.99);
+				g.SetWheelSpeedCount(1.99, 2.99);
 
-				auto ret = g.GetWheelspeedCount();
+				auto ret = g.GetWheelSpeedCount();
 				BOOST_CHECK(ret[0] == 1.99);
 				BOOST_CHECK(ret[1] == 2.99);
+			}
+
+			BOOST_AUTO_TEST_CASE(GadWheelSpeed_AidingLeverArmFixed)
+			{
+				OxTS::GadWheelSpeed g(0);
+
+				g.SetAidingLeverArmFixed(1.99, 2.99, 3.99);
+
+				auto ret = g.GetAidingLeverArm();
+
+				BOOST_CHECK(ret[0] == 1.99);
+				BOOST_CHECK(ret[1] == 2.99);
+				BOOST_CHECK(ret[2] == 3.99);
+			}
+
+			BOOST_AUTO_TEST_CASE(GadWheelSpeed_AidingLeverArmVar)
+			{
+				OxTS::GadWheelSpeed g(0);
+
+				g.SetAidingLeverArmVar(1.99, 2.99, 3.99);
+
+				auto ret = g.GetAidingLeverArmVar();
+
+				BOOST_CHECK(ret[0] == 1.99);
+				BOOST_CHECK(ret[1] == 2.99);
+				BOOST_CHECK(ret[2] == 3.99);
+			}
+		}
+
+		namespace GadSpeed
+		{
+			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedFwMs)
+			{
+				OxTS::GadSpeed g(0);
+
+				g.SetSpeedFwMs(1.99);
+
+				auto ret = g.GetSpeed();
+				BOOST_CHECK(ret[0] == 1.99);
+			}
+
+			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedFwMsPeriod)
+			{
+				OxTS::GadSpeed g(0);
+
+				g.SetSpeedFwMs(1.99, 0.1);
+
+				auto ret = g.GetSpeed();
+				BOOST_CHECK(ret[0] == 1.99);
+				BOOST_CHECK(ret[2] == 0.1);
+			}
+
+			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedBwMs)
+			{
+				OxTS::GadSpeed g(0);
+
+				g.SetSpeedBwMs(1.99);
+
+				auto ret = g.GetSpeed();
+				BOOST_CHECK(ret[0] == 1.99);
+			}
+
+			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedBwMsPeriod)
+			{
+				OxTS::GadSpeed g(0);
+
+				g.SetSpeedBwMs(1.99, 0.1);
+
+				auto ret = g.GetSpeed();
+				BOOST_CHECK(ret[0] == 1.99);
+				BOOST_CHECK(ret[2] == 0.1);
+			}
+
+			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedFwPulsed)
+			{
+				OxTS::GadSpeed g(0);
+
+				g.SetSpeedFwPulsed(1000, 0.001);
+
+				auto ret = g.GetSpeed();
+				BOOST_CHECK(ret[0] == 1000);
+				BOOST_CHECK(ret[1] == 0.001);
+			}
+
+			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedFwPulsedPeriod)
+			{
+				OxTS::GadSpeed g(0);
+
+				g.SetSpeedFwPulsed(1000, 0.001, 0.1);
+
+				auto ret = g.GetSpeed();
+				BOOST_CHECK(ret[0] == 1000);
+				BOOST_CHECK(ret[1] == 0.001);
+				BOOST_CHECK(ret[2] == 0.1);
+			}
+
+			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedBwPulsed)
+			{
+				OxTS::GadSpeed g(0);
+
+				g.SetSpeedBwPulsed(1000, 0.001);
+
+				auto ret = g.GetSpeed();
+				BOOST_CHECK(ret[0] == 1000);
+				BOOST_CHECK(ret[1] == 0.001);
+			}
+
+			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedBwPulsedPeriod)
+			{
+				OxTS::GadSpeed g(0);
+
+				g.SetSpeedBwPulsed(1000, 0.001, 0.1);
+
+				auto ret = g.GetSpeed();
+				BOOST_CHECK(ret[0] == 1000);
+				BOOST_CHECK(ret[1] == 0.001);
+				BOOST_CHECK(ret[2] == 0.1);
+			}
+
+			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedMsVar)
+			{
+				OxTS::GadSpeed g(0);
+
+				g.SetSpeedMsVar(1.99);
+
+				auto ret = g.GetSpeedVar();
+				BOOST_CHECK(ret[0] == 1.99);
+			}
+
+			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedMsVarPeriod)
+			{
+				OxTS::GadSpeed g(0);
+
+				g.SetSpeedMsVarPeriod(1.99, 0.0, 0.01);
+
+				auto ret = g.GetSpeedVar();
+				BOOST_CHECK(ret[0] == 1.99);
+				BOOST_CHECK(ret[1] == 0.0);
+				BOOST_CHECK(ret[2] == 0.01);
+			}
+
+			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedPulsedVar)
+			{
+				OxTS::GadSpeed g(0);
+
+				g.SetSpeedPulsedVar(1, 0.01);
+
+				auto ret = g.GetSpeedVar();
+				BOOST_CHECK(ret[0] == 1);
+				BOOST_CHECK(ret[2] == 0.01);
+			}
+
+			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedPulsedVarPeriod)
+			{
+				OxTS::GadSpeed g(0);
+
+				g.SetSpeedPulsedVarPeriod(1, 0.0001, 0.01);
+
+				auto ret = g.GetSpeedVar();
+				BOOST_CHECK(ret[0] == 1);
+				BOOST_CHECK(ret[1] == 0.0001);
+				BOOST_CHECK(ret[2] == 0.01);
 			}
 
 			BOOST_AUTO_TEST_CASE(GadSpeed_AidingLeverArmFixed)

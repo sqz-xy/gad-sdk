@@ -87,10 +87,11 @@ typedef enum
    GEN_POS,          /** Position 3D. */
    GEN_RANGE,        /** Range, 1D value, can contain angle of arrival as additional info. */
    GEN_VEL,          /** Velocity 3D. */
-   GEN_SPEED,        /** Speed, e.g. wheel speed. */
+   GEN_WSPEED,       /** WheelSpeed, legacy system */
    GEN_ATT,          /** Attitude. */
    GEN_HEADING,      /** Heading   @note To be merged in GEN_ATT, with ATT specifying in type wherer only heading, or heading+pitch, or heading+pitch+roll are present. */
    GEN_TIMETRIG,     /** Time trigger, used for indoor segment navigation. */
+   GEN_SPEED,        /** 1-Dimensional speed in the vehicle frame */
    GEN_NUM
 } GEN_TYPE;
 
@@ -122,7 +123,9 @@ typedef enum
 typedef enum
 {
    SPEED_SYS_VOID,
-   SPEED_SYS_FW_VEL,        /** Speed at sensor fixed wrt IMU, speed angle wrt IMU given. */
+   SPEED_SYS_FW_VEL,        /** Speed at sensor fixed wrt IMU, signed, +ve forward */
+   SPEED_SYS_BW_VEL,        /** Speed at sensor fixed wrt IMU, signed, +ve backward */
+   SPEED_SYS_UNSIGNED,        /** Speed at sensor fixed wrt IMU, unsigned */
 } SPEED_SYS_TYPE;
 //==============================================================================
 //! \brief Attitude types 

@@ -567,52 +567,148 @@ namespace OxTS
 		return GetLocVar();
 	}
 	//==============================================================================
-	// GadSpeed
-	GadSpeed::GadSpeed(uint8_t stream_id) : Gad(stream_id, GEN_TYPE::GEN_SPEED) {}
+	// GadWheelSpeed
+	GadWheelSpeed::GadWheelSpeed(uint8_t stream_id) : Gad(stream_id, GEN_TYPE::GEN_WSPEED) {}
 
 	// val
-	void GadSpeed::SetSpeedFw(double speed)
+	void GadWheelSpeed::SetWheelSpeedFw(double wheelspeed)
 	{
 		SetDataMode(0);
 		SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_FW_VEL);
-		SetDataVal(speed, 1.0, 0.0);
+		SetDataVal(wheelspeed, 1.0, 0.0);
 	}
 
-	double GadSpeed::GetSpeedFw() const
+	double GadWheelSpeed::GetWheelSpeedFw() const
 	{
 		return GetDataVal()[0];
 	}
 
-	void GadSpeed::SetSpeedFwVar(double v_s)
+	void GadWheelSpeed::SetWheelSpeedFwVar(double v_s)
 	{
 		SetDataVarSingle(v_s);
 	}
 
-	double GadSpeed::GetSpeedFwVar() const
+	double GadWheelSpeed::GetWheelSpeedFwVar() const
 	{
 		return GetDataVar()[0];
 	}
 
-	void GadSpeed::SetWheelspeedCount(double count, double period)
+	void GadWheelSpeed::SetWheelSpeedCount(double count, double period)
 	{
 		SetDataMode(0);
 		SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_FW_VEL);
 		SetDataVal(count, period, 0.0);
 	}
 
-	std::vector<double> GadSpeed::GetWheelspeedCount() const
+	std::vector<double> GadWheelSpeed::GetWheelSpeedCount() const
 	{
 		return std::vector<double>{GetDataVal()[0], GetDataVal()[1]};
 	}
 
-	void GadSpeed::SetWheelspeedVar(double v_c)
+	void GadWheelSpeed::SetWheelSpeedVar(double v_c)
 	{
 		SetDataVarSingle(v_c);
 	}
 
-	double GadSpeed::GetWheelspeedVar() const
+	double GadWheelSpeed::GetWheelSpeedVar() const
 	{
 		return GetDataVar()[0];
+	}
+
+	// loc 
+	void GadWheelSpeed::SetAidingLeverArmFixed(double x, double y, double z)
+	{
+		SetLocMode(LOC_SYS::LOC_FIXED);
+		SetLocVal(x, y, z);
+	}
+
+	void GadWheelSpeed::SetAidingLeverArmConfig()
+	{
+		SetLocMode(LOC_SYS::LOC_CONFIG);
+		SetLocVal(0.0, 0.0, 0.0);
+	}
+
+	void GadWheelSpeed::SetAidingLeverArmOptimising()
+	{
+		SetLocMode(LOC_SYS::LOC_KF);
+		SetLocVal(0.0, 0.0, 0.0);
+	}
+
+	std::vector<double> GadWheelSpeed::GetAidingLeverArm() const
+	{
+		return GetLocVal();
+	}
+	void GadWheelSpeed::SetAidingLeverArmVar(double x, double y, double z)
+	{
+		SetLocVarDiag(x, y, z);
+	}
+
+	std::vector<double> GadWheelSpeed::GetAidingLeverArmVar() const
+	{
+		return GetLocVar();
+	}
+	//==============================================================================
+	// GadSpeed
+	GadSpeed::GadSpeed(uint8_t stream_id) : Gad(stream_id, GEN_TYPE::GEN_SPEED) {}
+
+	// val
+	void GadSpeed::SetSpeedFwMs(double speed, double period)
+	{
+		SetDataMode(0);
+		SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_FW_VEL);
+		SetDataVal(speed, 1.0, period);
+	}
+
+	void GadSpeed::SetSpeedBwMs(double speed, double period)
+	{
+		SetDataMode(0);
+		SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_BW_VEL);
+		SetDataVal(speed, 1.0, period);
+	}
+
+	void GadSpeed::SetSpeedFwPulsed(double frequency, double scale_factor, double period)
+	{
+		SetDataMode(0);
+		SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_FW_VEL);
+		SetDataVal(frequency, scale_factor, period);
+	}
+
+	void GadSpeed::SetSpeedBwPulsed(double frequency, double scale_factor, double period)
+	{
+		SetDataMode(0);
+		SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_BW_VEL);
+		SetDataVal(frequency, scale_factor, period);
+	}
+
+	std::vector<double> GadSpeed::GetSpeed() const
+	{
+		return GetDataVal();
+	}
+
+	// var
+	void GadSpeed::SetSpeedMsVar(double v_s)
+	{
+		SetDataVarSingle(v_s);
+	}
+
+	void GadSpeed::SetSpeedMsVarPeriod(double v_s, double v_sf, double v_p)
+	{
+		SetDataVarDiag(v_s, v_sf, v_p);
+	}
+
+	void GadSpeed::SetSpeedPulsedVar(double v_s, double v_sf)
+	{
+		SetDataVarDiag(v_s, v_sf, 0.0);
+	}
+
+	void GadSpeed::SetSpeedPulsedVarPeriod(double v_s, double v_sf, double v_p)
+	{
+		SetDataVarDiag(v_s, v_sf, v_p);
+	}
+
+	std::vector<double> GadSpeed::GetSpeedVar() const
+	{
+		return GetDataVal();
 	}
 
 	// loc 
@@ -625,12 +721,6 @@ namespace OxTS
 	void GadSpeed::SetAidingLeverArmConfig()
 	{
 		SetLocMode(LOC_SYS::LOC_CONFIG);
-		SetLocVal(0.0, 0.0, 0.0);
-	}
-
-	void GadSpeed::SetAidingLeverArmOptimising()
-	{
-		SetLocMode(LOC_SYS::LOC_KF);
 		SetLocVal(0.0, 0.0, 0.0);
 	}
 
@@ -647,6 +737,7 @@ namespace OxTS
 	{
 		return GetLocVar();
 	}
+
 	//==============================================================================
 	// GadAttitude
 	GadAttitude::GadAttitude() : Gad(DEFAULT_STREAM_ID, GEN_TYPE::GEN_ATT) {}

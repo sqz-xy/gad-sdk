@@ -2,8 +2,11 @@ cmake_minimum_required(VERSION 3.1)
 
 # C++ Standard version. Minimum supported is C++11.
 set(CMAKE_CXX_STANDARD 11)
-# Explicitly set policy for _DIR behaviour
-cmake_policy(SET CMP0074 NEW)
+
+if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.12.0")
+    # Explicitly set policy for _DIR behaviour
+    cmake_policy(SET CMP0074 NEW)
+endif()
 
 project(oxts-sdk-examples-gal VERSION 0.1.0)
 

@@ -56,5 +56,5 @@ jobs:
           source-directory: public
           destination-github-username: 'OxfordTechnicalSolutions'
           destination-repository-name: 'OxfordTechnicalSolutions.github.io'
-          user-email: slogan@oxts.com
+          user-email: automated_push_from_gad_SDK
           target-branch: master

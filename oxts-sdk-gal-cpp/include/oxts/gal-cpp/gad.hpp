@@ -586,32 +586,44 @@ namespace OxTS
 		 * Set the forward speed aiding estimate.
 		 *
 		 * @param speed Forward speed estimate in the vehicle frame (m/s).
-		 * @param(optional) period Time over which the speed measurement is taken (if known) (s).
 		 */
-		void SetSpeedFwMs(double speed, double period=0.0);
+		void SetSpeedFwMs(double speed);
 		/**
 		 * Set the backward speed aiding estimate.
 		 *
 		 * @param speed Backward speed estimate in the vehicle frame (m/s).
-		 * @param(optional) period Time over which the speed measurement is taken (if known) (s).
 		 */
-		void SetSpeedBwMs(double speed, double period=0.0);
+		void SetSpeedBwMs(double speed);
 		/**
-		 * Set the forward speed aiding estimate.
+		 * Set an unsigned speed aiding estimate.
+		 *
+		 * @param speed Unsigned speed estimate in the vehicle frame (m/s).
+		 */
+		void SetSpeedUnMs(double speed);
+		/**
+		 * Set the forward pulsed speed aiding estimate.
 		 *
 		 * @param frequency Pulse frequency in the forward vehicle direction (counts/s).
-		 * @param scale_factor Scale factor converting counts to m, e.g. 0.01 for 100 counts/m.
+		 * @param scale_factor Scale factor converting counts to m, e.g. 0.01 for 100 counts/m. (m)
 		 * @param(optional) period Time over which the speed measurement is taken (if known) (s).
 		 */
 		void SetSpeedFwPulsed(double frequency, double scale_factor, double period=0.0);
 		/**
-		 * Set the backward speed aiding estimate.
+		 * Set the backward pulsed speed aiding estimate.
 		 *
 		 * @param frequency Pulse frequency in the backward vehicle direction (counts/s).
-		 * @param scale_factor Scale factor converting counts to m, e.g. 0.01 for 100 counts/m.
+		 * @param scale_factor Scale factor converting counts to m, e.g. 0.01 for 100 counts/m. (m)
 		 * @param(optional) period Time over which the speed measurement is taken (if known) (s).
 		 */
 		void SetSpeedBwPulsed(double frequency, double scale_factor, double period=0.0);
+		/**
+		 * Set an unsigned pulsed speed aiding estimate.
+		 *
+		 * @param frequency Unsigned pulse frequency (counts/s).
+		 * @param scale_factor Scale factor converting counts to m, e.g. 0.01 for 100 counts/m. (m)
+		 * @param(optional) period Time over which the speed measurement is taken (if known) (s).
+		 */
+		void SetSpeedUnPulsed(double frequency, double scale_factor, double period=0.0);
 		/**
 		 * Get the aiding speed estimate.
 		 */
@@ -622,13 +634,6 @@ namespace OxTS
 		 * @param v_s Estimated variance on the speed measurement ((m/s)^2).
 		 */
 		void SetSpeedMsVar(double v_s);
-		/**
-		 * Set the aiding speed variance estimate including scale factor and period
-		 * @param v_s Speed variance estimate (variance on the measurement) ((m/s)^2).
-		 * @param v_sf Scale factor variance estimate (m^-2).
-		 * @param v_p Period variance estimate (s^2).
-		 */
-		void SetSpeedMsVarPeriod(double v_s, double v_sf, double v_p);
 		/**
 		 * Set the aiding speed variance estimate including scale factor and period
 		 * @param v_s Pulse frequency variance estimate (variance on the measurement) (s^-2).

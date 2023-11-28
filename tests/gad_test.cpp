@@ -598,17 +598,6 @@ namespace OxTS
 				BOOST_CHECK(ret[0] == 1.99);
 			}
 
-			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedFwMsPeriod)
-			{
-				OxTS::GadSpeed g(0);
-
-				g.SetSpeedFwMs(1.99, 0.1);
-
-				auto ret = g.GetSpeed();
-				BOOST_CHECK(ret[0] == 1.99);
-				BOOST_CHECK(ret[2] == 0.1);
-			}
-
 			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedBwMs)
 			{
 				OxTS::GadSpeed g(0);
@@ -619,15 +608,14 @@ namespace OxTS
 				BOOST_CHECK(ret[0] == 1.99);
 			}
 
-			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedBwMsPeriod)
+			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedUnMs)
 			{
 				OxTS::GadSpeed g(0);
 
-				g.SetSpeedBwMs(1.99, 0.1);
+				g.SetSpeedUnMs(1.99);
 
 				auto ret = g.GetSpeed();
 				BOOST_CHECK(ret[0] == 1.99);
-				BOOST_CHECK(ret[2] == 0.1);
 			}
 
 			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedFwPulsed)
@@ -676,6 +664,29 @@ namespace OxTS
 				BOOST_CHECK(ret[2] == 0.1);
 			}
 
+			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedUnPulsed)
+			{
+				OxTS::GadSpeed g(0);
+
+				g.SetSpeedUnPulsed(1000, 0.001);
+
+				auto ret = g.GetSpeed();
+				BOOST_CHECK(ret[0] == 1000);
+				BOOST_CHECK(ret[1] == 0.001);
+			}
+
+			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedUnPulsedPeriod)
+			{
+				OxTS::GadSpeed g(0);
+
+				g.SetSpeedUnPulsed(1000, 0.001, 0.1);
+
+				auto ret = g.GetSpeed();
+				BOOST_CHECK(ret[0] == 1000);
+				BOOST_CHECK(ret[1] == 0.001);
+				BOOST_CHECK(ret[2] == 0.1);
+			}
+
 			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedMsVar)
 			{
 				OxTS::GadSpeed g(0);
@@ -684,18 +695,6 @@ namespace OxTS
 
 				auto ret = g.GetSpeedVar();
 				BOOST_CHECK(ret[0] == 1.99);
-			}
-
-			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedMsVarPeriod)
-			{
-				OxTS::GadSpeed g(0);
-
-				g.SetSpeedMsVarPeriod(1.99, 0.0, 0.01);
-
-				auto ret = g.GetSpeedVar();
-				BOOST_CHECK(ret[0] == 1.99);
-				BOOST_CHECK(ret[1] == 0.0);
-				BOOST_CHECK(ret[2] == 0.01);
 			}
 
 			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedPulsedVar)

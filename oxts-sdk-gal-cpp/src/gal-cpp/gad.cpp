@@ -652,18 +652,25 @@ namespace OxTS
 	GadSpeed::GadSpeed(uint8_t stream_id) : Gad(stream_id, GEN_TYPE::GEN_SPEED) {}
 
 	// val
-	void GadSpeed::SetSpeedFwMs(double speed, double period)
+	void GadSpeed::SetSpeedFwMs(double speed)
 	{
 		SetDataMode(0);
 		SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_FW_VEL);
-		SetDataVal(speed, 1.0, period);
+		SetDataVal(speed, 1.0, 1.0);
 	}
 
-	void GadSpeed::SetSpeedBwMs(double speed, double period)
+	void GadSpeed::SetSpeedBwMs(double speed)
 	{
 		SetDataMode(0);
 		SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_BW_VEL);
-		SetDataVal(speed, 1.0, period);
+		SetDataVal(speed, 1.0, 1.0);
+	}
+
+	void GadSpeed::SetSpeedUnMs(double speed)
+	{
+		SetDataMode(0);
+		SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_UNSIGNED);
+		SetDataVal(speed, 1.0, 1.0);
 	}
 
 	void GadSpeed::SetSpeedFwPulsed(double frequency, double scale_factor, double period)
@@ -680,6 +687,13 @@ namespace OxTS
 		SetDataVal(frequency, scale_factor, period);
 	}
 
+	void GadSpeed::SetSpeedUnPulsed(double frequency, double scale_factor, double period)
+	{
+		SetDataMode(0);
+		SetDataValType(SPEED_SYS_TYPE::SPEED_SYS_UNSIGNED);
+		SetDataVal(frequency, scale_factor, period);
+	}
+
 	std::vector<double> GadSpeed::GetSpeed() const
 	{
 		return GetDataVal();
@@ -689,11 +703,6 @@ namespace OxTS
 	void GadSpeed::SetSpeedMsVar(double v_s)
 	{
 		SetDataVarSingle(v_s);
-	}
-
-	void GadSpeed::SetSpeedMsVarPeriod(double v_s, double v_sf, double v_p)
-	{
-		SetDataVarDiag(v_s, v_sf, v_p);
 	}
 
 	void GadSpeed::SetSpeedPulsedVar(double v_s, double v_sf)

@@ -594,7 +594,8 @@ namespace OxTS
 
 				g.SetSpeedFwMs(1.99);
 
-				BOOST_CHECK(g.GetSpeed() == 1.99);
+				auto ret = g.GetSpeed();
+				BOOST_CHECK(ret[0] == 1.99);
 			}
 
 			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedBwMs)
@@ -603,7 +604,8 @@ namespace OxTS
 
 				g.SetSpeedBwMs(1.99);
 
-				BOOST_CHECK(g.GetSpeed() == 1.99);
+				auto ret = g.GetSpeed();
+				BOOST_CHECK(ret[0] == 1.99);
 			}
 
 			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedUnMs)
@@ -612,7 +614,8 @@ namespace OxTS
 
 				g.SetSpeedUnMs(1.99);
 
-				BOOST_CHECK(g.GetSpeed() == 1.99);
+				auto ret = g.GetSpeed();
+				BOOST_CHECK(ret[0] == 1.99);
 			}
 
 			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedFwPulsed)
@@ -690,7 +693,8 @@ namespace OxTS
 
 				g.SetSpeedMsVar(1.99);
 
-				BOOST_CHECK(g.GetSpeedVar() == 1.99);
+				auto ret = g.GetSpeedVar();
+				BOOST_CHECK(ret[0] == 1.99);
 			}
 
 			BOOST_AUTO_TEST_CASE(GadSpeed_SpeedPulsedVar)

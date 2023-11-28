@@ -717,7 +717,7 @@ namespace OxTS
 
 	std::vector<double> GadSpeed::GetSpeedVar() const
 	{
-		return GetDataVal();
+		return GetDataVar();
 	}
 
 	// loc 

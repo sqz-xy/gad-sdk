@@ -548,7 +548,7 @@ namespace OxTS
 				BOOST_CHECK(g.GetWheelSpeedFwVar() == 1.99);
 			}
 
-			BOOST_AUTO_TEST_CASE(GadWheelSpeed_WheelWheelSpeedCount)
+			BOOST_AUTO_TEST_CASE(GadWheelSpeed_WheelSpeedCount)
 			{
 				OxTS::GadWheelSpeed g(0);
 

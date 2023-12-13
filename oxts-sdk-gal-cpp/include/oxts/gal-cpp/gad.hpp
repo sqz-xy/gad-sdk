@@ -607,7 +607,7 @@ namespace OxTS
 		 * @param scale_factor Scale factor converting counts to m, e.g. 0.01 for 100 counts/m. (m)
 		 * @param(optional) period Time over which the speed measurement is taken (if known) (s).
 		 */
-		void SetSpeedFwPulsed(double frequency, double scale_factor, double period=0.0);
+		void SetSpeedFwPulsed(double frequency, double scale_factor, double period=1.0);
 		/**
 		 * Set the backward pulsed speed aiding estimate.
 		 *
@@ -615,7 +615,7 @@ namespace OxTS
 		 * @param scale_factor Scale factor converting counts to m, e.g. 0.01 for 100 counts/m. (m)
 		 * @param(optional) period Time over which the speed measurement is taken (if known) (s).
 		 */
-		void SetSpeedBwPulsed(double frequency, double scale_factor, double period=0.0);
+		void SetSpeedBwPulsed(double frequency, double scale_factor, double period=1.0);
 		/**
 		 * Set an unsigned pulsed speed aiding estimate.
 		 *
@@ -623,7 +623,7 @@ namespace OxTS
 		 * @param scale_factor Scale factor converting counts to m, e.g. 0.01 for 100 counts/m. (m)
 		 * @param(optional) period Time over which the speed measurement is taken (if known) (s).
 		 */
-		void SetSpeedUnPulsed(double frequency, double scale_factor, double period=0.0);
+		void SetSpeedUnPulsed(double frequency, double scale_factor, double period=1.0);
 		/**
 		 * Get the aiding speed estimate.
 		 */

@@ -7,11 +7,16 @@ Aiding types
 An OxTS INS can currently accept five fundamental aiding types through the 
 Generic Aiding interface:
 
--	:ref:`Position <pos_aidingtype>`
--	:ref:`Velocity <vel_aidingtype>`
--	:ref:`Speed <spe_aidingtype>`
--	:ref:`Attitude <att_aidingtype>`
--	:ref:`Heading <hea_aidingtype>`
+.. toctree::
+   :maxdepth: 1
+   :caption: Aiding Types
+   :name: AidingTypesToc
+   
+   pos.rst
+   vel.rst
+   spe.rst
+   att.rst
+   hea.rst
 
 
 Each of these aiding types will require a slightly different setup, but they 

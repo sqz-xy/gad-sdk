@@ -4,8 +4,8 @@ My first GAD
 ############
 
 In this example, velocity data is sent to an OxTS INS in real time. Instead of using an actual sensor, the velocity is hard coded.
-The full source code for the GAD SDK in both C++ and Python can be found below.
- Since this is the same code as discussed in :ref:`Getting Started <gettingstarted>`, a full breakdown of the code will not be given here.
+The full source code for the GAD SDK in both C++ and Python can be found below. 
+Since this is the same code as discussed in :ref:`Getting Started <gettingstarted>`, a full breakdown of the code will not be given here.
 
 Requirements
 ************

@@ -32,45 +32,45 @@ Table of Contents
    :caption: Introduction
    :name: introtree
 
-   longform/intro
+   source/longform/intro
    
 .. toctree::
    :maxdepth: 3
    :caption: Manual
    :name: Manual
    
-   longform/overview
-   longform/gettingstarted
-   longform/aiding_types/index
-   longform/ismydatabeingreceived
-   longform/GAD_post_processing
-   longform/section5
+   source/longform/overview
+   source/longform/gettingstarted
+   source/longform/aiding_types/index
+   source/longform/ismydatabeingreceived
+   source/longform/GAD_post_processing
+   source/longform/section5
 
 .. toctree::
    :maxdepth: 3
    :caption: Tutorials and examples
    :name: tutorials_examples
    
-   longform/my_first_gad
-   longform/static_aiding
-   longform/example_can_ws
+   source/longform/my_first_gad
+   source/longform/static_aiding
+   source/longform/example_can_ws
 
 .. toctree::
    :maxdepth: 3
    :caption: Reference section
    :name: refsec
    
-   longform/KF
-   longform/Frames
-   longform/lever_arm
-   longform/cov
-   longform/time_stamping
-   longform/Glossary
-   longform/GAD_cols
-   longform/enum_tab
-   longform/adv_com
-   longform/gal-cpp/index
-   longform/py_com
+   source/longform/KF
+   source/longform/Frames
+   source/longform/lever_arm
+   source/longform/cov
+   source/longform/time_stamping
+   source/longform/Glossary
+   source/longform/GAD_cols
+   source/longform/enum_tab
+   source/longform/adv_com
+   source/longform/gal-cpp/index
+   source/longform/py_com
 
 
 

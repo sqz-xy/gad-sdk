@@ -44,13 +44,5 @@ if (OXTS_SDK_BUILD_TESTS)
 endif()
 
 if (OXTS_SDK_BUILD_PYTHON)
-    add_subdirectory(oxts-sdk-py/pybind11)
-    pybind11_add_module(oxts_sdk oxts-sdk-py/gal-py-bindings.cpp 
-                                 oxts-sdk-gal-cpp/src/gal-cpp/gad.cpp
-                                 oxts-sdk-gal-cpp/src/gal-cpp/gad_handler.cpp
-                                 oxts-sdk-gal-c/src/gad_encode_bin.c
-                                 oxts-sdk-gal-c/src/gad_encode_csv.c
-                                 oxts-sdk-core/src/BasicCasts.c
-                                 oxts-sdk-core/src/ccomtx.cpp
-    )
-
+    add_subdirectory(oxts-sdk-py)
+endif()

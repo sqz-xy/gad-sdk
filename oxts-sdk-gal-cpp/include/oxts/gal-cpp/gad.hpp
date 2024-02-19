@@ -80,7 +80,7 @@ namespace OxTS
 			 */
 			int8_t        m_type;
 			/** Aiding stream ID to identify the source device.
-			 *  Values 128-254. Each stream should have a unique ID.
+			 *  Values 129-254. Each stream should have a unique ID.
 			 */
 			uint8_t       m_stream_id;
 			/** Sub-struct VALUE. Contains navigation aiding data. */
@@ -261,7 +261,7 @@ namespace OxTS
 			/**
 			 * Constructor
 			 *
-			 * @param stream_id Stream ID for the position aiding source. Must be unique 128-254.
+			 * @param stream_id Stream ID for the position aiding source. Must be unique 129-254.
 			 */
 			explicit GadPosition(const uint8_t stream_id);
 			/**
@@ -373,7 +373,7 @@ namespace OxTS
 			/**
 			 * Constructor
 			 *
-			 * @param stream_id Stream ID for the velocity aiding source. Must be unique 128-254.
+			 * @param stream_id Stream ID for the velocity aiding source. Must be unique 129-254.
 			 */
 			explicit GadVelocity(const uint8_t stream_id);
 			/**
@@ -703,7 +703,7 @@ namespace OxTS
 			 */
 			GadAttitude();
 			/** Constructor.
-			 *  @param stream_id Stream ID for the attitude aiding source. Must be unique 128-254.
+			 *  @param stream_id Stream ID for the attitude aiding source. Must be unique 129-254.
 			 */
 			explicit GadAttitude(const uint8_t stream_id);
 			const container_double3_t& GetAtt() const;

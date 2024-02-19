@@ -60,9 +60,7 @@ jobs:
         # Add additional options to the MSBuild command line here (like platform or verbosity level).
         # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
         # run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /property:Platform=x64  ${{github.workspace}}/build/oxts-sdk.sln
-        run: | 
-          cmake ..
-          cmake --build . --target install --config Release
+        run: cmake --build . --target install --config Release
         
       - name: Run Tests
         run: ${{github.workspace}}/build/tests/Release/unit_tests.exe

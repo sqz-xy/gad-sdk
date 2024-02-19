@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 	int num_packets       = std::stoi(argv[2]); // Number of packets to send.
 
 	// Construct the velocity aiding with stream ID 130.
-	OxTS::GadVelocity gv = OxTS::GadVelocity(130);
+	OxTS::Gal_Cpp::GadVelocity gv(130);
 
 	// Set the required data
 	gv.SetVelNed(0.0,0.0,0.0);
@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
 	gv.SetAidingLeverArmVar(0.01,0.01,0.01);
 
 	// Initialise the handler
-	OxTS::GadHandler gh = OxTS::GadHandler();
+	OxTS::Gal_Cpp::GadHandler gh;
 	gh.SetEncoderToBin();
 	gh.SetOutputModeToUdp(unit_ip);
 

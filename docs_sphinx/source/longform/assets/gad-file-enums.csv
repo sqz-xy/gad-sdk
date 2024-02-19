@@ -1,0 +1,22 @@
+﻿Column,Description,Data type,Enum,Definition
+F,Frame of measurement,All,0,Void
+F,Frame of measurement,Position,1,WGS84
+F,Frame of measurement,Position,2,Local
+F,Frame of measurement,Velocity,1,NED
+F,Frame of measurement,Velocity,2,Odometry
+F,Frame of measurement,Velocity,3,Local
+F,Frame of measurement,Orientation,1,Vehicle
+F,Frame of measurement,Orientation,2,Local
+F,Frame of measurement,Heading,1,NED (navigation)
+F,Frame of measurement,Heading,2,Local
+X,Type of time,All,0,Void
+X,Type of time,All,1,GPS
+X,Type of time,All,2,PPS
+X,Type of time,All,3,Latency
+X,Type of time,All,4,SDN  (internal only)
+X,Type of time,All,6,Unix
+X,Type of time,All,7,TAI
+AG,Lever Arm (or alignment),All,-1,Invalid
+AG,Lever Arm (or alignment),All,0,Fixed
+AG,Lever Arm (or alignment),All,1,Unused
+AG,Lever Arm (or alignment),All,2,Config

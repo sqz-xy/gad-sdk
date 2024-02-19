@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
 
     //============================================================================
     // Construct the position aiding class with stream ID 129.
-    OxTS::GadPosition gp = OxTS::GadPosition(129);
+    OxTS::Gal_Cpp::GadPosition gp(129);
     // Set the time from external source (Week 2191 - January 2022)
     gp.SetTimeExternal(2191.0, 0.0);
     // Set the aiding position
@@ -50,7 +50,7 @@ int main(int argc, char* argv[])
     gp.SetAidingLeverArmVar(0.1, 0.1, 0.1);
     //============================================================================
     // Initialise the handler
-    OxTS::GadHandler gh = OxTS::GadHandler();
+    OxTS::Gal_Cpp::GadHandler gh
 
     // This switch case sets up the GadHandler to either output binary to UDP or 
     // CSV to file.

@@ -309,7 +309,7 @@ static void print(FILE *fp, const NComRxC *nrx)
 			1900+td->tm_year, 1+td->tm_mon, td->tm_mday, td->tm_hour, td->tm_min, td->tm_sec, ms);
 	}
 
-	// Print the measurments listed in the header
+	// Print the measurements listed in the header
 	if (nrx->mIsTimeValid)
 	{
 		// Print the 	PosLat (deg)
@@ -479,7 +479,7 @@ static void print(FILE *fp, const NComRxC *nrx)
 		// if(nrx->mIsSlipValid) fprintf(fp, "%.3f",nrx->mSlip);
 		// fprintf(fp, ",");
 
-		// // Print the 	AngleTrack (deg) edited for +ve measurments only
+		// // Print the 	AngleTrack (deg) edited for +ve measurements only
 		// if(nrx->mIsTrackValid)
 		// {
 		// 	if(nrx->mTrack<0) fprintf(fp, "%.3f",360 + nrx->mTrack); else fprintf(fp, "%.3f",nrx->mTrack);

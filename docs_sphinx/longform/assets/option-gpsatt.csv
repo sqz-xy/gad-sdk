@@ -1,5 +1,0 @@
-﻿Option,X,Description
--aid_gpsatt_X,on,Turn on GNSS dual antenna
-,off,Turn off GNSS dual antenna
--aid_gpsatt_loc_idX,#,Associate a heading angular offset ID X to the primary GPS antenna
-,,

@@ -23,44 +23,11 @@
 #include "oxts/gal-c/gad_defines.h"
 #include "oxts/gal-c/gad_struct.h"
 
+//============================================================================================================
+//! \brief A private data structure for the generic Aiding Decoder Memory.
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
-#if OXTS_EXE_PP
-   // Functions for extracting generic aiding from text format (csv)
-   extern int update_genaid_from_csv(GEN_AIDING_DATA* gad, unsigned char* data, int len);
-   extern int set_csv_filename(void* dm, const char* filename);
-   extern int read_next_csv_line(void* dm, signed char* data, int max_len, uint32_t* len);
-   extern int open_csv(void* dm);
-   extern int close_csv(void* dm);
-   int genaid_gen3d_parse(GEN_3D* val, char** tokens, int* cur_token, int max_tokens);
-#endif
-
-   extern int update_genaid_from_bin(GEN_AIDING_DATA* gad, unsigned char* data, int len);
-
-   int decode_gen3d_bin(GEN_3D* field, unsigned char* b, size_t* b_offset);
-   int decode_gen3d_var_bin(GEN_3D* field, unsigned char* b, size_t* b_offset);
-   int decode_acq_timestamp_bin(uint32_t* acq_time, unsigned char* b, size_t *b_offset);
-   int genaid_basic_checks_bin(unsigned char* data, int len);
-
-#if OXTS_EXE_PP
-   // Functions related to the generic aiding decoder memory
-   extern int initialise_genaidcsv_decodermemory(void** dm, int time_arrow_fwd);
-   extern int kill_genaidcsv_decodermemory(void** dm, int free_base);
-   extern int invalid_genaidcsv_decodermemory(void* dm);
-#endif
-
-   extern int kill_genaidbin_decodermemory(void** dm, int free_base);
-
-   //int update_genaid_decodermemory_options (void *dm, RTBNS_OPTIONS)
-
-
-#ifdef __cplusplus
-}
-#endif
+extern int32_t update_genaid_from_bin(GEN_AIDING_DATA* gad, const uint8_t* data, const size_t len);
+extern int32_t genaid_basic_checks_bin(const uint8_t* data, const size_t len); /*PRQA S 0776 # Assume compiler has greater than 6-character limit for identifier uniqueness. */
 
 
 #endif

@@ -3,6 +3,14 @@ build/
 _install/
 install/
 .vscode/
+.vs/
 public/
 .cache/
+msvc_2020/.vs
+msvc_2020/x64
 *.gad
+log.txt
+EthernetSendTest/x64
+msvc_2020/gad-sdk-c/x64
+msvc_2020/gad-sdk-cpp/x64
+msvc_2020/tests_project/x64

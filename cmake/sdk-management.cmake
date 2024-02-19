@@ -3,13 +3,9 @@
 
 # Building
 set(SDK_LIST "")
-list(APPEND SDK_LIST "core")
 list(APPEND SDK_LIST "gal-c")
 list(APPEND SDK_LIST "gal-cpp")
 
-set(CORE_DEPENDENCY_LIST "")
-set(GAL_C_DEPENDENCY_LIST "core")
-set(GAL_CPP_DEPENDENCY_LIST "gal-c")
 set(BUILD_LIST)
 
 function(add_sdk name)
@@ -31,7 +27,7 @@ function(add_sdks)
     endforeach()
     LIST(REMOVE_DUPLICATES BUILD_LIST)
     foreach(SDK_DIR IN LISTS BUILD_LIST)
-    add_subdirectory("${SDK_DIR}")
+        add_subdirectory("${SDK_DIR}")
     endforeach()
     set(BUILD_LIST ${BUILD_LIST} PARENT_SCOPE)
 endfunction()
@@ -67,12 +63,7 @@ macro(export_config)
         VERSION ${PROJECT_VERSION}
         COMPATIBILITY AnyNewerVersion
     )
-    if(${PROJECT_NAME} STREQUAL "oxts-sdk-core")
-        configure_file(
-            "${OXTS_SDK_ROOT}/cmake/oxts-sdk-core-config.cmake"
-            "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
-            @ONLY)
-    elseif(${PROJECT_NAME} STREQUAL "oxts-sdk-gal-c")
+    if(${PROJECT_NAME} STREQUAL "oxts-sdk-gal-c")
          configure_file(
              "${OXTS_SDK_ROOT}/cmake/oxts-sdk-gal-c-config.cmake"
              "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"

@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
 
 	//============================================================================
 	// Construct the heading aiding class with stream ID 131.
-	OxTS::GadHeading gh = OxTS::GadHeading(132);
+	OxTS::Gal_Cpp::GadHeading gh(132);
 	// Set the aiding attitude
 	gh.SetHeading(180.0);
 	// Set the estimated variance on this heading
@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
 	gh.SetAidingAlignmentVar(5.0, 5.0, 5.0);
 	//============================================================================
 	// Initialise the handler
-	OxTS::GadHandler handler = OxTS::GadHandler();
+	OxTS::Gal_Cpp::GadHandler handler;
 
 	// This switch case sets up the GadHandler to either output binary to UDP or 
 	// CSV to file.

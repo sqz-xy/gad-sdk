@@ -3,55 +3,62 @@
 /** @file gad_output_file.hpp */
 
 #include <string>
-
+#include <ostream>
+#include <fstream>
 #include "oxts/gal-cpp/gad_output/gad_output.hpp"
 
 namespace OxTS
 {
-	class GadOutputFile : public GadOutput
+	namespace Gal_Cpp
 	{
-	private:
-		std::string file_out; /** Path to file (include .gad extension) */
-		FILE* file_ptr;      /** Pointer to file handler object */
-	public:
-		/** Constructor */
-		GadOutputFile(std::string file_path) : file_out(file_path)
+		class GadOutputFile : public GadOutput
 		{
-			SetOutputFile(fopen(file_out.c_str(), "w+"));
-		}
-		/** Destructor */
-		~GadOutputFile()
-		{
-			fclose(file_ptr);
-		}
-		/** Output the packet to file */
-		void OutputPacket(unsigned char* packet, int packet_size) override
-		{
-			fprintf(file_ptr, "%s", packet);
-			fflush(file_ptr);
-		}
-		/** Set the output file pointer */
-		void SetOutputFile(FILE* file_ptr)
-		{
-			this->file_ptr = file_ptr;
-		}
-		/** Get the output file pointer */
-		FILE* GetOutputFile()
-		{
-			return file_ptr;
-		}
-		/** Set the output file path */
-		void SetOutputFilePath(std::string file_path)
-		{
-			file_out = file_path;
-		}
-		/** Set the output file path */
-		std::string GetOutputFilePath()
-		{
-			return file_out;
-		}
-	};
+		private:
+			std::string m_file_out; /** Path to file (include .gad extension) */
+			std::ofstream m_file_stream;      /** Output file stream */
+		public:
+			/** Constructor */
+			GadOutputFile() : GadOutput(), m_file_stream()
+			{
 
+			}
+
+			void SetFileName(const std::string& file_path)
+			{
+				m_file_stream.open(file_path);
+			}
+
+			GadOutputFile(const std::string& file_path) : GadOutput(), m_file_stream(file_path.c_str())
+			{
+				
+			}
+
+			/** Destructor */
+			virtual ~GadOutputFile()
+			{
+				try
+				{
+					(void)m_file_stream.flush(); /*PRQA S 4631 # This will not throw an exception.*/
+				}
+				catch (...)
+				{
+
+				}
+			}
+			/** Output the packet to file */
+			virtual void OutputPacket(const uint8_t* const packet, const std::size_t packet_size) override
+			{
+				const std::string str(reinterpret_cast<const char *>(packet), packet_size, std::allocator<char>());
+				m_file_stream << str;
+				(void)m_file_stream.flush();
+			}
+			/** Set the output file path */
+			std::string GetOutputFilePath() const
+			{
+				return m_file_out;
+			}
+		};
+	}
 } // namespace OxTS
 
 

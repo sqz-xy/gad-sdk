@@ -1,0 +1,6 @@
+﻿  EthernetSendTest.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 417 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  EthernetSendTest.vcxproj -> D:\tmp\mirsa-compliant-gad-sdk-2\misra-compliant-gad-sdk\msvc_2020\x64\Release\EthernetSendTest.exe

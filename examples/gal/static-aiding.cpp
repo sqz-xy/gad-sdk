@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
 
 	//============================================================================
 	// Construct the position aiding class with stream ID 129.
-	OxTS::GadPosition gp = OxTS::GadPosition(129);
+	OxTS::Gal_Cpp::GadPosition gp(129);
 	// Set the aiding position
 	gp.SetPosGeodetic(51.91520330,-1.24479140,111.525);
 	// Set the estimated variance on this position
@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 	gp.SetAidingLeverArmVar(0.1,0.1,0.1);
 	//============================================================================
 	// Construct the velocity aiding class with stream ID 130.
-	OxTS::GadVelocity gv = OxTS::GadVelocity(130);
+	OxTS::Gal_Cpp::GadVelocity gv(130);
 	// Set the aiding velocity
 	gv.SetVelNed(0.0,0.0,0.0);
 	// Set the estimated variance on this velocity
@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
 	gv.SetAidingLeverArmVar(0.1,0.1,0.1);
 	//============================================================================
 	// Construct the attitude aiding class with stream ID 131.
-	OxTS::GadAttitude ga = OxTS::GadAttitude(131);
+	OxTS::Gal_Cpp::GadAttitude ga(131);
 	// Set the aiding attitude
 	ga.SetAtt(0.0,0.0,0.0);
 	// Set the estimated variance on this attitude
@@ -106,7 +106,7 @@ int main(int argc, char* argv[])
 	ga.SetAidingAlignmentVar(5.0,5.0,5.0);
 	//============================================================================
 	// Initialise the handler
-	OxTS::GadHandler gh = OxTS::GadHandler();
+	OxTS::Gal_Cpp::GadHandler gh;
 
 	// This switch case sets up the GadHandler to either output binary to UDP or 
 	// CSV to file.

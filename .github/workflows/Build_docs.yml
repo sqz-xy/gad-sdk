@@ -31,9 +31,11 @@ jobs:
         sudo apt-get install doxygen
         sudo apt-get install graphviz
         pip install -U sphinx
+        pip install sphinx-tabs
         pip3 install sphinx-rtd-theme
         pip3 install breathe
         pip3 install sphinx-sitemap
+        pip3 install sphinx-toolbox
         cd docs_sphinx
         sphinx-build -b html . public
         mv custom.css public/_static/

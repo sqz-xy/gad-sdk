@@ -1,6 +1,0 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets(1967,5): warning : The referenced project '..\msvc_2020\gad-sdk-cpp\gad-sdk-cpp.vcxproj' does not exist.
-  EthernetSendTest.cpp
-D:\tmp\mirsa-compliant-gad-sdk-2\misra-compliant-gad-sdk\oxts-sdk-gal-cpp\include\oxts\gal-cpp\udp_server_client.hpp(100,28): error C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
-D:\tmp\mirsa-compliant-gad-sdk-2\misra-compliant-gad-sdk\oxts-sdk-gal-cpp\include\oxts\gal-cpp\udp_server_client.hpp(98): message : while compiling class template member function 'void networking_udp::server<1000>::set_endpoint(const std::string &,const uint16_t)'
-D:\tmp\mirsa-compliant-gad-sdk-2\misra-compliant-gad-sdk\oxts-sdk-gal-cpp\include\oxts\gal-cpp\gad_output\gad_output_udp.hpp(35): message : see reference to function template instantiation 'void networking_udp::server<1000>::set_endpoint(const std::string &,const uint16_t)' being compiled
-D:\tmp\mirsa-compliant-gad-sdk-2\misra-compliant-gad-sdk\oxts-sdk-gal-cpp\include\oxts\gal-cpp\gad_output\gad_output_udp.hpp(24): message : see reference to class template instantiation 'networking_udp::server<1000>' being compiled

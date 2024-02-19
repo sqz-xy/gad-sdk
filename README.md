@@ -19,7 +19,7 @@ Find the full code documentation for this project at: [https://oxfordtechnicalso
 - Ethernet connection to an OxTS INS, for real-time aiding.
 - C/C++ Compiler (Easiest option is to install Visual Studio Professional 2019 on Windows, Linux GCC)
 - Python > 3.7 (Optional, for Python SDK and building documentation.)
-- Boost 1.71 (Optional, for unit testing only).
+- Boost 1.82 (Optional, for unit testing only).
 
 ### Installing requirements on Linux and Unix
 

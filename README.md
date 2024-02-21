@@ -137,8 +137,21 @@ To build:
 
 See the extended documentation for using the SDK.  If built using Visual Studio all code with examples and unit tests are available in the solution (oxts-sdk.sln) in the build folder.  This automatically links to the source files in each specific folder in the root directory.
 
-	## stuff
+Note: If this error message is shown when building a GAD-SDK project:
+```
+    Could not find a package configuration file provided by "oxts-sdk-gal-cpp"
+  with any of the following names:
 
+    oxts-sdk-gal-cppConfig.cmake
+    oxts-sdk-gal-cpp-config.cmake
+```
+Place the following commands in your project's CMakeLists file:
+```
+set("oxts-sdk-gal-cpp_DIR" "<install_dir>/lib/cmake/oxts-sdk-gal-cpp")
+set("oxts-sdk-gal-c_DIR" "<install_dir>/lib/cmake/oxts-sdk-gal-c")
+
+```
+Where, <install_dir> is the directory that the GAD-SDK is installed to. E.g. c:/Program Files (x86)/oxts-sdk
 ## Python GAD SDK (Windows and Linux)
 
 Note: As of PIP 21.3 pip creates build files locally in a folder called build instead of a temporary folder.

@@ -2,7 +2,7 @@
 #include <string>
 #include <chrono>
 #include <thread>
-using namespace std::chrono_literals;
+using namespace std::literals::chrono_literals;
 
 #include "oxts/gal-cpp/gad.hpp"
 #include "oxts/gal-cpp/gad_handler.hpp"

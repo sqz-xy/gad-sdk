@@ -121,9 +121,11 @@ To build:
 2. Install Sphinx and Breathe using pip install (python 3.7 also required):
 ```
   pip install -U sphinx
+  pip install sphinx-tabs
   pip3 install sphinx-rtd-theme
-  pip3 install sphinx-sitemap
   pip3 install breathe
+  pip3 install sphinx-sitemap
+  pip3 install sphinx-toolbox
 
 ```
 3. Navigate to the `docs_sphinx\source` directory and run the command:

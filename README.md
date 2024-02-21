@@ -1,3 +1,5 @@
+This utility is supported by OxTS. If you require assistance, please contact OxTS support at [https://support.oxts.com/hc/en-us/requests/new]
+
 # OxTS Generic Aiding SDK
 
 For more information on OxTS Generic Aiding Solutions, see [here](https://www.oxts.com/what-is-generic-aiding/)
@@ -14,12 +16,14 @@ Find the full code documentation for this project at: [https://oxfordtechnicalso
 
 ## Requirements
 
+- Navsuite 3.9 or newer. Or Blended 230817 or newer.
+- OxTS INS with firmware version 231017 or newer. Contact OxTS [support](https://support.oxts.com/hc/en-us/requests/new) for help with firmware.
 - CMake >3.1 (Last version tested 3.24)
 - Generic Aiding Feature Codes.
 - Ethernet connection to an OxTS INS, for real-time aiding.
 - C/C++ Compiler (Easiest option is to install Visual Studio Professional 2019 on Windows, Linux GCC)
 - Python > 3.7 (Optional, for Python SDK and building documentation.)
-- Boost 1.71 (Optional, for unit testing only).
+- Boost 1.82 (Optional, for unit testing only).
 
 ### Installing requirements on Linux and Unix
 
@@ -88,7 +92,7 @@ target_link_libraries(${PROJECT_NAME}
 in their CMakeLists.txt.
  
 Header files can then be included your .cpp source code using 
-`#include "oxts/<oxts-sdk-module>/<filename>.hpp". For an example of this usage, see  [https://oxfordtechnicalsolutions.github.io/longform/example-my-first-gad.html](here.)
+`#include "oxts/<oxts-sdk-module>/<filename>.hpp". For an example of this usage, see [here](https://oxfordtechnicalsolutions.github.io/source/longform/my_first_gad.html)
 
 
 ### Build options
@@ -117,9 +121,11 @@ To build:
 2. Install Sphinx and Breathe using pip install (python 3.7 also required):
 ```
   pip install -U sphinx
+  pip install sphinx-tabs
   pip3 install sphinx-rtd-theme
-  pip3 install sphinx-sitemap
   pip3 install breathe
+  pip3 install sphinx-sitemap
+  pip3 install sphinx-toolbox
 
 ```
 3. Navigate to the `docs_sphinx\source` directory and run the command:
@@ -131,6 +137,21 @@ To build:
 
 See the extended documentation for using the SDK.  If built using Visual Studio all code with examples and unit tests are available in the solution (oxts-sdk.sln) in the build folder.  This automatically links to the source files in each specific folder in the root directory.
 
+Note: If this error message is shown when building a GAD-SDK project:
+```
+    Could not find a package configuration file provided by "oxts-sdk-gal-cpp"
+  with any of the following names:
+
+    oxts-sdk-gal-cppConfig.cmake
+    oxts-sdk-gal-cpp-config.cmake
+```
+Place the following commands in a project's CMakeLists file:
+```
+set("oxts-sdk-gal-cpp_DIR" "<install_dir>/lib/cmake/oxts-sdk-gal-cpp")
+set("oxts-sdk-gal-c_DIR" "<install_dir>/lib/cmake/oxts-sdk-gal-c")
+
+```
+Where, <install_dir> is the directory that the GAD-SDK is installed to. E.g. c:/Program Files (x86)/oxts-sdk
 ## Python GAD SDK (Windows and Linux)
 
 Note: As of PIP 21.3 pip creates build files locally in a folder called build instead of a temporary folder.

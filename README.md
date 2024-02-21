@@ -137,6 +137,8 @@ To build:
 
 See the extended documentation for using the SDK.  If built using Visual Studio all code with examples and unit tests are available in the solution (oxts-sdk.sln) in the build folder.  This automatically links to the source files in each specific folder in the root directory.
 
+	## stuff
+
 ## Python GAD SDK (Windows and Linux)
 
 Note: As of PIP 21.3 pip creates build files locally in a folder called build instead of a temporary folder.

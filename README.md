@@ -145,7 +145,7 @@ Note: If this error message is shown when building a GAD-SDK project:
     oxts-sdk-gal-cppConfig.cmake
     oxts-sdk-gal-cpp-config.cmake
 ```
-Place the following commands in your project's CMakeLists file:
+Place the following commands in a project's CMakeLists file:
 ```
 set("oxts-sdk-gal-cpp_DIR" "<install_dir>/lib/cmake/oxts-sdk-gal-cpp")
 set("oxts-sdk-gal-c_DIR" "<install_dir>/lib/cmake/oxts-sdk-gal-c")

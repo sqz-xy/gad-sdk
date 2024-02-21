@@ -1,3 +1,5 @@
+This utility is supported by OxTS. If you require assistance, please contact OxTS support at [https://support.oxts.com/hc/en-us/requests/new]
+
 # OxTS Generic Aiding SDK
 
 For more information on OxTS Generic Aiding Solutions, see [here](https://www.oxts.com/what-is-generic-aiding/)

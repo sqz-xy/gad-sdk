@@ -1,11 +1,9 @@
 #include <iostream>
 #include <string>
-#include <chrono>
-#include <thread>
-using namespace std::literals::chrono_literals;
 
 #include "oxts/gal-cpp/gad.hpp"
 #include "oxts/gal-cpp/gad_handler.hpp"
+#include "oxts_sleep.hpp"
 
 
 int main(int argc, char* argv[])
@@ -25,6 +23,9 @@ int main(int argc, char* argv[])
         gh.SetOutputModeToUdp(unit_ip);
         // Construct the velocity aiding with stream ID 130.
         OxTS::Gal_Cpp::GadVelocity gv(130);
+
+        int sleep_interval = 100;
+
         // Loop through packets
         for (int i = 0; i < num_packets; ++i)
         {
@@ -37,7 +38,7 @@ int main(int argc, char* argv[])
                 // Send packet
                 gh.SendPacket(gv);
                 std::cout << "packet " << i << " sent" << std::endl;
-                std::this_thread::sleep_for(100ms);
+                OxTS::sleep_millisecods(sleep_interval);
 
         }
 

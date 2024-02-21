@@ -39,12 +39,10 @@ Source code
 	
 		#include <iostream>
 		#include <string>
-		#include <chrono>
-		#include <thread>
-		using namespace std::chrono_literals;
 
 		#include "oxts/gal-cpp/gad.hpp"
 		#include "oxts/gal-cpp/gad_handler.hpp"
+		#include "oxts_sleep.hpp"
 		
 		
 		int main(int argc, char* argv[])
@@ -58,7 +56,7 @@ Source code
 			std::string unit_ip   = argv[1]; // Unit to send GAD to
 			int num_packets       = std::stoi(argv[2]); // Number of packets to send.
 			
-				// Initialise the handler
+			// Initialise the handler
 			OxTS::Gal_Cpp::GadHandler gh;
 			gh.SetEncoderToBin();
 			gh.SetOutputModeToUdp(unit_ip);
@@ -76,7 +74,7 @@ Source code
 				// Send packet
 				gh.SendPacket(gv);
 				std::cout << "packet " << i << " sent" << std::endl;
-				std::this_thread::sleep_for(100ms);
+				OxTS::sleep_milliseconds(100);
 		
 			}
 		

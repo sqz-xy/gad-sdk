@@ -9,7 +9,6 @@ project(oxts-sdk-tests VERSION 0.1.0)
 
 find_package(Boost REQUIRED )
 
-add_compile_definitions(OXTS_MISRA_COMPLIANT=1)
 
 set(OXTS_SDK_UNIT_TESTS unit_tests)
 add_executable(${OXTS_SDK_UNIT_TESTS} ./gad_test.cpp)

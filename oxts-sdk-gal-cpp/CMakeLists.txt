@@ -12,7 +12,9 @@ ${OXTS_SDK_GAL_VERSION_MAJOR}.${OXTS_SDK_GAL_VERSION_MINOR}.${OXTS_SDK_GAL_VERSI
 CACHE STRING "version" FORCE
 )
 
-add_compile_definitions(OXTS_MISRA_COMPLIANT=1)
+IF (WIN32)
+    add_compile_definitions(_WINSOCK_DEPRECATED_NO_WARNINGS)
+ENDIF()
 
 project(oxts-sdk-gal-cpp VERSION ${OXTS_SDK_GAL_VERSION})
 set(DESCRIPTION "Generic Aiding library for the OxTS SDK in C++.")

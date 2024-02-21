@@ -5,6 +5,10 @@
 #ifndef UDP_SERVER_CLIENT
 #define UDP_SERVER_CLIENT
 
+#ifndef _WINSOCK_DEPRECATED_NO_WARNINGS
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+#endif
+
 #include "oxts/gal-cpp/Lib_Detect.hpp"
 #include "oxts/gal-cpp/oxts_sockets.hpp"
 

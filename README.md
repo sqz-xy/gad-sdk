@@ -16,6 +16,8 @@ Find the full code documentation for this project at: [https://oxfordtechnicalso
 
 ## Requirements
 
+- Navsuite 3.9 or newer. Or Blended 230817 or newer.
+- OxTS INS with firmware version 231017 or newer. Contact OxTS [support](https://support.oxts.com/hc/en-us/requests/new) for help with firmware.
 - CMake >3.1 (Last version tested 3.24)
 - Generic Aiding Feature Codes.
 - Ethernet connection to an OxTS INS, for real-time aiding.

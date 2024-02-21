@@ -92,7 +92,7 @@ target_link_libraries(${PROJECT_NAME}
 in their CMakeLists.txt.
  
 Header files can then be included your .cpp source code using 
-`#include "oxts/<oxts-sdk-module>/<filename>.hpp". For an example of this usage, see  [https://oxfordtechnicalsolutions.github.io/longform/example-my-first-gad.html](here.)
+`#include "oxts/<oxts-sdk-module>/<filename>.hpp". For an example of this usage, see [here](https://oxfordtechnicalsolutions.github.io/longform/example-my-first-gad.html)
 
 
 ### Build options

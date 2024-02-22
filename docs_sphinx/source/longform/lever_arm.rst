@@ -127,7 +127,7 @@ The first set need to be placed in the SDK code:
 
    .. code-tab:: c++
    
-	    SetAidingAlignmentArmConfig();
+	    SetAidingAlignmentConfig();
 	
    .. code-tab:: py
    

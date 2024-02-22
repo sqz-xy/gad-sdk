@@ -6,9 +6,9 @@
 //! Redistribution and use in source and binary forms, with or without modification, are only permitted with
 //! the specific prior written permission of Oxford Technical Solutions.
 //!
-//! $LastChangedDate: 2017-04-26 14:43:57 +0100 (Wed, 26 Apr 2017) $
-//! $LastChangedRevision: 23461 $
-//! $LastChangedBy: sgratrix $
+//! LastChangedDate: 2017-04-26 14:43:57 +0100 (Wed, 26 Apr 2017)
+//! LastChangedRevision: 23461 
+//! LastChangedBy: sgratrix 
 //!
 //! \file errors.h
 //!
@@ -30,7 +30,7 @@ char sp[1000];
 #elif (defined OXTS_ENABLE_STDIO)
 #define FP_IS_DEFINED 1
 #define SP_IS_DEFINED 0
-//fp = stderr;
+
 #else
 #define FP_IS_DEFINED 0
 #define SP_IS_DEFINED 0

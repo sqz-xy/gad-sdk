@@ -6,9 +6,9 @@
 //! Redistribution and use in source and binary forms, with or without modification, are only permitted with
 //! the specific prior written permission of Oxford Technical Solutions.
 //!
-//! $LastChangedDate: 2018-07-02 16:57:28 +0100 (Mon, 02 Jul 2018) $
-//! $LastChangedRevision: 26649 $
-//! $LastChangedBy: icleju $
+//! LastChangedDate: 2018-07-02 16:57:28 +0100 (Mon, 02 Jul 2018)
+//! LastChangedRevision: 26649
+//! LastChangedBy: icleju
 //!
 //! \file BasicCasts.h
 //!

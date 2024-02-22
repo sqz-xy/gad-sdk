@@ -12,7 +12,7 @@
 #include "oxts/gal-c/oxts_pointers.h" /*PRQA S 0816 # ISO:C90*/
 
 
-int32_t BuildCComPkt(CCOM_MSG *cmsg, const uint8_t* data, const size_t length)
+int32_t BuildCComPkt(CCOM_MSG *cmsg, const uint8_t* data, const size_t length) /*PRQA S 1503 # Function is intended for external consumption. */
 {
    int32_t ec;
 

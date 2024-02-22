@@ -1,19 +1,19 @@
 //============================================================================================================
-//!
-//! The software is protected by copyright of Oxford Technical Solutions.
-//! Copyright (C) 2020 Oxford Technical Solutions - http://www.oxts.com
-//!
-//! Redistribution and use in source and binary forms, with or without modification, are only permitted with
-//! the specific prior written permission of Oxford Technical Solutions.
-//!
-//! $LastChangedDate: 2019-10-07 15:14:42 +0100 (Mon, 07 Oct 2019) $
-//! $LastChangedRevision: 28566 $
-//! $LastChangedBy: smccarthy $
-//!
-//! \file gad_struct.h
-//!
-//! \brief Header for gad_struct.c
-//!  
+//
+// The software is protected by copyright of Oxford Technical Solutions.
+// Copyright (C) 2020 Oxford Technical Solutions - http://www.oxts.com
+//
+// Redistribution and use in source and binary forms, with or without modification, are only permitted with
+// the specific prior written permission of Oxford Technical Solutions.
+//
+// LastChangedDate: 2019-10-07 15:14:42 +0100 (Mon, 07 Oct 2019)
+// LastChangedRevision: 28566
+// LastChangedBy: smccarthy
+//
+// \file gad_struct.h
+//
+// \brief Header for gad_struct.c
+//  
 //============================================================================================================
 
 #ifndef GAD_STRUCT
@@ -31,7 +31,7 @@
 typedef uint8_t   GEN_BOOL;
 
 //==============================================================================
-//! \brief Decoder types
+// \brief Decoder types
 
 #define DECODER_VOID 0U                    /** Not set. */ /*PRQA S 1534 # Macro is intended for external consumption. */
 #define DECODER_CSV 1U                     /** Text data. */ /*PRQA S 1534 # Macro is intended for external consumption. */
@@ -39,7 +39,7 @@ typedef uint8_t   GEN_BOOL;
 
 
 //==============================================================================
-//! \brief Variance formats
+// \brief Variance formats
 
 #define GEN_VAR_VOID 0U                   /** Missing. */
 #define GEN_VAR_SINGLE 1U                 /** Single variance value. */
@@ -47,7 +47,7 @@ typedef uint8_t   GEN_BOOL;
 #define GEN_VAR_HMAT 3U                    /** Half-matrix (full co-variance matrix). */
 
 //==============================================================================
-//! \brief 3-dimensional structure (vector real) with storage for full variance
+// \brief 3-dimensional structure (vector real) with storage for full variance
 
 typedef struct
 {
@@ -59,7 +59,7 @@ typedef struct
 } GEN_3D;
 
 //==============================================================================
-//! \brief Time systems
+// \brief Time systems
 #define TIME_VOID 0 /*PRQA S 1534 # Macro is intended for external consumption. */
 /** Standard GPS time format. */
 #define TIME_GPS 1            /*PRQA S 1534 # Macro is intended for external consumption. */
@@ -77,7 +77,7 @@ typedef struct
 #define TIME_TAI 7            /*PRQA S 1534 # Macro is intended for external consumption. */
 
 //==============================================================================
-//! \brief Generic Aiding types
+// \brief Generic Aiding types
 
 #define GEN_VOID 0U 
 /** Position 3D. */ 
@@ -90,7 +90,7 @@ typedef struct
 #define GEN_WSPEED 4U        /*PRQA S 1534 # Macro is intended for external consumption. */
 /** Attitude. */ 
 #define GEN_ATT 5U         /*PRQA S 1534 # Macro is intended for external consumption. */
- /** Heading   @note To be merged in GEN_ATT, with ATT specifying in type wherer only heading, or heading+pitch, or heading+pitch+roll are present. */ 
+ /** Heading   note To be merged in GEN_ATT, with ATT specifying in type wherer only heading, or heading+pitch, or heading+pitch+roll are present. */ 
 #define GEN_HEADING 6U     /*PRQA S 1534 # Macro is intended for external consumption. */
 /** Time trigger, used for indoor segment navigation. */
 #define GEN_TIMETRIG 7U    /*PRQA S 1534 # Macro is intended for external consumption. */
@@ -100,7 +100,7 @@ typedef struct
 #define GEN_NUM 10U	/*PRQA S 1534 # Macro is intended for external consumption. */
 
 //==============================================================================
-//! \brief Position coordinate systems
+// \brief Position coordinate systems
 
 #define POS_SYS_VOID 0U         /*PRQA S 1534 # Macro is intended for external consumption. */
 /** WGS84 - lat/lon/depth */ 
@@ -109,7 +109,7 @@ typedef struct
 #define POS_SYS_LOCAL 2U        /*PRQA S 1534 # Macro is intended for external consumption. */
 
 //==============================================================================
-//! \brief Velocity types
+// \brief Velocity types
 
 #define VEL_SYS_VOID 0U /*PRQA S 1534 # Macro is intended for external consumption. */
  /** North East Down */ 
@@ -120,7 +120,7 @@ typedef struct
 #define VEL_SYS_LOCAL 3U      /*PRQA S 1534 # Macro is intended for external consumption. */
 
 //==============================================================================
-//! \brief Speed types 
+// \brief Speed types 
 
 #define SPEED_SYS_VOID 0U /*PRQA S 1534 # Macro is intended for external consumption. */
 /** Speed at sensor fixed wrt IMU, signed, +ve forward */
@@ -131,7 +131,7 @@ typedef struct
 #define SPEED_SYS_UNSIGNED 3U	/*PRQA S 1534 # Macro is intended for external consumption. */
 
 //==============================================================================
-//! \brief Attitude types 
+// \brief Attitude types 
 
 #define ATT_SYS_VOID 0U /*PRQA S 1534 # Macro is intended for external consumption. */
 /** Attitude measurement given as Heading, Pitch, Roll in the navigation (NED) frame. */
@@ -140,7 +140,7 @@ typedef struct
 #define ATT_SYS_LOCAL 2U     /*PRQA S 1534 # Macro is intended for external consumption. */
 
 //============================================================================================================
-//! \brief Heading types
+// \brief Heading types
 #define HEA_SYS_VOID 0U /*PRQA S 1534 # Macro is intended for external consumption. */
 // Heading measurement in the navigation frame (NED).
 #define HEA_SYS_NAV 1U         /*PRQA S 1534 # Macro is intended for external consumption. */
@@ -148,7 +148,7 @@ typedef struct
 #define HEA_SYS_LOCAL 2U       /*PRQA S 1534 # Macro is intended for external consumption. */
 
 //==============================================================================
-//! \brief Location types. (lever arm)
+// \brief Location types. (lever arm)
 /** Lever arm specified explicitly. */ 
 #define LOC_FIXED 0U    /*PRQA S 1534 # Macro is intended for external consumption. */
  /** Take lever arm from kalman filter. -- lever arm is specified in the .gap file. */ 
@@ -158,11 +158,11 @@ typedef struct
 
 
 //==============================================================================
-//! \brief Generic aiding data structure 
-//!
-//! The data is streamed in the sequence of data members
-//! The dimension of the data is defined by type, if variable, we will need to define a new sub-structure
-//! The sequence of data items is fixed (e.g. as given in this structure)
+// \brief Generic aiding data structure 
+//
+// The data is streamed in the sequence of data members
+// The dimension of the data is defined by type, if variable, we will need to define a new sub-structure
+// The sequence of data items is fixed (e.g. as given in this structure)
 
 typedef struct /*PRQA S 3630 # This is required to be public as it is to be consumed. */
 {
@@ -201,29 +201,29 @@ typedef struct /*PRQA S 3630 # This is required to be public as it is to be cons
 } GEN_AIDING_DATA;
 
 //==============================================================================
-//! \brief Functions to initialise/destroy/copy
+// \brief Functions to initialise/destroy/copy
 
 // Non-MISRA compliant mode.
 
 //==============================================================================
-//! \brief Functions to initialise/destroy/copy
+// \brief Functions to initialise/destroy/copy
 
 /** Sets all the valid flags to 0
-   @param gad pointer to GEN_AIDING_DATA
-   @todo make safe to user passing a NULL pointer
+   param gad pointer to GEN_AIDING_DATA
+   todo make safe to user passing a NULL pointer
 */
 extern int32_t reset_genaid_data(GEN_AIDING_DATA* gad);
 
 extern int32_t reset_gen3d(GEN_3D* d); /*PRQA S 0776 # Assume compiler has greater than 6-character limit for identifier uniqueness. */
 
 /** Initialise a block of memory for GEN_AIDING_DATA
-   @param gad pointer to start of GEN_AIDING_DATA
+   param gad pointer to start of GEN_AIDING_DATA
 */
 extern int32_t initialise_genaid(GEN_AIDING_DATA* gad);
 
 /** Copies the data from one pointer to the other. not safe to dst pointer buffer < sizeof(GEN_AIDING_DATA)
-   @param dst Pointer to the location the data is being copied to
-   @param src Pointer to the location of the start of the gen_aiding_data struct
+   param dst Pointer to the location the data is being copied to
+   param src Pointer to the location of the start of the gen_aiding_data struct
 */
 extern int32_t genaid_copy(GEN_AIDING_DATA* dst, const GEN_AIDING_DATA* src);
 

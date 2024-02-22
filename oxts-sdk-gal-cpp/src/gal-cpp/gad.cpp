@@ -952,17 +952,6 @@ namespace OxTS
 			SetDataVal(frequency, scale_factor, period);
 		}
 
-		//double_t GadSpeed::GetSpeed() const
-		//{
-		//	double_t ret_val = 0.0;
-		//	const container_double3_t& val = GetDataVal();
-		//	if (val.size() > 0U)
-		//	{
-		//		ret_val = val[0U];
-		//	}
-		//	return ret_val;
-		//}
-
 		const container_double3_t& GadSpeed::GetSpeed() const
 		{
 			return GetDataVal();
@@ -983,17 +972,6 @@ namespace OxTS
 		{
 			SetDataVarDiag(v_s, v_sf, v_p);
 		}
-
-		//double_t GadSpeed::GetSpeedVar() const
-		//{
-		//	double_t ret_val = 0.0;
-		//	const container_double6_t& var = GetDataVar();
-		//	if (var.size() > 0U)
-		//	{
-		//		ret_val = var[0U];
-		//	}
-		//	return ret_val;
-		//}
 
 		const container_double6_t& GadSpeed::GetSpeedVar() const
 		{
@@ -1118,6 +1096,16 @@ namespace OxTS
 			SetLocVal(0.0, 0.0, 0.0);
 		}
 
+		void GadAttitude::SetAidingAlignmentConfig()
+		{
+#ifdef OXTS_ENABLE_CPP11
+			SetLocMode(static_cast<uint8_t>(LOC_SYS::LOC_CONFIG));
+#else
+			SetLocMode(static_cast<uint8_t>(LOC_CONFIG));
+#endif
+			SetLocVal(0.0, 0.0, 0.0);
+		}
+
 		// In here was orignally SetData rather than SetLoc
 		void GadAttitude::SetAidingAlignmentVar(const double_t x, const double_t y, const double_t z)
 		{
@@ -1214,6 +1202,17 @@ namespace OxTS
 #endif
 			SetLocVal(h, p, r);
 		}
+
+		void GadHeading::SetAidingAlignmentConfig()
+		{
+#ifdef OXTS_ENABLE_CPP11
+			SetLocMode(static_cast<uint8_t>(LOC_SYS::LOC_CONFIG));
+#else
+			SetLocMode(static_cast<uint8_t>(LOC_CONFIG));
+#endif
+			SetLocVal(0.0, 0.0, 0.0);
+		}
+
 
 		void GadHeading::SetAidingAlignmentVar(const double_t h_v, const double_t p_v, const double_t r_v)
 		{

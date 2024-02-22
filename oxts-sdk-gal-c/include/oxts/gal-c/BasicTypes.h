@@ -6,9 +6,9 @@
 //! Redistribution and use in source and binary forms, with or without modification, are only permitted with
 //! the specific prior written permission of Oxford Technical Solutions.
 //!
-//! $LastChangedDate: 2019-02-26 11:25:06 +0000 (Tue, 26 Feb 2019) $
-//! $LastChangedRevision: 27721 $
-//! $LastChangedBy: icleju $
+//! LastChangedDate: 2019-02-26 11:25:06 +0000 (Tue, 26 Feb 2019)
+//! LastChangedRevision: 27721
+//! LastChangedBy: icleju
 //!
 //! \file BasicTypes.h
 //!
@@ -133,10 +133,5 @@
 #ifndef SCNX64
 #define SCNX64 SCNx64
 #endif
-
-
-typedef long double real80_t;  //!< Floating-point real of 80 bits
-typedef      double real64_t;  //!< Floating-point real of 64 bits
-typedef       float real32_t;  //!< Floating-point real of 32 bits
 
 #endif

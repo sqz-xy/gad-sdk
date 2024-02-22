@@ -6,9 +6,9 @@
 //! Redistribution and use in source and binary forms, with or without modification, are only permitted with
 //! the specific prior written permission of Oxford Technical Solutions.
 //!
-//! $LastChangedDate: 2018-08-10 14:12:02 +0100 (Fri, 10 Aug 2018) $
-//! $LastChangedRevision: 26913 $
-//! $LastChangedBy: alambert $
+//! LastChangedDate: 2018-08-10 14:12:02 +0100 (Fri, 10 Aug 2018)
+//! LastChangedRevision: 26913
+//! LastChangedBy: alambert
 //!
 //! \file Lib_Detect.h
 //!

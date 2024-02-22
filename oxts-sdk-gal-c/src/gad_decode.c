@@ -70,7 +70,7 @@ static int32_t decode_acq_timestamp_bin(uint32_t* acq_time, const uint8_t* b, si
 //============================================================================================================
 //! \brief Decode a generic aiding binary packet
 
-int32_t update_genaid_from_bin(GEN_AIDING_DATA *gad, const uint8_t *data, const size_t len) /*PRQA S 1503 */ /*PRQA S 1505  # function is used in gad_test.cpp, but is commented out.*/
+int32_t update_genaid_from_bin(GEN_AIDING_DATA *gad, const uint8_t *data, const size_t len) /*PRQA S 1503 # function is used in gad_test.cpp. */ /*PRQA S 1505  # function is used in gad_test.cpp.*/
 {
 
 	const uint8_t* h = data;
@@ -368,7 +368,7 @@ static int32_t decode_gen3d_var_bin(GEN_3D *field, const uint8_t *b, size_t *b_o
 //!
 //! Returns 0 on success, -1 if the format is not accepted
 
-int32_t genaid_basic_checks_bin(const uint8_t *data, const size_t len) /*PRQA S 1503 */ /*PRQA S 1505  # function is used in gad_test.cpp, but is commented out.*/
+int32_t genaid_basic_checks_bin(const uint8_t *data, const size_t len) /*PRQA S 1503 # function is used in gad_test.cpp. */ /*PRQA S 1505  # function is used in gad_test.cpp.*/
 {
 	int32_t ec = 0;
 	const uint8_t 		*h = 		data;

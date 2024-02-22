@@ -2,7 +2,6 @@
 
 #include <ostream>
 #include <fstream>
-#include <iostream> //TF added
 
 namespace OxTS
 {
@@ -13,7 +12,7 @@ namespace OxTS
 			m_str_stream(),
 			m_str()
 		{
-			WriteHeader();
+			(void)WriteHeader();
 		}
 
 		/** Encode the generic aiding packet to csv format.
@@ -47,7 +46,7 @@ namespace OxTS
 		void GadEncoderCsv::EncodeGadCsv(const Gad& g)
 		{
 			bool i;
-			i = Write<std::int32_t>(0U);
+			i = Write<std::int32_t>(0);
 			if (i) { i = Write<std::int32_t>(static_cast<std::int32_t>(g.GetType())); }
 			if (i) { i = Write<std::int32_t>(static_cast<std::int32_t>(g.GetStreamId())); }
 			if (i) { i = WriteGen3d(g.GetValValid(), g.GetVal()); }
@@ -126,7 +125,9 @@ namespace OxTS
 		bool GadEncoderCsv::WriteGen3d(const bool valid_flag, const Gen3d& gen_3d_data, const bool end_comma)
 		{
 			bool i;
-			if (!Write<std::int32_t>(valid_flag ? 1U : 0U))
+
+			const std::int32_t flag_value = (valid_flag ? 1 : 0);
+			if (!Write<std::int32_t>(flag_value))
 			{
 				i = false;
 			}

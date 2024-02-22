@@ -13,15 +13,6 @@ char* get_char_ptr_from_uint8(uint8_t* const base, const int32_t offset) /*PRQA 
 //============================================================================================================
 
 //!
-//! \brief Return a const char pointer from a const uint8_t pointer, at the given offset.
-const char* get_cchar_ptr_from_cuint8(const uint8_t* const base, const int32_t offset)
-{
-	return (const char*)(&(base[offset]));
-}
-
-//============================================================================================================
-
-//!
 //! \brief Return a char pointer from a char pointer, at the given offset.
 char* get_char_ptr_from_char(char* const base, const int32_t offset) /*PRQA S 1503 */ /*PRQA S 1505  # function is used in errors.c, so Helix is wrong.*/
 {
@@ -57,9 +48,3 @@ uint8_t get_cuint8_value_from_cuint8(const uint8_t* const base, const int32_t of
 
 //============================================================================================================
 
-//!
-//! \brief Return a void pointer from a uint8_t pointer, at the given offset.
-void* get_void_from_cuint8(uint8_t* const base, const int32_t offset)
-{
-	return (void*)(&base[offset]);
-}

@@ -31,7 +31,7 @@ namespace OxTS
 				if (m_str_stream.good())
 				{
 					m_str_stream << val; /*PRQA S 3840 # Seems to think it's using an array type? */
-					if (end_comma && m_str_stream.good())
+					if  (m_str_stream.good() && end_comma)
 					{
 						m_str_stream << ",";
 					}
@@ -50,7 +50,7 @@ namespace OxTS
 						m_str_stream << std::fixed << std::setprecision(static_cast<std::streamsize>(decimal_places));
 					}
 					m_str_stream << val;
-					if (end_comma && m_str_stream.good())
+					if (m_str_stream.good() && end_comma)
 					{
 						m_str_stream << ",";
 					}
@@ -63,7 +63,8 @@ namespace OxTS
 			bool WriteFlagAndValue(const bool flag, const T& val)
 			{
 				bool i = false;
-				if (Write<int>(flag ? 1U : 0U))
+				const std::int32_t flag_value = (flag ? 1 : 0);
+				if (Write<std::int32_t>(flag_value))
 				{
 					if (flag)
 					{
@@ -84,7 +85,7 @@ namespace OxTS
 			int32_t WriteHeader();
 
 			/** Private method to write Gen3D to file. */
-			bool WriteGen3d(const bool valid_flag, const Gen3d& gen_3d_data, const bool end_flag=true);
+			bool WriteGen3d(const bool valid_flag, const Gen3d& gen_3d_data, const bool end_comma=true);
 
 			/** Private method to encode GAD to CSV. */
 			void EncodeGadCsv(const Gad& g);

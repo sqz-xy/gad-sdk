@@ -6,9 +6,9 @@
 //! Redistribution and use in source and binary forms, with or without modification, are only permitted with
 //! the specific prior written permission of Oxford Technical Solutions.
 //!
-//! $LastChangedDate: 2019-10-10 17:01:45 +0100 (Thu, 10 Oct 2019) $
-//! $LastChangedRevision: 28591 $
-//! $LastChangedBy: smccarthy $
+//! LastChangedDate: 2019-10-10 17:01:45 +0100 (Thu, 10 Oct 2019
+//! LastChangedRevision: 28591
+//! LastChangedBy: smccarthy
 //!
 //! \file gad_defines.h
 //!

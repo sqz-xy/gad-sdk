@@ -662,7 +662,6 @@ namespace OxTS
 			/**
 			 * Get the aiding speed variance estimate.
 			 */
-			//double_t GetSpeedVar() const;
 			const container_double6_t& GetSpeedVar() const;
 			/**
 			 * Set lever arm from the INS to the aiding source. This lever arm will not be
@@ -809,7 +808,7 @@ namespace OxTS
 			 * Indicate that alignment will be configured in the configuration file on
 			 * the INS.
 			 */
-			void SetAidingAlignmentArmConfig();
+			void SetAidingAlignmentConfig();
 			/**
 			 * Set the estimated variance (error) on the alignment angles between the IMU
 			 * and aiding sensor frames.

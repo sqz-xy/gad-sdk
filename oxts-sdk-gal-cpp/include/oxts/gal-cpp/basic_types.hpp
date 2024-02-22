@@ -61,7 +61,7 @@
 //============================================================================================================
 
 #ifdef _MSC_VER
-#include <limits.h>
+#include <climits>
 #if(_MSC_VER < 1300)
 	typedef signed   char     int8_t;
 	typedef signed   short    int16_t;
@@ -131,10 +131,5 @@
 #ifndef SCNX64
 #define SCNX64 SCNx64
 #endif
-
-
-typedef long double real80_t;  //!< Floating-point real of 80 bits
-typedef      double real64_t;  //!< Floating-point real of 64 bits
-typedef       float real32_t;  //!< Floating-point real of 32 bits
 
 #endif

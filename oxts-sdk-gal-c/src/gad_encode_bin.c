@@ -73,7 +73,7 @@ static int32_t buffer_overrun_chk(const size_t buffer_size, const size_t expecte
 
 /////////////////////////////////////////////////
 
-int32_t encode_gen_aid(const GEN_AIDING_DATA* gad, uint8_t* const buffer, const size_t buffer_size, size_t* packet_size) /*PRQA S 1503 */ /*PRQA S 1505  # function is used in gad_test.cpp, but is commented out.*/
+int32_t encode_gen_aid(const GEN_AIDING_DATA* gad, uint8_t* const buffer, const size_t buffer_size, size_t* packet_size) /*PRQA S 1503 # function is used in gad_test.cpp. */ /*PRQA S 1505  # function is used in gad_test.cpp.*/
 {
    /*
       holds return errors for each step. 0 means no error occured and

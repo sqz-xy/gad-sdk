@@ -23,7 +23,7 @@ namespace OxTS
 		void GadEncoderBin::EncodePacket(const Gad& g)
 		{
 			// Encode Gad
-			std::int32_t ec = EncodeGadBin(g);
+			(void)EncodeGadBin(g);
 			// Encode CCom
             m_ccom_gad.msg_type() = CCOM_PKT_GEN_AIDING;
 			(void)m_ccom_gad.encode<MAX_BUFF>(m_buffer, m_gad_size);
@@ -82,14 +82,14 @@ namespace OxTS
             */
             BufferType::iterator h = m_buffer.begin();
 
-            BufferType::iterator b = h + 4; // static_cast<ptrdiff_t>(GEN_AID_HEADER_MIN_SIZE);
+            BufferType::iterator b = h + 4;
 
             /*
                Populate the header portion of the data buffer with the version and type.
 
                TODO: stop encoding if the gad->type is > 15 as this starts writing to first 4 bits of the byte
             */
-            const uint8_t ver_type = static_cast<uint8_t>((0 << 4) | g.GetType());
+            const uint8_t ver_type = static_cast<uint8_t>(g.GetType());
             BasicCasts::cast_uint8_to_1_byte_LE<MAX_BUFF>(h, m_buffer.end(), ver_type);
 
             /*
@@ -97,7 +97,7 @@ namespace OxTS
                of the payload is formed, it is initialised to 0 so if the specific if
                statement isn't reached, the bit representing each field is left as 0.
             */
-            std::uint16_t bitmask = 0;
+            std::uint16_t bitmask = 0U;
 
             /*
                This sets the first xDEV_ACQ.. bytes to 0 and advances the
@@ -107,7 +107,7 @@ namespace OxTS
             */ 
  
             (void)fill_array<uint8_t, MAX_BUFF>(b, b + static_cast<ptrdiff_t>(XDEV_ACQUISTION_TIMESTAMP_SIZE), 0U);
-            b += 8;// static_cast<ptrdiff_t>(XDEV_ACQUISTION_TIMESTAMP_SIZE);
+            b += 8;
 
             /*
                Encode stream ID
@@ -120,7 +120,7 @@ namespace OxTS
                of the generic aiding struct
             */
 
-            if (error_code == 0 && g.GetValValid())
+            if (g.GetValValid())
             {
                 error_code = EncodeGen3d(g.GetVal(), b);
                 if (error_code == 0)
@@ -128,7 +128,7 @@ namespace OxTS
                     bitmask = ValueBit;
                 }
             }
-            if (error_code == 0 && g.GetTimeValid())
+            if (g.GetTimeValid() && (error_code == 0))
             {
                 error_code = EncodeGen3d(g.GetTime(), b);
                 if (error_code == 0)
@@ -136,7 +136,7 @@ namespace OxTS
                     bitmask |= TimeBit;
                 }
             }
-            if (error_code == 0 && g.GetLocValid())
+            if (g.GetLocValid() && (error_code == 0))
             {
                 error_code = EncodeGen3d(g.GetLoc(), b);
                 if (error_code == 0)
@@ -144,7 +144,7 @@ namespace OxTS
                     bitmask |= LocationBit;
                 }
             }
-            if (error_code == 0 && g.GetRes1Valid())
+            if (g.GetRes1Valid() && (error_code == 0) )
             {
                 error_code = EncodeGen3d(g.GetRes1(), b);
                 if (error_code == 0)
@@ -152,7 +152,7 @@ namespace OxTS
                     bitmask |= Res1Bit;
                 }
             }
-            if (error_code == 0 && g.GetRes2Valid())
+            if (g.GetRes2Valid() && (error_code == 0))
             {
                 error_code = EncodeGen3d(g.GetRes2(), b);
                 if (error_code == 0)
@@ -160,8 +160,8 @@ namespace OxTS
                     bitmask |= Res2Bit;
                 }
             }
-            BasicCasts::cast_uint16_to_2_byte_LE<MAX_BUFF>(h, m_buffer.end(), bitmask);
-            error_code = (b != m_buffer.end()) ? 0 : 1;     // Need to check output parameter
+            BasicCasts::cast_uint16_to_2_byte_LE<MAX_BUFF>(h, m_buffer.end(), bitmask); 
+            error_code = (h != m_buffer.end()) ? 0 : 1;     // Need to check output parameter
             m_gad_size = static_cast<size_t>(b - m_buffer.begin());
 
             return error_code;
@@ -211,7 +211,7 @@ namespace OxTS
 
             const GEN_VAR_TYPE var_type = static_cast<GEN_VAR_TYPE>(field.GetVarType());
             const container_double6_t& field_var = field.GetVar();
-            size_t var_size = 0;
+            size_t var_size = 0U;
 
             switch (var_type)
             {
@@ -225,21 +225,21 @@ namespace OxTS
                 }
                 case GEN_VAR_SINGLE:
                 {
-                    var_size = 1;
+                    var_size = 1U;
                     break;
                 }
                 case GEN_VAR_DIAG:
                 {
-                    var_size = 3;
+                    var_size = 3U;
                     break;
                 }
                 case GEN_VAR_HMAT:
                 {
-                    var_size = 6;
+                    var_size = 6U;
                     break;
                 }
             }
-            if (var_size > 0)
+            if (var_size > 0U)
             {
                 if (!BufferOverrunCheck(it, (var_size * sizeof(double_t))))
                 {

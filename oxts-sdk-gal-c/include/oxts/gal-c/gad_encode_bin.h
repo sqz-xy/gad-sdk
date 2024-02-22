@@ -9,9 +9,9 @@
 //! Redistribution and use in source and binary forms, with or without modification, are only permitted with
 //! the specific prior written permission of Oxford Technical Solutions.
 //!
-//! $LastChangedDate: 2019-10-07 15:14:42 +0100 (Mon, 07 Oct 2019) $
-//! $LastChangedRevision: 28566 $
-//! $LastChangedBy: smccarthy $
+//! LastChangedDate: 2019-10-07 15:14:42 +0100 (Mon, 07 Oct 2019)
+//! LastChangedRevision: 28566
+//! LastChangedBy: smccarthy
 //!
 //! \file gad_encode.h
 //!

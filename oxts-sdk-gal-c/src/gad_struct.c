@@ -104,7 +104,7 @@ int32_t initialise_genaid(GEN_AIDING_DATA* gad) /*PRQA S 1505 # Function is inte
 
 //============================================================================================================
 
-int32_t genaid_copy(GEN_AIDING_DATA* dst, const GEN_AIDING_DATA* src) /*PRQA S 1505 # Function is intended for external consumption. */
+int32_t genaid_copy(GEN_AIDING_DATA* dst, const GEN_AIDING_DATA* src) /*PRQA S 1505 # Function is intended for external consumption. */ /*PRQA S 1503 # Function is intended for external consumption. */
 {
    int32_t ec = 0;
 #ifdef EXTRA_CHECKS

@@ -5,7 +5,7 @@ Welcome
 
 The purpose of the Generic Aiding Data Software Development Kit (GAD SDK) is to act as 
 an interface between various types of aiding data and an OxTS Inertial Navigation System (INS).  
-The GAD SDK will take the aiding data from a sensor and converted into the GAD format. 
+The GAD SDK will take the aiding data from a sensor and convert it into the GAD format. 
 Provided that this data is in the GAD format, the sensor used to obtain it is irrelevant to the system. 
 Thus, using the GAD SDK opens the door to a large array of alternative sensors which can provide 
 measurement data to the INS and help it to maintain its performance in a wide array of environments and applications

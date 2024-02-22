@@ -4,14 +4,15 @@
 Static-aiding
 #############
 
-In this example, position, velocity, and attitude data is sent to an OxTS INS in real time or saved as a GAD file for postprocessing. The full source code for the GAD SDK in both C++ and Python can be found below.
+In this example, position, velocity, and attitude data is sent to an OxTS INS in real time, or saved as a GAD file for postprocessing. 
+The full source code for the GAD SDK in both C++ and Python is shown below.
 
 Requirements
 ************
 
-•	An OxTS INS with the relevant Generic Aiding Feature Codes enabled. If you are not sure whether you have the right Feature Codes or are unfamiliar with them, contact support@oxts.com.
-•	A PC, connected to the INS via ethernet.
-•	The `GAD SDK <https://github.com/OxfordTechnicalSolutions/gad-sdk/tree/main#readme>`_ has been built on this machine / pre-built binaries have been downloaded (not currently available).
+*	An OxTS INS with the relevant Generic Aiding Feature Codes enabled. If you are not sure whether you have the right Feature Codes or are unfamiliar with them, contact support@oxts.com.
+*	A PC, connected to the INS via ethernet.
+*	The `GAD SDK <https://github.com/OxfordTechnicalSolutions/gad-sdk/tree/main#readme>`_ has been built on this machine.
 
 How to run the executable
 -------------------------
@@ -281,12 +282,12 @@ This is a simple enum, to allow switching between UDP (via ethernet) and CSV (fi
 			file_out = sys.argv[4]
 
 	
-This first half of this section sets the default values for the four input arguments of the main function. The four input arguments are (in order):
+The first half of this section sets the default values for the four input arguments of the main function. The four input arguments are (in order):
 
 1.	IP address of the INS unit
 2.	Number of measurement packets to be converted into GAD packets (default = 30).
-3.	Type of output to be sent. If this is “csv” or “CSV” then the output will be saved as a GAD file. Otherwise, it will be sent to the unity via UDP.
-4.	If the output is to be saved as a GAD file, this is the name of GAD file. (default is “out.gad”).
+3.	Type of output to be sent. If this is “csv” or “CSV” then the output will be saved as a GAD file. Otherwise, it will be sent to the unit via UDP.
+4.	If the output is to be saved as a GAD file, then this is the name of GAD file. (default is “out.gad”).
 
 The second half of this section reads in and sets the input arguments listed above.
 
@@ -327,10 +328,11 @@ This block of code initialises an instance of the GadHandler and sets it up to e
 Exercise
 ********
 
-•	Set-up the equipment on a work bench; remember that for this example, no sensor is needed.
-•	Configure and initialise the INS. How will you initialise the INS if it is mounted on a work bench?
-•	Enter in the position given by the navigation engine into the GAD SDK program.
-•	Start the executable, then start the GAD SDK program with the output as UDP.
-•	Observe the output of the Navigation engine with NAVDisplay. Remember that the GAD SDK is feeding the navigation engine that give no movement. So, what happens when you move the INS across the work desk?
-•	Now try to the output type to csv and rerun the GAD SDK. After the program has finished (run out of packets to send), look at the GAD file with a spreadsheet program such as Excel. Do you understand the information given in this GAD file? See here for more information on the format of gad files.
-•	You will notice that in the GAD SDK code, the different update types are made outside of the packet loop. Move the code for one of the update types, e.g. velocity, into the packet loop section. Now write a function that varies the input value, e.g. the velocity could be the square root of the packet number. Run the GAD SDK program again (output type = csv), study the GAD file. Do you see where the values in the gad file have changed?
+*	Set-up the equipment on a work bench; remember that for this example, no sensor is needed.
+*	Configure and initialise the INS. How will you initialise the INS if it is mounted on a work bench?
+*	Enter in the position given by the navigation engine into the GAD SDK program.
+*	Run the executable (C++) or run the code from the Python command line. Make sure the output type is set to UDP.
+*	Observe the output of the Navigation engine with NAVDisplay. Remember that the GAD SDK is feeding the navigation engine that give no movement. So, what happens when you move the INS across the work desk?
+*	Now try to the output type to csv and rerun the GAD SDK. After the program has finished (run out of packets to send), look at the GAD file with a spreadsheet program such as Excel. Do you understand the information given in this GAD file? See here for more information on the format of gad files.
+*	You will notice that in the GAD SDK code, the different update types are made outside of the packet loop. Move the code for one of the update types, e.g. velocity, into the packet loop section. Now write a function that varies the input value, e.g. the velocity could be the square root of the packet number. 
+	Run the GAD SDK program again (output type = csv), study the GAD file. Do you see where the values in the gad file have changed?

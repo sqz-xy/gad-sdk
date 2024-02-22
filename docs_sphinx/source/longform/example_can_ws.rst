@@ -13,15 +13,15 @@ In order to use CAN data for your vehicle/device, significant changes to the CAN
 Consult the `python-can library <https://python-can.readthedocs.io/en/stable/index.html>`_ and your device/vehicle's CAN documentation (see note below) on how to do this.
 
 
-	**A note about CAN message**
+	**A note about CAN messages**
 	
-	If you are using an independent aiding device that uses CAN messages, you can refer to the device’s documentation for the message IDs. 
+	If you are using an independent aiding device that produces CAN messages, you can refer to the device’s documentation for the message IDs. 
 	However, if you are plugging into the CAN bus of a vehicle, it will be harder to identify the message ID you want. 
 	If you are an OEM employee then you should have full access to all the message IDs your vehicle uses, but if you are not, then you can refer to these `open-source <https://en.wikipedia.org/wiki/OBD-II_PIDs>`_ lists that tell you some IDs to look out for. 
 
 
 For the specfic vehicle used in this example, the wheel speed data transmitted by its CAN bus is in miles per hour and is a scalar, i.e. it does not give information on whether the motion is in the forwards or backwards direction.
-Therefore, the unsigned aiding frame is used for the GAD speed update. Furthermore, the data needs be converted into metres per second.
+Therefore, the unsigned aiding frame is used for the GAD speed update. Furthermore, the data needs to be converted into metres per second.
 
 Source code
 ***********
@@ -59,7 +59,7 @@ Source code
 CAN-specific code
 *****************
 
-You should be familar with most of the code shown above. However, there is some CAN-specific code that we shall explain.
+You should be familiar with most of the code shown above. However, there is some CAN-specific code that we shall explain.
 
 .. code-block:: python
 	
@@ -67,15 +67,14 @@ You should be familar with most of the code shown above. However, there is some 
 
 
 The first step in extracting the wheel speed aiding data is to configure the CAN bus reader. 
-The line of code above shows how the reader was configured for this specfic example. 
-Again refer to the Python CAN libary and your device/vehicle's CAN documentation for the correct configurations.
+The line of code above shows how the reader was configured for this specific example. 
+Again, refer to the Python CAN library and your device/vehicle's CAN documentation for the correct configurations.
 Once configured correctly, the CAN bus reader will extract all CAN messages.
 
 
 The CAN bus will send a large number of messages each second, the majority of which will not be useful in providing wheelspeed aiding. 
 Therefore, one needs to filter through all the messages to find the specific messages that contains the correct type of aiding data. 
 The correct messages are identified by the message ID number, which can be found in the device/vehicle's CAN documentation.
-(See note below for more information on CAN documentaion.)
 
 .. code-block:: python
 
@@ -92,7 +91,7 @@ The third line converts the data from the ID = 1540 messages into speed in metre
 bytes (msg.data[0:2]) of the message data into an integer (int.from_bytes). Here the "little" argument means `little-endian <https://en.wikipedia.org/wiki/Endianness>`_,
 i.e., this specific CAN bus stores the least-significant byte at the smallest address.
 In order to reduce memory usage, this **specific** CAN bus encodes the speed message as integer. Where the integer is equal to 100 times the real value of the speed.
-Hence in order to extract the correct value of the speed in miles per hour, the decoded integer needs to be mulitplied by 0.01. 
+Hence to extract the correct value of the speed in miles per hour, the decoded integer needs to be multiplied by 0.01. 
 
 Finally, the multiplication by (1609.34/(60*60)) is used to convert from miles per hour to metres per second.
 

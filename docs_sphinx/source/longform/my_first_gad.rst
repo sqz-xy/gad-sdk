@@ -5,7 +5,7 @@ My first GAD
 
 In this example, velocity data is sent to an OxTS INS in real time. Instead of using an actual sensor, the velocity is hard coded.
 The full source code for the GAD SDK in both C++ and Python can be found below. 
-Since this is the same code as discussed in :ref:`Getting Started <gettingstarted>`, a full breakdown of the code will not be given here.
+Since this is the same code as discussed in :ref:`Getting Started <gettingstarted>` , a full breakdown of the code will not be given here.
 
 Requirements
 ************
@@ -17,7 +17,8 @@ Requirements
 How to run the executable
 -------------------------
 
-If you are using C++, then the GAD SDK code needs to be run via an executable.  
+If you are using C++, then the GAD SDK code needs to be run via an executable. 
+The executable for this example is created when building the GAD SDK. 
 
 .. tabs::
 	
@@ -119,9 +120,9 @@ Source code
 Exercise
 ********
 
-•	Set-up the equipment on a work bench; remember that for this example, no sensor is needed.
-•	Configure and initialise the INS. How will you initialise the INS if it is mounted on a work bench?
-•	Start the executable, then start the GAD SDK program.
-•	Observe the output of the navigation engine with NAVDisplay. Remember that the GAD SDK is feeding the navigation engine with velocity updates that give no movement. So what happens when you move the INS across the work desk?
-•	Stop the GAD SDK program and change the velocity of the packets to a value such as (5.0,0.0,0.0) and restart. What happens to the Navigation engines solution? What are the velocity innovations?
-•	Stop the GAD SDK program and reset the velocity of the packets to (0.0,0.0,0.0). Now increase the covariance of the packets to something like (1.0,1.0,1.0). What is the navigations solution while the INS is stationary on the bench? Now, try moving the INS across the table. How does changing the covariance value affect the navigation engines solution when the INS is moving? Can you explain these changes?
+*	Set-up the equipment on a work bench; remember that for this example, no sensor is needed.
+*	Configure and initialise the INS. How will you initialise the INS if it is mounted on a work bench?
+*	Run the executable (C++) or run the code from the Python command line.
+*	Observe the output of the navigation engine with NAVDisplay. Remember that the GAD SDK is feeding the navigation engine with velocity updates that give no movement. So what happens when you move the INS across the work desk?
+*	Stop the GAD SDK program and change the velocity of the packets to a value such as (5.0,0.0,0.0) and restart. What happens to the Navigation engines solution? What are the velocity innovations?
+*	Stop the GAD SDK program and reset the velocity of the packets to (0.0,0.0,0.0). Now increase the covariance of the packets to something like (1.0,1.0,1.0). What is the navigations solution while the INS is stationary on the bench? Now, try moving the INS across the table. How does changing the covariance value affect the navigation engines solution when the INS is moving? Can you explain these changes?

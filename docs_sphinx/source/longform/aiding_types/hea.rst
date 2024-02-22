@@ -78,7 +78,7 @@ Here are two examples of how to configure the GadHandler to transmit heading dat
 		OxTS::Gal_Cpp::GadHeading ghe(135); // Sets heading aiding data to GAD stream ID 135
 		ghe.SetHeadingLocal(heading); // Set a heading measurement in a user defined local frame
 		ghe.SetHeadingVar(var_hea); // Only one measurement, so covariance matrix is only one value!
-		SetAidingAlignmentConfig(); // Set aligment to 'config', i.e. set in the configuration file
+		SetAidingAlignmentArmConfig(); // Set alignment to 'config', i.e. set in the configuration file
 
 
    .. code-tab:: py
@@ -86,7 +86,7 @@ Here are two examples of how to configure the GadHandler to transmit heading dat
 		ghe = oxts_sdk.GadHeading(135) # Sets heading aiding data to GAD stream ID 135
 		ghe.heading_local = heading # Set a heading measurement in a user defined local frame
 		ghe.heading_var = var_hea # Only one measurement, so covariance matrix is only one value!
-		ghe.set_aiding_alignment_config() # Set aligment to 'config', i.e. set in the configuration file
+		ghe.set_aiding_alignment_config() # Set alignment to 'config', i.e. set in the configuration file
 
 Note that, to make use of the local frame, you must define the local coordinate frame in the configuration of the INS. 
 To do this, add the similar commands to the config file of your INS:

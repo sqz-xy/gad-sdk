@@ -2,14 +2,14 @@
 
 Covariance
 **********
-All aiding provided to the INS must come with a (co)variance estimate. This gives the Kalman Filter some indication of the estimated accuracy of the data being provided, which it can then use to decide whether to use the data, and if so, how strongly the data should be weighted.
+All aiding data provided to the INS must come with a (co)variance estimate. This gives the Kalman Filter some indication of the estimated accuracy of the data being provided, which it can then use to decide whether to use the data, and if so, how strongly the data should be weighted.
 
 The information contained within a covariance matrix can be separated into two parts. 
 
-First, the diagonal matrix elements gives estimations of the error along each axis. This is known as the variance. 
+First, the diagonal matrix elements give estimations of the accuracy along each axis. This is known as the variance. 
 
-Second, the off-diagonal matrix elements gives estimations of any correlations in errors between the different axes. This is known as the covariance.
-It’s quite rare in positioning for one axis to influence another, but it can happen.
+Second, the off-diagonal matrix elements give estimations of any correlations in the accuracies between the different axes. This is known as the covariance.
+It’s quite rare for the accuracy of one axis to influence another, but it can happen.
 
 For the most part, however, we can assume that the errors for X, Y and Z are independent of each other. Assuming also that these values are the same, the very simplest covariance matrix might look like this:
 
@@ -52,7 +52,7 @@ In the example above, we have a single value of covariance for all three axes, w
 
 
 If the variances for X, Y and Z were different, we would need to enter three different values. 
-In example below, we have an estimated standard deviation of 0.1 in the X axis, 0.3 in the Y axis, and 0.2 in the Z axis:
+In the example below, we have an estimated standard deviation of 0.1 in the X axis, 0.3 in the Y axis, and 0.2 in the Z axis:
 
 
 	.. math::
@@ -116,10 +116,10 @@ Since the quality of measurement from a sensor can vary significantly from one m
 the best scenario is one where the sensor's software calculates the covariance for each measurement.
 Consult your sensor's documentation to see if this information is outputted.
 
-Even if covariances are not directly provided by the sensor, the measurement with basic variance estimations can often be used as an effective aiding update. 
+Even if covariances are not directly provided by the sensor, a measurement with even basic variance estimations can often be used as an effective aiding update. 
 A good starting point for this would be to calculate the variance when the sensor is stationary. For example, with a sensor that measures velocity, 
 one could record the velocity output over a period of time. It can be assumed that the mean value of the velocity is zero in X, Y and Z. Thus, the variances along
-X, Y and Z can be calculate using the standard formula:
+X, Y and Z can be calculated using the standard formula:
 
 	.. math::
 
@@ -128,11 +128,11 @@ X, Y and Z can be calculate using the standard formula:
 Where :math:`x_{i}` is the value of one measurement, :math:`\bar{x}` is the mean value of all measurements (in the case of velocity this will be zero), 
 and :math:`n` is the number of observations.
 
-While it is unlikely that the variance will be the same when the sensor is moving, the estimate provide by this method can still be surprisingly useful.
+While it is unlikely that the variance will be the same when the sensor is moving, the estimate provided by this method can still be surprisingly useful.
 To further improve the variance, one can scale the variances based on the corresponding innovations when the sensor and INS are moving. 
 For more information on the innovations provided by the OxTS INS, see :ref:`here <Data_used>`.
 
-A more complete method for calculating the variance would be to take set of test measurements in an environment with good GNSS coverage.
+A more complete method for calculating the variance would be to take a set of test measurements in an environment with good GNSS coverage.
 Thus, the GNSS and INS data could then be used to produce an NCOM file that acts as a reference measurement.
 One can then compare this reference NCOM to the GAD data produced by the sensor.
 

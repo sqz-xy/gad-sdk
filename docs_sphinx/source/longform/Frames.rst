@@ -3,7 +3,7 @@
 Frames
 ******
 
-All aiding data will be in a specific coordinate frame. Which frame will depend on your sensors orientation and the type of data you it's transmitting.
+All aiding data will be in a specific coordinate frame. Which frame will depend on your sensor's orientation and the type of data you it's transmitting.
 Furthermore, the INS can interpret aiding data in different frames, giving you flexibility when it comes to how you transmit the data. 
 
 There are three major types of frame that you’ll deal with:

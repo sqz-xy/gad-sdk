@@ -73,7 +73,7 @@ Here are two examples of how to configure the GadHandler to transmit attitude da
 		OxTS::Gal_Cpp::GadAttitude ga(134);  // Sets attitude aiding data to GAD stream ID 137
 		ga.SetAttLocal(hea, pit, rol); // Set an attitude measurement in heading, pitch and roll in local reference frame
 		ga.SetAttVar(var_hea, var_pit, var_rol); // Diagonal covariance matrix. Note there is no local attitude variance command
-		ga.SetAidingAlignmentConfig(); // Set aligment to 'config', i.e. set in the configuration file
+		ga.SetAidingAlignmentArmConfig(); // Set alignment to 'config', i.e. set in the configuration file
 
 
 	
@@ -82,7 +82,7 @@ Here are two examples of how to configure the GadHandler to transmit attitude da
 		ga = oxts_sdk.GadAttitude(134) # Sets attitude aiding data to GAD stream ID 137
 		ga.att_local = [heading, pitch, roll] # Set an attitude measurement in heading, pitch and roll in local reference frame
 		ga.att_var = [var_hea, var_pit, var_rol] # Diagonal covariance matrix. Note there is no local attitude variance command. 
-		ga.set_aiding_alignment_config() # Set aligment to 'config', i.e. set in the configuration file
+		ga.set_aiding_alignment_config() # Set alignment to 'config', i.e. set in the configuration file
 
 Note that, to make use of the local frame, you must define the local coordinate frame in the configuration of the INS. To do this, add the similar commands to the config file of your INS:
 

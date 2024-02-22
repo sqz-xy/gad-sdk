@@ -1,8 +1,6 @@
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.10)
 
-if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.12.0")
-    cmake_policy(SET CMP0074 NEW)
-endif()
+cmake_policy(SET CMP0074 NEW)
 
 project(oxts-sdk LANGUAGES CXX C)
 
@@ -14,12 +12,12 @@ add_definitions(-DOXTS_SDK_VERSION_PATCH=${oxts-sdk_VERSION_PATCH})
 
 # Building and installation options
 option(OXTS_SDK_BUILD_DOCS "Build SDK documentation." OFF)
-option(OXTS_SDK_BUILD_TESTS "Enable unit test targets." ON)
-option(OXTS_SDK_BUILD_EXAMPLES "Enable examples targets." ON)
-option(OXTS_SDK_BUILD_PYTHON "Build SDK Python wrapper." OFF)
-option(OXTS_SDK_DISABLE_BOOST "Disable Boost library when building." OFF)
+option(OXTS_SDK_BUILD_TESTS "Enable unit test targets." OFF) 
+option(OXTS_SDK_BUILD_EXAMPLES "Enable examples targets." ON) 
+option(OXTS_SDK_BUILD_PYTHON "Build SDK Python wrapper." OFF) 
 # Used for cpp linting by clang-tidy
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 
 # C++ Standard version
 set(CMAKE_CXX_STANDARD 11)
@@ -37,11 +35,6 @@ include(sdk-management)
 # Add the sdks
 add_sdks()
 
-# Optional extras
-if (OXTS_SDK_BUILD_DOCS)
-    add_subdirectory(docs_sphinx)
-endif()
-
 if (OXTS_SDK_BUILD_EXAMPLES)
     add_subdirectory(examples)
 endif()
@@ -51,29 +44,5 @@ if (OXTS_SDK_BUILD_TESTS)
 endif()
 
 if (OXTS_SDK_BUILD_PYTHON)
-    find_package(Boost COMPONENTS system thread regex)
-    add_subdirectory(oxts-sdk-py/pybind11)
-    pybind11_add_module(oxts_sdk oxts-sdk-py/gal-py-bindings.cpp
-                                 oxts-sdk-gal-cpp/src/gal-cpp/gad.cpp
-                                 oxts-sdk-gal-cpp/src/gal-cpp/gad_handler.cpp
-                                 oxts-sdk-gal-c/src/gad_encode_bin.c
-                                 oxts-sdk-gal-c/src/gad_encode_csv.c
-                                 oxts-sdk-core/src/BasicCasts.c
-                                 oxts-sdk-core/src/ccomtx.cpp
-				 )
-    # P. Rodrigues 2023-07-27 On the Jetson Nano, we have an old
-    # boost, which needs this link line. Newer boost versions
-    # evidently don't require it.
-    if ("${Boost_VERSION}" EQUAL "106501")
-        target_link_libraries(oxts_sdk PUBLIC ${Boost_LIBRARIES})
-    endif()
-
-    include_directories(oxts-sdk-gal-cpp/include)
-    include_directories(oxts-sdk-gal-c/include)
-    include_directories(oxts-sdk-core/include)
-    if(NOT OXTS_SDK_DISABLE_BOOST)
-        include_directories(${Boost_INCLUDE_DIR})
-    endif()
-
-
+    add_subdirectory(oxts-sdk-py)
 endif()

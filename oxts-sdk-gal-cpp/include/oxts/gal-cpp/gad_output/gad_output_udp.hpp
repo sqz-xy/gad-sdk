@@ -4,59 +4,51 @@
 #include "oxts/gal-cpp/config.h"
 #include "oxts/gal-cpp/gad_output/gad_output.hpp"
 
-#ifndef OXTS_SDK_DISABLE_BOOST
 #include "oxts/gal-cpp/udp_server_client.hpp"
-#endif
 
 namespace OxTS
 {
-	const int GAD_PORT = 50485;
-
-#ifndef OXTS_SDK_DISABLE_BOOST
-	class GadOutputUdp : public GadOutput
+	namespace Gal_Cpp
 	{
-	private:
-		/** Server to receive the GAD. */
+		const uint16_t GAD_PORT = 50485U;
 
-		std::shared_ptr<networking_udp::server> udpServer_;
-		/** Port on the INS to recieve GAD. */
-		int unitGaPort = GAD_PORT;
-	public:
-		/** Constructor */
-		GadOutputUdp(std::string ip)
+		class GadOutputUdp : public GadOutput
 		{
-			udpServer_.reset(new networking_udp::server());
-			udpServer_->set_remote_endpoint(ip, unitGaPort);
-		}
-		/** Send the packet over UDP to the configured endpoint.
-		 * @param packet Encoded data to be sent.
-		 * @param packet_size Size of the packet in bytes.
-		 */
-		void OutputPacket(unsigned char* packet, int packet_size) override
-		{
-			udpServer_->send(packet, packet_size);
-		}
-	};
-#else
-	class GadOutputUdp : public GadOutput
-	{
-	private:
+		private:
+			/** Constants. */
+			static const std::size_t UDP_BUFFER_SIZE = 1024U;
+			static const std::size_t ETHERNET_MTU = 1000U;
+			/** Temporary buffer. */
+			std::array<uint8_t, UDP_BUFFER_SIZE> m_buffer;
+			/** Server to receive the GAD. */
+			networking_udp::server<ETHERNET_MTU> m_udpServer;
+			/** Port on the INS to recieve GAD. */
+			uint16_t unitGaPort;
+		public:
+			/** Constructor */
+			GadOutputUdp() : GadOutput(), m_buffer(), m_udpServer(), unitGaPort(GAD_PORT)
+			{
 
-		short unitGaPort = 50485;
-	public:
-		/** Constructor */
-		GadOutputUdp(std::string ip) {  }
-		/** Send the packet over UDP to the configured endpoint.
-		 * @param packet Encoded data to be sent.
-		 * @param packet_size Size of the packet in bytes.
-		 */
-		void virtual OutputPacket(unsigned char* packet, int packet_size) override
-		{
-			// Send Packet to unit endpoint (Unit IP, Port 50485)
-		}
-	};
-#endif // OXTS_SDK_DISABLE_BOOST
-
+			}
+			void SetRemoteEndpoint(const std::string& ip)
+			{
+				m_udpServer.set_endpoint(ip, unitGaPort);
+			}
+			GadOutputUdp(const std::string& ip) : GadOutput(), m_buffer(), m_udpServer(), unitGaPort(GAD_PORT)
+			{
+				m_udpServer.set_endpoint(ip, unitGaPort);
+			}
+			/** Send the packet over UDP to the configured endpoint.
+			 * @param packet Encoded data to be sent.
+			 * @param packet_size Size of the packet in bytes.
+			 */
+			virtual void OutputPacket(const uint8_t* const packet, const std::size_t packet_size) override
+			{
+				(void)memcpy(m_buffer.data(), packet, packet_size);
+				(void)m_udpServer.send_to_endpoint<UDP_BUFFER_SIZE>(m_buffer, packet_size);
+			}
+		};
+	}
 } // OxTS
 
 

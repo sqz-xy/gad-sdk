@@ -3,6 +3,12 @@
 
 .. role:: cpp(code)
    :language: cpp
+   
+.. role:: c(code)
+   :language: c
+   
+.. role:: python(code)
+   :language: python
 
 OxTS C++ Generic Aiding SDK
 ===========================
@@ -23,56 +29,51 @@ Table of Contents
 
 .. toctree::
    :maxdepth: 2
-   :caption: Introduction to Generic Aiding
+   :caption: Introduction
+   :name: introtree
 
-   longform/intro
-   longform/generic-aiding-requirements
-   longform/estimating-errors
-   longform/timestamps
-   longform/data-rates
-   longform/sensorcharacterisation
-
+   source/longform/intro
+   
+.. toctree::
+   :maxdepth: 3
+   :caption: Manual
+   :name: Manual
+   
+   source/longform/overview
+   source/longform/gettingstarted
+   source/longform/aiding_types/index
+   source/longform/ismydatabeingreceived
+   source/longform/GAD_post_processing
+   source/longform/section5
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Aiding types
-   :name: aidingtypestoc
-
-   longform/generic-aiding-position-updates
-   longform/generic-aiding-velocity-updates
-   longform/generic-aiding-attitude-updates
-   longform/generic-aiding-heading-updates
-   longform/generic-aiding-speed-updates
-
+   :maxdepth: 3
+   :caption: Tutorials and examples
+   :name: tutorials_examples
+   
+   source/longform/my_first_gad
+   source/longform/static_aiding
+   source/longform/example_can_ws
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Examples
-
-   longform/example-my-first-gad
-   longform/example-static-aiding
-   longform/example-static-aiding-no-boost
-   longform/example-zv-wheelspeed
-   longform/example-heading
-
-
-.. toctree:: 
-   :maxdepth: 2
-   :caption: Additional Material
-
-   longform/defining-a-local-reference-frame
-   longform/gad-files
-   longform/reassigning-traditional-sources
-   longform/stream-priority
-   longform/position-only-initialisation
-   longform/all-options
-   longform/is-my-data-being-received
-   longform/ncom-updates
-   longform/advanced-commands
+   :maxdepth: 3
+   :caption: Reference section
+   :name: refsec
+   
+   source/longform/KF
+   source/longform/Frames
+   source/longform/lever_arm
+   source/longform/cov
+   source/longform/time_stamping
+   source/longform/Glossary
+   source/longform/GAD_cols
+   source/longform/enum_tab
+   source/longform/adv_com
+   source/longform/gal-cpp/index
+   source/longform/py_com
 
 
-.. toctree::
-   :maxdepth: 2
-   :caption: API
 
-   gal-cpp/index
+
+
+   

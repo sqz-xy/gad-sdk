@@ -1,19 +1,19 @@
 //============================================================================================================
-//!
-//! The software is protected by copyright of Oxford Technical Solutions.
-//! Copyright (C) 2020 Oxford Technical Solutions - http://www.oxts.com
-//!
-//! Redistribution and use in source and binary forms, with or without modification, are only permitted with
-//! the specific prior written permission of Oxford Technical Solutions.
-//!
-//! $LastChangedDate: 2019-10-07 15:14:42 +0100 (Mon, 07 Oct 2019) $
-//! $LastChangedRevision: 28566 $
-//! $LastChangedBy: smccarthy $
-//!
-//! \file gad_struct.h
-//!
-//! \brief Header for gad_struct.c
-//!  
+//
+// The software is protected by copyright of Oxford Technical Solutions.
+// Copyright (C) 2020 Oxford Technical Solutions - http://www.oxts.com
+//
+// Redistribution and use in source and binary forms, with or without modification, are only permitted with
+// the specific prior written permission of Oxford Technical Solutions.
+//
+// LastChangedDate: 2019-10-07 15:14:42 +0100 (Mon, 07 Oct 2019)
+// LastChangedRevision: 28566
+// LastChangedBy: smccarthy
+//
+// \file gad_struct.h
+//
+// \brief Header for gad_struct.c
+//  
 //============================================================================================================
 
 #ifndef GAD_STRUCT
@@ -23,144 +23,148 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 
-#include "oxts/core/BasicTypes.h"
-#include "oxts/core/errors.h"
+#include "oxts/gal-c/BasicTypes.h"
 #include "oxts/gal-c/gad_defines.h"
 
 typedef uint8_t   GEN_BOOL;
 
 //==============================================================================
-//! \brief Decoder types
+// \brief Decoder types
 
-typedef enum
-{
-   DECODER_VOID,                    /** Not set. */
-   DECODER_CSV,                     /** Text data. */
-   DECODER_BIN                      /** Binary data. */
-} DECODER_TYPE;
+#define DECODER_VOID 0U                    /** Not set. */ /*PRQA S 1534 # Macro is intended for external consumption. */
+#define DECODER_CSV 1U                     /** Text data. */ /*PRQA S 1534 # Macro is intended for external consumption. */
+#define DECODER_BIN 2U                     /** Binary data. */ /*PRQA S 1534 # Macro is intended for external consumption. */
 
 
 //==============================================================================
-//! \brief Variance formats
+// \brief Variance formats
 
-typedef enum
-{
-   GEN_VAR_VOID,                   /** Missing. */
-   GEN_VAR_SINGLE,                 /** Single variance value. */
-   GEN_VAR_DIAG,                   /** Diagonal variance matrix. */
-   GEN_VAR_HMAT                    /** Half-matrix (full co-variance matrix). */
-} GEN_VAR_TYPE;
+#define GEN_VAR_VOID 0U                   /** Missing. */
+#define GEN_VAR_SINGLE 1U                 /** Single variance value. */
+#define GEN_VAR_DIAG 2U                   /** Diagonal variance matrix. */
+#define GEN_VAR_HMAT 3U                    /** Half-matrix (full co-variance matrix). */
 
 //==============================================================================
-//! \brief 3-dimensional structure (vector real) with storage for full variance
+// \brief 3-dimensional structure (vector real) with storage for full variance
 
 typedef struct
 {
    uint8_t        mode;        /** ID */
    uint8_t        x_type;      /** Type of value x, e.g. coord system */
-   real64_t       x[3];        /** Values */
+   double_t       x[3];        /** Values */
    uint8_t        v_type;      /** Variance type see GEN_VAR_TYPE */
-   real64_t       v[3*(3+1)/2];/** Space for covariance matrix (diag+upper diag) */
+   double_t       v[3*(3+1)/2];/** Space for covariance matrix (diag+upper diag) */
 } GEN_3D;
 
 //==============================================================================
-//! \brief Time systems
-typedef enum
-{
-   TIME_VOID,
-   TIME_GPS,            /** Standard GPS time format. */
-   TIME_PPS_RELATIVE,   /** Time since PPS. */
-   TIME_EST_LATENCY,    /** Not a full timestamp, just an estimate of latency. */
-   TIME_SDN,            /** This is internal timing for xbns. (DO NOT USE) */
-   TIME_EXT,            /** IN DEVELOPMENT, DO NOT USE */
-   TIME_UNIX_UTC,       /** Time since unix epoch, including leap seconds. */
-   TIME_TAI             // Time in TAI format
-}TIME_SYS;
+// \brief Time systems
+#define TIME_VOID 0 /*PRQA S 1534 # Macro is intended for external consumption. */
+/** Standard GPS time format. */
+#define TIME_GPS 1            /*PRQA S 1534 # Macro is intended for external consumption. */
+/** Time since PPS. */
+#define TIME_PPS_RELATIVE 2   
+/** Not a full timestamp, just an estimate of latency. */
+#define TIME_EST_LATENCY 3    /*PRQA S 1534 # Macro is intended for external consumption. */
+/** This is internal timing for xbns. (DO NOT USE) */
+#define TIME_SDN 4            /*PRQA S 1534 # Macro is intended for external consumption. */
+/** IN DEVELOPMENT, DO NOT USE */
+#define TIME_EXT 5            /*PRQA S 1534 # Macro is intended for external consumption. */
+/** Time since unix epoch, including leap seconds. */ 
+#define TIME_UNIX_UTC 6       /*PRQA S 1534 # Macro is intended for external consumption. */
+// Time in TAI format 
+#define TIME_TAI 7            /*PRQA S 1534 # Macro is intended for external consumption. */
 
 //==============================================================================
-//! \brief Generic Aiding types
+// \brief Generic Aiding types
 
-typedef enum
-{
-   GEN_VOID,
-   GEN_POS,          /** Position 3D. */
-   GEN_RANGE,        /** Range, 1D value, can contain angle of arrival as additional info. */
-   GEN_VEL,          /** Velocity 3D. */
-   GEN_SPEED,        /** Speed, e.g. wheel speed. */
-   GEN_ATT,          /** Attitude. */
-   GEN_HEADING,      /** Heading   @note To be merged in GEN_ATT, with ATT specifying in type wherer only heading, or heading+pitch, or heading+pitch+roll are present. */
-   GEN_TIMETRIG,     /** Time trigger, used for indoor segment navigation. */
-   GEN_NUM
-} GEN_TYPE;
-
-//==============================================================================
-//! \brief Position coordinate systems
-
-typedef enum
-{
-   POS_SYS_VOID,         
-   POS_SYS_WGS84,        /** WGS84 - lat/lon/depth */
-   POS_SYS_LOCAL,        /** User defined right-handed local coordinate system - x/y/z */
-} POS_SYS_TYPE;
-
+#define GEN_VOID 0U 
+/** Position 3D. */ 
+#define GEN_POS 1U          /*PRQA S 1534 # Macro is intended for external consumption. */
+/** Range, 1D value, can contain angle of arrival as additional info. */ 
+#define GEN_RANGE 2U        /*PRQA S 1534 # Macro is intended for external consumption. */
+/** Velocity 3D. */ 
+#define GEN_VEL 3U          /*PRQA S 1534 # Macro is intended for external consumption. */
+/** Speed, e.g. wheel speed. */ 
+#define GEN_WSPEED 4U        /*PRQA S 1534 # Macro is intended for external consumption. */
+/** Attitude. */ 
+#define GEN_ATT 5U         /*PRQA S 1534 # Macro is intended for external consumption. */
+ /** Heading   note To be merged in GEN_ATT, with ATT specifying in type wherer only heading, or heading+pitch, or heading+pitch+roll are present. */ 
+#define GEN_HEADING 6U     /*PRQA S 1534 # Macro is intended for external consumption. */
+/** Time trigger, used for indoor segment navigation. */
+#define GEN_TIMETRIG 7U    /*PRQA S 1534 # Macro is intended for external consumption. */
+/** 1-Dimensional speed in the vehicle frame */
+#define GEN_SPEED 8U	/*PRQA S 1534 # Macro is intended for external consumption. */
+#define GEN_ANGRATE 9U	/*PRQA S 1534 # Macro is intended for external consumption. */
+#define GEN_NUM 10U	/*PRQA S 1534 # Macro is intended for external consumption. */
 
 //==============================================================================
-//! \brief Velocity types
+// \brief Position coordinate systems
 
-typedef enum
-{
-   VEL_SYS_VOID,
-   VEL_SYS_NED,             /** North East Down */
-   VEL_SYS_ODO,             /** Aiding source frame - x/y/z */
-   VEL_SYS_LOCAL            /** User defined right-handed local coordinate system - x/y/z */
-} VEL_SYS_TYPE;
+#define POS_SYS_VOID 0U         /*PRQA S 1534 # Macro is intended for external consumption. */
+/** WGS84 - lat/lon/depth */ 
+#define POS_SYS_WGS84 1U        /*PRQA S 1534 # Macro is intended for external consumption. */
+/** User defined right-handed local coordinate system - x/y/z */
+#define POS_SYS_LOCAL 2U        /*PRQA S 1534 # Macro is intended for external consumption. */
 
 //==============================================================================
-//! \brief Speed types 
+// \brief Velocity types
 
-typedef enum
-{
-   SPEED_SYS_VOID,
-   SPEED_SYS_FW_VEL,        /** Speed at sensor fixed wrt IMU, speed angle wrt IMU given. */
-} SPEED_SYS_TYPE;
+#define VEL_SYS_VOID 0U /*PRQA S 1534 # Macro is intended for external consumption. */
+ /** North East Down */ 
+#define VEL_SYS_NED 1U        /*PRQA S 1534 # Macro is intended for external consumption. */
+/** Aiding source frame - x/y/z */
+#define VEL_SYS_ODO 2U        /*PRQA S 1534 # Macro is intended for external consumption. */
+/** User defined right-handed local coordinate system - x/y/z */
+#define VEL_SYS_LOCAL 3U      /*PRQA S 1534 # Macro is intended for external consumption. */
+
 //==============================================================================
-//! \brief Attitude types 
+// \brief Speed types 
 
-typedef enum
-{
-   ATT_SYS_VOID,
-   ATT_SYS_HPR,      /** Attitude measurement given as Heading, Pitch, Roll in the navigation (NED) frame. */
-   ATT_SYS_LOCAL,    /** Attitude measurement given as Heading, Pitch, Roll in a static local reference frame. */
-} ATT_SYS_TYPE;
+#define SPEED_SYS_VOID 0U /*PRQA S 1534 # Macro is intended for external consumption. */
+/** Speed at sensor fixed wrt IMU, signed, +ve forward */
+#define SPEED_SYS_FW_VEL 1U    /*PRQA S 1534 # Macro is intended for external consumption. */
+/** Speed at sensor fixed wrt IMU, signed, +ve backward */
+#define SPEED_SYS_BW_VEL 2U	/*PRQA S 1534 # Macro is intended for external consumption. */
+/** Speed at sensor fixed wrt IMU, unsigned */
+#define SPEED_SYS_UNSIGNED 3U	/*PRQA S 1534 # Macro is intended for external consumption. */
+
+//==============================================================================
+// \brief Attitude types 
+
+#define ATT_SYS_VOID 0U /*PRQA S 1534 # Macro is intended for external consumption. */
+/** Attitude measurement given as Heading, Pitch, Roll in the navigation (NED) frame. */
+#define ATT_SYS_HPR 1U       /*PRQA S 1534 # Macro is intended for external consumption. */
+/** Attitude measurement given as Heading, Pitch, Roll in a static local reference frame. */
+#define ATT_SYS_LOCAL 2U     /*PRQA S 1534 # Macro is intended for external consumption. */
 
 //============================================================================================================
-//! \brief Heading types
-typedef enum
-{
-   HEA_SYS_VOID,
-   HEA_SYS_NAV,        // Heading measurement in the navigation frame (NED).
-   HEA_SYS_LOCAL       // Heading measurement in a local frame. 
-} HEA_SYS_TYPE;
+// \brief Heading types
+#define HEA_SYS_VOID 0U /*PRQA S 1534 # Macro is intended for external consumption. */
+// Heading measurement in the navigation frame (NED).
+#define HEA_SYS_NAV 1U         /*PRQA S 1534 # Macro is intended for external consumption. */
+// Heading measurement in a local frame.  
+#define HEA_SYS_LOCAL 2U       /*PRQA S 1534 # Macro is intended for external consumption. */
 
 //==============================================================================
-//! \brief Location types. (lever arm)
-typedef enum
-{
-   LOC_FIXED = 0,    /** Lever arm specified explicitly. */
-   LOC_KF = 1,       /** Take lever arm from kalman filter. -- lever arm is specified in the .gap file. */
-   LOC_CONFIG = 2    /** Take lever arm from a configured lever arm in the config. */
-}LOC_SYS;
+// \brief Location types. (lever arm)
+/** Lever arm specified explicitly. */ 
+#define LOC_FIXED 0U    /*PRQA S 1534 # Macro is intended for external consumption. */
+ /** Take lever arm from kalman filter. -- lever arm is specified in the .gap file. */ 
+#define LOC_KF 1U       /*PRQA S 1534 # Macro is intended for external consumption. */
+/** Take lever arm from a configured lever arm in the config. */ 
+#define LOC_CONFIG 2U   /*PRQA S 1534 # Macro is intended for external consumption. */
 
 
 //==============================================================================
-//! \brief Generic aiding data structure 
-//!
-//! The data is streamed in the sequence of data members
-//! The dimension of the data is defined by type, if variable, we will need to define a new sub-structure
-//! The sequence of data items is fixed (e.g. as given in this structure)
+// \brief Generic aiding data structure 
+//
+// The data is streamed in the sequence of data members
+// The dimension of the data is defined by type, if variable, we will need to define a new sub-structure
+// The sequence of data items is fixed (e.g. as given in this structure)
 
-typedef struct
+typedef struct /*PRQA S 3630 # This is required to be public as it is to be consumed. */
 {
    /** Aiding type. Enumerated by GEN_TYPE */
    int8_t         type;
@@ -196,46 +200,31 @@ typedef struct
 
 } GEN_AIDING_DATA;
 
+//==============================================================================
+// \brief Functions to initialise/destroy/copy
 
-
-#ifdef __cplusplus
-extern "C"
-{
-#endif
+// Non-MISRA compliant mode.
 
 //==============================================================================
-//! \brief Functions to initialise/destroy/copy
+// \brief Functions to initialise/destroy/copy
 
 /** Sets all the valid flags to 0
-   @param gad pointer to GEN_AIDING_DATA
-   @todo make safe to user passing a NULL pointer
+   param gad pointer to GEN_AIDING_DATA
+   todo make safe to user passing a NULL pointer
 */
-int reset_genaid_data(GEN_AIDING_DATA* gad);
+extern int32_t reset_genaid_data(GEN_AIDING_DATA* gad);
 
-
-int reset_gen3d(GEN_3D* d);
+extern int32_t reset_gen3d(GEN_3D* d); /*PRQA S 0776 # Assume compiler has greater than 6-character limit for identifier uniqueness. */
 
 /** Initialise a block of memory for GEN_AIDING_DATA
-   @param gad pointer to the a pointer to start of GEN_AIDING_DATA
+   param gad pointer to start of GEN_AIDING_DATA
 */
-int initialise_genaid(void** gad);
-
-
-/** Frees generic aiding resource
- * @param gad pointer to the a pointer to start of GEN_AIDING_DATA
- * @param free_base
-*/
-int kill_genaid(void** gad, int free_base);
-
+extern int32_t initialise_genaid(GEN_AIDING_DATA* gad);
 
 /** Copies the data from one pointer to the other. not safe to dst pointer buffer < sizeof(GEN_AIDING_DATA)
-   @param dst Pointer to the location the data is being copied to
-   @param src Pointer to the location of the start of the gen_aiding_data struct
+   param dst Pointer to the location the data is being copied to
+   param src Pointer to the location of the start of the gen_aiding_data struct
 */
-int genaid_copy(void* dst, void* src);
-
-#ifdef __cplusplus
-}
-#endif
+extern int32_t genaid_copy(GEN_AIDING_DATA* dst, const GEN_AIDING_DATA* src);
 
 #endif

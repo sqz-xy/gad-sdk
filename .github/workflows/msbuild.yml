@@ -35,7 +35,7 @@ jobs:
           # REQUIRED: Specify the required boost version
           # A list of supported versions can be found here: 
           # https://github.com/actions/boost-versions/blob/main/versions-manifest.json
-          boost_version: 1.77.0
+          boost_version: 1.82.0
           # OPTIONAL: Specify a custon install location
           # boost_install_dir: lib
           # OPTIONAL: Specify a platform version
@@ -51,6 +51,7 @@ jobs:
             -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
             -DBoost_INCLUDE_DIR=${{steps.install-boost.outputs.BOOST_ROOT}}/include
             -DBoost_LIBRARY_DIRS=${{steps.install-boost.outputs.BOOST_ROOT}}/lib
+            -DOXTS_SDK_BUILD_TESTS=ON
         env:
             BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
 
@@ -58,7 +59,8 @@ jobs:
         working-directory: ${{github.workspace}}/build 
         # Add additional options to the MSBuild command line here (like platform or verbosity level).
         # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-        run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /property:Platform=x64  ${{github.workspace}}/build/oxts-sdk.sln
+        # run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /property:Platform=x64  ${{github.workspace}}/build/oxts-sdk.sln
+        run: cmake --build . --target install --config Release
         
       - name: Run Tests
         run: ${{github.workspace}}/build/tests/Release/unit_tests.exe

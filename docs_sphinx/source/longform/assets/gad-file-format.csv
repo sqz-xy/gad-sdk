@@ -1,0 +1,70 @@
+Col,Type,Value,Description
+A,ver,0,.gad file version. Currently must be 0.
+B,type,#,"The type of GAD for this packet e.g. position, velocity, heading, speed"
+C,stream_id,#,Stream ID of the packet. 129 - 254
+D,val_valid,0/1,Validity of the val struct
+E,mode,0,Currently unused. Set to 0.
+F,x_type,#,Format of measurement. e.g. For position: WGS84. Specified in Enum.
+G,x[0],#,Measurement value
+H,x[1],#,Measurement value
+I,x[2],#,Measurement value
+J,v_type,#,"Covariance matrix type (single value, diagonal matrix, half-matrix)"
+K,v[0],#,Covariance value
+L,v[1],#,Covariance value
+M,v[2],#,Covariance value
+N,v[3],#,Covariance value
+O,v[5],#,Covariance value
+P,time_valid,0/1,Validity of the time struct
+Q,mode,0,Currently unused. Set to 0.
+R,x_type,#,"Type of time. e.g. Void, Latency, PPS relative, GPS. Specified in Enum."
+X,x[0],#,Measurement value
+T,x[1],#,Measurement value
+U,x[2],#,Measurement value
+V,v_type,0,Variance for time not currently supported (GEN_VAR_VOID)
+W,v[0],#,Covariance value
+X,v[1],#,Covariance value
+Y,v[2],#,Covariance value
+Z,v[3],#,Covariance value
+AA,v[4],#,Covariance value
+AB,v[5],#,Covariance value
+AC,acq_valid,0/1,Validity of the acquisition timestamp.
+AD,acq,#,Acquisition timestamp (ns). Not to be added by users for PP.
+AE,loc_valid,0/1,Validity of the loc struct
+AF,mode,#,"Lever arm: in packet, associated to KF, in config. Specified in Enum."
+AG,x_type,0,Not currently used.
+AH,x[0],#,Measurement value
+AI,x[1],#,Measurement value
+AJ,x[2],#,Measurement value
+AK,v_type,#,"Covariance matrix type (single value, diagonal matrix, half-matrix)"
+AL,v[0],#,Covariance value
+AM,v[1],#,Covariance value
+AM,v[2],#,Covariance value
+AO,v[3],#,Covariance value
+AP,v[4],#,Covariance value
+AQ,v[5],#,Covariance value
+AR,res1_valid,0,res1 not currently supported.
+AS,mode,,
+AT,x_type,,
+AU,x[0],,
+AV,x[1],,
+AW,x[2],,
+AX,v_type,,
+AY,v[0],,
+AZ,v[1],,
+BA,v[2],,
+BB,v[3],,
+BC,v[4],,
+BD,v[5],,
+BE,res2_valid,0,res2 not currently supported.
+BF,mode,,
+BG,x_type,,
+BH,x[0],,
+BI,x[1],,
+BJ,x[2],,
+BK,v_type,,
+BL,v[0],,
+BM,v[1],,
+BN,v[2],,
+BO,v[3],,
+BP,v[4],,
+BQ,v[5],,

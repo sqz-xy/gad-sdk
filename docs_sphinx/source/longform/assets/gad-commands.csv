@@ -1,0 +1,24 @@
+﻿Option,Description
+gad_csv_output_[enabled],Off: turn off csv_output (default)Immediate: turn on csv output with the data as logged e.g. timestamps as delays Resolved: turn on csv output with the timestamps resolved
+aid_gpsint1_[enabled],On/off. Enable GPS1
+aid_gpsint1_loc_id[leverarm_ID],Associate a leverarm_ID to the primary GPS antenna
+aid_gpsatt_[enabled],On/off. Enable GNSS dual antenna
+aid_gpsatt_loc_id[heading_angular_offset_ID],Associate a heading_angular_offset_ID with the primary GPS antenna
+aid_gpsext_[enabled],On/off. Enable external GPS
+aid_gpsext_loc_id[leverarm_ID],Associates the external GPS with a fixed leverarm_ID
+aid_wspeed_[enabled],On/off. Enable internal wheelspeed
+aid_wspeed_loc_id[leverarm_ID],Associates the internal wheelspeed to a fixed leverarm_ID
+gad_[enabled][stream_ID],On/off. Enable stream with stream_ID
+gad_loc_id[stream_ID]_[leverarm_ID],Associate stream_ID with leverarm_ID
+gad_att_id[stream_ID]_[attitude_ID],Associate stream_ID with attitude_ID
+locationA_B_C_D_X,"Create loc ID [A] for Lever Arm ([B],[C],[D]), with common variance [X]"
+locationA_B_C_D_X_Y_Z,"Create loc ID [A] for Lever Arm ([B],[C],[D]), with variance ([X],[Y],[Z])"
+attitudeA_B_C_D_X,"Create att ID [A] for Attitude ([B],[C],[D]), with common variance [X]"
+attitudeA_B_C_D_X_Y_Z,"Create att ID [A] for Attitude ([B],[C],[D]), with variance ([X],[Y],[Z])"
+gad_init_vel_from_pos_[enabled],On/off. Enable dynamic velocity initialisation from GAD position data
+gad_init_hea_from_pos_[enabled],On/off. Enable dynamic heading initialisation from position data
+gad_lrf[lrf_id]_[lat]_[lon]_[alt]_[yaw]_[pitch]_[roll],This command sets a new GAD local reference frame with a specified Id. Learn more about local reference frames.
+gad_lrf_id[stream_id]_[lrf_id],This command sets a specific GAD stream_id to use the lrf_id
+gad_init_vel_from_pos_[enabled],on/off. This command allows the system to initialise using velocity estimates from a GAD position stream. Learn more about position-only initialisation.
+motion_speed[speed],"Set speed for dynamic initialisation, in m/s (default 5.0). It is important to note that the position updates (from a single stream) must be more regular than 1Hz for velocity to be calculated. More than 5 Hz is highly recommended. Furthermore, if there are any available velocity streams, the system will use these for initialisation, rather than the position streams, regardless of this option being set"
+gad_csv_output_X,Off: .gad file output off Immediate: .gad file output on. Output data before the timestamp has been resolved to full GPS time. Can be useful for debugging. Resolved: .gad file output on. Output data once it has been resolved to full GPS time.

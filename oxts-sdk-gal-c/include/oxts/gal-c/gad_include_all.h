@@ -22,6 +22,7 @@
 #include "oxts/gal-c/gad_defines.h"
 #include "oxts/gal-c/gad_struct.h"
 #include "oxts/gal-c/gad_decode.h"
-#include "oxts/gal-c/gad_encode.h"
+#include "oxts/gal-c/gad_encode_bin.h"
+#include "oxts/gal-c/gad_encode_csv.h"
 
 #endif

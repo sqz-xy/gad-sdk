@@ -78,7 +78,7 @@ Here are two examples of how to configure the GadHandler to transmit heading dat
 		OxTS::Gal_Cpp::GadHeading ghe(135); // Sets heading aiding data to GAD stream ID 135
 		ghe.SetHeadingLocal(heading); // Set a heading measurement in a user defined local frame
 		ghe.SetHeadingVar(var_hea); // Only one measurement, so covariance matrix is only one value!
-		SetAidingAlignmentArmConfig(); // Set aligment to 'config', i.e. set in the configuration file
+		SetAidingAlignmentConfig(); // Set aligment to 'config', i.e. set in the configuration file
 
 
    .. code-tab:: py

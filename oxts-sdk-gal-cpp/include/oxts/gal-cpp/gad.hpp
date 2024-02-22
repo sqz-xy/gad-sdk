@@ -750,7 +750,7 @@ namespace OxTS
 			 * Indicate that alignment will be configured in the configuration file on
 			 * the INS.
 			 */
-			void SetAidingAlignmentArmConfig();
+			void SetAidingAlignmentConfig();
 			/**
 			 * Set the estimated variance (error) on the alignment angles between the IMU
 			 * and aiding sensor frames.

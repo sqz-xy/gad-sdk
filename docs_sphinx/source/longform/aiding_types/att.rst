@@ -73,7 +73,7 @@ Here are two examples of how to configure the GadHandler to transmit attitude da
 		OxTS::Gal_Cpp::GadAttitude ga(134);  // Sets attitude aiding data to GAD stream ID 137
 		ga.SetAttLocal(hea, pit, rol); // Set an attitude measurement in heading, pitch and roll in local reference frame
 		ga.SetAttVar(var_hea, var_pit, var_rol); // Diagonal covariance matrix. Note there is no local attitude variance command
-		ga.SetAidingAlignmentArmConfig(); // Set aligment to 'config', i.e. set in the configuration file
+		ga.SetAidingAlignmentConfig(); // Set aligment to 'config', i.e. set in the configuration file
 
 
 	

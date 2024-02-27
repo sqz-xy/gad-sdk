@@ -1,0 +1,45 @@
+name: python
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can convert this to a matrix build if you need cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+   runs-on: ${{ matrix.os }}
+   strategy:
+      matrix:
+        os: [ubuntu-latest]
+   steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: Setup virtual environment
+      run: |
+        pip install --upgrade pip
+        python3.8 -m venv env
+        source env/bin/activate
+        echo "VIRTUAL ENV:" $VIRTUAL_ENV
+    - name: Install Cmake
+      run: >-
+        sudo apt-get install cmake
+    - name: Build package
+      run: python3.8 -m pip install .
+  
+    - name: Test package
+      working-directory: ${{github.workspace}}
+      run: |
+        python3.8 -m pytest ./tests/pybind_test.py 
+      

@@ -15,3 +15,4 @@ msvc_2020/gad-sdk-c/x64
 msvc_2020/gad-sdk-cpp/x64
 msvc_2020/tests_project/x64
 oxts_sdk.egg-info/
+.pytest_cache/

@@ -7,11 +7,9 @@ For more information on OxTS Generic Aiding Solutions, see
 [here](https://www.oxts.com/what-is-generic-aiding/)
 
 This project contains the OxTS GAD SDK, written in C, C++, and Python. The SDK 
-is designed to allow users to take measurements from their sensors, encode  
-them to the GAD format, then send to an OxTS INS to be used in the navigation 
+is designed to allow users to take measurements from their sensors, encode them 
+to the GAD format, then send to an OxTS INS to be used in the navigation 
 solution.
-
-In addition, the C++ SDK has been wrapped in Python using PyBind11.
 
 The OxTS GAD SDK is compliant with the Motor Industry Software Reliability 
 Association (MISRA) coding standards.

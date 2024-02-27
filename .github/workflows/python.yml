@@ -44,5 +44,6 @@ jobs:
     - name: Test package
       working-directory: ${{github.workspace}}
       run: |
+        python3.11 -m pip install pytest
         python3.11 -m pytest ./tests/pybind_test.py 
       

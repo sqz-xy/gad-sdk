@@ -14,6 +14,8 @@ CACHE STRING "version" FORCE
 
 IF (WIN32)
     add_compile_definitions(_WINSOCK_DEPRECATED_NO_WARNINGS)
+ELSE()
+    add_compile_options(-fPIC)
 ENDIF()
 
 project(oxts-sdk-gal-cpp VERSION ${OXTS_SDK_GAL_VERSION})

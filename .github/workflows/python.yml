@@ -37,6 +37,7 @@ jobs:
       run: >-
         sudo apt-get install cmake
     - name: Build package
+      working-directory: ${{github.workspace}}
       run: python3.8 -m pip install .
   
     - name: Test package

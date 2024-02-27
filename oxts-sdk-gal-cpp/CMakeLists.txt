@@ -54,34 +54,21 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/oxts/gal-cpp/config.h.in
                ${CMAKE_CURRENT_BINARY_DIR}/include/oxts/gal-cpp/config.h @ONLY
 )
 
-
 ####
 # Create targets
-add_library(${PROJECT_NAME} #STATIC
-    ${OXTS_GAL_CPP_HEADERS}
+add_library(${PROJECT_NAME}
     ${OXTS_GAL_CPP_SOURCES}
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
 
-
-# install (FILES ${OXTS_GAL_CPP_HEADERS} DESTINATION ${INCLUDE_DIRECTORY}/oxts/gal-cpp)
 install (DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/oxts/gal-cpp 
          DESTINATION ${INCLUDE_DIRECTORY}/oxts
 )
-# It's possible that this can be done more elegantly
 install (FILES ${CMAKE_CURRENT_BINARY_DIR}/include/oxts/gal-cpp/config.h 
          DESTINATION ${INCLUDE_DIRECTORY}/oxts/gal-cpp
 )
-message(STATUS "install prefix: ${CMAKE_INSTALL_PREFIX}")
 export_config()
-
-# TODO: Add testing
-# if(OXTS_SDK_ENABLE_TESTING)
-#     add_subdirectory(tests)
-# endif()

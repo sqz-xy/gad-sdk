@@ -20,23 +20,24 @@ jobs:
       matrix:
         os: [ubuntu-20.04]
    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Checkout submodules
+      run: git submodule update --init --recursive
     - name: Set up Python 3.11
       uses: actions/setup-python@v1
       with:
         python-version: 3.11
-    - name: Setup virtual environment
-      run: |
-        pip install --upgrade pip
-        python3.11 -m venv env
-        source env/bin/activate
-        echo "VIRTUAL ENV:" $VIRTUAL_ENV
+    # - name: Setup virtual environment
+    #   run: |
+    #     pip install --upgrade pip
+    #     python3.11 -m venv env
+    #     source env/bin/activate
+    #     echo "VIRTUAL ENV:" $VIRTUAL_ENV
     - name: Install Cmake
       run: >-
-        sudo apt-get install cmake
-    - name: Build package
+        sudo apt-get install build-essential cmake
+    - name: Pip Install Package
       working-directory: ${{github.workspace}}
       run: python3.11 -m pip install .
   

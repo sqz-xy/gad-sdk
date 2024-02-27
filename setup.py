@@ -116,7 +116,7 @@ class CMakeBuild(build_ext):
 # logic and declaration, and simpler if you include description/version in a file.
 setup(
     name="oxts_sdk",
-    version="2.0.0",
+    version="2.0.1",
     author="OxTS",
     author_email="support@oxts.com",
     description="OxTS Python SDK generated using pybind11 and CMake",

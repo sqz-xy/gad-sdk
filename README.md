@@ -124,11 +124,20 @@ dependency is required to build the Python SDK from source.
 Clone and install as follows:
 
 ```console
-git submodule update --init --recursive
+git clone https://github.com/OxfordTechnicalSolutions/gad-sdk.git --recursive
 python -m pip install ./gad-sdk 
 ```
 
-The library can then be imported using `import oxts_sdk`.
+Should you have already cloned the repo without `--recursive`, you will find 
+that the PyBind folder is empty and the Python package fails to install. In 
+this case, submodules can be updated using:
+
+```console
+git submodule update --init --recursive
+```
+
+Once the install is completed, the library can then be imported using 
+`import oxts_sdk`.
 
 Information on Python SDK can be found within the main SDK documentation. In 
 addition, a list of bindings to the C++ can be found in the documentation or 

@@ -17,6 +17,11 @@ Association (MISRA) coding standards.
 Find the full code documentation for this project at: 
 [https://oxfordtechnicalsolutions.github.io/index.html](https://oxfordtechnicalsolutions.github.io/index.html)
 
+![Ubuntu 20.04](https://github.com/OxfordTechnicalSolutions/gad-sdk/actions/workflows/cmake.yml/badge.svg?branch=main)
+![Windows 10](https://github.com/OxfordTechnicalSolutions/gad-sdk/actions/workflows/msbuild.yml/badge.svg?branch=main)
+![Python3.11](https://github.com/OxfordTechnicalSolutions/gad-sdk/actions/workflows/python.yml/badge.svg?branch=main)
+![Docs](https://github.com/OxfordTechnicalSolutions/gad-sdk/actions/workflows/Build_docs.yml/badge.svg?branch=main)
+
 ## Requirements
 
 - Navsuite 3.9 or newer.

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-cmake_policy(SET CMP0074 NEW)
+
 
 project(oxts-sdk VERSION 2.0.1 LANGUAGES CXX C)
 

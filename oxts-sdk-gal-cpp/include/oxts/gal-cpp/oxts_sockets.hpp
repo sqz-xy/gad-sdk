@@ -4,7 +4,7 @@
 
 #include "oxts/gal-cpp/Lib_Detect.hpp"
 
-#ifdef OXTS_OS_WINDOWS
+#if (OXTS_OS_WINDOWS)
 #define WIN32_LEAN_AND_MEAN /*PRQA S 1534 # Used by windows.h */
 #include <windows.h>
 #include <process.h>
@@ -22,7 +22,7 @@
 #include <cstdint>
 #include "oxts/gal-cpp/oxts_arrays.hpp"
 
-#ifndef OXTS_CC_MSVC
+#if !(OXTS_CC_MSVC)
 typedef sa_family_t ADDRESS_FAMILY;
 #endif
 
@@ -60,7 +60,7 @@ namespace OxTS
 			bool     m_broadcast;
 			bool     m_is_good;
 			bool     m_active;
-#ifdef OXTS_OS_WINDOWS
+#if (OXTS_OS_WINDOWS)
 			WSADATA  m_wsaData;
 			UINT_PTR m_handle;
 #else

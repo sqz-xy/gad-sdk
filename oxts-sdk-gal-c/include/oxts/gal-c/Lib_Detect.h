@@ -25,48 +25,48 @@
 // OXTS_CC: OXTS_CC_MSVC OXTS_CC_MINGW OXTS_CC_CYGWIN OXTS_CC_GCC OXTS_CC_QCC OXTS_CC_BORLAND OXTS_CC_TI
 
 #ifdef _MSC_VER
-#if (defined(OXTS_CC_BORLAND) || defined(OXTS_CC_MINGW) || defined(OXTS_CC_CYGWIN) || defined(OXTS_CC_QCC) || defined(OXTS_CC_TI) || defined(OXTS_CC_GCC))
+#if ((OXTS_CC_BORLAND) || (OXTS_CC_MINGW) || (OXTS_CC_CYGWIN) || (OXTS_CC_QCC) || (OXTS_CC_TI) || (OXTS_CC_GCC))
 #error "Detected MSVC but you say something else"
 #endif
-#define OXTS_CC_MSVC
+#define OXTS_CC_MSVC (1)
 #elif __BORLANDC__
-#if (defined(OXTS_CC_MSVC) || defined(OXTS_CC_MINGW) || defined(OXTS_CC_CYGWIN) || defined(OXTS_CC_QCC) || defined(OXTS_CC_TI) || defined(OXTS_CC_GCC))
+#if ((OXTS_CC_MSVC) || (OXTS_CC_MINGW) || (OXTS_CC_CYGWIN) || (OXTS_CC_QCC) || (OXTS_CC_TI) || (OXTS_CC_GCC))
 #error "Detected BORLAND but you say something else"
 #endif
-#define OXTS_CC_BORLAND
+#define OXTS_CC_BORLAND (1)
 #elif (__MINGW32__ || __MINGW64__)
-#if (defined(OXTS_CC_MSVC) || defined(OXTS_CC_BORLAND) || defined(OXTS_CC_CYGWIN) || defined(OXTS_CC_QCC) || defined(OXTS_CC_TI) || defined(OXTS_CC_GCC))
+#if ((OXTS_CC_MSVC) || (OXTS_CC_BORLAND) || (OXTS_CC_CYGWIN) || (OXTS_CC_QCC) || (OXTS_CC_TI) || (OXTS_CC_GCC))
 #error "Detected MINGW but you say something else"
 #endif
-#define OXTS_CC_MINGW
+#define OXTS_CC_MINGW (1)
 #elif __CYGWIN32__
-#if (defined(OXTS_CC_MSVC) || defined(OXTS_CC_BORLAND) || defined(OXTS_CC_MINGW) || defined(OXTS_CC_QCC) || defined(OXTS_CC_TI) || defined(OXTS_CC_GCC))
+#if ((OXTS_CC_MSVC) || (OXTS_CC_BORLAND) || (OXTS_CC_MINGW) || (OXTS_CC_QCC) || (OXTS_CC_TI) || (OXTS_CC_GCC))
 #error "Detected CYGWIN but you say something else"
 #endif
-#define OXTS_CC_CYGWIN
+#define OXTS_CC_CYGWIN (1)
 #elif defined(__QNX__)
-#if (defined(OXTS_CC_MSVC) || defined(OXTS_CC_BORLAND) || defined(OXTS_CC_MINGW) || defined(OXTS_CC_CYGWIN) || defined(OXTS_CC_TI) || defined(OXTS_CC_GCC))
+#if ((OXTS_CC_MSVC) || (OXTS_CC_BORLAND) || (OXTS_CC_MINGW) || (OXTS_CC_CYGWIN) || (OXTS_CC_TI) || (OXTS_CC_GCC))
 #error "Detected QCC but you say something else"
 #endif
-#define OXTS_CC_QCC
+#define OXTS_CC_QCC (1)
 #elif defined(__TI_COMPILER_VERSION__)
-#if (defined(OXTS_CC_MSVC) || defined(OXTS_CC_BORLAND) || defined(OXTS_CC_MINGW) || defined(OXTS_CC_CYGWIN) || defined(OXTS_CC_QCC) || defined(OXTS_CC_GCC))
+#if ((OXTS_CC_MSVC) || (OXTS_CC_BORLAND) || (OXTS_CC_MINGW) || (OXTS_CC_CYGWIN) || (OXTS_CC_QCC) || (OXTS_CC_GCC))
 #error "Detected TI but you say something else"
 #endif
-#define OXTS_CC_TI
+#define OXTS_CC_TI (1)
 #elif __GNUC__
-#if (defined(OXTS_CC_MSVC) || defined(OXTS_CC_BORLAND) || defined(OXTS_CC_MINGW) || defined(OXTS_CC_CYGWIN) || defined(OXTS_CC_QCC) || defined(OXTS_CC_TI))
+#if ((OXTS_CC_MSVC) || (OXTS_CC_BORLAND) || (OXTS_CC_MINGW) || (OXTS_CC_CYGWIN) || (OXTS_CC_QCC) || (OXTS_CC_TI))
 #error "Detected GCC but you say something else"
 #endif
-#define OXTS_CC_GCC
+#define OXTS_CC_GCC (1)
 #else
 #error "Compiler not understood"
 #endif
 
 
-#ifdef OXTS_CC_MSVC
+#if (OXTS_CC_MSVC)
 #ifdef __CLR_VER
-#define OXTS_CC_MSVC_CLR
+#define OXTS_CC_MSVC_CLR (1)
 #endif
 #endif
 
@@ -75,27 +75,27 @@
 // OXTS_OS: OXTS_OS_WINDOWS OXTS_OS_QNX OXTS_OS_TI OXTS_OS_LINUX
 
 #if defined(WIN32) || defined(_WIN32)
-		#if (defined(OXTS_OS_QNX) || defined(OXTS_OS_TI) || defined(OXTS_OS_LINUX) || defined(OXTS_OS_XDEV))
+		#if ((OXTS_OS_QNX) || (OXTS_OS_TI) || (OXTS_OS_LINUX) || (OXTS_OS_XDEV))
 		#error "Detected OXTS_OS_WINDOWS but you say something else"
 		#endif
 	#define OXTS_OS_WINDOWS /*PRQA S 1534 # Macro is intended for external consumption. */
 #elif defined(__QNX__)
-		#if (defined(OXTS_OS_WINDOWS) || defined(OXTS_OS_TI) || defined(OXTS_OS_LINUX) || defined(OXTS_OS_XDEV))
+		#if ((OXTS_OS_WINDOWS) || (OXTS_OS_TI) || (OXTS_OS_LINUX) || (OXTS_OS_XDEV))
 		#error "Detected OXTS_OS_QNX but you say something else"
 		#endif
 	#define OXTS_OS_QNX
 #elif defined(__TI_COMPILER_VERSION__)
-		#if (defined(OXTS_OS_WINDOWS) || defined(OXTS_OS_QNX) || defined(OXTS_OS_LINUX) || defined(OXTS_OS_XDEV))
+		#if ((OXTS_OS_WINDOWS) || (OXTS_OS_QNX) || (OXTS_OS_LINUX) || (OXTS_OS_XDEV))
 		#error "Detected OXTS_OS_TI but you say something else"
 		#endif
 	#define OXTS_OS_TI
 #elif defined(xDev)
-		#if (defined(OXTS_OS_WINDOWS) || defined(OXTS_OS_QNX) || defined(OXTS_OS_LINUX) || defined(OXTS_OS_XDEV))
+		#if ((OXTS_OS_WINDOWS) || (OXTS_OS_QNX) || (OXTS_OS_LINUX) || (OXTS_OS_XDEV))
 		#error "Detected OXTS_OS_TI but you say something else"
 		#endif
 	#define OXTS_OS_XDEV
 #else
-#if (defined(OXTS_OS_WINDOWS) || defined(OXTS_OS_QNX) || defined(OXTS_OS_TI) || defined(OXTS_OS_XDEV))
+#if ((OXTS_OS_WINDOWS) || (OXTS_OS_QNX) || (OXTS_OS_TI) || (OXTS_OS_XDEV))
 #error "Detected OXTS_OS_LINUX but you say something else"
 #endif
 #define OXTS_OS_LINUX

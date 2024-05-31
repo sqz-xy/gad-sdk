@@ -15,7 +15,7 @@
 #include <iostream>
 #include <string>
 
-#ifndef OXTS_CC_MSVC
+#if !(OXTS_CC_MSVC)
 #include <arpa/inet.h>
 #endif
 

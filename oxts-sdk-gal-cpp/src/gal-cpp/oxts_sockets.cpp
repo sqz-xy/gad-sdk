@@ -17,7 +17,7 @@ namespace OxTS
 		bool SocketSystem::startup()
 		{
 			bool success = true;
-#ifdef OXTS_OS_WINDOWS
+#if (OXTS_OS_WINDOWS)
 			if (m_ref_count == 0UL)
 			{
 				WSADATA WsaData;
@@ -48,7 +48,7 @@ namespace OxTS
 			{
 				m_ref_count--;
 
-#ifdef OXTS_OS_WINDOWS
+#if (OXTS_OS_WINDOWS)
 				if (m_ref_count == 0UL)
 				{
 					if (WSACleanup() != 0)
@@ -76,7 +76,7 @@ namespace OxTS
 			:
 			m_broadcast(broadcast_),
 			m_active(false),
-#ifdef OXTS_OS_WINDOWS
+#if (OXTS_OS_WINDOWS)
 			m_wsaData(),
 			m_handle(0UL),
 #else
@@ -161,7 +161,7 @@ namespace OxTS
 				if (success)
 				{
 					sockaddr_in address;
-#ifdef OXTS_CC_MSVC
+#if (OXTS_CC_MSVC)
 					std::int32_t len = static_cast<int32_t>(sizeof(sockaddr_in));
 					if ((getsockname(m_handle, reinterpret_cast<struct sockaddr*>(&address), &len) != 0) || (len == 0))
 #else
@@ -201,7 +201,7 @@ namespace OxTS
 			}
 			else
 			{
-#ifdef OXTS_OS_WINDOWS
+#if (OXTS_OS_WINDOWS)
 				if (closesocket(m_handle) == SOCKET_ERROR)
 				{
 					m_is_good = false;
